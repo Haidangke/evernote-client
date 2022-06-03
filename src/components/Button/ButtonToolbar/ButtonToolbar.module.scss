@@ -1,0 +1,47 @@
+.btn {
+    height: 28px;
+    min-width: fit-content;
+    line-height: 28px;
+    border-radius: 3px;
+    padding: 0 2px;
+    margin: 0 2px;
+    border: 1px solid var(--white);
+    & svg {
+        fill: var(--color-26);
+    }
+    &:hover {
+        background-color: var(--color-f2);
+    }
+    &:active {
+        border: 1px solid var(--active-icon-toolbar);
+    }
+}
+
+.btn-active {
+    background-color: var(--active-icon-toolbar);
+
+    &:hover {
+        background-color: var(--active-icon-toolbar);
+        opacity: 0.8;
+    }
+    & > svg {
+        fill: var(--white);
+    }
+}
+
+//dropdown
+.dropdown-btn {
+    padding: 0;
+    margin: 0;
+    & > span {
+        display: inline-block;
+        padding: 0 4px;
+    }
+    & > svg {
+        margin: 0 4px;
+    }
+}
+
+//Handle Button
+.tippy-content {
+}

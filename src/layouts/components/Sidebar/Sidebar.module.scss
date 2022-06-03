@@ -1,0 +1,359 @@
+@import '../../../assets/styles/mixin.scss';
+
+.wrapper {
+    position: relative;
+}
+
+.resizable {
+    &:hover .resize-btn {
+        opacity: 1;
+    }
+}
+
+.resizable-small {
+    width: 60px !important;
+    min-width: 60px !important;
+
+    & > .resize-btn > svg {
+        transform: rotate(180deg);
+    }
+}
+
+.resize-btn {
+    transition: opacity ease-in 0.1s;
+    opacity: 0;
+    z-index: 999;
+    position: absolute;
+    width: 20px;
+    height: 32px;
+    @include flex(center, center);
+    background-color: #4d4d4d;
+    border-radius: 4px;
+    right: -10px;
+    bottom: 10px;
+    cursor: pointer;
+    & > svg {
+        color: var(--white);
+    }
+}
+
+//Header
+.header {
+    height: 56px;
+    @include flex(center, space-between);
+}
+
+.header-left {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    padding: 0 15px;
+}
+
+.header-avatar {
+    width: 28px;
+    height: 28px;
+
+    cursor: pointer;
+}
+
+.header-info {
+    width: 100%;
+    @include flex(center, unset);
+    margin-left: 10px;
+    & > p {
+        color: var(--gray);
+        font-size: 1.3rem;
+        cursor: pointer;
+    }
+    & > svg {
+        color: var(--gray-icon);
+        width: 1.3rem;
+        margin-left: 4px;
+    }
+
+    &:hover > p {
+        color: var(--white);
+    }
+}
+
+.header-logo {
+    flex-basis: 52px;
+    margin-right: 12px;
+    cursor: pointer;
+    @include flex(center, flex-end);
+    & > svg {
+        color: var(--gray-icon);
+    }
+}
+
+//Actions
+.actions {
+    padding: 0 12px 8px 12px;
+}
+
+.search {
+    @include flex(center, unset);
+    position: relative;
+    background-color: #404040;
+    height: 36px;
+    padding: 0 14px;
+    border-radius: 50px;
+    margin-top: 2px;
+    & > svg {
+        color: var(--gray);
+        position: absolute;
+        left: 6px;
+    }
+}
+
+.search-focus {
+    position: relative;
+    border-radius: 4px 0px 0 0;
+
+    & > .search-input > input {
+        position: relative;
+        background-color: var(--white);
+        color: var(--black);
+        z-index: 999;
+    }
+
+    & > svg {
+        color: var(--color-73);
+        z-index: 999;
+    }
+}
+
+.search-focus::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: calc(100% + 10px);
+    width: calc(100% + 24px);
+    left: -5px;
+    top: -5px;
+    z-index: 999;
+    background: var(--white);
+    box-shadow: var(--box-shadow);
+    z-index: 998;
+    border-radius: 4px 4px 0 0;
+}
+
+.search-focus__content {
+    width: 100%;
+    height: 100px;
+    background-color: var(--white);
+}
+
+.search-focus__title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-top: 8px;
+    padding-left: 16px;
+}
+
+.search-focus__item {
+    @include flex(center, unset);
+    padding: 7px 10px 6px;
+    width: 100%;
+    height: 34px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #f2f2f2;
+    }
+}
+
+.search-focus__item > svg {
+    margin-right: 4px;
+    color: var(--color-73);
+}
+
+.search-focus__name {
+    font-size: 1.3rem;
+    color: var(--search-dropdown-text);
+}
+
+.search-input {
+    width: 100%;
+    height: 100%;
+    padding: 0 12px 0 18px;
+    & > input {
+        width: 100%;
+        height: 100%;
+        background-color: #404040;
+        color: var(--gray);
+        font-family: 'SegoeUI';
+        font-size: 1.4rem;
+    }
+}
+
+.new-btn {
+    @include flex(center, space-between);
+    height: 36px;
+    background-color: var(--primary-color);
+    margin: 11px 0 8px 0;
+    color: var(--white);
+    font-size: 1.4rem;
+    border-radius: 50px;
+    & > svg {
+        margin-right: 6px;
+    }
+}
+
+.new-btn__left {
+    @include flex(center, unset);
+    & > svg {
+        margin: 0 2px 0 6px;
+    }
+}
+
+.line-space {
+    width: 100%;
+    height: 12px;
+}
+
+//Sticky(Features)
+.sticky {
+    position: relative;
+    @include flex(center, space-between);
+    height: 32px;
+    padding: 0 16px 0 18px;
+    cursor: pointer;
+    &:hover {
+        background-color: #333;
+    }
+
+    &:hover > .sticky-name {
+        color: var(--white);
+    }
+}
+
+.sticky:hover {
+    .sticky-add__btn {
+        @include flex(center, center);
+    }
+}
+
+.sticky-link {
+    display: flex;
+    flex: 1;
+}
+
+.triangle {
+    display: flex;
+    position: absolute;
+    left: 5px;
+    color: var(--gray-icon);
+    transition: all 0.1s ease-in-out;
+}
+
+.triangle-active {
+    transform: rotate(90deg);
+}
+
+.sticky-active {
+    background-color: #404040;
+    &:hover {
+        background-color: #404040;
+    }
+    & > .sticky-name {
+        color: var(--white);
+    }
+}
+
+.sticky-icon {
+    @include flex(center, center);
+    height: 24px;
+    width: 24px;
+    margin-right: 6px;
+    color: var(--gray-icon);
+}
+
+.sticky-name {
+    color: var(--gray);
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+}
+
+.sticky-add__btn {
+    display: none;
+    width: 18px;
+    height: 18px;
+
+    border-radius: 50%;
+    background-color: #1a1a1a;
+    &:hover {
+        background-color: #666;
+    }
+    &:hover > svg {
+        color: var(--gray);
+    }
+    & > svg {
+        color: var(--gray-icon);
+    }
+}
+
+.sticky-item {
+    @include flex(center, unset);
+    height: 24px;
+    padding: 0 8px 0 44px;
+    cursor: pointer;
+    &:hover {
+        background-color: #333;
+    }
+
+    &:hover > .sticky-item__name {
+        color: var(--white);
+    }
+}
+
+.sticky-item__icon {
+    color: var(--gray-icon);
+    margin-right: 8px;
+}
+
+.sticky-item__name {
+    color: var(--gray);
+    font-size: 1.3rem;
+}
+
+//Small Mode
+.resizable-small {
+    //header
+    .header {
+        height: unset;
+        flex-direction: column;
+    }
+    .header-avatar {
+        height: 56px;
+        @include flex(center, unset);
+    }
+    .header-info {
+        display: none;
+    }
+    .header-logo {
+        order: -1;
+        flex-basis: 36px;
+        margin-right: unset;
+        align-items: flex-end;
+    }
+
+    //actions
+    .new-btn__left > span {
+        display: none;
+    }
+
+    //sticky(features)
+    .sticky-name {
+        display: none;
+    }
+
+    .sticky:hover .sticky-add__btn {
+        display: none;
+    }
+
+    .triangle {
+        display: none;
+    }
+}

@@ -1,0 +1,47 @@
+@import 'normalize.css';
+@import 'font', 'variables', 'tippy';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'SegoeUI';
+    font-size: 1.6rem;
+    line-height: 1.5;
+    text-rendering: optimizespeed;
+    color: var(--text-color);
+    overflow-y: overlay;
+    letter-spacing: 0.1px;
+}
+
+input {
+    border: none;
+    outline: none;
+}
+
+a {
+    text-decoration: none;
+    color: unset;
+}
+
+button {
+    border: none;
+    background-color: unset;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.root {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    max-width: 100vw;
+}

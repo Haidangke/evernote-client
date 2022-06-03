@@ -1,0 +1,39 @@
+@mixin flex($al, $jc) {
+    display: flex;
+    align-items: $al;
+    justify-content: $jc;
+}
+
+@mixin tablet {
+    @media only screen and (min-width: 601px) and (max-width: 1024px) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media only screen and (max-width: 600px) {
+        @content;
+    }
+}
+
+@mixin mobile-tablet {
+    @media only screen and (max-width: 1024px) and (min-width: 0) {
+        @content;
+    }
+}
+
+@mixin pc {
+    @media only screen and (min-width: 1025px) {
+        @content;
+    }
+}
+
+@mixin text-overflow($column) {
+    width: 100%;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: $column;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+}

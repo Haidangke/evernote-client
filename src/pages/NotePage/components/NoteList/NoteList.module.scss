@@ -1,0 +1,129 @@
+@import '../../../../assets/styles/mixin.scss';
+
+:root {
+    --height-header: 96px;
+}
+
+.wrapper {
+    border-right: 1px solid var(--color-e6);
+    height: 100%;
+    background-color: var(--color-f8);
+}
+
+//header
+.header {
+    height: var(--height-header);
+    padding: 18px 16px 0 24px;
+}
+
+.top {
+    @include flex(center, unset);
+    height: 28px;
+    line-height: 28px;
+    margin-bottom: 12px;
+}
+
+.top-icon {
+    margin-right: 8px;
+}
+
+.top-title {
+    font-size: 2rem;
+}
+
+.bottom {
+    @include flex(center, space-between);
+    margin-bottom: 12px;
+}
+
+.bottom-total {
+    color: var(--color-666);
+    font-size: 1.4rem;
+}
+
+.bottom-btn {
+    @include flex(center, unset);
+}
+
+.bottom-icon {
+    margin-left: 5px;
+    color: var(--color-73);
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover {
+        background-color: var(--color-e6);
+    }
+}
+
+//list
+
+.main {
+    height: calc(100vh - var(--height-header));
+    overflow-y: auto;
+}
+
+.item {
+    padding: 0 8px;
+}
+
+.list {
+    padding: 0 8px;
+    height: 32px;
+    @include flex(center, unset);
+}
+
+.item:nth-child(1) {
+    flex-basis: 160px;
+    min-width: 160px;
+}
+
+.item:nth-child(2) {
+    flex-basis: 92px;
+    min-width: 92px;
+}
+
+.item:nth-child(3) {
+    flex-basis: 1;
+}
+
+.list-header {
+    border-top: 1px solid var(--color-e6);
+    border-bottom: 1px solid var(--color-e6);
+}
+
+.item-header {
+    height: 16.5px;
+    font-size: 1.1rem;
+    color: var(--color-73);
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.item-header:nth-child(2) {
+    border-right: 1px solid var(--color-e6);
+    border-left: 1px solid var(--color-e6);
+}
+
+.list-b-h {
+    background-color: var(--color-f2);
+}
+
+.item-main {
+    cursor: pointer;
+    &:hover {
+        background-color: var(--white);
+    }
+}
+
+.item-body {
+    @include text-overflow(1);
+    font-size: 1.4rem;
+}
+
+.item-body:nth-child(1) {
+    color: var(--color-26);
+}
+
+.item-body:nth-child(2) {
+    color: var(--color-4d);
+}
