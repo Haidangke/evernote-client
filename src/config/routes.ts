@@ -1,6 +1,4 @@
-import { Config } from '.';
-
-const routes: Config = {
+export const routes = {
     home: '/',
     login: '/login',
     note: '/note',
@@ -9,4 +7,3 @@ const routes: Config = {
     recycle: '/recycle',
 };
 
-export default routes;

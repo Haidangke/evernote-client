@@ -1,6 +1,6 @@
 .btn {
     height: 28px;
-    min-width: fit-content;
+
     line-height: 28px;
     border-radius: 3px;
     padding: 0 2px;
@@ -30,12 +30,17 @@
 }
 
 //dropdown
+.dropdown-wrapper {
+    min-width: fit-content;
+}
 .dropdown-btn {
     padding: 0;
     margin: 0;
     & > span {
         display: inline-block;
         padding: 0 4px;
+        color: var(--color-4d);
+        font-weight: 700;
     }
     & > svg {
         margin: 0 4px;
@@ -44,4 +49,14 @@
 
 //Handle Button
 .tippy-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid var(--color-a6);
+    border-bottom: 1px solid var(--color-a6);
+    font-size: 1.2rem;
+    padding: 3px 6px;
+    color: var(--black);
 }

@@ -1,0 +1,20 @@
+div[data-slate-editor='true'] {
+    & *:not(code > *) {
+        font-family: 'Source Sans Pro', sans-serif;
+    }
+    code {
+        & > * {
+            font-family: 'Fira Code', monospace;
+        }
+        background-color: rgba(96, 125, 139, 0.2);
+        font-size: 1.4rem;
+        padding: 4px 10px;
+        border-radius: 3px;
+    }
+
+    h1,
+    h2,
+    h3 {
+        font-weight: 400;
+    }
+}

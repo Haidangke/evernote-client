@@ -1,10 +1,11 @@
 @import 'normalize.css';
-@import 'font', 'variables', 'tippy';
+@import 'font', 'variables', 'tippy', 'slate';
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'SegoeUI';
 }
 
 html {
@@ -12,7 +13,6 @@ html {
 }
 
 body {
-    font-family: 'SegoeUI';
     font-size: 1.6rem;
     line-height: 1.5;
     text-rendering: optimizespeed;
@@ -44,4 +44,19 @@ button {
     height: 100vh;
     width: 100vw;
     max-width: 100vw;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
 }

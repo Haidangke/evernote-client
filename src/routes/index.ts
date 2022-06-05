@@ -1,7 +1,5 @@
-import config from '~/config';
-import NoteLayout from '~/layouts/NoteLayout';
-import { RecyclePage, HomePage, LoginPage, NotebookPage } from '~/pages';
-import NoteEditor from '~/pages/NotePage/components/NoteEditor';
+import { RecyclePage, HomePage, LoginPage, NotebookPage, NotePage } from '~/pages';
+import { routesConfig } from '~/config';
 
 interface Route {
     path: string;
@@ -11,27 +9,26 @@ interface Route {
 
 const privateRoute: Route[] = [
     {
-        path: config.routes.home,
+        path: routesConfig.home,
         component: HomePage,
     },
 
     {
-        path: config.routes.note,
-        component: NoteEditor,
-        layout: NoteLayout,
+        path: routesConfig.note,
+        component: NotePage,
     },
 
     {
-        path: config.routes.notebook,
+        path: routesConfig.notebook,
         component: NotebookPage,
     },
 
     {
-        path: config.routes.recycle,
+        path: routesConfig.recycle,
         component: RecyclePage,
     },
 ];
 
-const publicRoute: Route[] = [{ path: config.routes.login, component: LoginPage }];
+const publicRoute: Route[] = [{ path: routesConfig.login, component: LoginPage }];
 
 export { privateRoute, publicRoute };

@@ -1,15 +1,22 @@
 import classNames from 'classnames/bind';
-import Editor from './Editor';
+import SlateEditor from './SlateEditor';
 import styles from './NoteEditor.module.scss';
 import Topbar from './Topbar';
+import { useRef, useState } from 'react';
+import useOnClickOutside from '~/hooks/useOnclickOutside';
 
 const cx = classNames.bind(styles);
 
 function NoteEditor() {
+    const [isToolbar, setIsToolbar] = useState(false);
+
+    const editorRef = useRef(null);
+
+    useOnClickOutside(editorRef, () => setIsToolbar(false));
     return (
-        <div className={cx('wrapper')}>
+        <div ref={editorRef} className={cx('wrapper')}>
             <Topbar />
-            <Editor />
+            <SlateEditor isToolbar={isToolbar} setIsToolbar={setIsToolbar} />
         </div>
     );
 }

@@ -1,8 +1,6 @@
-import { Config } from '.';
-
 const BASE_URL_API = 'http://localhost:5000/api';
 
-const constants: Config = {
+const constants = {
     BASE_URL_API,
 };
 

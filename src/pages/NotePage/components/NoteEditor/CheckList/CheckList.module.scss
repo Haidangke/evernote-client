@@ -1,0 +1,19 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.input {
+    display: flex;
+    margin-right: 8px;
+
+    & > input {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+    }
+}
+
+.content {
+    display: inline-block;
+}

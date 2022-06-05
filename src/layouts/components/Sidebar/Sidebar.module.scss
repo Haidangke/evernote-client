@@ -214,6 +214,17 @@
 }
 
 //Sticky(Features)
+.features {
+    height: calc(100vh - 92px - 99px);
+    overflow-y: auto;
+}
+
+.resizable-small {
+    .features {
+        overflow-y: hidden;
+    }
+}
+
 .sticky {
     position: relative;
     @include flex(center, space-between);

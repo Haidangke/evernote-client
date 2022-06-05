@@ -1,0 +1,126 @@
+@import '../../../../../assets/styles/mixin.scss';
+.toolbar {
+    position: relative;
+    @include flex(center, unset);
+    padding: 12px;
+    height: 52px;
+    max-width: 100%;
+
+    -webkit-box-shadow: inset 0 -1px 0 0 var(--color-f2);
+    box-shadow: inset 0 -1px 0 0 var(--color-f2);
+    z-index: 1;
+}
+
+.toolbar-on-header::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 2;
+}
+
+//line-through
+.line-through {
+    height: 100%;
+    min-width: 1px;
+    background-color: var(--color-d9);
+    margin: 0 2px;
+}
+
+.line-through + .line-through {
+    display: none;
+}
+
+//color
+.color-wrapper {
+    width: 252px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto 0;
+}
+
+.color-btn {
+    padding: 3px;
+    margin-top: 4px;
+    border-radius: 50%;
+    & > span {
+        position: relative;
+        display: inline-block;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        transition: all ease-in 0.1s;
+        border: 1px solid var(--white);
+    }
+
+    & > span:hover {
+        transform: scale(1.3);
+    }
+}
+
+.color-btn-active > span {
+    transform: scale(1.3);
+}
+
+.color-btn-light > span {
+    border: 1px solid var(--color-d9);
+}
+
+.color-picker {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    @include flex(center, center);
+
+    & > img {
+        position: absolute;
+        width: 28px;
+        height: 28px;
+    }
+}
+
+//dropdown
+.dropdown-wrapper {
+    padding: 8px 0;
+    border: 1px solid var(--color-d9);
+    max-height: calc(100vh - 94px);
+    overflow-y: auto;
+
+    & > button:hover {
+        background-color: var(--color-f2);
+    }
+}
+
+.dropdown-heading {
+    width: 100%;
+    padding: 10px 40px;
+    border-bottom: 1px solid var(--color-f2);
+    transition: all 0.15s ease-in;
+
+    &:last-child {
+        border-bottom: unset;
+    }
+
+    &__active {
+        color: var(--color-blue);
+    }
+}
+
+.dropdown-align {
+    padding: 6px 16px;
+    &-check {
+        display: flex;
+        align-items: center;
+        width: 24px;
+        height: 24px;
+        margin-right: 4px;
+    }
+
+    &-check > svg {
+        color: var(--color-blue);
+    }
+}

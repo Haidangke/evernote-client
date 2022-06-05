@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '~/app/hooks';
-import { login } from '~/features/auth/authThunk';
+import { login } from '~/app/thunk/authThunk';
 
 function Login() {
     const dispatch = useAppDispatch();
@@ -24,14 +24,14 @@ function Login() {
             <input
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                type="text"
-                placeholder="Username"
+                type='text'
+                placeholder='Username'
             />
             <input
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                type="text"
-                placeholder="Password"
+                type='text'
+                placeholder='Password'
             />
             <button onClick={handleLogin}>Login</button>
         </>

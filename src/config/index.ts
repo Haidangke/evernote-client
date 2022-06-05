@@ -1,13 +1,5 @@
-import routes from './routes';
+import { routes as routesConfig } from './routes';
+import { toolbar as toolbarConfig } from './toolbar';
 import constants from './contants';
 
-export interface Config {
-    [key: string]: string;
-}
-
-const config: { [key: string]: Config } = {
-    routes,
-    constants,
-};
-
-export default config;
+export { routesConfig, toolbarConfig, constants };

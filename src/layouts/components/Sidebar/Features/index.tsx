@@ -17,7 +17,7 @@ const cx = classNames.bind(styles);
 
 function Features() {
     return (
-        <>
+        <div className={cx('features')}>
             <Sticky name='Trang chủ' path='/' Icon={HomeIcon} type='link' />
             <Sticky
                 name='Lối tắt'
@@ -43,7 +43,7 @@ function Features() {
             <Sticky name='Thẻ' path='/tag' Icon={TagIcon} type='menu' onAdd={() => {}} />
             <div className={cx('line-space')}></div>
             <Sticky name='Thùng rác' path='/recycle' Icon={DeleteIcon} type='link' />
-        </>
+        </div>
     );
 }
 

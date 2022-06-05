@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '~/app/hooks';
-import { logout } from '~/features/auth/authThunk';
+import { logout } from '~/app/thunk/authThunk';
 
 function Home() {
     const dispatch = useAppDispatch();

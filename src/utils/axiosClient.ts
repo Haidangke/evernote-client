@@ -1,8 +1,8 @@
 import axios from 'axios';
-import config from '~/config';
+import { constants } from '~/config';
 
 const axiosClient = axios.create({
-    baseURL: config.constants.BASE_URL_API,
+    baseURL: constants.BASE_URL_API,
     headers: {
         Accepted: 'appication/json',
         'Content-Type': 'application/json',

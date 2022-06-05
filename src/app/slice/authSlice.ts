@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '~/app/store';
 import { User } from '~/types';
-import { login, logout, register } from './authThunk';
+import { login, logout, register } from '../thunk/authThunk';
 
 const user = JSON.parse(localStorage.getItem('user') as string);
 
