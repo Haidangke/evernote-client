@@ -1,4 +1,4 @@
 import authReducer from './authSlice';
-import toolbarReducer from './toolbarSlice';
+import noteReducer from './noteSlice';
 
-export { authReducer, toolbarReducer };
+export { authReducer, noteReducer };

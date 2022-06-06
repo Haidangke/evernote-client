@@ -6,7 +6,7 @@ import DropdownButton from './DropdownButton';
 import HandleButton from './HandleButton';
 import MarkButton from './MarkButton';
 
-type CustomElement = { type: 'paragraph'; children: CustomText[]; [key: string]: any };
+type CustomElement = { type: string; children: CustomText[]; [key: string]: any };
 type CustomText = { text: string };
 
 declare module 'slate' {

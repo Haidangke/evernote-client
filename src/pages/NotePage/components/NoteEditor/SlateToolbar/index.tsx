@@ -35,15 +35,17 @@ import styles from './SlateToolbar.module.scss';
 import { useState } from 'react';
 import { isBlockActive, toggleBlock } from '../ButtonToolbar/BlockButton';
 import { toolbarConfig } from '~/config';
+import SearchHightlight from '../SearchHightlight';
 
 const cx = classNames.bind(styles);
 
 interface SlateToolbarProps {
     onHeader: boolean;
     editor: any;
+    setSearch: any;
 }
 
-function SlateToolbar({ onHeader, editor }: SlateToolbarProps) {
+function SlateToolbar({ onHeader, editor, setSearch }: SlateToolbarProps) {
     const [heading, setHeading] = useState('Văn bản thường');
 
     const isAlignIconDefault = toolbarConfig.align.filter((item) =>
@@ -85,6 +87,7 @@ function SlateToolbar({ onHeader, editor }: SlateToolbarProps) {
 
             <div className={cx('line-through')}></div>
 
+            {/* heading */}
             <DropdownButton
                 width='120px'
                 content='content'
@@ -113,10 +116,14 @@ function SlateToolbar({ onHeader, editor }: SlateToolbarProps) {
                 <ArrowDownIcon width={8} height={24} />
             </DropdownButton>
 
+            <div className={cx('line-through')}></div>
+
             <DropdownButton content='content' dropdown={() => <h1>Drop Down</h1>}>
                 <span>Sans Serif</span>
                 <ArrowDownIcon width={8} height={24} />
             </DropdownButton>
+
+            <div className={cx('line-through')}></div>
 
             {/* font size */}
             <DropdownButton
@@ -147,6 +154,8 @@ function SlateToolbar({ onHeader, editor }: SlateToolbarProps) {
                 <span>{FontSizeTextDefault.replace('px', '')}</span>
                 <ArrowDownIcon width={8} height={24} />
             </DropdownButton>
+
+            <div className={cx('line-through')}></div>
 
             {/* color picker */}
             <DropdownButton
@@ -263,6 +272,8 @@ function SlateToolbar({ onHeader, editor }: SlateToolbarProps) {
             <BlockButton content='' format='y'>
                 <SubScriptIcon />
             </BlockButton>
+
+            <SearchHightlight setSearch={setSearch} />
         </div>
     );
 }

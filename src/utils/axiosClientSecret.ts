@@ -13,7 +13,8 @@ const axiosClientSecret = axios.create({
 
 axiosClientSecret.interceptors.request.use(
     async (config: any) => {
-        const access_token = localStorage.getItem('access_token') || '';
+        const user = JSON.parse(localStorage.getItem('user') as string);
+        const access_token = user.accessToken || '';
 
         if (access_token) {
             config.headers['Authorization'] = 'Bearer ' + access_token;
@@ -22,10 +23,11 @@ axiosClientSecret.interceptors.request.use(
         const date = new Date();
 
         if (tokenDecode.exp < date.getTime() / 1000) {
-            const data = await authService.refresh();
+            const { data } = await authService.refresh();
 
             config.headers['Authorization'] = 'Bearer ' + data;
-            localStorage.setItem('access_token', data);
+
+            localStorage.setItem('user', JSON.stringify({ ...user, accessToken: data }));
         }
 
         return config;

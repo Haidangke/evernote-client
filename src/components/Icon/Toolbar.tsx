@@ -300,3 +300,9 @@ export const CheckIcon = ({ className }: IconProps) => (
         ></path>
     </svg>
 );
+
+export const TableIcon = ({ className }: IconProps) => (
+    <svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' className={className}>
+        <path d='M8 5.016A2.125 2.125 0 005.875 7.14v9c0 1.173.951 2.125 2.125 2.125h9a2.125 2.125 0 002.125-2.125v-9A2.125 2.125 0 0017 5.016H8zM7.125 7.14c0-.484.392-.875.875-.875h1.875v2.75h-2.75V7.14zm4 1.875v-2.75h2.75v2.75h-2.75zm4 0v-2.75H17c.483 0 .875.391.875.875v1.875h-2.75zm-8 4v-2.75h2.75v2.75h-2.75zm4 0v-2.75h2.75v2.75h-2.75zm4 0v-2.75h2.75v2.75h-2.75zm-8 3.125v-1.875h2.75v2.75H8a.875.875 0 01-.875-.875zm4 .875v-2.75h2.75v2.75h-2.75zm4 0v-2.75h2.75v1.875a.875.875 0 01-.875.875h-1.875z'></path>
+    </svg>
+);

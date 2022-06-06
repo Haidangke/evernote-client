@@ -2,8 +2,26 @@ import CheckListItemElement from '../CheckList';
 
 export const SlateElement = (props: any) => {
     const { attributes, children, element } = props;
-    const style = { textAlign: element.align, fontSize: element.fontSize, color: element.color };
+
+    const style = {
+        textAlign: element.align,
+        fontSize: element.fontSize,
+        color: element.color,
+    };
     switch (element.type) {
+        //table
+        case 'table':
+            return (
+                <table>
+                    <tbody {...attributes}>{children}</tbody>
+                </table>
+            );
+        case 'table-row':
+            return <tr {...attributes}>{children}</tr>;
+        case 'table-cell':
+            return <td {...attributes}>{children}</td>;
+
+        //block-quote
         case 'block-quote':
             return (
                 <blockquote style={style} {...attributes}>
@@ -92,5 +110,16 @@ export const SlateLeaf = ({ attributes, children, leaf }: any) => {
         children = <u>{children}</u>;
     }
 
-    return <span {...attributes}>{children}</span>;
+    return (
+        <span
+            {...attributes}
+            {...(leaf.highlight && { 'data-cy': 'search-highlighted' })}
+            style={{
+                fontWeight: leaf.bold && 'bold',
+                backgroundColor: leaf.highlight && '#ffeeba',
+            }}
+        >
+            {children}
+        </span>
+    );
 };

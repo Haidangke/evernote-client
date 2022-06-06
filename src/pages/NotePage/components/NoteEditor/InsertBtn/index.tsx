@@ -3,12 +3,14 @@ import { useSlate } from 'slate-react';
 import classNames from 'classnames/bind';
 
 import { ArrowDownIcon } from '~/components/Icon';
-import { CalendarIcon, CodeIcon, InsertIcon, TodoIcon } from '~/components/Icon/Toolbar';
+import { CodeIcon, InsertIcon, TableIcon, TodoIcon } from '~/components/Icon/Toolbar';
 import Popper from '~/components/Popper';
 import { DropdownButton } from '../ButtonToolbar';
 import { toggleMark } from '../ButtonToolbar/MarkButton';
-import styles from './Insert.module.scss';
+import { toggleBlock } from '../ButtonToolbar/BlockButton';
 
+import styles from './Insert.module.scss';
+import { Transforms } from 'slate';
 const cx = classNames.bind(styles);
 
 function InsertBtn() {
@@ -31,9 +33,15 @@ function InsertBtn() {
                         </div>
 
                         <div className={cx('insert-item')}>
-                            <CalendarIcon className={cx('insert-icon')} />
-                            <div className={cx('insert-name')}>
-                                <span>Sự kiện trên lịch</span>
+                            <TableIcon className={cx('insert-icon')} />
+                            <div
+                                onClick={(event: any) => {
+                                    setVisible(false);
+                                    event.preventDefault();
+                                }}
+                                className={cx('insert-name')}
+                            >
+                                <span>Bảng</span>
                             </div>
                         </div>
 

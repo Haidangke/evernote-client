@@ -17,7 +17,7 @@ const authApi = {
     register(params: RegisterParams) {
         return axiosClient.post('/auth/register', params);
     },
-    refresh(): Promise<string> {
+    refresh(): Promise<Response<string>> {
         return axiosClient.post('/auth/refresh');
     },
 };

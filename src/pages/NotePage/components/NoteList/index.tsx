@@ -4,11 +4,14 @@ import classNames from 'classnames/bind';
 
 import styles from './NoteList.module.scss';
 import { FilterIcon, NoteListIcon, SortIcon, ViewIcon } from '~/components/Icon';
+import { useSearchParams } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 function NoteList() {
+    const [, setSearchParams] = useSearchParams();
     const [resizable, setResizable] = useState({ width: 320, height: '100vh' });
+
     return (
         <Resizable
             enable={{ right: true }}
@@ -46,6 +49,9 @@ function NoteList() {
                     <div className={cx('list-body')}>
                         {[1, 2, 3, 4, 5].map((item, index) => (
                             <div
+                                onClick={() =>
+                                    setSearchParams({ note: '628f048ce0f5bad9e19e6cc9' })
+                                }
                                 key={item}
                                 className={cx('list', 'item-main', {
                                     'list-b-h': index % 2 === 0,
