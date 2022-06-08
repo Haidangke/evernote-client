@@ -36,6 +36,7 @@ import { useState } from 'react';
 import { isBlockActive, toggleBlock } from '../ButtonToolbar/BlockButton';
 import { toolbarConfig } from '~/config';
 import SearchHightlight from '../SearchHightlight';
+import { textIndent } from '../InOutdent';
 
 const cx = classNames.bind(styles);
 
@@ -267,12 +268,12 @@ function SlateToolbar({ onHeader, editor, setSearch }: SlateToolbarProps) {
             </DropdownButton>
 
             {/* indent outdent */}
-            <BlockButton content='Indent' format=''>
+            <HandleButton content='Indent' onClick={() => textIndent(editor, 'indent')}>
                 <IndentIcon />
-            </BlockButton>
-            <BlockButton content='Outdent' format=''>
+            </HandleButton>
+            <HandleButton content='Outdent' onClick={() => textIndent(editor, 'outdent')}>
                 <OutdentIcon />
-            </BlockButton>
+            </HandleButton>
 
             <div className={cx('line-through')}></div>
             <MarkButton content='gạch dưới' format='underline'>

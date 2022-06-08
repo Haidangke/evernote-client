@@ -6,21 +6,23 @@ import styles from './Footer.module.scss';
 const cx = classNames.bind(styles);
 
 function Footer() {
-    const { isUpdating, isUpdateSuccess, isUpdateFailed } = useAppSelector((state) => state.note);
+    const { isUpdating, isUpdateSuccess, isUpdateFailed, isLoading } = useAppSelector(
+        (state) => state.note
+    );
     const [status, setStatus] = useState('Đã lưu mọi thay đổi');
 
     useEffect(() => {
-        if (isUpdating) {
+        if (isLoading) {
             setStatus('Đang lưu...');
         }
-        if (isUpdateSuccess) {
+        if (!isLoading && isUpdateSuccess) {
             setStatus('Đã lưu mọi thay đổi');
         }
 
-        if (isUpdateFailed) {
+        if (!isLoading && isUpdateFailed) {
             setStatus('Lưu không thành công');
         }
-    }, [isUpdating, isUpdateSuccess, isUpdateFailed]);
+    }, [isUpdating, isUpdateSuccess, isUpdateFailed, isLoading]);
 
     return (
         <div className={cx('wrapper')}>

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { createEditor } from 'slate';
@@ -17,6 +16,7 @@ import { withTables } from '../Table';
 import { useAppDispatch, useAppSelector } from '~/app/hooks';
 import { updateNote } from '~/app/thunk/noteThunk';
 import { LoadingIcon } from '~/components/Icon';
+import { setIsLoading } from '~/app/slice/noteSlice';
 
 const cx = classNames.bind(styles);
 
@@ -33,7 +33,11 @@ function SlateEditor({ isToolbar, setIsToolbar }: EditorProps) {
     const noteId = searchParams.get('note') || '';
 
     //state
-    const [heading, setHeading] = useState('');
+    const [date, setDate] = useState({
+        day: '',
+        month: '',
+        year: '',
+    });
     const [search, setSearch] = useState('');
     const [onHeader, setOnHeader] = useState(false);
     const [slateValue, setSlateValue] = useState(undefined);
@@ -51,13 +55,23 @@ function SlateEditor({ isToolbar, setIsToolbar }: EditorProps) {
     //condition render slate
     const initialContent = useMemo(
         () => (note?.content ? JSON.parse(note?.content || '') : ''),
-        [note?.content]
+        [note]
     );
 
     const condition = useMemo(
         () => isFetchSuccess && initialContent && note?._id === noteId,
         [isFetchSuccess, initialContent, note?._id, noteId]
     );
+
+    const isNote = useMemo(() => {
+        const content = slateValue || initialContent;
+        if (content.length > 1) return true;
+
+        if (content[0]?.children[0].text || content[0]?.children[0]?.children?.length > 0)
+            return true;
+
+        return false;
+    }, [initialContent, slateValue]);
 
     //update note
     const changeHandler = (e: any) => {
@@ -75,20 +89,40 @@ function SlateEditor({ isToolbar, setIsToolbar }: EditorProps) {
         };
     }, [debouncedChangeHandler, noteId]);
 
+    useEffect(() => {
+        if (note?.updatedAt) {
+            let new_date = new Date(note?.updatedAt);
+            const [day, month, year] = new_date.toLocaleDateString().split('/');
+            setDate((prev) => ({ ...prev, day, month, year }));
+        }
+    }, [note?.updatedAt]);
+
+    useEffect(() => {
+        setSlateValue(undefined);
+    }, [noteId]);
+
     return condition ? (
         <div ref={editorRef} className={cx('editor')}>
             <Slate
                 editor={editor}
                 value={initialContent}
                 onChange={(e: any) => {
-                    setSlateValue(e);
-                    debouncedChangeHandler(e);
+                    const isAstChange = editor.operations.some(
+                        (op: any) => 'set_selection' !== op.type
+                    );
+                    if (isAstChange) {
+                        dispatch(setIsLoading(true));
+                        setSlateValue(e);
+                        debouncedChangeHandler(e);
+                    }
                 }}
             >
                 {isToolbar ? (
                     <SlateToolbar onHeader={onHeader} editor={editor} setSearch={setSearch} />
                 ) : (
-                    <div className={cx('info-update')}>Chỉnh sửa lần cuối vào 3 thg 6, 2022</div>
+                    <div className={cx('info-update')}>
+                        Chỉnh sửa lần cuối vào {date.day} thg {date.month}, {date.year}
+                    </div>
                 )}
                 <div className={cx('editable')}>
                     <DebounceInput
@@ -104,12 +138,10 @@ function SlateEditor({ isToolbar, setIsToolbar }: EditorProps) {
                         value={note?.title}
                         onChange={(e) => {
                             dispatch(updateNote({ id: noteId, params: { title: e.target.value } }));
-                            console.log('debounce');
                         }}
                     />
                     <div className={cx('editable-main')}>
-                        {(slateValue || initialContent)[0]?.children[0].text ||
-                        (slateValue || initialContent)[0]?.children[0]?.children?.length > 0 ? (
+                        {isNote ? (
                             <></>
                         ) : (
                             <div className={cx('placeholder')}>
@@ -117,10 +149,7 @@ function SlateEditor({ isToolbar, setIsToolbar }: EditorProps) {
                             </div>
                         )}
                         <Editable
-                            contentEditable={false}
                             decorate={decorate}
-                            spellCheck
-                            autoFocus
                             onFocus={() => {
                                 setIsToolbar(true);
                                 setOnHeader(false);

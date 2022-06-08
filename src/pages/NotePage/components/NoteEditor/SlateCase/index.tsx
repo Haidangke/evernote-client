@@ -12,7 +12,9 @@ export const SlateElement = (props: any) => {
         textAlign: element.align,
         fontSize: element.fontSize,
         color: element.color,
+        paddingLeft: element.paddingLeft,
     };
+
     switch (element.type) {
         //table
         case 'table':
@@ -91,12 +93,6 @@ export const SlateElement = (props: any) => {
         case 'check-list-item':
             return <CheckListItemElement {...props} />;
 
-        case 'link':
-            return (
-                <a style={style} {...attributes} href={element.url}>
-                    {children}
-                </a>
-            );
         default:
             return (
                 <p style={style} {...attributes}>

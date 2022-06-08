@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Note, Tag } from '~/types';
 import { fetchNote, updateNote } from '../thunk/noteThunk';
 
@@ -10,6 +10,8 @@ interface InitialState {
     isUpdating: boolean;
     isUpdateSuccess: boolean;
     isUpdateFailed: boolean;
+
+    isLoading: boolean;
     note?: Note<Tag>;
     notes?: Note<Tag>[];
 }
@@ -22,6 +24,8 @@ const initialState: InitialState = {
     isUpdating: false,
     isUpdateSuccess: false,
     isUpdateFailed: false,
+
+    isLoading: false,
     note: undefined,
     notes: undefined,
 };
@@ -29,7 +33,11 @@ const initialState: InitialState = {
 const noteSlice = createSlice({
     name: 'note',
     initialState,
-    reducers: {},
+    reducers: {
+        setIsLoading(state, action: PayloadAction<boolean>) {
+            state.isLoading = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(fetchNote.pending, (state) => {
             state.isFetching = true;
@@ -71,6 +79,8 @@ const noteSlice = createSlice({
         });
     },
 });
+
+export const { setIsLoading } = noteSlice.actions;
 
 const noteReducer = noteSlice.reducer;
 export default noteReducer;
