@@ -68,7 +68,7 @@
 
 .list {
     padding: 0 8px;
-    height: 32px;
+    height: 34px;
     @include flex(center, unset);
 }
 
@@ -109,8 +109,18 @@
 }
 
 .item-main {
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
     cursor: pointer;
     &:hover {
+        background-color: var(--white);
+    }
+    &__active {
+        background-color: var(--white);
+        border-bottom: 1px solid var(--gray);
+        border-top: 1px solid var(--gray);
+    }
+    &__active:hover {
         background-color: var(--white);
     }
 }

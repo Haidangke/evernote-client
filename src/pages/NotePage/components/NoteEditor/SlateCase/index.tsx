@@ -1,7 +1,12 @@
+import { Transforms } from 'slate';
+import { ReactEditor, useSlateStatic } from 'slate-react';
 import CheckListItemElement from '../CheckList';
+import { insertRow } from '../Table';
 
 export const SlateElement = (props: any) => {
     const { attributes, children, element } = props;
+    const editor = useSlateStatic();
+    const path = ReactEditor.findPath(editor, element);
 
     const style = {
         textAlign: element.align,
@@ -12,9 +17,17 @@ export const SlateElement = (props: any) => {
         //table
         case 'table':
             return (
-                <table>
-                    <tbody {...attributes}>{children}</tbody>
-                </table>
+                <>
+                    <button onClick={() => Transforms.removeNodes(editor, { at: path })}>
+                        Delete
+                    </button>
+                    <table>
+                        <tbody {...attributes}>
+                            <button onClick={() => insertRow(editor)}>Add</button>
+                            {children}
+                        </tbody>
+                    </table>
+                </>
             );
         case 'table-row':
             return <tr {...attributes}>{children}</tr>;

@@ -124,3 +124,17 @@
         color: var(--color-blue);
     }
 }
+
+.btn__disable {
+    cursor: unset;
+    & svg {
+        fill: var(--color-26);
+        opacity: 0.2;
+    }
+    &:hover {
+        background-color: unset;
+    }
+    &:active {
+        border: 1px solid var(--white);
+    }
+}

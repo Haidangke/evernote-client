@@ -12,10 +12,16 @@ import {
 } from '~/components/Icon';
 import Sticky from '../Sticky';
 import styles from '~/layouts/components/Sidebar/Sidebar.module.scss';
+import noteService from '~/services/noteService';
 
 const cx = classNames.bind(styles);
 
 function Features() {
+    const handleAddNote = async () => {
+        console.log('add');
+        await noteService.create();
+    };
+
     return (
         <div className={cx('features')}>
             <Sticky name='Trang chủ' path='/' Icon={HomeIcon} type='link' />
@@ -29,7 +35,8 @@ function Features() {
                     { name: 'Chưa có tiêu đề', Icon: NoteSolidIcon },
                 ]}
             />
-            <Sticky name='Ghi chú' path='/note' Icon={NoteIcon} type='link' onAdd={() => {}} />
+            <Sticky name='Ghi chú' path='/note' Icon={NoteIcon} type='link' onAdd={handleAddNote} />
+
             <Sticky name='Nhiệm vụ' path='/todo' Icon={TodoIcon} type='menu' onAdd={() => {}} />
             <div className={cx('line-space')}></div>
 

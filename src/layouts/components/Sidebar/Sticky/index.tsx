@@ -1,10 +1,10 @@
 import React, { Fragment, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import classnames from 'classnames/bind';
+import Tippy from '@tippyjs/react';
 
 import styles from '~/layouts/components/Sidebar/Sidebar.module.scss';
-import { AddIcon, AddIconSmall, IconProps, TriangleIcon } from '~/components/Icon';
-import Tippy from '@tippyjs/react';
+import { AddIconSmall, IconProps, TriangleIcon } from '~/components/Icon';
 
 const cx = classnames.bind(styles);
 
@@ -26,15 +26,15 @@ function Sticky({ Icon, name, path = '', type, items, onAdd }: StickyProps) {
     const { pathname } = useLocation();
     const navigate = useNavigate();
 
-    const handleRedirect = (typeProps: string) => {
-        if (type === typeProps) {
+    const handleRedirect = () => {
+        if (['link', 'link-menu'].includes(type)) {
             navigate(path);
         }
     };
 
     return (
         <Fragment>
-            <div onClick={() => handleRedirect('link')}>
+            <div>
                 <div
                     onClick={() => type === 'menu' && setIsMenu(!isMenu)}
                     className={cx('sticky', { 'sticky-active': pathname === path })}
@@ -48,7 +48,7 @@ function Sticky({ Icon, name, path = '', type, items, onAdd }: StickyProps) {
                         </div>
                     )}
 
-                    <div onClick={() => handleRedirect('link-menu')} className={cx('sticky-link')}>
+                    <div onClick={() => handleRedirect()} className={cx('sticky-link')}>
                         <div className={cx('sticky-icon')}>
                             <Icon />
                         </div>
@@ -58,7 +58,7 @@ function Sticky({ Icon, name, path = '', type, items, onAdd }: StickyProps) {
 
                     {onAdd && (
                         <Tippy placement='right' content={`${name} mới`}>
-                            <div className={cx('sticky-add__btn')}>
+                            <div onClick={onAdd} className={cx('sticky-add__btn')}>
                                 <AddIconSmall />
                             </div>
                         </Tippy>

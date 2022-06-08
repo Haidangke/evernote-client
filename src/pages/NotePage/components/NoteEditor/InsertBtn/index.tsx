@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSlate } from 'slate-react';
+import { useSlate, useSlateStatic } from 'slate-react';
 import classNames from 'classnames/bind';
 
 import { ArrowDownIcon } from '~/components/Icon';
@@ -7,15 +7,16 @@ import { CodeIcon, InsertIcon, TableIcon, TodoIcon } from '~/components/Icon/Too
 import Popper from '~/components/Popper';
 import { DropdownButton } from '../ButtonToolbar';
 import { toggleMark } from '../ButtonToolbar/MarkButton';
-import { toggleBlock } from '../ButtonToolbar/BlockButton';
 
 import styles from './Insert.module.scss';
-import { Transforms } from 'slate';
+import { insertTable } from '../Table';
 const cx = classNames.bind(styles);
 
 function InsertBtn() {
     const [visible, setVisible] = useState(false);
     const editor = useSlate();
+    const editorStatic = useSlateStatic();
+
     return (
         <DropdownButton
             visibleProp={visible}
@@ -38,6 +39,7 @@ function InsertBtn() {
                                 onClick={(event: any) => {
                                     setVisible(false);
                                     event.preventDefault();
+                                    insertTable(editorStatic);
                                 }}
                                 className={cx('insert-name')}
                             >

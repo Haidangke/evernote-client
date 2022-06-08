@@ -11,11 +11,12 @@ interface HandleButtonProps {
     onClick: () => any;
     className?: string;
     content: string;
+    disable?: boolean;
 }
 
 const cx = classNames.bind(styles);
 
-function HandleButton({ children, onClick, className, content }: HandleButtonProps) {
+function HandleButton({ children, onClick, className, content, disable }: HandleButtonProps) {
     const [width] = useWindowSize();
     const [overflowActive, setOverflowActive] = useState<boolean>(true);
     const overflowingRef = useRef(null);
@@ -37,6 +38,7 @@ function HandleButton({ children, onClick, className, content }: HandleButtonPro
                 )}
             >
                 <button
+                    disabled={disable !== undefined ? disable : false}
                     ref={overflowingRef}
                     onClick={onClick}
                     className={`${cx('btn')}  ${className || ''}`}

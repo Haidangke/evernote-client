@@ -399,3 +399,15 @@ export const OtherIcon = ({ width = '2.4rem', height = '2.4rem', className }: Ic
         <path d='M4.5 12a1.5 1.5 0 103 0 1.5 1.5 0 00-3 0zm7.501 1.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm6 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3z' />
     </svg>
 );
+
+export const LoadingIcon = ({ width = '6rem', height = '6rem', className }: IconProps) => (
+    <svg
+        width={width}
+        height={height}
+        viewBox='0 0 66 66'
+        xmlns='http://www.w3.org/2000/svg'
+        className={className}
+    >
+        <circle fill='none' strokeWidth='6' strokeLinecap='round' cx='33' cy='33' r='30'></circle>
+    </svg>
+);

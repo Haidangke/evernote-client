@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 
@@ -11,12 +12,15 @@ import GlobalStyles from './components/GlobalStyles';
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
+const queryClient = new QueryClient();
 root.render(
     <React.StrictMode>
         <Router>
             <GlobalStyles>
                 <Provider store={store}>
-                    <App />
+                    <QueryClientProvider client={queryClient}>
+                        <App />
+                    </QueryClientProvider>
                 </Provider>
             </GlobalStyles>
         </Router>

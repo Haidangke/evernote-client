@@ -59,6 +59,9 @@ function SlateToolbar({ onHeader, editor, setSearch }: SlateToolbarProps) {
 
     const FontSizeTextDefault = isFontSizeTextDefault || '16';
 
+    const { history } = editor;
+    const { undos, redos } = history;
+
     return (
         <div className={cx('toolbar', { 'toolbar-on-header': onHeader })}>
             <InsertBtn />
@@ -77,11 +80,21 @@ function SlateToolbar({ onHeader, editor, setSearch }: SlateToolbarProps) {
 
             <div className={cx('line-through')}></div>
 
-            <HandleButton onClick={() => HistoryEditor.undo(editor)} content='Hoàn tác'>
+            <HandleButton
+                disable={undos.length === 0}
+                onClick={() => HistoryEditor.undo(editor)}
+                content='Hoàn tác'
+                className={cx({ btn__disable: undos.length === 0 })}
+            >
                 <UndoTcon />
             </HandleButton>
 
-            <HandleButton onClick={() => HistoryEditor.undo(editor)} content='Làm lại'>
+            <HandleButton
+                disable={redos.length === 0}
+                onClick={() => HistoryEditor.undo(editor)}
+                content='Làm lại'
+                className={cx({ btn__disable: redos.length === 0 })}
+            >
                 <RedoIcon />
             </HandleButton>
 

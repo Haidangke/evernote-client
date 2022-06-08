@@ -11,6 +11,18 @@ const axiosClientSecret = axios.create({
     },
 });
 
+async function refreshToken(config: any, user: any) {
+    try {
+        const { data } = await authService.refresh();
+
+        config.headers['Authorization'] = 'Bearer ' + data;
+
+        localStorage.setItem('user', JSON.stringify({ ...user, accessToken: data }));
+    } catch (error) {
+        await authService.logout();
+    }
+}
+
 axiosClientSecret.interceptors.request.use(
     async (config: any) => {
         const user = JSON.parse(localStorage.getItem('user') as string);
@@ -23,11 +35,7 @@ axiosClientSecret.interceptors.request.use(
         const date = new Date();
 
         if (tokenDecode.exp < date.getTime() / 1000) {
-            const { data } = await authService.refresh();
-
-            config.headers['Authorization'] = 'Bearer ' + data;
-
-            localStorage.setItem('user', JSON.stringify({ ...user, accessToken: data }));
+            await refreshToken(config, user);
         }
 
         return config;

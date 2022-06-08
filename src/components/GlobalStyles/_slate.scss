@@ -17,4 +17,21 @@ div[data-slate-editor='true'] {
     h3 {
         font-weight: 400;
     }
+
+    table {
+    }
+
+    tbody {
+    }
+
+    tr {
+    }
+
+    td {
+        min-width: 100px;
+        max-width: 100px;
+        border: 1px solid black;
+        & > span {
+        }
+    }
 }

@@ -1,7 +1,7 @@
 import { Response, Todo } from '~/types';
 import axiosClientSecret from '~/utils/axiosClientSecret';
 
-const todoApi = {
+const todoService = {
     create(params: { noteId: string }): Promise<Response<Todo>> {
         return axiosClientSecret.post('/todo', params);
     },
@@ -13,4 +13,4 @@ const todoApi = {
     },
 };
 
-export default todoApi;
+export default todoService;

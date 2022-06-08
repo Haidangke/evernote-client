@@ -1,12 +1,12 @@
 import { ListParams, Note, Response, UpdateNoteParams, Tag } from '~/types';
 import axiosClientSecret from '~/utils/axiosClientSecret';
 
-const noteApi = {
+const noteService = {
     get(id: string): Promise<Response<Note<Tag[]>>> {
         return axiosClientSecret.get(`/note/${id}`);
     },
 
-    getAll(params: ListParams): Promise<Response<Note<string>>> {
+    getAll(params?: ListParams): Promise<Response<Note<string>[]>> {
         return axiosClientSecret.get('/note', {
             params,
         });
@@ -16,10 +16,7 @@ const noteApi = {
         return axiosClientSecret.post('/note', { notebookId });
     },
 
-    update(
-        id: string,
-        params: UpdateNoteParams
-    ): Promise<Response<Note<string>>> {
+    update(id: string, params: UpdateNoteParams): Promise<Response<Note<string>>> {
         return axiosClientSecret.put(`/note/${id}`, params);
     },
 
@@ -32,4 +29,4 @@ const noteApi = {
     },
 };
 
-export default noteApi;
+export default noteService;

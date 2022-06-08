@@ -7,7 +7,7 @@ import HandleButton from './HandleButton';
 import MarkButton from './MarkButton';
 
 type CustomElement = { type: string; children: CustomText[]; [key: string]: any };
-type CustomText = { text: string };
+type CustomText = any;
 
 declare module 'slate' {
     interface CustomTypes {

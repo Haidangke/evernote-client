@@ -11,6 +11,7 @@ interface InitialState {
     isUpdateSuccess: boolean;
     isUpdateFailed: boolean;
     note?: Note<Tag>;
+    notes?: Note<Tag>[];
 }
 
 const initialState: InitialState = {
@@ -22,6 +23,7 @@ const initialState: InitialState = {
     isUpdateSuccess: false,
     isUpdateFailed: false,
     note: undefined,
+    notes: undefined,
 };
 
 const noteSlice = createSlice({

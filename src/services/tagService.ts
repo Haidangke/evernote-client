@@ -1,7 +1,7 @@
 import { AddNoteParams, DeleteNoteParams, Response, Tag } from '~/types';
 import axiosClientSecret from '~/utils/axiosClientSecret';
 
-const tagApi = {
+const tagService = {
     create(name: string): Promise<Response<Tag>> {
         return axiosClientSecret.post('/tag', { name });
     },
@@ -19,4 +19,4 @@ const tagApi = {
     },
 };
 
-export default tagApi;
+export default tagService;

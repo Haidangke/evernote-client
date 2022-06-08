@@ -1,7 +1,7 @@
 import { UpdateNoteParams } from '~/types';
 import axiosClientSecret from '~/utils/axiosClientSecret';
 
-const notebookApi = {
+const notebookService = {
     create(params: { name: string }) {
         return axiosClientSecret.post('/notebook', params);
     },
@@ -13,4 +13,4 @@ const notebookApi = {
     },
 };
 
-export default notebookApi;
+export default notebookService;

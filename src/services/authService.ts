@@ -2,7 +2,7 @@ import { Response } from '~/types';
 import { LoginParams, RegisterParams, User } from '~/types/auth';
 import axiosClient from '~/utils/axiosClient';
 
-const authApi = {
+const authService = {
     async login(params: LoginParams): Promise<Response<User>> {
         const response = await axiosClient.post('/auth/login', params);
         if (response.data.accessToken) {
@@ -22,4 +22,4 @@ const authApi = {
     },
 };
 
-export default authApi;
+export default authService;

@@ -52,3 +52,28 @@
     font-weight: 400;
     font-family: 'Source Sans Pro', sans-serif;
 }
+
+//loading
+.loading {
+    flex-grow: 1;
+    @include flex(center, center);
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-icon {
+    animation: rotate 1s linear infinite;
+    & > circle {
+        stroke: var(--primary-color);
+        stroke-dasharray: 187;
+        stroke-dashoffset: 36;
+    }
+}

@@ -1,16 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Resizable } from 're-resizable';
 import classNames from 'classnames/bind';
 
+import noteService from '~/services/noteService';
+
 import styles from './NoteList.module.scss';
 import { FilterIcon, NoteListIcon, SortIcon, ViewIcon } from '~/components/Icon';
-import { useSearchParams } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 function NoteList() {
-    const [, setSearchParams] = useSearchParams();
+    const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [resizable, setResizable] = useState({ width: 320, height: '100vh' });
+
+    const { data } = useQuery('notes', async () => await noteService.getAll());
+    const notes = data?.data;
+    const noteId = searchParams.get('note');
+
+    useEffect(() => {
+        if (!noteId && notes && notes[0]) {
+            navigate(`/note?note=${notes[0]._id}`);
+        }
+    }, [notes, navigate, noteId]);
 
     return (
         <Resizable
@@ -32,7 +46,7 @@ function NoteList() {
                         <div className={cx('top-title')}>Ghi chú</div>
                     </div>
                     <div className={cx('bottom')}>
-                        <div className={cx('bottom-total')}>14 ghi chú</div>
+                        <div className={cx('bottom-total')}>{notes?.length} ghi chú</div>
                         <div className={cx('bottom-btn')}>
                             <SortIcon className={cx('bottom-icon')} />
                             <FilterIcon className={cx('bottom-icon')} />
@@ -46,18 +60,21 @@ function NoteList() {
                         <div className={cx('item', 'item-header')}>Đã cập nhật</div>
                         <div className={cx('item', 'item-header')}>Thẻ</div>
                     </div>
+
+                    {/* data fetch */}
                     <div className={cx('list-body')}>
-                        {[1, 2, 3, 4, 5].map((item, index) => (
+                        {notes?.map((item, index) => (
                             <div
-                                onClick={() =>
-                                    setSearchParams({ note: '628f048ce0f5bad9e19e6cc9' })
-                                }
-                                key={item}
+                                onClick={() => setSearchParams({ note: item._id })}
+                                key={item._id}
                                 className={cx('list', 'item-main', {
                                     'list-b-h': index % 2 === 0,
+                                    'item-main__active': noteId === item._id,
                                 })}
                             >
-                                <div className={cx('item', 'item-body')}>Đi ăn cơm</div>
+                                <div className={cx('item', 'item-body')}>
+                                    {item.title || 'Chưa có tiêu đề'}
+                                </div>
                                 <div className={cx('item', 'item-body')}>34 phút trước</div>
                                 <div className={cx('item', 'item-body')}></div>
                             </div>

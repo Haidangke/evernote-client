@@ -1,4 +1,4 @@
-import { Editor, Range, Element as SlateElement, Point } from 'slate';
+import { Editor, Range, Element as SlateElement, Point, Transforms } from 'slate';
 
 export const withTables = (editor: any) => {
     const { deleteBackward, deleteForward, insertBreak } = editor;
@@ -65,4 +65,68 @@ export const withTables = (editor: any) => {
     };
 
     return editor;
+};
+
+export const insertTable = (editor: any) => {
+    const table = {
+        type: 'table',
+        children: [
+            {
+                type: 'table-row',
+                children: [
+                    {
+                        type: 'table-cell',
+                        children: [{ text: '' }],
+                    },
+                    {
+                        type: 'table-cell',
+                        children: [{ text: '' }],
+                    },
+                    {
+                        type: 'table-cell',
+                        children: [{ text: '' }],
+                    },
+                ],
+            },
+            {
+                type: 'table-row',
+                children: [
+                    {
+                        type: 'table-cell',
+                        children: [{ text: '' }],
+                    },
+                    {
+                        type: 'table-cell',
+                        children: [{ text: '' }],
+                    },
+                    {
+                        type: 'table-cell',
+                        children: [{ text: '' }],
+                    },
+                ],
+            },
+        ],
+    };
+    Transforms.insertNodes(editor, table);
+};
+
+export const insertRow = (editor: any) => {
+    const table = {
+        type: 'table-row',
+        children: [
+            {
+                type: 'table-cell',
+                children: [{ text: '' }],
+            },
+            {
+                type: 'table-cell',
+                children: [{ text: '' }],
+            },
+            {
+                type: 'table-cell',
+                children: [{ text: '' }],
+            },
+        ],
+    };
+    Transforms.insertNodes(editor, table);
 };
