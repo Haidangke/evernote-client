@@ -6,47 +6,45 @@ import Popper from '~/components/Popper';
 import styles from './ButtonToolbar.module.scss';
 import useWindowSize from '~/hooks/useWindowSize';
 import { checkOverflow } from '.';
+import { useAppDispatch } from '~/app/hooks';
+import { toolbarActions } from '~/app/slice/toolbarSlice';
 
-interface DropDown {
+interface DropDownProps {
     children: any;
     className?: string;
     dropdown: any;
-    content?: string;
-    visibleProp?: boolean;
-    setVisibleProp?: any;
     value?: string;
-    width?: string;
+    isOther?: boolean;
+    formats?: string[];
 }
 
 const cx = classNames.bind(styles);
 
-function DropDownButton({
-    value,
-    children,
-    className,
-    dropdown,
-    content,
-    visibleProp,
-    setVisibleProp,
-}: DropDown) {
-    const [visibleState, setVisibleState] = useState(false);
+function DropDownButton({ value, children, className, dropdown, isOther, formats }: DropDownProps) {
+    const dispatch = useAppDispatch();
+    const [visible, setVisible] = useState(false);
 
-    const visible = setVisibleProp ? visibleProp : visibleState;
-    const setVisible = setVisibleProp || setVisibleState;
     const Dropdown = dropdown;
 
     const [width] = useWindowSize();
-    const [overflowActive, setOverflowActive] = useState<boolean>(true);
+    const [isOverflow, setIsOverflow] = useState<boolean>(false);
     const overflowingRef = useRef(null);
 
     useEffect(() => {
-        setOverflowActive(checkOverflow(overflowingRef.current, width));
+        if (width === 0) return;
+        const check = checkOverflow(overflowingRef.current, width);
+        setIsOverflow(!check);
+        if (!formats) return;
+
+        for (let i = 0; i < formats.length; i++) {
+            dispatch(toolbarActions.setOverflow({ format: formats[i], value: !check }));
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [width]);
 
-    return overflowActive ? (
+    return !isOverflow || isOther ? (
         <div className={cx('dropdown-wrapper')}>
             <TippyHeadless
-                content={content}
                 placement='bottom-start'
                 interactive
                 visible={visible}

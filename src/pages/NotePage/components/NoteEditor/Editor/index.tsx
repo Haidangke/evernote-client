@@ -7,16 +7,17 @@ import { DebounceInput } from 'react-debounce-input';
 import { debounce } from 'lodash';
 import classNames from 'classnames/bind';
 
-import SlateToolbar from '../SlateToolbar';
+import SlateToolbar from '../Toolbar';
 import styles from './SlateEditor.module.scss';
-import { SlateElement, SlateLeaf } from '../SlateCase';
+import { SlateElement, SlateLeaf } from '../Case';
 import { withChecklists } from '../CheckList';
 import useDecorate from '~/hooks/useDecorate';
 import { withTables } from '../Table';
 import { useAppDispatch, useAppSelector } from '~/app/hooks';
 import { updateNote } from '~/app/thunk/noteThunk';
 import { LoadingIcon } from '~/components/Icon';
-import { setIsLoading } from '~/app/slice/noteSlice';
+import { noteActions } from '~/app/slice/noteSlice';
+import useWindowSize from '~/hooks/useWindowSize';
 
 const cx = classNames.bind(styles);
 
@@ -101,6 +102,10 @@ function SlateEditor({ isToolbar, setIsToolbar }: EditorProps) {
         setSlateValue(undefined);
     }, [noteId]);
 
+    const [width] = useWindowSize();
+
+    useEffect(() => setIsToolbar(false), [setIsToolbar, width]);
+
     return condition ? (
         <div ref={editorRef} className={cx('editor')}>
             <Slate
@@ -111,7 +116,7 @@ function SlateEditor({ isToolbar, setIsToolbar }: EditorProps) {
                         (op: any) => 'set_selection' !== op.type
                     );
                     if (isAstChange) {
-                        dispatch(setIsLoading(true));
+                        dispatch(noteActions.setIsLoading(true));
                         setSlateValue(e);
                         debouncedChangeHandler(e);
                     }
@@ -150,6 +155,7 @@ function SlateEditor({ isToolbar, setIsToolbar }: EditorProps) {
                         )}
                         <Editable
                             decorate={decorate}
+                            onClick={() => setIsToolbar(true)}
                             onFocus={() => {
                                 setIsToolbar(true);
                                 setOnHeader(false);

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classnames from 'classnames/bind';
 import { Resizable } from 're-resizable';
 
 import { ArrowLeftIcon } from '~/components/Icon';
 import useMouseMove from '~/hooks/useMouseMove';
+import useWindowSize from '~/hooks/useWindowSize';
 import Actions from './Actions';
 import Features from './Features';
 import Header from './Header';
@@ -22,6 +23,7 @@ const isSmall = typeof isSmallLocal === 'boolean' ? isSmallLocal : false;
 function Sidebar() {
     const [resizable, setResizable] = useState({ width, height: '100vh' });
     const [isSmallSidebar, setIsSmallSidebar] = useState(isSmall);
+    const [maxWidth, setMaxWidth] = useState(400);
 
     const { x } = useMouseMove();
 
@@ -30,17 +32,38 @@ function Sidebar() {
             setIsSmallSidebar(true);
             localStorage.setItem('isSmall-sidebar', JSON.stringify(true));
         }
-        if (x >= 270) {
+        if (x >= maxWidth * 0.625) {
             setIsSmallSidebar(false);
             localStorage.setItem('isSmall-sidebar', JSON.stringify(false));
         }
     };
+
+    const [widthWindow] = useWindowSize();
+    useEffect(() => {
+        if (widthWindow < 0) return;
+        const limitWidth = widthWindow / 3;
+
+        //sidebar o trang thai nho nhat
+        // if (270 > widthWindow - 500 - 280) {
+        //     setIsSmallSidebar(true);
+        // } else {
+        //     setIsSmallSidebar(false);
+        // }
+
+        //sidebar o trang thai bi
+        if (limitWidth < 400) {
+            setMaxWidth(limitWidth);
+        } else {
+            setMaxWidth(400);
+        }
+    }, [widthWindow]);
+
     return (
         <Resizable
             className={cx('resizable', { 'resizable-small': isSmallSidebar })}
             style={{ backgroundColor: '#1a1a1a' }}
             enable={{ right: true }}
-            maxWidth={400}
+            maxWidth={maxWidth}
             minWidth={270}
             size={{
                 width: resizable.width,

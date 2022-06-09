@@ -5,23 +5,31 @@ import TippyHeadless from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 
 import { ButtonProps, checkOverflow } from '.';
-import styles from './ButtonToolbar.module.scss';
 import useWindowSize from '~/hooks/useWindowSize';
 import { toolbarConfig } from '~/config';
+import { useAppDispatch } from '~/app/hooks';
+import { toolbarActions } from '~/app/slice/toolbarSlice';
+
+import styles from './ButtonToolbar.module.scss';
 
 const cx = classNames.bind(styles);
 
-function BlockButton({ format, children, content, className, status }: ButtonProps) {
+function BlockButton({ format, children, content, className }: ButtonProps) {
+    const dispatch = useAppDispatch();
     const editor = useSlate();
     const [width] = useWindowSize();
-    const [overflowActive, setOverflowActive] = useState<boolean>(true);
+    const [isOverflow, setIsOverflow] = useState<boolean>(false);
     const overflowingRef = useRef(null);
 
     useEffect(() => {
-        setOverflowActive(checkOverflow(overflowingRef.current, width));
-    }, [width]);
+        if (width === 0) return;
+        const check = checkOverflow(overflowingRef.current, width);
 
-    return overflowActive ? (
+        setIsOverflow(!check);
+        dispatch(toolbarActions.setOverflow({ format, value: !check }));
+    }, [dispatch, format, width]);
+
+    return !isOverflow ? (
         <div>
             <TippyHeadless
                 delay={[500, 0]}

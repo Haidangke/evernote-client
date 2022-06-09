@@ -1,11 +1,11 @@
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '~/app/hooks';
-import styles from './Footer.module.scss';
+import styles from './SlateFooter.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Footer() {
+function SlateFooter() {
     const { isUpdating, isUpdateSuccess, isUpdateFailed, isLoading } = useAppSelector(
         (state) => state.note
     );
@@ -40,4 +40,4 @@ function Footer() {
     );
 }
 
-export default Footer;
+export default SlateFooter;

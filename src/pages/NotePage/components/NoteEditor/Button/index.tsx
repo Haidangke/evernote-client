@@ -22,14 +22,13 @@ export interface ButtonProps {
     content?: string;
     children: any;
     className?: string;
-    status?: 'column' | 'row';
 }
 
 export const checkOverflow = (textContainer: any, width: any): boolean => {
     if (textContainer) {
         const rect = textContainer.getBoundingClientRect();
 
-        return rect.right + 100 < width;
+        return rect.right + 70 < width;
     }
 
     return false;

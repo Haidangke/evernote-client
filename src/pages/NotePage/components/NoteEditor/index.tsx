@@ -8,19 +8,18 @@ import Footer from './Footer';
 import useOnClickOutside from '~/hooks/useOnclickOutside';
 
 import styles from './NoteEditor.module.scss';
-import SlateEditor from './SlateEditor';
+import SlateEditor from './Editor';
 import { useAppDispatch } from '~/app/hooks';
 import { fetchNote } from '~/app/thunk/noteThunk';
 const cx = classNames.bind(styles);
 
 function NoteEditor() {
-    const [searchParams] = useSearchParams();
     const dispatch = useAppDispatch();
-    const [isToolbar, setIsToolbar] = useState(false);
+    const [searchParams] = useSearchParams();
 
-    const editorRef = useRef(null);
+    const [isToolbar, setIsToolbar] = useState(true);
 
-    useOnClickOutside(editorRef, () => setIsToolbar(false));
+    const editorRef = useRef<any>(null);
 
     useEffect(() => {
         const noteId = searchParams.get('note');
@@ -28,6 +27,9 @@ function NoteEditor() {
             dispatch(fetchNote(noteId));
         }
     }, [searchParams, dispatch]);
+
+    useOnClickOutside(editorRef, () => setIsToolbar(false));
+
     return (
         <div ref={editorRef} className={cx('wrapper')}>
             <Topbar />

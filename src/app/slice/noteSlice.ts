@@ -80,7 +80,7 @@ const noteSlice = createSlice({
     },
 });
 
-export const { setIsLoading } = noteSlice.actions;
+export const noteActions = noteSlice.actions;
 
 const noteReducer = noteSlice.reducer;
 export default noteReducer;

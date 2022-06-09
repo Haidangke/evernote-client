@@ -5,8 +5,8 @@ function useMouseMove() {
     useEffect(() => {
         const handleWindowMouseMove = (event: any) => {
             setGlobalCoords({
-                x: event.screenX,
-                y: event.screenY,
+                x: event.clientX,
+                y: event.clientY,
             });
         };
         window.addEventListener('mousemove', handleWindowMouseMove);

@@ -7,21 +7,28 @@ import { ButtonProps, checkOverflow } from '.';
 import styles from './ButtonToolbar.module.scss';
 import classNames from 'classnames/bind';
 import useWindowSize from '~/hooks/useWindowSize';
+import { useAppDispatch } from '~/app/hooks';
+import { toolbarActions } from '~/app/slice/toolbarSlice';
 
 const cx = classNames.bind(styles);
 
 function MarkButton({ format, children, content, className }: ButtonProps) {
     const editor = useSlate();
+    const dispatch = useAppDispatch();
 
     const [width] = useWindowSize();
-    const [overflowActive, setOverflowActive] = useState<boolean>(true);
+    const [isOverflow, setIsOverflow] = useState<boolean>(false);
     const overflowingRef = useRef(null);
 
     useEffect(() => {
-        setOverflowActive(checkOverflow(overflowingRef.current, width));
-    }, [width]);
+        if (width === 0) return;
+        const check = checkOverflow(overflowingRef.current, width);
+        setIsOverflow(!check);
 
-    return overflowActive ? (
+        dispatch(toolbarActions.setOverflow({ format, value: !check }));
+    }, [dispatch, format, width]);
+
+    return !isOverflow ? (
         <div>
             <TippyHeadless
                 delay={[500, 0]}

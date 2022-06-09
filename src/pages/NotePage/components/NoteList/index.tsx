@@ -8,13 +8,17 @@ import noteService from '~/services/noteService';
 
 import styles from './NoteList.module.scss';
 import { FilterIcon, NoteListIcon, SortIcon, ViewIcon } from '~/components/Icon';
+import useWindowSize from '~/hooks/useWindowSize';
 
 const cx = classNames.bind(styles);
 
 function NoteList() {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
+
     const [resizable, setResizable] = useState({ width: 320, height: '100vh' });
+    const [maxWidth, setMaxWidth] = useState(600);
+    const [widthWindow] = useWindowSize();
 
     const { data } = useQuery('notes', async () => await noteService.getAll());
     const notes = data?.data;
@@ -26,10 +30,23 @@ function NoteList() {
         }
     }, [notes, navigate, noteId]);
 
+    useEffect(() => {
+        if (widthWindow > 0) {
+            const limitSidebar = widthWindow / 3;
+            if (limitSidebar < 400) {
+                //sidebar = 100% / 3
+                setMaxWidth(widthWindow - 500 - limitSidebar);
+            } else {
+                // sidebar = 400
+                setMaxWidth(widthWindow - 900);
+            }
+        }
+    }, [widthWindow]);
+
     return (
         <Resizable
             enable={{ right: true }}
-            maxWidth={635}
+            maxWidth={maxWidth}
             minWidth={280}
             size={{ width: resizable.width, height: resizable.height }}
             onResizeStop={(e, direction, ref, d) => {

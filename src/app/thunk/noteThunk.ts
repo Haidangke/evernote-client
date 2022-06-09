@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import noteService from '~/services/noteService';
 import { UpdateNoteParams } from '~/types';
-import { setIsLoading } from '../slice/noteSlice';
+import { noteActions } from '../slice/noteSlice';
 
 export const fetchNote = createAsyncThunk('note/fetchNote', async (id: string, thunkAPI) => {
     try {
@@ -29,9 +29,9 @@ export const updateNote = createAsyncThunk(
         const { id, params } = obj;
         try {
             await noteService.update(id, params);
-            thunkAPI.dispatch(setIsLoading(false));
+            thunkAPI.dispatch(noteActions.setIsLoading(false));
         } catch (error: any) {
-            thunkAPI.dispatch(setIsLoading(false));
+            thunkAPI.dispatch(noteActions.setIsLoading(false));
             return thunkAPI.rejectWithValue('');
         }
     }

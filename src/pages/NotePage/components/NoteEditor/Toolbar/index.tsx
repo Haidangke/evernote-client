@@ -5,7 +5,7 @@ import {
     DropdownButton,
     HandleButton,
     MarkButton,
-} from '~/pages/NotePage/components/NoteEditor/ButtonToolbar';
+} from '~/pages/NotePage/components/NoteEditor/Button';
 import { ArrowDownIcon } from '~/components/Icon';
 import {
     AlignIcon,
@@ -33,10 +33,11 @@ import InsertBtn from '../InsertBtn';
 import colorPicker from '~/assets/images/color-picker.png';
 import styles from './SlateToolbar.module.scss';
 import { useState } from 'react';
-import { isBlockActive, toggleBlock } from '../ButtonToolbar/BlockButton';
+import { isBlockActive, toggleBlock } from '../Button/BlockButton';
 import { toolbarConfig } from '~/config';
 import SearchHightlight from '../SearchHightlight';
-import { textIndent } from '../InOutdent';
+import { textIndent } from '../Indent';
+import OverflowToolbar from '../OverflowToolbar';
 
 const cx = classNames.bind(styles);
 
@@ -67,23 +68,24 @@ function SlateToolbar({ onHeader, editor, setSearch }: SlateToolbarProps) {
         <div className={cx('toolbar', { 'toolbar-on-header': onHeader })}>
             <InsertBtn />
 
-            <HandleButton onClick={() => console.log('Handle')} content='Tệp đính kèm'>
+            <HandleButton handle={() => console.log('Handle')} content='Tệp đính kèm'>
                 <FileIcon />
             </HandleButton>
 
-            <HandleButton onClick={() => console.log('Handle')} content='Nhiệm vụ'>
+            <HandleButton handle={() => console.log('Handle')} content='Nhiệm vụ'>
                 <TodoIcon />
             </HandleButton>
 
-            <HandleButton onClick={() => console.log('Handle')} content='Sự kiện trên lịch'>
+            <HandleButton handle={() => console.log('Handle')} content='Sự kiện trên lịch'>
                 <CalendarIcon />
             </HandleButton>
 
             <div className={cx('line-through')}></div>
 
+            {/* undo redo */}
             <HandleButton
                 disable={undos.length === 0}
-                onClick={() => HistoryEditor.undo(editor)}
+                handle={() => HistoryEditor.undo(editor)}
                 content='Hoàn tác'
                 className={cx({ btn__disable: undos.length === 0 })}
             >
@@ -92,7 +94,7 @@ function SlateToolbar({ onHeader, editor, setSearch }: SlateToolbarProps) {
 
             <HandleButton
                 disable={redos.length === 0}
-                onClick={() => HistoryEditor.undo(editor)}
+                handle={() => HistoryEditor.undo(editor)}
                 content='Làm lại'
                 className={cx({ btn__disable: redos.length === 0 })}
             >
@@ -103,8 +105,6 @@ function SlateToolbar({ onHeader, editor, setSearch }: SlateToolbarProps) {
 
             {/* heading */}
             <DropdownButton
-                width='120px'
-                content='content'
                 value={heading}
                 dropdown={() => (
                     <div className={cx('dropdown-wrapper')}>
@@ -132,7 +132,8 @@ function SlateToolbar({ onHeader, editor, setSearch }: SlateToolbarProps) {
 
             <div className={cx('line-through')}></div>
 
-            <DropdownButton content='content' dropdown={() => <h1>Drop Down</h1>}>
+            {/* font family */}
+            <DropdownButton dropdown={() => <h1>Drop Down</h1>}>
                 <span>Sans Serif</span>
                 <ArrowDownIcon width={8} height={24} />
             </DropdownButton>
@@ -141,7 +142,6 @@ function SlateToolbar({ onHeader, editor, setSearch }: SlateToolbarProps) {
 
             {/* font size */}
             <DropdownButton
-                content='content'
                 dropdown={() => (
                     <div className={cx('dropdown-wrapper')}>
                         {toolbarConfig.fontSize.map((item) => (
@@ -173,7 +173,6 @@ function SlateToolbar({ onHeader, editor, setSearch }: SlateToolbarProps) {
 
             {/* color picker */}
             <DropdownButton
-                content='content'
                 dropdown={() => (
                     <div className={cx('color-wrapper')}>
                         {toolbarConfig.color.map((item) => (
@@ -228,14 +227,14 @@ function SlateToolbar({ onHeader, editor, setSearch }: SlateToolbarProps) {
                 <TestListIcon />
             </BlockButton>
 
-            <HandleButton onClick={() => console.log('Handle')} content='Sự kiện trên lịch'>
+            <HandleButton handle={() => console.log('Handle')} content='Sự kiện trên lịch'>
                 <LinkIcon />
             </HandleButton>
             <div className={cx('line-through')}></div>
 
             {/* align */}
             <DropdownButton
-                content='content'
+                formats={['left', 'center', 'right']}
                 dropdown={() => (
                     <div className={cx('dropdown-wrapper')}>
                         {toolbarConfig.align.map((item) => {
@@ -268,26 +267,36 @@ function SlateToolbar({ onHeader, editor, setSearch }: SlateToolbarProps) {
             </DropdownButton>
 
             {/* indent outdent */}
-            <HandleButton content='Indent' onClick={() => textIndent(editor, 'indent')}>
+            <HandleButton
+                format='indent'
+                content='Indent'
+                handle={() => textIndent(editor, 'indent')}
+            >
                 <IndentIcon />
             </HandleButton>
-            <HandleButton content='Outdent' onClick={() => textIndent(editor, 'outdent')}>
+            <HandleButton
+                format='outdent'
+                content='Outdent'
+                handle={() => textIndent(editor, 'outdent')}
+            >
                 <OutdentIcon />
             </HandleButton>
 
             <div className={cx('line-through')}></div>
-            <MarkButton content='gạch dưới' format='underline'>
-                <LineThrougnIcon />
-            </MarkButton>
-            <BlockButton content='' format='x'>
+
+            {/* <BlockButton content='' format='x'>
                 <UpperIndexIcon />
             </BlockButton>
 
             <BlockButton content='' format='y'>
                 <SubScriptIcon />
-            </BlockButton>
+            </BlockButton> */}
 
-            <SearchHightlight setSearch={setSearch} />
+            <DropdownButton isOther dropdown={() => <OverflowToolbar />}>
+                <span>Khác</span>
+                <ArrowDownIcon width={8} height={24} />
+            </DropdownButton>
+            {/* <SearchHightlight setSearch={setSearch} /> */}
         </div>
     );
 }

@@ -1,28 +1,22 @@
-import { useState } from 'react';
 import { useSlate, useSlateStatic } from 'slate-react';
 import classNames from 'classnames/bind';
 
 import { ArrowDownIcon } from '~/components/Icon';
 import { CodeIcon, InsertIcon, TableIcon, TodoIcon } from '~/components/Icon/Toolbar';
 import Popper from '~/components/Popper';
-import { DropdownButton } from '../ButtonToolbar';
-import { toggleMark } from '../ButtonToolbar/MarkButton';
+import { DropdownButton } from '../Button';
+import { toggleMark } from '../Button/MarkButton';
 
 import styles from './Insert.module.scss';
 import { insertTable } from '../Table';
 const cx = classNames.bind(styles);
 
 function InsertBtn() {
-    const [visible, setVisible] = useState(false);
     const editor = useSlate();
     const editorStatic = useSlateStatic();
 
     return (
         <DropdownButton
-            visibleProp={visible}
-            setVisibleProp={setVisible}
-            className={cx('insert-btn')}
-            content='content'
             dropdown={() => (
                 <Popper>
                     <div className={cx('insert')}>
@@ -37,7 +31,6 @@ function InsertBtn() {
                             <TableIcon className={cx('insert-icon')} />
                             <div
                                 onClick={(event: any) => {
-                                    setVisible(false);
                                     event.preventDefault();
                                     insertTable(editorStatic);
                                 }}
@@ -56,7 +49,6 @@ function InsertBtn() {
 
                         <div
                             onClick={(event: any) => {
-                                setVisible(false);
                                 event.preventDefault();
                                 toggleMark(editor, 'code');
                             }}
