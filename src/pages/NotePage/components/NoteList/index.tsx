@@ -1,34 +1,39 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Resizable } from 're-resizable';
 import classNames from 'classnames/bind';
 
-import noteService from '~/services/noteService';
+import useWindowSize from '~/hooks/useWindowSize';
+import { useAppDispatch, useAppSelector } from '~/app/hooks';
+import { fetchListNote } from '~/app/thunk/listNoteThunk';
 
 import styles from './NoteList.module.scss';
 import { FilterIcon, NoteListIcon, SortIcon, ViewIcon } from '~/components/Icon';
-import useWindowSize from '~/hooks/useWindowSize';
+import { selectListNote } from '~/app/slice/listNoteSlice';
 
 const cx = classNames.bind(styles);
 
 function NoteList() {
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
+    const noteId = searchParams.get('note');
+
+    const listNote = useAppSelector(selectListNote);
 
     const [resizable, setResizable] = useState({ width: 320, height: '100vh' });
     const [maxWidth, setMaxWidth] = useState(600);
     const [widthWindow] = useWindowSize();
 
-    const { data } = useQuery('notes', async () => await noteService.getAll());
-    const notes = data?.data;
-    const noteId = searchParams.get('note');
+    useEffect(() => {
+        if (!noteId && listNote.length !== 0) {
+            navigate(`/note?note=${listNote[0]._id}`);
+        }
+    }, [listNote, navigate, noteId]);
 
     useEffect(() => {
-        if (!noteId && notes && notes[0]) {
-            navigate(`/note?note=${notes[0]._id}`);
-        }
-    }, [notes, navigate, noteId]);
+        dispatch(fetchListNote({}));
+    }, [dispatch]);
 
     useEffect(() => {
         if (widthWindow > 0) {
@@ -63,7 +68,7 @@ function NoteList() {
                         <div className={cx('top-title')}>Ghi chú</div>
                     </div>
                     <div className={cx('bottom')}>
-                        <div className={cx('bottom-total')}>{notes?.length} ghi chú</div>
+                        <div className={cx('bottom-total')}>{listNote?.length} ghi chú</div>
                         <div className={cx('bottom-btn')}>
                             <SortIcon className={cx('bottom-icon')} />
                             <FilterIcon className={cx('bottom-icon')} />
@@ -79,24 +84,29 @@ function NoteList() {
                     </div>
 
                     {/* data fetch */}
-                    <div className={cx('list-body')}>
-                        {notes?.map((item, index) => (
-                            <div
-                                onClick={() => setSearchParams({ note: item._id })}
-                                key={item._id}
-                                className={cx('list', 'item-main', {
-                                    'list-b-h': index % 2 === 0,
-                                    'item-main__active': noteId === item._id,
-                                })}
-                            >
-                                <div className={cx('item', 'item-body')}>
-                                    {item.title || 'Chưa có tiêu đề'}
+
+                    {listNote.length === 0 ? (
+                        <></>
+                    ) : (
+                        <div className={cx('list-body')}>
+                            {listNote?.map((item, index) => (
+                                <div
+                                    onClick={() => setSearchParams({ note: item._id })}
+                                    key={item._id}
+                                    className={cx('list', 'item-main', {
+                                        'list-b-h': index % 2 === 0,
+                                        'item-main__active': noteId === item._id,
+                                    })}
+                                >
+                                    <div className={cx('item', 'item-body')}>
+                                        {item.title || 'Chưa có tiêu đề'}
+                                    </div>
+                                    <div className={cx('item', 'item-body')}>34 phút trước</div>
+                                    <div className={cx('item', 'item-body')}></div>
                                 </div>
-                                <div className={cx('item', 'item-body')}>34 phút trước</div>
-                                <div className={cx('item', 'item-body')}></div>
-                            </div>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
         </Resizable>

@@ -73,7 +73,7 @@ const toolbarSlice = createSlice({
 
 export const toolbarActions = toolbarSlice.actions;
 
-export const SelectOverflowToolbar = (state: RootState) => state.toolbar.overflowToolbar;
+export const selectOverflowToolbar = (state: RootState) => state.toolbar.overflowToolbar;
 
 const toolbarReducer = toolbarSlice.reducer;
 

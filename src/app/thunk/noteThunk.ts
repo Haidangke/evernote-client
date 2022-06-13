@@ -13,16 +13,6 @@ export const fetchNote = createAsyncThunk('note/fetchNote', async (id: string, t
     }
 });
 
-export const fetchNotes = createAsyncThunk('note/fetchNote', async (id: string, thunkAPI) => {
-    try {
-        const response = await noteService.get(id);
-        return response.data;
-    } catch (error: any) {
-        console.log({ error });
-        return thunkAPI.rejectWithValue('');
-    }
-});
-
 export const updateNote = createAsyncThunk(
     'note/updateNote',
     async (obj: { id: string; params: UpdateNoteParams }, thunkAPI) => {

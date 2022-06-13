@@ -1,5 +1,8 @@
 @import 'normalize.css';
-@import 'font', 'variables', 'tippy', 'slate';
+@import '../../assets/styles/font';
+@import '../../assets/styles/variables';
+@import '../../assets/styles/tippy';
+@import '../../assets/styles/slate';
 
 * {
     margin: 0;

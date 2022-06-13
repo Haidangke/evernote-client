@@ -45,4 +45,12 @@ export const toolbar = {
         'rgb(13, 58, 90)',
         'rgb(24, 168, 65)',
     ],
+    fontFamily: [
+        { value: '"Source Sans Pro", sans-serif', name: 'Sans Serif' },
+        { value: '"Source Serif Pro", serif', name: 'Serif' },
+        { value: '"Zilla Slab", serif', name: 'Slab Serif' },
+        { value: '"Source Code Pro", monospace', name: 'Đơn cách' },
+        { value: '"Dancing Script", cursive', name: 'Mã' },
+        { value: '"Kalam", cursive', name: 'Viết tay' },
+    ],
 };

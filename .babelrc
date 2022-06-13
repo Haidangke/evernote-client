@@ -4,7 +4,8 @@
             "module-resolver",
             {
                 "alias": {
-                    "~": "./src"
+                    "~": "./src",
+                    "mixin": "src/assets/styles/mixin"
                 }
             }
         ]

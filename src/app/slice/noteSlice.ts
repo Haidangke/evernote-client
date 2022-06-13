@@ -13,7 +13,6 @@ interface InitialState {
 
     isLoading: boolean;
     note?: Note<Tag>;
-    notes?: Note<Tag>[];
 }
 
 const initialState: InitialState = {
@@ -27,7 +26,6 @@ const initialState: InitialState = {
 
     isLoading: false,
     note: undefined,
-    notes: undefined,
 };
 
 const noteSlice = createSlice({
