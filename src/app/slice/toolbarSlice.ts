@@ -56,6 +56,18 @@ const initialState: InitialState = {
             isOverflow: false,
             format: 'right',
         },
+        {
+            isOverflow: false,
+            format: 'sup',
+        },
+        {
+            isOverflow: false,
+            format: 'sub',
+        },
+        {
+            isOverflow: false,
+            format: 'through',
+        },
     ],
 };
 

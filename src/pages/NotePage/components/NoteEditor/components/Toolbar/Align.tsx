@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import classNames from 'classnames/bind';
 
 import { ArrowDownIcon } from '~/components/Icon';
-import { AlignIcon, CheckIcon } from '~/components/Icon/Toolbar';
+import { AlignLeftIcon, CheckIcon } from '~/components/Icon/Toolbar';
 import { toolbarConfig } from '~/config';
 import { isBlockActive, toggleBlock } from '../../utils/block';
 import { DropdownButton } from '../Button';
@@ -11,13 +11,13 @@ import styles from './Toolbar.module.scss';
 const cx = classNames.bind(styles);
 
 function Align({ editor }: any) {
-    const isAlignIconDefault = useMemo(
+    const isAlignLeftIconDefault = useMemo(
         () =>
             toolbarConfig.align.filter((item) => isBlockActive(editor, item.value, 'align'))[0]
                 ?.icon,
         [editor]
     );
-    const AlignIconDefault = isAlignIconDefault || AlignIcon;
+    const AlignLeftIconDefault = isAlignLeftIconDefault || AlignLeftIcon;
     return (
         <DropdownButton
             formats={['left', 'center', 'right']}
@@ -36,7 +36,7 @@ function Align({ editor }: any) {
                             >
                                 <div className={cx('dropdown-align-check')}>
                                     {(isBlockActive(editor, item.value, 'align') ||
-                                        (!isAlignIconDefault && item.value === 'left')) && (
+                                        (!isAlignLeftIconDefault && item.value === 'left')) && (
                                         <CheckIcon />
                                     )}
                                 </div>
@@ -48,7 +48,7 @@ function Align({ editor }: any) {
                 </div>
             )}
         >
-            <AlignIconDefault />
+            <AlignLeftIconDefault />
             <ArrowDownIcon width={8} height={24} />
         </DropdownButton>
     );

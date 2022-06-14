@@ -184,7 +184,7 @@ export const LinkIcon = ({ className }: IconProps) => (
     </svg>
 );
 
-export const AlignIcon = ({ className }: IconProps) => (
+export const AlignLeftIcon = ({ className }: IconProps) => (
     <svg
         height={24}
         width={24}

@@ -9,6 +9,13 @@ const withKeyCommands = (editor: any) => {
 
         if (isVoid(parentNode) || !Node.string(parentNode).length) {
             Transforms.removeNodes(editor, { at: parentPath });
+            const length = editor.children.length;
+            if (length === 0) {
+                Transforms.insertNodes(editor, {
+                    type: 'paragraph',
+                    children: [{ text: '' }],
+                });
+            }
         } else {
             deleteBackward(...args);
         }

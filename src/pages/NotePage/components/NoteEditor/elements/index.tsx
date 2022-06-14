@@ -1,4 +1,5 @@
 import CheckListItemElement from '../elements/CheckList';
+import Link from './Link';
 
 const SlateElement = (props: any) => {
     const { attributes, children, element } = props;
@@ -70,11 +71,7 @@ const SlateElement = (props: any) => {
             return <CheckListItemElement {...props} />;
 
         case 'link':
-            return (
-                <a {...attributes} href={element.url}>
-                    {children}
-                </a>
-            );
+            return <Link {...props} style={style} />;
 
         default:
             return (
@@ -100,6 +97,17 @@ const SlateLeaf = ({ attributes, children, leaf }: any) => {
 
     if (leaf.underline) {
         children = <u>{children}</u>;
+    }
+
+    if (leaf.sup) {
+        children = <sup>{children}</sup>;
+    }
+
+    if (leaf.sub) {
+        children = <sub>{children}</sub>;
+    }
+    if (leaf.through) {
+        children = <s>{children}</s>;
     }
 
     return (

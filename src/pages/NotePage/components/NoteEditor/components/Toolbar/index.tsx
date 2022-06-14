@@ -3,7 +3,6 @@ import classNames from 'classnames/bind';
 import { CalendarIcon, FileIcon, TodoIcon } from '~/components/Icon/Toolbar';
 import { HandleButton } from '~/pages/NotePage/components/NoteEditor/components/Button';
 
-
 import InsertBtn from './Insert';
 import OverflowToolbar from '../OverflowToolbar';
 
@@ -19,15 +18,16 @@ import ListStyle from './ListStyle';
 import TextIndent from './TextIndent';
 
 import styles from './Toolbar.module.scss';
+import TextFormat from './TextFormat';
 const cx = classNames.bind(styles);
 
-interface SlateToolbarProps {
+interface ToolbarProps {
     onHeader: boolean;
     editor: any;
     setSearch: any;
 }
 
-function SlateToolbar({ onHeader, editor, setSearch }: SlateToolbarProps) {
+function Toolbar({ onHeader, editor, setSearch }: ToolbarProps) {
     return (
         <div className={cx('toolbar', { 'toolbar-on-header': onHeader })}>
             <InsertBtn />
@@ -80,21 +80,15 @@ function SlateToolbar({ onHeader, editor, setSearch }: SlateToolbarProps) {
             <Align editor={editor} />
 
             {/* indent outdent */}
-            <TextIndent />
+            <TextIndent editor={editor} />
 
             <div className={cx('line')}></div>
 
-            {/* <BlockButton content='' format='x'>
-                <UpperIndexIcon />
-            </BlockButton>
-
-            <BlockButton content='' format='y'>
-                <SubScriptIcon />
-            </BlockButton> */}
+            <TextFormat />
 
             <OverflowToolbar />
         </div>
     );
 }
 
-export default SlateToolbar;
+export default Toolbar;

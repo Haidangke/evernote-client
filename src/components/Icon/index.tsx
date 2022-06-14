@@ -411,3 +411,19 @@ export const LoadingIcon = ({ width = '6rem', height = '6rem', className }: Icon
         <circle fill='none' strokeWidth='6' strokeLinecap='round' cx='33' cy='33' r='30'></circle>
     </svg>
 );
+
+export const CloseIcon = ({ width = '24', height = '24', className }: IconProps) => (
+    <svg
+        width={width}
+        height={height}
+        viewBox='0 0 24 24'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+        className={className}
+    >
+        <path
+            d='M17.53 6.47a.75.75 0 00-1.06 0L12 10.94 7.53 6.47a.75.75 0 00-1.06 1.06L10.94 12l-4.47 4.47a.75.75 0 101.06 1.06L12 13.06l4.47 4.47a.75.75 0 101.06-1.06L13.06 12l4.47-4.47a.75.75 0 000-1.06z'
+            fill='currentColor'
+        ></path>
+    </svg>
+);

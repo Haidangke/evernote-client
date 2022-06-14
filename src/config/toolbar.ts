@@ -1,4 +1,4 @@
-import { AlignCenterIcon, AlignIcon, AlignRightIcon } from '~/components/Icon/Toolbar';
+import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from '~/components/Icon/Toolbar';
 
 export const toolbar = {
     heading: [
@@ -25,7 +25,7 @@ export const toolbar = {
         '96px',
     ],
     align: [
-        { value: 'left', icon: AlignIcon },
+        { value: 'left', icon: AlignLeftIcon },
         { value: 'center', icon: AlignCenterIcon },
         { value: 'right', icon: AlignRightIcon },
     ],

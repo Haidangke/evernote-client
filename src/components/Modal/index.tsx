@@ -4,22 +4,25 @@ import useOnClickOutside from '~/hooks/useOnclickOutside';
 import Popper from '../Popper';
 import styles from './Modal.module.scss';
 
-interface ModalProps {
+export interface ModalProps {
     children: any;
     isOpen: boolean;
     setIsOpen: (isOpen: boolean) => void;
+    isCenter?: boolean;
 }
 
 const cx = classNames.bind(styles);
 
-function Modal({ children, isOpen, setIsOpen }: ModalProps) {
+function Modal({ children, isOpen, setIsOpen, isCenter }: ModalProps) {
     const modalRef = useRef(null);
 
     useOnClickOutside(modalRef, () => setIsOpen(false));
     if (!isOpen) return <></>;
     return (
-        <div ref={modalRef} className={cx('wrapper')}>
-            <Popper>{children}</Popper>
+        <div className={styles.overplay}>
+            <div ref={modalRef} className={cx('wrapper', { isCenter })}>
+                <Popper>{children}</Popper>
+            </div>
         </div>
     );
 }

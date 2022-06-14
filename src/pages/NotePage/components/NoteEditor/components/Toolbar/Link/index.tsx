@@ -36,7 +36,7 @@ function Link({ editor }: any) {
                                     <div className={cx('field')}>
                                         <span>Tên liên kết</span>
                                         <input
-                                            onChange={(e) => setLink(e.target.value)}
+                                            onChange={(e) => setName(e.target.value)}
                                             placeholder='Google'
                                             type='text'
                                         />
@@ -44,7 +44,7 @@ function Link({ editor }: any) {
                                     <div className={cx('field')}>
                                         <span>Liên kết</span>
                                         <input
-                                            onChange={(e) => setName(e.target.value)}
+                                            onChange={(e) => setLink(e.target.value)}
                                             placeholder='https://google.com'
                                             type='text'
                                         />
@@ -52,13 +52,13 @@ function Link({ editor }: any) {
                                 </div>
                                 <div className={cx('button')}>
                                     <Button
-                                        type='outline'
+                                        variant='outline'
                                         onClick={() => setVisible(false)}
                                         content='Hủy'
                                     />
                                     <Button
                                         disabled={link.length === 0 || name.length === 0}
-                                        type='primary'
+                                        variant='primary'
                                         onClick={() => {
                                             insertLink(editor, link, name);
                                             setVisible(false);

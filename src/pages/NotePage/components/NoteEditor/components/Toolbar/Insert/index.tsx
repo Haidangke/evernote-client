@@ -48,7 +48,7 @@ function Insert() {
                 </Popper>
             )}
         >
-            <InsertIcon className={cx('icon')}/>
+            <InsertIcon className={cx('icon')} />
             <span>Chèn</span>
             <ArrowDownIcon width={8} height={24} />
         </DropdownButton>

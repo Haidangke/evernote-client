@@ -1,4 +1,24 @@
+.overplay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(42, 51, 60, 0.4);
+    z-index: 99998;
+}
+
 .wrapper {
     position: absolute;
-    top: 100%;
+    max-width: 990px;
+    min-height: 200px;
+    min-width: 550px;
+    width: min-content;
+}
+
+.isCenter {
+    top: 50%;
+    left: 50%;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
 }

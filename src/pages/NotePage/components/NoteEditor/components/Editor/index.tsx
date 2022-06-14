@@ -8,8 +8,8 @@ import { debounce } from 'lodash';
 import pipe from 'lodash/fp/pipe';
 import classNames from 'classnames/bind';
 
-import SlateToolbar from '../Toolbar';
-import styles from './SlateEditor.module.scss';
+import Toolbar from '../Toolbar';
+import styles from './Editor.module.scss';
 import useDecorate from '~/hooks/useDecorate';
 import { useAppDispatch, useAppSelector } from '~/app/hooks';
 import { updateNote } from '~/app/thunk/noteThunk';
@@ -114,7 +114,7 @@ function SlateEditor({ isToolbar, setIsToolbar }: EditorProps) {
                 }}
             >
                 {isToolbar ? (
-                    <SlateToolbar onHeader={onHeader} editor={editor} setSearch={setSearch} />
+                    <Toolbar onHeader={onHeader} editor={editor} setSearch={setSearch} />
                 ) : (
                     <div className={cx('info-update')}>
                         Chỉnh sửa lần cuối vào {date.day} thg {date.month}, {date.year}

@@ -6,20 +6,22 @@ const cx = classNames.bind(styles);
 
 interface ButtonProps {
     content: string;
-    onClick: () => void;
-    type: 'primary' | 'outline';
+    onClick?: () => void;
+    variant: 'primary' | 'outline';
     disabled?: boolean;
+    type?: 'submit' | 'reset' | 'button';
 }
 
-function Button({ content, type, onClick, disabled = false }: ButtonProps) {
+function Button({ content, variant, onClick, disabled = false, type = 'button' }: ButtonProps) {
     return (
         <button
+            type={type}
             disabled={disabled}
             onClick={onClick}
             className={cx('wrapper', {
                 disabled,
-                primary: type === 'primary',
-                outline: type === 'outline',
+                primary: variant === 'primary',
+                outline: variant === 'outline',
             })}
         >
             {content}

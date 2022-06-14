@@ -7,16 +7,19 @@ import { selectOverflowToolbar } from '~/app/slice/toolbarSlice';
 import { ArrowDownIcon } from '~/components/Icon';
 import {
     AlignCenterIcon,
-    AlignIcon,
+    AlignLeftIcon,
     AlignRightIcon,
     BoldIcon,
     BulletedListIcon,
     IndentIcon,
     ItalicIcon,
+    LineThrougnIcon,
     NumberListIcon,
     OutdentIcon,
+    SubScriptIcon,
     TestListIcon,
     UnderlineIcon,
+    UpperIndexIcon,
 } from '~/components/Icon/Toolbar';
 import { DropdownButton } from '../Button';
 import { textIndent } from '../../utils/indent';
@@ -26,7 +29,7 @@ import { isBlockActive, toggleBlock } from '../../utils/block';
 import styles from './OverflowToolbar.module.scss';
 const cx = classNames.bind(styles);
 
-const markToolbar = [
+const fontStyle = [
     {
         icon: BoldIcon,
         format: 'bold',
@@ -44,7 +47,7 @@ const markToolbar = [
     },
 ];
 
-const listToolbar = [
+const listStyle = [
     {
         icon: BulletedListIcon,
         format: 'bulleted-list',
@@ -62,7 +65,7 @@ const listToolbar = [
     },
 ];
 
-const handleToolbar = [
+const indent = [
     {
         icon: IndentIcon,
         format: 'indent',
@@ -77,10 +80,16 @@ const handleToolbar = [
     },
 ];
 
-const dropdownToolbar = [
-    { icon: AlignIcon, format: 'left', name: 'Căn trái' },
+const align = [
+    { icon: AlignLeftIcon, format: 'left', name: 'Căn trái' },
     { icon: AlignCenterIcon, format: 'center', name: 'Căn giữa' },
     { icon: AlignRightIcon, format: 'right', name: 'Căn phải' },
+];
+
+const textFormat = [
+    { icon: LineThrougnIcon, format: 'through', name: 'Gạch ngang' },
+    { icon: UpperIndexIcon, format: 'sup', name: 'Chỉ số trên' },
+    { icon: SubScriptIcon, format: 'sub', name: 'Chỉ số dưới' },
 ];
 
 function OverflowToolbar() {
@@ -102,7 +111,7 @@ function OverflowToolbar() {
             dropdown={() => (
                 <div className={cx('wrapper')}>
                     <div className={cx('list')}>
-                        {markToolbar.map((item) => {
+                        {fontStyle.map((item) => {
                             const Icon = item.icon;
                             return (
                                 <div
@@ -120,12 +129,12 @@ function OverflowToolbar() {
                                 </div>
                             );
                         })}
-                        {markToolbar.filter((item) => isOverflow(item.format)).length > 0 && (
+                        {fontStyle.filter((item) => isOverflow(item.format)).length > 0 && (
                             <div className={cx('line-through')}>
                                 <span></span>
                             </div>
                         )}
-                        {listToolbar.map((item) => {
+                        {listStyle.map((item) => {
                             const Icon = item.icon;
                             return (
                                 <div
@@ -143,12 +152,12 @@ function OverflowToolbar() {
                                 </div>
                             );
                         })}
-                        {listToolbar.filter((item) => isOverflow(item.format)).length > 0 && (
+                        {listStyle.filter((item) => isOverflow(item.format)).length > 0 && (
                             <div className={cx('line-through')}>
                                 <span></span>
                             </div>
                         )}
-                        {dropdownToolbar.map((item) => {
+                        {align.map((item) => {
                             const Icon = item.icon;
                             return (
                                 <div
@@ -166,12 +175,33 @@ function OverflowToolbar() {
                                 </div>
                             );
                         })}
-                        {handleToolbar.map((item) => {
+                        {indent.map((item) => {
                             const Icon = item.icon;
                             return (
                                 <div
                                     key={item.format}
                                     onClick={() => item.handle(editor)}
+                                    className={cx('item', {
+                                        item__hide: !isOverflow(item.format),
+                                    })}
+                                >
+                                    <span className={cx('icon')}>
+                                        <Icon width={24} height={24} />
+                                    </span>
+                                    <span className={cx('name')}>{item.name}</span>
+                                </div>
+                            );
+                        })}
+                        {indent.filter((item) => isOverflow(item.format)).length > 0 && (
+                            <div className={cx('line-through')}>
+                                <span></span>
+                            </div>
+                        )}
+                        {textFormat.map((item) => {
+                            const Icon = item.icon;
+                            return (
+                                <div
+                                    key={item.format}
                                     className={cx('item', {
                                         item__hide: !isOverflow(item.format),
                                     })}

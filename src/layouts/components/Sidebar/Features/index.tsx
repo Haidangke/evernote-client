@@ -13,14 +13,18 @@ import {
 import Sticky from '../Sticky';
 import styles from '~/layouts/components/Sidebar/Sidebar.module.scss';
 import noteService from '~/services/noteService';
+import { useState } from 'react';
+import Modal from '~/components/Modal';
+import Tag from './Tag';
 
 const cx = classNames.bind(styles);
 
 function Features() {
     const handleAddNote = async () => {
-        console.log('add');
         await noteService.create();
     };
+
+    const handleAddTag = () => {};
 
     return (
         <div className={cx('features')}>
@@ -47,7 +51,7 @@ function Features() {
                 type='link-menu'
                 onAdd={() => {}}
             />
-            <Sticky name='Thẻ' path='/tag' Icon={TagIcon} type='menu' onAdd={() => {}} />
+            <Tag />
             <div className={cx('line-space')}></div>
             <Sticky name='Thùng rác' path='/recycle' Icon={DeleteIcon} type='link' />
         </div>
