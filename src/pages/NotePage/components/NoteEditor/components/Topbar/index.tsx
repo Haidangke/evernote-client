@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import ButtonTippy from '~/components/ButtonTippy';
-import { FullSizeIcon, NoteMainIcon, NoteToIcon, OtherIcon } from '~/components/Icon';
+import { FullSizeIcon, NoteMainIcon, NoteToIcon, OtherIcon } from '~/assets/icons';
 import styles from './Topbar.module.scss';
 
 const cx = classNames.bind(styles);

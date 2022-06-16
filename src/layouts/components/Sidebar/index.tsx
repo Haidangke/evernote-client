@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import classnames from 'classnames/bind';
 import { Resizable } from 're-resizable';
 
-import { ArrowLeftIcon } from '~/components/Icon';
-import useMouseMove from '~/hooks/useMouseMove';
+import { ArrowLeftIcon } from '~/assets/icons';
 import useWindowSize from '~/hooks/useWindowSize';
 import Actions from './Actions';
-import Features from './Features';
+import Menu from './Menu';
 import Header from './Header';
 
 import styles from './Sidebar.module.scss';
@@ -25,32 +24,11 @@ function Sidebar() {
     const [isSmallSidebar, setIsSmallSidebar] = useState(isSmall);
     const [maxWidth, setMaxWidth] = useState(400);
 
-    const { x } = useMouseMove();
-
-    const handleResize = () => {
-        if (x <= 60) {
-            setIsSmallSidebar(true);
-            localStorage.setItem('isSmall-sidebar', JSON.stringify(true));
-        }
-        if (x >= maxWidth * 0.625) {
-            setIsSmallSidebar(false);
-            localStorage.setItem('isSmall-sidebar', JSON.stringify(false));
-        }
-    };
-
     const [widthWindow] = useWindowSize();
     useEffect(() => {
         if (widthWindow < 0) return;
         const limitWidth = widthWindow / 3;
 
-        //sidebar o trang thai nho nhat
-        // if (270 > widthWindow - 500 - 280) {
-        //     setIsSmallSidebar(true);
-        // } else {
-        //     setIsSmallSidebar(false);
-        // }
-
-        //sidebar o trang thai bi
         if (limitWidth < 400) {
             setMaxWidth(limitWidth);
         } else {
@@ -76,7 +54,6 @@ function Sidebar() {
                 });
                 localStorage.setItem('width-sidebar', JSON.stringify(resizable.width + d.width));
             }}
-            onResize={handleResize}
         >
             <div
                 onClick={() => {
@@ -91,7 +68,7 @@ function Sidebar() {
             <div className={cx('wrapper')}>
                 <Header />
                 <Actions />
-                <Features />
+                <Menu isSmallSidebar={isSmallSidebar} />
             </div>
         </Resizable>
     );

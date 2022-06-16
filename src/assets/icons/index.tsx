@@ -427,3 +427,21 @@ export const CloseIcon = ({ width = '24', height = '24', className }: IconProps)
         ></path>
     </svg>
 );
+
+export const TagSubIcon = ({ className }: IconProps) => (
+    <svg
+        width='14'
+        height='14'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+        className={className}
+    >
+        <path d='M7 6.5a1 1 0 100-2 1 1 0 000 2z' fill='currentColor'></path>
+        <path
+            fillRule='evenodd'
+            clipRule='evenodd'
+            d='M2 6.273a2 2 0 01.52-1.345L5.89 1.22a1.5 1.5 0 012.22 0l3.37 3.707A2 2 0 0112 6.273V11a2 2 0 01-2 2H4a2 2 0 01-2-2V6.273zm9 0V11a1 1 0 01-1 1H4a1 1 0 01-1-1V6.273a1 1 0 01.26-.672l3.37-3.707a.5.5 0 01.74 0L10.74 5.6a1 1 0 01.26.672z'
+            fill='currentColor'
+        ></path>
+    </svg>
+);

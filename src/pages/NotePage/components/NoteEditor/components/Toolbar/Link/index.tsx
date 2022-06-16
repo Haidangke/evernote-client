@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 
 import Button from '~/components/Button';
 
-import { LinkIcon } from '~/components/Icon/Toolbar';
+import { LinkIcon } from '~/assets/icons/toolbar';
 import Popper from '~/components/Popper';
 import useOnClickOutside from '~/hooks/useOnclickOutside';
 import styles from './Link.module.scss';

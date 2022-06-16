@@ -1,0 +1,146 @@
+@import '../../../../assets/styles/mixin.scss';
+
+.menu {
+    height: calc(100vh - 92px - 99px);
+    overflow-y: auto;
+}
+
+.menu__small {
+    overflow-y: hidden;
+
+    .name {
+        display: none;
+    }
+
+    .menu-item:hover .add-btn {
+        display: none;
+    }
+
+    .triangle {
+        display: none;
+    }
+
+    .menu-sub {
+        display: none;
+    }
+}
+
+.menu-item {
+    position: relative;
+    @include flex(center, space-between);
+    height: 32px;
+    padding: 0 16px 0 18px;
+    cursor: pointer;
+    &:hover {
+        background-color: #333;
+    }
+
+    &:hover > .name {
+        color: var(--white);
+    }
+}
+
+.active {
+    background-color: #404040;
+    &:hover {
+        background-color: #404040;
+    }
+    & > .name {
+        color: var(--white);
+    }
+}
+
+.menu-item:hover {
+    .add-btn {
+        @include flex(center, center);
+    }
+}
+
+.content {
+    display: flex;
+    flex: 1;
+}
+
+.triangle {
+    display: flex;
+    position: absolute;
+    left: 5px;
+    color: var(--gray-icon);
+    transition: all 0.1s ease-in-out;
+    &__active {
+        transform: rotate(90deg);
+    }
+}
+
+.icon {
+    @include flex(center, center);
+    height: 24px;
+    width: 24px;
+    margin-right: 6px;
+    color: var(--gray-icon);
+}
+
+.name {
+    color: var(--gray);
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+}
+
+.add-btn {
+    display: none;
+    width: 18px;
+    height: 18px;
+
+    border-radius: 50%;
+    background-color: #1a1a1a;
+    &:hover {
+        background-color: #666;
+    }
+    &:hover > svg {
+        color: var(--gray);
+    }
+    & > svg {
+        color: var(--gray-icon);
+    }
+}
+
+.menu-sub {
+}
+
+.item {
+    @include flex(center, unset);
+    height: 24px;
+    padding: 0 8px 0 44px;
+    cursor: pointer;
+    &:hover {
+        background-color: #333;
+    }
+
+    &:hover > .item-name {
+        color: var(--white);
+    }
+
+    &-icon {
+        color: var(--gray-icon);
+        margin-right: 8px;
+    }
+
+    &-name {
+        color: var(--gray);
+        font-size: 1.3rem;
+    }
+}
+
+.item__add {
+    & > .item-icon {
+        color: var(--primary-color);
+    }
+
+    & > .item-name {
+        color: var(--primary-color);
+    }
+
+    &:hover > .item-name {
+        color: var(--primary-color);
+    }
+}

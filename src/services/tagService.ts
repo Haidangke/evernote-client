@@ -2,6 +2,9 @@ import { AddNoteParams, DeleteNoteParams, Response, Tag } from '~/types';
 import axiosClientSecret from '~/utils/axiosClientSecret';
 
 const tagService = {
+    get(): Promise<Response<Tag[]>> {
+        return axiosClientSecret.get('/tag');
+    },
     create(name: string): Promise<Response<Tag>> {
         return axiosClientSecret.post('/tag', { name });
     },
@@ -14,7 +17,7 @@ const tagService = {
         return axiosClientSecret.delete(`/tag/${id}`);
     },
 
-    deleteToNote(params:DeleteNoteParams) {
+    deleteToNote(params: DeleteNoteParams) {
         return axiosClientSecret.post('/tag/note', params);
     },
 };

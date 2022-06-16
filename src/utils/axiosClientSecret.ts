@@ -19,6 +19,7 @@ async function refreshToken(config: any, user: any) {
 
         localStorage.setItem('user', JSON.stringify({ ...user, accessToken: data }));
     } catch (error) {
+        window.location.reload();
         await authService.logout();
     }
 }

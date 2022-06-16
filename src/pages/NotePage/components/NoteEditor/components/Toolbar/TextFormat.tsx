@@ -1,4 +1,4 @@
-import { LineThrougnIcon, SubScriptIcon, UpperIndexIcon } from '~/components/Icon/Toolbar';
+import { LineThrougnIcon, SubScriptIcon, UpperIndexIcon } from '~/assets/icons/toolbar';
 import { MarkButton } from '../Button';
 
 function Sub() {

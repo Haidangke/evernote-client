@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { SearchIcon } from '~/components/Icon';
+import { SearchIcon } from '~/assets/icons';
 import styles from './SearchHightlight.module.scss';
 
 const cx = classNames.bind(styles);
@@ -7,7 +7,7 @@ const cx = classNames.bind(styles);
 function SearchHightlight({ setSearch }: any) {
     return (
         <div className={cx('wrapper')}>
-            <SearchIcon className={cx('seach-icon')}/>
+            <SearchIcon className={cx('seach-icon')} />
             <input
                 type='search'
                 placeholder='Search the text...'

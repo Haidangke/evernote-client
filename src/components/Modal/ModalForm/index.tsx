@@ -1,9 +1,11 @@
 import classNames from 'classnames/bind';
+
 import Button from '~/components/Button';
-import { CloseIcon } from '~/components/Icon';
+import { CloseIcon } from '~/assets/icons';
 import Modal, { ModalProps } from '..';
 
 import styles from './ModalForm.module.scss';
+
 interface ModalFormProps extends ModalProps {
     title: string;
     description: string;
@@ -26,7 +28,9 @@ function ModalForm({
             <div className={cx('header')}>
                 <h2 className={cx('title')}>
                     <span>{title}</span>
-                    <CloseIcon className={cx('icon')} />
+                    <span onClick={() => setIsOpen(false)}>
+                        <CloseIcon className={cx('icon')} />
+                    </span>
                 </h2>
                 <p className={cx('description')}>{description}</p>
             </div>

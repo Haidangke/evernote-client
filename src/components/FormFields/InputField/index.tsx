@@ -9,20 +9,22 @@ interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
     control: Control<any>;
     label?: string;
     placeholder: string;
+    isValid: (name: string) => boolean;
 }
 
 const cx = classNames.bind(styles);
 
-function InputField({ name, control, label, placeholder }: InputFieldProps) {
+function InputField({ name, control, label, placeholder, isValid }: InputFieldProps) {
     const {
         field: { value, onChange, onBlur, ref },
         fieldState: { error },
     } = useController({ name, control });
+
     return (
         <div className={cx('wrapper')}>
             <label className={cx('label')}>{label}</label>
             <input
-                className={cx('input', { error })}
+                className={cx('input')}
                 ref={ref}
                 value={value}
                 onChange={onChange}
@@ -30,6 +32,9 @@ function InputField({ name, control, label, placeholder }: InputFieldProps) {
                 type='text'
                 placeholder={placeholder}
             />
+            <p className={cx('error')}>
+                {isValid(value) ? 'Tên của thẻ đã tồn tại' : error?.message}
+            </p>
         </div>
     );
 }

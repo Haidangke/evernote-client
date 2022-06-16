@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 
-import { ArrowDownIcon } from '~/components/Icon';
-import { ColorPickerIcon } from '~/components/Icon/Toolbar';
+import { ArrowDownIcon } from '~/assets/icons';
+import { ColorPickerIcon } from '~/assets/icons/toolbar';
 import { toolbarConfig } from '~/config';
 import { isBlockActive, toggleBlock } from '../../utils/block';
 import { DropdownButton } from '../Button';

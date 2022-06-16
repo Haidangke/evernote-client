@@ -1,5 +1,6 @@
-import { routes as routesConfig } from './routes';
-import { toolbar as toolbarConfig } from './toolbar';
+import routesConfig from './routes';
+import toolbarConfig from './toolbar';
 import constants from './contants';
+import searchKeysConfig from './searchKeys';
 
-export { routesConfig, toolbarConfig, constants };
+export { routesConfig, toolbarConfig, searchKeysConfig, constants };

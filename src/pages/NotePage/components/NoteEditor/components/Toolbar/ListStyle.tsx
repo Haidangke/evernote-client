@@ -1,5 +1,5 @@
 import React from 'react';
-import { BulletedListIcon, NumberListIcon, TestListIcon } from '~/components/Icon/Toolbar';
+import { BulletedListIcon, NumberListIcon, TestListIcon } from '~/assets/icons/toolbar';
 import { BlockButton } from '../Button';
 
 function ListStyle() {

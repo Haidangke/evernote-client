@@ -1,6 +1,6 @@
-import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from '~/components/Icon/Toolbar';
+import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from '~/assets/icons/toolbar';
 
-export const toolbar = {
+const toolbar = {
     heading: [
         { value: 'heading-one', name: 'Tiêu đề lớn', size: '2em' },
         { value: 'heading-two', name: 'Tiêu đề trung bình', size: '1.5em' },
@@ -54,3 +54,5 @@ export const toolbar = {
         { value: '"Kalam", cursive', name: 'Viết tay' },
     ],
 };
+
+export default toolbar;

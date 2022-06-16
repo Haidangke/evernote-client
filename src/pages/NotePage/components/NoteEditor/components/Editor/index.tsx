@@ -13,7 +13,7 @@ import styles from './Editor.module.scss';
 import useDecorate from '~/hooks/useDecorate';
 import { useAppDispatch, useAppSelector } from '~/app/hooks';
 import { updateNote } from '~/app/thunk/noteThunk';
-import { LoadingIcon } from '~/components/Icon';
+import { LoadingIcon } from '~/assets/icons';
 import { noteActions } from '~/app/slice/noteSlice';
 import useWindowSize from '~/hooks/useWindowSize';
 import { listNoteActions } from '~/app/slice/listNoteSlice';
@@ -41,7 +41,7 @@ function SlateEditor({ isToolbar, setIsToolbar }: EditorProps) {
     const { note, isFetchSuccess } = useAppSelector((state) => state.note);
 
     const [searchParams] = useSearchParams();
-    const noteId = searchParams.get('note') || '';
+    const noteId = searchParams.get('noteId') || '';
 
     //state
     const [date, setDate] = useState({

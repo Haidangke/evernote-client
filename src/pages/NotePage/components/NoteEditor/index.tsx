@@ -9,24 +9,25 @@ import useOnClickOutside from '~/hooks/useOnclickOutside';
 
 import styles from './NoteEditor.module.scss';
 import Editor from './components/Editor';
-import { useAppDispatch } from '~/app/hooks';
+import { useAppDispatch, useAppSelector } from '~/app/hooks';
 import { fetchNote } from '~/app/thunk/noteThunk';
 const cx = classNames.bind(styles);
 
 function NoteEditor() {
     const dispatch = useAppDispatch();
     const [searchParams] = useSearchParams();
+    const { listNote } = useAppSelector((state) => state.listNote);
 
     const [isToolbar, setIsToolbar] = useState(true);
 
     const editorRef = useRef<any>(null);
 
+    const noteId = searchParams.get('noteId');
     useEffect(() => {
-        const noteId = searchParams.get('note');
-        if (noteId) {
+        if (listNote.some((note) => note._id === noteId) && noteId) {
             dispatch(fetchNote(noteId));
         }
-    }, [searchParams, dispatch]);
+    }, [noteId, dispatch, listNote]);
 
     useOnClickOutside(editorRef, () => setIsToolbar(false));
 

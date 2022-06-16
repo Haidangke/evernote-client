@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Resizable } from 're-resizable';
 import classNames from 'classnames/bind';
 
@@ -8,16 +8,15 @@ import { useAppDispatch, useAppSelector } from '~/app/hooks';
 import { fetchListNote } from '~/app/thunk/listNoteThunk';
 
 import styles from './NoteList.module.scss';
-import { FilterIcon, NoteListIcon, SortIcon, ViewIcon } from '~/components/Icon';
+import { FilterIcon, NoteListIcon, SortIcon, ViewIcon } from '~/assets/icons';
 import { selectListNote } from '~/app/slice/listNoteSlice';
 
 const cx = classNames.bind(styles);
 
 function NoteList() {
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
-    const noteId = searchParams.get('note');
+    const noteId = searchParams.get('noteId');
 
     const listNote = useAppSelector(selectListNote);
 
@@ -26,10 +25,11 @@ function NoteList() {
     const [widthWindow] = useWindowSize();
 
     useEffect(() => {
-        if (!noteId && listNote.length !== 0) {
-            navigate(`/note?note=${listNote[0]._id}`);
+        if (!listNote.some((note) => note._id === noteId) && listNote.length !== 0) {
+            searchParams.set('noteId', listNote[0]._id);
+            setSearchParams(searchParams);
         }
-    }, [listNote, navigate, noteId]);
+    }, [listNote, noteId, searchParams, setSearchParams]);
 
     useEffect(() => {
         dispatch(fetchListNote({}));
@@ -91,7 +91,10 @@ function NoteList() {
                         <div className={cx('list-body')}>
                             {listNote?.map((item, index) => (
                                 <div
-                                    onClick={() => setSearchParams({ note: item._id })}
+                                    onClick={() => {
+                                        searchParams.set('noteId', item._id);
+                                        setSearchParams(searchParams);
+                                    }}
                                     key={item._id}
                                     className={cx('list', 'item-main', {
                                         'list-b-h': index % 2 === 0,

@@ -1,8 +1,8 @@
 import { useSlate } from 'slate-react';
 import classNames from 'classnames/bind';
 
-import { ArrowDownIcon } from '~/components/Icon';
-import { CodeIcon, InsertIcon, TodoIcon } from '~/components/Icon/Toolbar';
+import { ArrowDownIcon } from '~/assets/icons';
+import { CodeIcon, InsertIcon, TodoIcon } from '~/assets/icons/toolbar';
 import Popper from '~/components/Popper';
 import { DropdownButton } from '../../Button';
 

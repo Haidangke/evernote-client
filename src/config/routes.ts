@@ -1,4 +1,4 @@
-export const routes = {
+const routes = {
     home: '/',
     login: '/login',
     note: '/note',
@@ -7,3 +7,4 @@ export const routes = {
     recycle: '/recycle',
 };
 
+export default routes;

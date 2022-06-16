@@ -3,7 +3,7 @@ import classnames from 'classnames/bind';
 import TippyHeadless from '@tippyjs/react/headless';
 
 import styles from '~/layouts/components/Sidebar/Sidebar.module.scss';
-import { AddIcon, ArrowDownIcon, NoteSolidIcon, SearchIcon } from '~/components/Icon';
+import { AddIcon, ArrowDownIcon, NoteSolidIcon, SearchIcon } from '~/assets/icons';
 import Popper from '~/components/Popper';
 
 const cx = classnames.bind(styles);

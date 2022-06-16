@@ -1,3 +1,12 @@
+.wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99998;
+}
+
 .overplay {
     position: fixed;
     top: 0;
@@ -8,8 +17,8 @@
     z-index: 99998;
 }
 
-.wrapper {
-    position: absolute;
+.content {
+    position: fixed;
     max-width: 990px;
     min-height: 200px;
     min-width: 550px;
@@ -20,5 +29,5 @@
     top: 50%;
     left: 50%;
     z-index: 99999;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -70%);
 }

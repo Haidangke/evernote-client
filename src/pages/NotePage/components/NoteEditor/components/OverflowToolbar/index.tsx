@@ -4,7 +4,7 @@ import { useSlate } from 'slate-react';
 
 import { useAppSelector } from '~/app/hooks';
 import { selectOverflowToolbar } from '~/app/slice/toolbarSlice';
-import { ArrowDownIcon } from '~/components/Icon';
+import { ArrowDownIcon } from '~/assets/icons';
 import {
     AlignCenterIcon,
     AlignLeftIcon,
@@ -20,7 +20,7 @@ import {
     TestListIcon,
     UnderlineIcon,
     UpperIndexIcon,
-} from '~/components/Icon/Toolbar';
+} from '~/assets/icons/toolbar';
 import { DropdownButton } from '../Button';
 import { textIndent } from '../../utils/indent';
 import { isMarkActive, toggleMark } from '../../utils/mark';
