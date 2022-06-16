@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import classNames from 'classnames/bind';
 
-import { ArrowDownIcon } from '~/assets/icons';
-import { toolbarConfig } from '~/config';
+import { ArrowDownIcon } from 'assets/icons';
+import { toolbarConfig } from 'config';
 import { toggleBlock } from '../../utils/block';
 import { DropdownButton } from '../Button';
 

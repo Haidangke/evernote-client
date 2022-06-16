@@ -4,9 +4,9 @@ import TippyHeadless from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 
 import { ButtonProps } from '.';
-import useWindowSize from '~/hooks/useWindowSize';
-import { useAppDispatch } from '~/app/hooks';
-import { toolbarActions } from '~/app/slice/toolbarSlice';
+import useWindowSize from 'hooks/useWindowSize';
+import { useAppDispatch } from 'app/hooks';
+import { toolbarActions } from 'app/slice/toolbarSlice';
 
 import styles from './Button.module.scss';
 import { isBlockActive, toggleBlock } from '../../utils/block';

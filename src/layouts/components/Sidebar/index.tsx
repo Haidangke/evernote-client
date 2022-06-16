@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import classnames from 'classnames/bind';
 import { Resizable } from 're-resizable';
 
-import { ArrowLeftIcon } from '~/assets/icons';
-import useWindowSize from '~/hooks/useWindowSize';
+import { ArrowLeftIcon } from 'assets/icons';
+import useWindowSize from 'hooks/useWindowSize';
 import Actions from './Actions';
 import Menu from './Menu';
 import Header from './Header';
 
 import styles from './Sidebar.module.scss';
 import './Sidebar.scss';
+import Slidebar from '../Slidebar';
 
 const cx = classnames.bind(styles);
 
@@ -66,9 +67,12 @@ function Sidebar() {
                 <ArrowLeftIcon width={14} height={14} />
             </div>
             <div className={cx('wrapper')}>
-                <Header />
-                <Actions />
-                <Menu isSmallSidebar={isSmallSidebar} />
+                <div className={cx('main')}>
+                    <Header />
+                    <Actions />
+                    <Menu isSmallSidebar={isSmallSidebar} />
+                </div>
+                <Slidebar />
             </div>
         </Resizable>
     );

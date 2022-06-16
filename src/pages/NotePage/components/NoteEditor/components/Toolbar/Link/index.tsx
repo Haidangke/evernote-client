@@ -2,11 +2,11 @@ import { useRef, useState } from 'react';
 import TippyHeadless from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 
-import Button from '~/components/Button';
+import Button from 'components/Button';
 
-import { LinkIcon } from '~/assets/icons/toolbar';
-import Popper from '~/components/Popper';
-import useOnClickOutside from '~/hooks/useOnclickOutside';
+import { LinkIcon } from 'assets/icons/toolbar';
+import Popper from 'components/Popper';
+import useOnClickOutside from 'hooks/useOnclickOutside';
 import styles from './Link.module.scss';
 import { insertLink } from '../../../utils/link';
 

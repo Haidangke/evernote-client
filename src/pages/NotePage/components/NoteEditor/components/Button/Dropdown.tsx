@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import TippyHeadless from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 
-import Popper from '~/components/Popper';
+import Popper from 'components/Popper';
 import styles from './Button.module.scss';
-import useWindowSize from '~/hooks/useWindowSize';
+import useWindowSize from 'hooks/useWindowSize';
 
-import { useAppDispatch } from '~/app/hooks';
-import { toolbarActions } from '~/app/slice/toolbarSlice';
+import { useAppDispatch } from 'app/hooks';
+import { toolbarActions } from 'app/slice/toolbarSlice';
 import checkOverflow from '../../utils/checkOverflow';
 
 interface DropDownProps {

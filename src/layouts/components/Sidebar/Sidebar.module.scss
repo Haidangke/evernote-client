@@ -1,9 +1,15 @@
-@import '../../../assets/styles/mixin.scss';
+@import 'styles/mixin';
+@import 'styles/mixin';
 
 .wrapper {
     position: relative;
     z-index: 3;
+    height: 100%;
+}
+
+.main {
     background-color: rgb(26, 26, 26);
+    height: 100%;
 }
 
 .resizable {

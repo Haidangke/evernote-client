@@ -1,4 +1,4 @@
-import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from '~/assets/icons/toolbar';
+import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from 'assets/icons/toolbar';
 
 const toolbar = {
     heading: [

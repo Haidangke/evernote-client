@@ -1,0 +1,77 @@
+@import 'styles/mixin';
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 96px;
+}
+
+.topbar {
+    height: 40px;
+    border-bottom: 2px solid var(--color-666);
+    @include flex(center, space-between);
+
+    & > span {
+        display: inline-block;
+        color: var(--text-color);
+        flex: 1;
+        font-size: 2rem;
+    }
+}
+
+.button {
+    @include flex(center, unset);
+}
+
+.icon {
+    color: var(--color-73);
+}
+
+.search {
+    height: 40px;
+    @include flex(center, unset);
+    border: 1px solid var(--gray);
+    border-radius: 3px;
+    & > input {
+        font-size: 1.4rem;
+        color: var(--color-26);
+        flex: 1;
+        padding: 5px 5px 5px 11px;
+    }
+
+    & > svg {
+        margin-right: 7px;
+        color: var(--color-a6);
+    }
+}
+
+.main {
+    flex: 1;
+    padding: 10px 24px 0;
+}
+
+.component {
+}
+
+.title {
+}
+
+.list {
+}
+
+.item {
+}
+
+.name {
+}
+
+.quantity {
+}

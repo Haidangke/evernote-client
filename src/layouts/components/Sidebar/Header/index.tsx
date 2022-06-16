@@ -1,9 +1,9 @@
 import Tippy from '@tippyjs/react';
 import classnames from 'classnames/bind';
 
-import { ArrowDownIcon, Setting } from '~/assets/icons';
-import styles from '~/layouts/components/Sidebar/Sidebar.module.scss';
-import { avatar_default } from '~/assets/images/avatar_default';
+import { ArrowDownIcon, Setting } from 'assets/icons';
+import styles from 'layouts/components/Sidebar/Sidebar.module.scss';
+import { avatar_default } from 'assets/images/avatar_default';
 
 const cx = classnames.bind(styles);
 

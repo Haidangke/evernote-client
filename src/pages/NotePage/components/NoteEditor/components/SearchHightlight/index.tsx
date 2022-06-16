@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { SearchIcon } from '~/assets/icons';
+import { SearchIcon } from 'assets/icons';
 import styles from './SearchHightlight.module.scss';
 
 const cx = classNames.bind(styles);

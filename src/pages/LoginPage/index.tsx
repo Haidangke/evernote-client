@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '~/app/hooks';
-import { login } from '~/app/thunk/authThunk';
+import { useAppDispatch } from 'app/hooks';
+import { login } from 'app/thunk/authThunk';
 
 function Login() {
     const dispatch = useAppDispatch();

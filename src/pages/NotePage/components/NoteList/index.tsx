@@ -3,13 +3,13 @@ import { useSearchParams } from 'react-router-dom';
 import { Resizable } from 're-resizable';
 import classNames from 'classnames/bind';
 
-import useWindowSize from '~/hooks/useWindowSize';
-import { useAppDispatch, useAppSelector } from '~/app/hooks';
-import { fetchListNote } from '~/app/thunk/listNoteThunk';
+import useWindowSize from 'hooks/useWindowSize';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { fetchListNote } from 'app/thunk/listNoteThunk';
 
 import styles from './NoteList.module.scss';
-import { FilterIcon, NoteListIcon, SortIcon, ViewIcon } from '~/assets/icons';
-import { selectListNote } from '~/app/slice/listNoteSlice';
+import { FilterIcon, NoteListIcon, SortIcon, ViewIcon } from 'assets/icons';
+import { selectListNote } from 'app/slice/listNoteSlice';
 
 const cx = classNames.bind(styles);
 

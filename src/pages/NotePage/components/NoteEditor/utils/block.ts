@@ -1,5 +1,5 @@
 import { Editor, Transforms, Element as SlateElement } from 'slate';
-import { toolbarConfig } from '~/config';
+import { toolbarConfig } from 'config';
 
 const LIST_TYPES = ['numbered-list', 'bulleted-list'];
 const TEXT_ALIGN_TYPES = ['left', 'center', 'right', 'justify'];

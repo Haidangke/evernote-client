@@ -1,7 +1,7 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-import authService from '~/services/authService';
-import { constants } from '~/config';
+import authService from 'services/authService';
+import { constants } from 'config';
 
 const axiosClientSecret = axios.create({
     baseURL: constants.BASE_URL_API,

@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
-import { useAppSelector } from '~/app/hooks';
+import { useAppSelector } from 'app/hooks';
 import styles from './SlateFooter.module.scss';
 
 const cx = classNames.bind(styles);

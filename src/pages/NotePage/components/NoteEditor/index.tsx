@@ -5,12 +5,12 @@ import classNames from 'classnames/bind';
 import Topbar from './components/Topbar';
 import Footer from './components/Footer';
 
-import useOnClickOutside from '~/hooks/useOnclickOutside';
+import useOnClickOutside from 'hooks/useOnclickOutside';
 
 import styles from './NoteEditor.module.scss';
 import Editor from './components/Editor';
-import { useAppDispatch, useAppSelector } from '~/app/hooks';
-import { fetchNote } from '~/app/thunk/noteThunk';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { fetchNote } from 'app/thunk/noteThunk';
 const cx = classNames.bind(styles);
 
 function NoteEditor() {

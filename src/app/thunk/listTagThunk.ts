@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import tagService from '~/services/tagService';
+import tagService from 'services/tagService';
 
 export const fetchListTag = createAsyncThunk('listTag/fetchListTag', async (params, thunkAPI) => {
     try {

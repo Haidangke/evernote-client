@@ -8,7 +8,7 @@ import {
     NoteSolidIcon,
     StarIcon,
     TodoIcon,
-} from '~/assets/icons';
+} from 'assets/icons';
 import Tag from '../Tag';
 
 import styles from './Menu.module.scss';

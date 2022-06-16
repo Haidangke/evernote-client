@@ -2,9 +2,9 @@ import classNames from 'classnames/bind';
 import { useCallback } from 'react';
 import { useSlate } from 'slate-react';
 
-import { useAppSelector } from '~/app/hooks';
-import { selectOverflowToolbar } from '~/app/slice/toolbarSlice';
-import { ArrowDownIcon } from '~/assets/icons';
+import { useAppSelector } from 'app/hooks';
+import { selectOverflowToolbar } from 'app/slice/toolbarSlice';
+import { ArrowDownIcon } from 'assets/icons';
 import {
     AlignCenterIcon,
     AlignLeftIcon,
@@ -20,7 +20,7 @@ import {
     TestListIcon,
     UnderlineIcon,
     UpperIndexIcon,
-} from '~/assets/icons/toolbar';
+} from 'assets/icons/toolbar';
 import { DropdownButton } from '../Button';
 import { textIndent } from '../../utils/indent';
 import { isMarkActive, toggleMark } from '../../utils/mark';

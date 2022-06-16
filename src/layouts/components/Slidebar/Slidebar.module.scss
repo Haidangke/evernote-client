@@ -1,7 +1,26 @@
 .wrapper {
-    position: fixed;
-    z-index: 2;
+    position: absolute;
+    z-index: -1;
     width: 380px;
     height: 100vh;
-    padding: 0 8px 0 24px;
+    padding-top: 24px;
+    top: 0;
+    right: 0;
+    background-color: var(--white);
+    transition: transform 0.3s ease-in;
+}
+
+.open {
+    transform: translateX(100%);
+}
+
+.overplay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--black);
+    opacity: 0.25;
+    z-index: -1;
 }

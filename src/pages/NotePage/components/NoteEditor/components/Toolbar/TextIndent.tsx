@@ -1,4 +1,4 @@
-import { IndentIcon, OutdentIcon } from '~/assets/icons/toolbar';
+import { IndentIcon, OutdentIcon } from 'assets/icons/toolbar';
 import { textIndent } from '../../utils/indent';
 import { HandleButton } from '../Button';
 

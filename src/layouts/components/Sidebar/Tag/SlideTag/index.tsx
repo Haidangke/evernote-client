@@ -1,16 +1,16 @@
 import classNames from 'classnames/bind';
-import { SearchIcon, SortIcon, TagIcon } from '~/assets/icons';
-import ButtonTippy from '~/components/ButtonTippy';
+import { OtherIcon, SearchIcon, SortIcon, TagIcon } from 'assets/icons';
+import ButtonTippy from 'components/ButtonTippy';
 
-import styles from './Slidebar.module.scss';
+import styles from './SlideTag.module.scss';
 const cx = classNames.bind(styles);
 
-function SlidebarTag() {
+function SlideTag() {
     return (
         <div className={cx('wrapper')}>
             <header className={cx('header')}>
                 <div className={cx('topbar')}>
-                    <span></span>
+                    <span>Thẻ</span>
                     <div className={cx('button')}>
                         <ButtonTippy placement='bottom' content='Tạo thẻ mới'>
                             <TagIcon className={cx('icon')} />
@@ -27,11 +27,12 @@ function SlidebarTag() {
             </header>
             <main className={cx('main')}>
                 <div className={cx('component')}>
-                    <div className={cx('title')}></div>
+                    <div className={cx('title')}>0 - 9</div>
                     <div className={cx('list')}>
                         <div className={cx('item')}>
-                            <div className={cx('name')}></div>
-                            <div className={cx('quantity')}></div>
+                            <span className={cx('name')}>aaa</span>
+                            <span className={cx('quantity')}>(0)</span>
+                            <OtherIcon width={16} height={16} />
                         </div>
                     </div>
                 </div>
@@ -40,4 +41,4 @@ function SlidebarTag() {
     );
 }
 
-export default SlidebarTag;
+export default SlideTag;

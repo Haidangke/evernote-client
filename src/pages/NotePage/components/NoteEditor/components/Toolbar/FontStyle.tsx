@@ -1,5 +1,5 @@
 import React from 'react';
-import { BoldIcon, ItalicIcon, UnderlineIcon } from '~/assets/icons/toolbar';
+import { BoldIcon, ItalicIcon, UnderlineIcon } from 'assets/icons/toolbar';
 import { MarkButton } from '../Button';
 
 function FontStyle() {

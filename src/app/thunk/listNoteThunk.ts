@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import noteService from '~/services/noteService';
-import { ListParams } from '~/types';
+import noteService from 'services/noteService';
+import { ListParams } from 'types';
 
 export const fetchListNote = createAsyncThunk(
     'listNote/fetchListNote',

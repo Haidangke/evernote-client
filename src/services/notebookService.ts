@@ -1,5 +1,5 @@
-import { UpdateNoteParams } from '~/types';
-import axiosClientSecret from '~/utils/axiosClientSecret';
+import { UpdateNoteParams } from 'types';
+import axiosClientSecret from 'utils/axiosClientSecret';
 
 const notebookService = {
     create(params: { name: string }) {

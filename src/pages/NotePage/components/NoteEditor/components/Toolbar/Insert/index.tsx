@@ -1,13 +1,14 @@
 import { useSlate } from 'slate-react';
 import classNames from 'classnames/bind';
 
-import { ArrowDownIcon } from '~/assets/icons';
-import { CodeIcon, InsertIcon, TodoIcon } from '~/assets/icons/toolbar';
-import Popper from '~/components/Popper';
+import Popper from 'components/Popper';
 import { DropdownButton } from '../../Button';
-
-import styles from './Insert.module.scss';
 import { toggleMark } from '../../../utils/mark';
+
+import { ArrowDownIcon } from 'assets/icons';
+import { CodeIcon, InsertIcon, TodoIcon } from 'assets/icons/toolbar';
+import styles from './Insert.module.scss';
+
 const cx = classNames.bind(styles);
 
 function Insert() {

@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 
-import Button from '~/components/Button';
-import { CloseIcon } from '~/assets/icons';
+import Button from 'components/Button';
+import { CloseIcon } from 'assets/icons';
 import Modal, { ModalProps } from '..';
 
 import styles from './ModalForm.module.scss';

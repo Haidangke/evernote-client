@@ -1,9 +1,9 @@
 import TippyHeadless from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 import { useEffect, useRef, useState } from 'react';
-import { useAppDispatch } from '~/app/hooks';
-import { toolbarActions } from '~/app/slice/toolbarSlice';
-import useWindowSize from '~/hooks/useWindowSize';
+import { useAppDispatch } from 'app/hooks';
+import { toolbarActions } from 'app/slice/toolbarSlice';
+import useWindowSize from 'hooks/useWindowSize';
 import checkOverflow from '../../utils/checkOverflow';
 
 import styles from './Button.module.scss';

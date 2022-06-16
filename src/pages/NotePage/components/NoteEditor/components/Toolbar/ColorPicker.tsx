@@ -1,12 +1,12 @@
 import classNames from 'classnames/bind';
 
-import { ArrowDownIcon } from '~/assets/icons';
-import { ColorPickerIcon } from '~/assets/icons/toolbar';
-import { toolbarConfig } from '~/config';
+import { ArrowDownIcon } from 'assets/icons';
+import { ColorPickerIcon } from 'assets/icons/toolbar';
+import { toolbarConfig } from 'config';
 import { isBlockActive, toggleBlock } from '../../utils/block';
 import { DropdownButton } from '../Button';
 
-import colorPicker from '~/assets/images/color-picker.png';
+import colorPicker from 'assets/images/color-picker.png';
 import styles from './Toolbar.module.scss';
 const cx = classNames.bind(styles);
 

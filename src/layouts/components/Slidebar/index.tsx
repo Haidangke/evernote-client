@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import SlidebarTag from '../Sidebar/Tag/Slidebar';
+import SlideTag from '../Sidebar/Tag/SlideTag';
 
 import styles from './Slidebar.module.scss';
 const cx = classNames.bind(styles);
@@ -12,13 +12,18 @@ function Slidebar() {
     let Component = null;
     const tag = searchParams.get('tag');
 
-    if (tag) Component = SlidebarTag;
+    if (tag) Component = SlideTag;
 
     useEffect(() => {
-        setIsOpen(Boolean(tag));
+        setIsOpen(tag === 'true' ? true : false);
     }, [tag]);
 
-    return <div className={cx('wrapper', { open: isOpen })}>{Component && <Component />}</div>;
+    return (
+        <>
+            {isOpen && <div className={cx('overplay')}></div>}
+            <div className={cx('wrapper', { open: isOpen })}>{Component && <Component />}</div>
+        </>
+    );
 }
 
 export default Slidebar;

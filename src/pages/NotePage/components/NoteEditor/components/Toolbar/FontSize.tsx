@@ -1,9 +1,9 @@
 import classNames from 'classnames/bind';
 import { useMemo } from 'react';
-import { ArrowDownIcon } from '~/assets/icons';
+import { ArrowDownIcon } from 'assets/icons';
 
-import { CheckIcon } from '~/assets/icons/toolbar';
-import { toolbarConfig } from '~/config';
+import { CheckIcon } from 'assets/icons/toolbar';
+import { toolbarConfig } from 'config';
 import { isBlockActive, toggleBlock } from '../../utils/block';
 import { DropdownButton } from '../Button';
 

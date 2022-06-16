@@ -1,7 +1,7 @@
 import { Route, Routes as Switch } from 'react-router-dom';
 
-import { privateRoute, publicRoute } from '~/routes';
-import PrivateRoute from '~/routes/PrivateRoute';
+import { privateRoute, publicRoute } from 'routes';
+import PrivateRoute from 'routes/PrivateRoute';
 import useSearchKey from './hooks/useSearchKey';
 
 import DefaultLayout from './layouts/DefaultLayout';

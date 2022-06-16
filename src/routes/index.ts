@@ -1,5 +1,5 @@
-import { RecyclePage, HomePage, LoginPage, NotebookPage, NotePage } from '~/pages';
-import { routesConfig } from '~/config';
+import { RecyclePage, HomePage, LoginPage, NotebookPage, NotePage } from 'pages';
+import { routesConfig } from 'config';
 
 interface Route {
     path: string;

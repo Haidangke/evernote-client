@@ -10,13 +10,13 @@ import classNames from 'classnames/bind';
 
 import Toolbar from '../Toolbar';
 import styles from './Editor.module.scss';
-import useDecorate from '~/hooks/useDecorate';
-import { useAppDispatch, useAppSelector } from '~/app/hooks';
-import { updateNote } from '~/app/thunk/noteThunk';
-import { LoadingIcon } from '~/assets/icons';
-import { noteActions } from '~/app/slice/noteSlice';
-import useWindowSize from '~/hooks/useWindowSize';
-import { listNoteActions } from '~/app/slice/listNoteSlice';
+import useDecorate from 'hooks/useDecorate';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { updateNote } from 'app/thunk/noteThunk';
+import { LoadingIcon } from 'assets/icons';
+import { noteActions } from 'app/slice/noteSlice';
+import useWindowSize from 'hooks/useWindowSize';
+import { listNoteActions } from 'app/slice/listNoteSlice';
 
 import { withChecklists, withLinks, withKeyCommands } from '../../plugins';
 import { SlateElement, SlateLeaf } from '../../elements';

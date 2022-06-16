@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 
-import { CalendarIcon, FileIcon, TodoIcon } from '~/assets/icons/toolbar';
-import { HandleButton } from '~/pages/NotePage/components/NoteEditor/components/Button';
+import { CalendarIcon, FileIcon, TodoIcon } from 'assets/icons/toolbar';
+import { HandleButton } from 'pages/NotePage/components/NoteEditor/components/Button';
 
 import InsertBtn from './Insert';
 import OverflowToolbar from '../OverflowToolbar';

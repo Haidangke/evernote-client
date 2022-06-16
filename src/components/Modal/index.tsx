@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import classNames from 'classnames/bind';
 import { CSSTransition } from 'react-transition-group';
 
-import useOnClickOutside from '~/hooks/useOnclickOutside';
+import useOnClickOutside from 'hooks/useOnclickOutside';
 import Popper from '../Popper';
 import styles from './Modal.module.scss';
 import './Modal.scss';

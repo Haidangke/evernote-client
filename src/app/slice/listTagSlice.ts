@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Tag } from '~/types';
+import { Tag } from 'types';
 import { fetchListTag } from '../thunk/listTagThunk';
 
 interface InitialState {

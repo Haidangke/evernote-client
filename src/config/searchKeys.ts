@@ -1,3 +1,3 @@
-const searchKeys = ['noteId', 'tag'];
+const searchKeys = { all: ['noteId', 'tag'], keyRefresh: ['tag'] };
 
 export default searchKeys;

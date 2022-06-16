@@ -4,7 +4,7 @@ import classnames from 'classnames/bind';
 import Tippy from '@tippyjs/react';
 
 import styles from './Menu.module.scss';
-import { AddIconSmall, IconProps, TriangleIcon } from '~/assets/icons';
+import { AddIconSmall, IconProps, TriangleIcon } from 'assets/icons';
 
 const cx = classnames.bind(styles);
 

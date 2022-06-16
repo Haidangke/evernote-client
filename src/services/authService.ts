@@ -1,6 +1,6 @@
-import { Response } from '~/types';
-import { LoginParams, RegisterParams, User } from '~/types/auth';
-import axiosClient from '~/utils/axiosClient';
+import { Response } from 'types';
+import { LoginParams, RegisterParams, User } from 'types/auth';
+import axiosClient from 'utils/axiosClient';
 
 const authService = {
     async login(params: LoginParams): Promise<Response<User>> {

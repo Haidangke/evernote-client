@@ -1,9 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import authService from '~/services/authService';
-import { LoginParams, RegisterParams } from '~/types';
+import authService from 'services/authService';
+import { LoginParams, RegisterParams } from 'types';
 import { authActions } from '../slice/authSlice';
 
-export const register = createAsyncThunk( 'auth/register', async (params: RegisterParams, thunkAPI) => {
+export const register = createAsyncThunk(
+    'auth/register',
+    async (params: RegisterParams, thunkAPI) => {
         try {
             const response = await authService.register(params);
 

@@ -3,13 +3,13 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { TagIcon, TagSubIcon } from '~/assets/icons';
-import InputField from '~/components/FormFields/InputField';
-import ModalForm from '~/components/Modal/ModalForm';
-import tagService from '~/services/tagService';
+import { TagIcon, TagSubIcon } from 'assets/icons';
+import InputField from 'components/FormFields/InputField';
+import ModalForm from 'components/Modal/ModalForm';
+import tagService from 'services/tagService';
 
-import { useAppDispatch, useAppSelector } from '~/app/hooks';
-import { fetchListTag } from '~/app/thunk/listTagThunk';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { fetchListTag } from 'app/thunk/listTagThunk';
 import MenuItem from '../Menu/MenuItem';
 
 interface FormTag {
