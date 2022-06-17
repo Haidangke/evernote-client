@@ -7,7 +7,7 @@ import {
     NoteIcon,
     NoteSolidIcon,
     StarIcon,
-    TodoIcon,
+    MissionIcon,
 } from 'assets/icons';
 import Tag from '../Tag';
 
@@ -49,7 +49,7 @@ function Menu({ isSmallSidebar }: MenuProps) {
                 value='todo'
                 name='Nhiệm vụ'
                 path='/todo'
-                icon={TodoIcon}
+                icon={MissionIcon}
                 types={['menu']}
                 onAdd={() => {}}
             />

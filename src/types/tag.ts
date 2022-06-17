@@ -1,6 +1,7 @@
 export interface Tag {
     _id: string;
     name: string;
+    quantity: number;
 }
 
 export interface AddNoteParams {

@@ -1,11 +1,39 @@
+import { useMemo, useState } from 'react';
+import _ from 'lodash';
 import classNames from 'classnames/bind';
-import { OtherIcon, SearchIcon, SortIcon, TagIcon } from 'assets/icons';
+
+import { OtherSmallIcon, SearchIcon, SortIcon, TagIcon } from 'assets/icons';
 import ButtonTippy from 'components/ButtonTippy';
 
 import styles from './SlideTag.module.scss';
+import { useAppSelector } from 'app/hooks';
 const cx = classNames.bind(styles);
 
 function SlideTag() {
+    const [searchValue, setSearchValue] = useState('');
+    const { listTag } = useAppSelector((state) => state.listTag);
+    const titles = useMemo(
+        () => _.uniq(listTag.map((tag) => tag.name.trim().substring(0, 1)).sort()),
+        [listTag]
+    );
+
+    const tagsDivide = useMemo(
+        () =>
+            titles
+                .map((title) => {
+                    const dauraItem = {
+                        title,
+                        list: listTag.filter((tag) => tag.name.trim().substring(0, 1) === title),
+                    };
+                    return dauraItem;
+                })
+                .filter(
+                    (title) =>
+                        title.list.filter((tag) => tag.name.includes(searchValue.trim())).length > 0
+                ),
+        [listTag, searchValue, titles]
+    );
+
     return (
         <div className={cx('wrapper')}>
             <header className={cx('header')}>
@@ -21,21 +49,33 @@ function SlideTag() {
                     </div>
                 </div>
                 <div className={cx('search')}>
-                    <input type='text' placeholder='Tìm thẻ' />
+                    <input
+                        onChange={(e) => setSearchValue(e.target.value)}
+                        type='text'
+                        placeholder='Tìm thẻ'
+                    />
                     <SearchIcon />
                 </div>
             </header>
             <main className={cx('main')}>
-                <div className={cx('component')}>
-                    <div className={cx('title')}>0 - 9</div>
-                    <div className={cx('list')}>
-                        <div className={cx('item')}>
-                            <span className={cx('name')}>aaa</span>
-                            <span className={cx('quantity')}>(0)</span>
-                            <OtherIcon width={16} height={16} />
+                {tagsDivide.map((tagDivide) => (
+                    <div key={tagDivide.title} className={cx('component')}>
+                        <div className={cx('title')}>{tagDivide.title.toUpperCase()}</div>
+                        <div className={cx('list')}>
+                            {tagDivide.list
+                                .filter((tag) => tag.name.includes(searchValue.trim()))
+                                .map((tag) => (
+                                    <div key={tag._id} className={cx('item')}>
+                                        <span className={cx('name')}>{tag.name}</span>
+                                        <span className={cx('quantity')}>({tag.quantity})</span>
+                                        <span className={cx('other')}>
+                                            <OtherSmallIcon width={16} height={16} />
+                                        </span>
+                                    </div>
+                                ))}
                         </div>
                     </div>
-                </div>
+                ))}
             </main>
         </div>
     );

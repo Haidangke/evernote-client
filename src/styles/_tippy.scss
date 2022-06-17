@@ -9,3 +9,8 @@
 .tippy-content {
     padding: 8px 9px;
 }
+
+.tippy-tooltip[data-animation='rotate'][data-state='hidden'] {
+    opacity: 0;
+    transform: rotate(90deg);
+}
