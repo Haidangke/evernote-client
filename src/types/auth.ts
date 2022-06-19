@@ -1,5 +1,5 @@
 export interface LoginParams {
-    username: string;
+    email: string;
     password: string;
 }
 
@@ -7,6 +7,7 @@ export interface RegisterParams {
     username: string;
     email: string;
     password: string;
+    passwordConfirm: string;
 }
 
 export interface User {

@@ -9,7 +9,7 @@ export const register = createAsyncThunk(
         try {
             const response = await authService.register(params);
 
-            thunkAPI.dispatch(authActions.setMessage(response.data.message));
+            thunkAPI.dispatch(authActions.setMessage(response.msg));
             return response.data;
         } catch (error: any) {
             const message =
@@ -25,10 +25,11 @@ export const register = createAsyncThunk(
 export const login = createAsyncThunk('auth/login', async (params: LoginParams, thunkAPI) => {
     try {
         const data = await authService.login(params);
+        thunkAPI.dispatch(authActions.setMessage(data.msg));
         return { user: data };
     } catch (error: any) {
         const message =
-            (error.response && error.response.data && error.response.data.message) ||
+            (error.response && error.response.data && error.response.data.msg) ||
             error.message ||
             error.toString();
         thunkAPI.dispatch(authActions.setMessage(message));

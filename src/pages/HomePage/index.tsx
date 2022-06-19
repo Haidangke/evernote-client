@@ -1,16 +1,30 @@
-import React from 'react';
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { logout } from 'app/thunk/authThunk';
+import { CustomHome } from 'assets/icons';
+import background from 'assets/images/background.png';
+import classNames from 'classnames/bind';
+
+import styles from './HomePage.module.scss';
+
+const cx = classNames.bind(styles);
 
 function Home() {
-    const dispatch = useAppDispatch();
-    const { user } = useAppSelector((state) => state.auth);
-
     return (
-        <div>
-            <div>Username: {user?.username}</div>
-            <div>Email: {user?.email}</div>
-            <button onClick={() => dispatch(logout())}>Logout</button>
+        <div className={cx('wrapper')}>
+            <div className={cx('background')}>
+                <img src={background} alt='background' />
+                <div></div>
+            </div>
+
+            <header className={cx('header')}>
+                <div className={cx('left')}>Xin chào!</div>
+                <div className={cx('right')}>
+                    <div className={cx('day')}>CHỦ NHẬT, 19 THÁNG 6, 2022</div>
+                    <button className={cx('btn')}>
+                        <CustomHome />
+                        Tùy chỉnh
+                    </button>
+                </div>
+            </header>
+            <div className={cx('main')}></div>
         </div>
     );
 }

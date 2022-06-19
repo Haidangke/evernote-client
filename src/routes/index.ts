@@ -1,4 +1,4 @@
-import { RecyclePage, HomePage, LoginPage, NotebookPage, NotePage } from 'pages';
+import { RecyclePage, HomePage, LoginPage, NotebookPage, NotePage, RegisterPage } from 'pages';
 import { routesConfig } from 'config';
 
 interface Route {
@@ -29,6 +29,9 @@ const privateRoute: Route[] = [
     },
 ];
 
-const publicRoute: Route[] = [{ path: routesConfig.login, component: LoginPage }];
+const publicRoute: Route[] = [
+    { path: routesConfig.login, component: LoginPage },
+    { path: routesConfig.register, component: RegisterPage },
+];
 
 export { privateRoute, publicRoute };

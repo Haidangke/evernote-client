@@ -14,7 +14,7 @@ const authService = {
         localStorage.removeItem('user');
         return axiosClient.post('/auth/logout');
     },
-    register(params: RegisterParams) {
+    register(params: RegisterParams): Promise<Response<any>> {
         return axiosClient.post('/auth/register', params);
     },
     refresh(): Promise<Response<string>> {

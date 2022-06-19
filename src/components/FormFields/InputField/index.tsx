@@ -11,6 +11,7 @@ interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
     placeholder: string;
     isValid?: (name: string) => boolean;
     variant?: 'outline';
+    type?: string;
 }
 
 const cx = classNames.bind(styles);
@@ -22,6 +23,7 @@ function InputField({
     placeholder,
     isValid,
     variant = 'outline',
+    type = 'text',
 }: InputFieldProps) {
     const {
         field: { value, onChange, onBlur, ref },
@@ -36,18 +38,19 @@ function InputField({
                 </label>
             )}
             <input
+                autoComplete='on'
                 id={`input-${name}`}
                 className={cx('input', { [variant]: true })}
                 ref={ref}
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}
-                type='text'
+                type={type}
                 placeholder={placeholder}
             />
-            {/* <p className={cx('error')}>
+            <p className={cx('error')}>
                 {isValid && isValid(value) ? 'Tên của thẻ đã tồn tại' : error?.message}
-            </p> */}
+            </p>
         </div>
     );
 }

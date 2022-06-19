@@ -9,6 +9,7 @@ interface InitialState {
     user?: User;
     isLoggedIn: boolean;
     logging: boolean;
+    registering: boolean;
     message: string;
 }
 
@@ -18,12 +19,14 @@ const initialState: InitialState = user
           isLoggedIn: true,
           logging: false,
           message: '',
+          registering: false,
       }
     : {
           user: undefined,
           isLoggedIn: false,
           logging: false,
           message: '',
+          registering: false,
       };
 
 const authSlice = createSlice({
@@ -39,17 +42,14 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(register.pending, (state) => {
-            state.logging = true;
-            state.isLoggedIn = false;
+            state.registering = true;
         });
         builder.addCase(register.fulfilled, (state) => {
-            state.isLoggedIn = false;
-            state.logging = false;
+            state.registering = false;
         });
 
         builder.addCase(register.rejected, (state) => {
-            state.logging = false;
-            state.isLoggedIn = false;
+            state.registering = false;
         });
 
         builder.addCase(login.pending, (state, action: any) => {
