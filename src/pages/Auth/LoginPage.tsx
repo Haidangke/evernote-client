@@ -12,8 +12,9 @@ import { LoginParams } from 'types';
 import styles from './Auth.module.scss';
 import { yupResolver } from '@hookform/resolvers/yup';
 import classNames from 'classnames/bind';
+import { useEffect, useState } from 'react';
 
-const defaultValues = { email: 'vatcmnvo@gmail.com', password: 'Haidangker1234' };
+const defaultValues = { email: 'vatcmnvo@gmail.com', password: 'Haidangker12345' };
 
 const schema = yup
     .object()
@@ -34,7 +35,9 @@ const schema = yup
 
 const cx = classNames.bind(styles);
 function Login() {
-    const { message, logging } = useAppSelector((state) => state.auth);
+    const [remember, setRemember] = useState(false);
+
+    const { message, logging, isLoggedIn } = useAppSelector((state) => state.auth);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const { control, handleSubmit, reset } = useForm<LoginParams>({
@@ -43,14 +46,17 @@ function Login() {
     });
 
     const handleFormSubmit = async (formValue: LoginParams) => {
-        dispatch(login(formValue))
+        dispatch(login({ formValue, remember }))
             .unwrap()
             .then(() => {
                 reset(defaultValues);
-                navigate('/');
             })
             .catch(() => {});
     };
+
+    useEffect(() => {
+        if (isLoggedIn) navigate('/');
+    }, [isLoggedIn, navigate]);
 
     return (
         <Auth page='login'>
@@ -70,6 +76,18 @@ function Login() {
                     {logging ? <ReactLoading height={22} width={22} type='spin' /> : 'Đăng nhập'}
                 </button>
             </form>
+
+            <div className={cx('actions')}>
+                <div className={cx('remember')}>
+                    <input
+                        onChange={() => setRemember(!remember)}
+                        type='checkbox'
+                        defaultChecked={remember}
+                    />
+                    <span>Ghi nhớ tôi</span>
+                </div>
+                <div className={cx('forgot')}>Quên mật khẩu?</div>
+            </div>
         </Auth>
     );
 }

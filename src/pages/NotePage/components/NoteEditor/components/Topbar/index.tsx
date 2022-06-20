@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import ButtonTippy from 'components/ButtonTippy';
+import { TippyButton } from 'components/Tippy';
 import { FullSizeIcon, NoteMainIcon, NoteToIcon, OtherIcon } from 'assets/icons';
 import styles from './Topbar.module.scss';
 
@@ -10,13 +10,13 @@ function Topbar() {
         <div className={cx('topbar')}>
             <div className={cx('left')}>
                 <div className={cx('icon')}>
-                    <ButtonTippy content='Mở rộng ghi chú' placement='bottom'>
+                    <TippyButton content='Mở rộng ghi chú' placement='bottom'>
                         <FullSizeIcon />
-                    </ButtonTippy>
+                    </TippyButton>
                 </div>
                 <div className={cx('line')}></div>
                 <div className={cx('note')}>
-                    <ButtonTippy
+                    <TippyButton
                         className={cx('note-btn')}
                         content='Di chuyển ghi chú'
                         placement='bottom'
@@ -26,24 +26,24 @@ function Topbar() {
                             <NoteMainIcon />
                             <span>Sổ tay mới</span>
                         </>
-                    </ButtonTippy>
+                    </TippyButton>
 
-                    <ButtonTippy
+                    <TippyButton
                         className={cx('note-btn__move')}
                         content='Di chuyển ghi chú'
                         placement='bottom'
                     >
                         <NoteToIcon />
-                    </ButtonTippy>
+                    </TippyButton>
                 </div>
             </div>
             <div className={cx('right')}>
                 <div className={cx('info-auth')}>Chỉ bạn</div>
                 <div className={cx('share-btn')}>Chia sẻ</div>
                 <div className={cx('other-btn')}>
-                    <ButtonTippy content='Thao tác khác' placement='bottom'>
+                    <TippyButton content='Thao tác khác' placement='bottom'>
                         <OtherIcon />
-                    </ButtonTippy>
+                    </TippyButton>
                 </div>
             </div>
         </div>

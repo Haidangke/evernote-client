@@ -1,9 +1,8 @@
-import React from 'react';
 import Tippy from '@tippyjs/react';
 
 type Placement = 'top' | 'bottom' | 'left' | 'right';
 
-interface ButtonTippyProps {
+interface TippyButtonProps {
     children: any;
     onClick?: () => void;
     content: string;
@@ -13,7 +12,7 @@ interface ButtonTippyProps {
     height?: string | number;
 }
 
-function ButtonTippy({
+function TippyButton({
     children,
     onClick,
     content,
@@ -21,7 +20,7 @@ function ButtonTippy({
     className,
     width,
     height,
-}: ButtonTippyProps) {
+}: TippyButtonProps) {
     return (
         <Tippy content={content} placement={placement}>
             <button className={className} style={{ width, height }} onClick={onClick}>
@@ -31,4 +30,4 @@ function ButtonTippy({
     );
 }
 
-export default ButtonTippy;
+export default TippyButton;

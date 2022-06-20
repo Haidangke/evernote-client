@@ -43,15 +43,6 @@ function Auth({ page, children }: AuthProps) {
                     <div className={cx('form-main')}>
                         {children}
                         <div className={styles.error}>{message}</div>
-                        {page === 'login' && (
-                            <div className={cx('actions')}>
-                                <div className={cx('remember')}>
-                                    <input type='checkbox' />
-                                    <span>Ghi nhớ tôi</span>
-                                </div>
-                                <div className={cx('forgot')}>Quên mật khẩu?</div>
-                            </div>
-                        )}
 
                         <div className={cx('form-footer')}>
                             <span>{authText[page].answer}</span>
@@ -66,10 +57,10 @@ function Auth({ page, children }: AuthProps) {
                 <div className={cx('right-wrapper')}>
                     <div className={cx('image')}>{authPageImage}</div>
                     <div className={cx('intro')}>
-                        <div className={cx('intro-title')}>Welcome to Forny.</div>
+                        <div className={cx('intro-title')}>Welcome to NoteKe</div>
                         <div className={cx('intro-description')}>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                            nonumm. Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                            Ghi chép lại mọi thứ, mọi lúc, mọi nơi một cách nhanh chóng, tiện lợi và
+                            hoàn toàn miễn phí.
                         </div>
                     </div>
                 </div>

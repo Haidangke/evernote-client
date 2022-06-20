@@ -9,7 +9,6 @@ import { fetchListNote } from 'app/thunk/listNoteThunk';
 
 import styles from './NoteList.module.scss';
 import { FilterIcon, NoteListIcon, SortIcon, ViewIcon } from 'assets/icons';
-import { selectListNote } from 'app/slice/listNoteSlice';
 
 const cx = classNames.bind(styles);
 
@@ -18,7 +17,7 @@ function NoteList() {
     const [searchParams, setSearchParams] = useSearchParams();
     const noteId = searchParams.get('noteId');
 
-    const listNote = useAppSelector(selectListNote);
+    const { listNote, isFetched } = useAppSelector((state) => state.listNote);
 
     const [resizable, setResizable] = useState({ width: 320, height: '100vh' });
     const [maxWidth, setMaxWidth] = useState(600);
@@ -32,8 +31,10 @@ function NoteList() {
     }, [listNote, noteId, searchParams, setSearchParams]);
 
     useEffect(() => {
-        dispatch(fetchListNote({}));
-    }, [dispatch]);
+        if (!isFetched) {
+            dispatch(fetchListNote({}));
+        }
+    }, [dispatch, isFetched]);
 
     useEffect(() => {
         if (widthWindow > 0) {

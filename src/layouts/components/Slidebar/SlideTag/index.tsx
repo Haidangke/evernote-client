@@ -3,7 +3,7 @@ import _ from 'lodash';
 import classNames from 'classnames/bind';
 
 import { OtherSmallIcon, SearchIcon, SortIcon, TagIcon } from 'assets/icons';
-import ButtonTippy from 'components/ButtonTippy';
+import { TippyButton } from 'components/Tippy';
 
 import styles from './SlideTag.module.scss';
 import { useAppSelector } from 'app/hooks';
@@ -40,12 +40,12 @@ function SlideTag() {
                 <div className={cx('topbar')}>
                     <span>Thẻ</span>
                     <div className={cx('button')}>
-                        <ButtonTippy placement='bottom' content='Tạo thẻ mới'>
+                        <TippyButton placement='bottom' content='Tạo thẻ mới'>
                             <TagIcon className={cx('icon')} />
-                        </ButtonTippy>
-                        <ButtonTippy placement='bottom' content='Cách sắp xếp'>
+                        </TippyButton>
+                        <TippyButton placement='bottom' content='Cách sắp xếp'>
                             <SortIcon className={cx('icon')} />
-                        </ButtonTippy>
+                        </TippyButton>
                     </div>
                 </div>
                 <div className={cx('search')}>

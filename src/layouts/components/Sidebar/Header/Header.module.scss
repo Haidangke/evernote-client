@@ -1,0 +1,140 @@
+@import 'styles/mixin';
+
+.wrapper {
+    height: 56px;
+    @include flex(center, space-between);
+}
+
+.left {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    padding: 0 15px;
+}
+
+.avatar {
+    width: 28px;
+    height: 28px;
+}
+
+.info {
+    @include flex(center, unset);
+}
+
+.email {
+    width: 100%;
+    @include flex(center, unset);
+    margin-left: 10px;
+    & > p {
+        color: var(--gray);
+        font-size: 1.3rem;
+        cursor: pointer;
+    }
+    & > svg {
+        color: var(--gray-icon);
+        width: 1.3rem;
+        margin-left: 4px;
+        margin-top: 2px;
+    }
+
+    &:hover > p {
+        color: var(--white);
+    }
+}
+
+.logo {
+    flex-basis: 52px;
+    margin-right: 12px;
+    cursor: pointer;
+    @include flex(center, flex-end);
+    & > svg {
+        color: var(--gray-icon);
+    }
+}
+
+.small {
+    height: unset;
+    flex-direction: column;
+    .avatar {
+        height: 56px;
+        @include flex(center, unset);
+    }
+    .info {
+        display: none;
+    }
+    .logo {
+        order: -1;
+        flex-basis: 36px;
+        margin-right: unset;
+        align-items: flex-end;
+    }
+}
+
+//dropdown
+.drdown {
+    padding: 12px 0;
+    &-header {
+        padding: 0 20px;
+    }
+
+    &-header > .info {
+        height: 40px;
+        @include flex(center, unset);
+    }
+
+    &-header .email {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--color-a6);
+        cursor: default;
+    }
+
+    &-title {
+        padding: 6px 0px;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        color: var(--color-a6);
+        font-weight: 700;
+    }
+    &-icon {
+        color: var(--color-blue);
+        margin-right: 8px;
+        min-width: 24px;
+    }
+
+    &-body {
+        border-top: 1px solid var(--color-e6);
+        border-bottom: 1px solid var(--color-e6);
+        margin-top: 16px;
+    }
+
+    &-list {
+        padding: 8px 0;
+    }
+
+    &-item {
+        @include flex(center, space-between);
+        color: var(--text-color);
+        padding: 0 20px;
+        font-weight: 700;
+        padding: 6px 20px;
+        font-size: 1.4rem;
+        cursor: pointer;
+    }
+
+    &-footer {
+        color: var(--text-color);
+        font-size: 1.4rem;
+        padding: 0 20px;
+        font-weight: 700;
+        margin-top: 10px;
+
+        line-height: 28px;
+        background-color: var(--white);
+        cursor: pointer;
+    }
+    &-item:hover,
+    &-footer:hover {
+        background-color: var(--color-f2);
+    }
+}

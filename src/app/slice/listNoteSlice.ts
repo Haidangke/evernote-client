@@ -1,20 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Note, Tag } from 'types';
-import { RootState } from '../store';
 import { fetchListNote } from '../thunk/listNoteThunk';
 
 interface InitialState {
     isFetching: boolean;
-    isFetchSuccess: boolean;
-    isFetchFailed: boolean;
+    isSuccess: boolean;
+    isFailed: boolean;
+    isFetched: boolean;
 
     listNote: Note<Tag>[];
 }
 
 const initialState: InitialState = {
     isFetching: false,
-    isFetchSuccess: false,
-    isFetchFailed: false,
+    isSuccess: false,
+    isFailed: false,
+    isFetched: false,
 
     listNote: [] as Note<Tag>[],
 };
@@ -34,21 +35,24 @@ const listNoteSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(fetchListNote.pending, (state) => {
             state.isFetching = true;
-            state.isFetchSuccess = false;
-            state.isFetchFailed = false;
+            state.isSuccess = false;
+            state.isFailed = false;
+            state.isFetched = false;
         });
         builder.addCase(fetchListNote.fulfilled, (state, action: any) => {
             state.isFetching = false;
-            state.isFetchSuccess = true;
-            state.isFetchFailed = false;
+            state.isSuccess = true;
+            state.isFailed = false;
+            state.isFetched = true;
 
             state.listNote = action.payload;
         });
 
         builder.addCase(fetchListNote.rejected, (state) => {
             state.isFetching = false;
-            state.isFetchSuccess = true;
-            state.isFetchFailed = false;
+            state.isSuccess = true;
+            state.isFailed = false;
+            state.isFetched = true;
 
             state.listNote = [];
         });
@@ -56,8 +60,6 @@ const listNoteSlice = createSlice({
 });
 
 export const listNoteActions = listNoteSlice.actions;
-
-export const selectListNote = (state: RootState) => state.listNote.listNote;
 
 const listNoteReducer = listNoteSlice.reducer;
 export default listNoteReducer;

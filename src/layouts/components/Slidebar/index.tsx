@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import SlideTag from '../Sidebar/Tag/SlideTag';
+import SlideTag from './SlideTag';
 
 import styles from './Slidebar.module.scss';
 const cx = classNames.bind(styles);

@@ -9,11 +9,11 @@ import {
     StarIcon,
     MissionIcon,
 } from 'assets/icons';
-import Tag from '../Tag';
 
 import styles from './Menu.module.scss';
 
 import MenuItem from './MenuItem';
+import Tag from './Tag';
 
 interface MenuProps {
     isSmallSidebar: boolean;

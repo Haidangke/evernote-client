@@ -12,13 +12,13 @@
 
 .left,
 .right {
-    transform: translateY(-4%);
-    flex: 1;
     @include flex(center, center);
     flex-direction: column;
+    flex: 1;
 }
 
 .form {
+    transform: translateY(-4%);
     width: 400px;
     padding: 30px;
 }
@@ -44,15 +44,21 @@
 }
 
 .form-main {
+    display: flex;
+    flex-direction: column;
     & > form > input {
         font-family: 'Roboto', sans-serif;
         font-size: 1.6rem;
+    }
+    & > form {
+        order: 1;
     }
 }
 
 .actions {
     @include flex(unset, space-between);
     margin-top: 24px;
+    order: 3;
 }
 
 .remember {
@@ -108,12 +114,14 @@
     min-height: 20px;
     padding-top: 8px;
     height: 24px;
+    order: 2;
 }
 
 .form-footer {
     margin-top: 40px;
     font-size: 14px;
     text-align: center;
+    order: 4;
     & > span {
         margin-right: 6px;
         color: #b0b0b0;
@@ -130,11 +138,11 @@
 //right
 .right {
     background-color: #e2f9e4;
-    flex: 1;
 }
 
 .right-wrapper {
     width: 300px;
+    transform: translateY(-4%);
 }
 
 .intro {
