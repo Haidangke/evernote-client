@@ -27,16 +27,17 @@ export const login = createAsyncThunk(
     async (params: { formValue: LoginParams; remember: boolean }, thunkAPI) => {
         try {
             const response = await authService.login(params.formValue);
-            const { data, msg } = response;
+            const { data } = response;
             if (params.remember) {
                 if (data?.accessToken) {
                     localStorage.setItem('user', JSON.stringify(data));
+                    console.log('Thunk');
                 }
             } else {
                 localStorage.removeItem('user');
             }
-            thunkAPI.dispatch(authActions.setMessage(msg));
-            return { user: data };
+            thunkAPI.dispatch(authActions.clearMessage());
+            return data;
         } catch (error: any) {
             const message =
                 (error.response && error.response.data && error.response.data.msg) ||

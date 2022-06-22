@@ -6,7 +6,7 @@ import { toolbarConfig } from 'config';
 import { isBlockActive, toggleBlock } from '../../utils/block';
 import { DropdownButton } from '../Button';
 
-import colorPicker from 'assets/images/color-picker.png';
+import colorPicker from 'assets/images/cl_pick.png';
 import styles from './Toolbar.module.scss';
 const cx = classNames.bind(styles);
 

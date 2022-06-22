@@ -1,20 +1,23 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import ReactLoading from 'react-loading';
 import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import classNames from 'classnames/bind';
 
 import Auth from 'pages/Auth';
-
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { login } from 'app/thunk/authThunk';
 import { InputField } from 'components/FormFields';
 import { LoginParams } from 'types';
-import styles from './Auth.module.scss';
-import { yupResolver } from '@hookform/resolvers/yup';
-import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
 
-const defaultValues = { email: 'vatcmnvo@gmail.com', password: 'Haidangker12345' };
+import { FcGoogle } from 'react-icons/fc';
+import { BsApple } from 'react-icons/bs';
+
+import styles from './Auth.module.scss';
+import authService from 'services/authService';
+const defaultValues = { email: '', password: '' };
 
 const schema = yup
     .object()
@@ -36,11 +39,11 @@ const schema = yup
 const cx = classNames.bind(styles);
 function Login() {
     const [remember, setRemember] = useState(false);
-
-    const { message, logging, isLoggedIn } = useAppSelector((state) => state.auth);
+    const [validEmail, setValidEmail] = useState(false);
+    const { message, logging } = useAppSelector((state) => state.auth);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const { control, handleSubmit, reset } = useForm<LoginParams>({
+    const { control, handleSubmit, reset, getValues } = useForm<LoginParams>({
         defaultValues,
         resolver: yupResolver(schema),
     });
@@ -50,30 +53,63 @@ function Login() {
             .unwrap()
             .then(() => {
                 reset(defaultValues);
+                navigate('/');
             })
             .catch(() => {});
     };
 
-    useEffect(() => {
-        if (isLoggedIn) navigate('/');
-    }, [isLoggedIn, navigate]);
+    const handleCheckEmail = () => {
+        const { email } = getValues();
+        authService
+            .checkEmail({ email })
+            .then((res) => {
+                setValidEmail(true);
+            })
+            .catch((error) => {
+                console.log(error.response.data.msg);
+                setValidEmail(false);
+            });
+    };
 
     return (
         <Auth page='login'>
+            <div className={cx('method')}>
+                <div className={cx('method-item')}>
+                    <FcGoogle />
+                    <span>Tiếp tục với Google</span>
+                </div>
+                <div className={cx('method-item')}>
+                    <BsApple />
+                    <span>Tiếp tục với Apple</span>
+                </div>
+            </div>
+
+            <div className={cx('or')}>hoặc</div>
             <form onSubmit={handleSubmit(handleFormSubmit)}>
-                <InputField name='email' control={control} placeholder='Email Address' />
-                <InputField
-                    type='password'
-                    name='password'
-                    control={control}
-                    placeholder='Password'
-                />
+                <InputField name='email' control={control} placeholder='Địa chỉ email' />
+                {validEmail && (
+                    <div className={cx('input-hide')}>
+                        <InputField
+                            type='password'
+                            name='password'
+                            control={control}
+                            placeholder='Password'
+                        />
+                    </div>
+                )}
                 <button
                     disabled={logging}
-                    type='submit'
+                    type={validEmail ? 'submit' : 'button'}
+                    onClick={!validEmail ? handleCheckEmail : () => {}}
                     className={cx('submit', { disable: logging })}
                 >
-                    {logging ? <ReactLoading height={22} width={22} type='spin' /> : 'Đăng nhập'}
+                    {logging ? (
+                        <ReactLoading height={22} width={22} type='spin' />
+                    ) : validEmail ? (
+                        'Đăng nhập'
+                    ) : (
+                        'Tiếp tục'
+                    )}
                 </button>
             </form>
 
@@ -84,9 +120,8 @@ function Login() {
                         type='checkbox'
                         defaultChecked={remember}
                     />
-                    <span>Ghi nhớ tôi</span>
+                    <span>Ghi nhớ tôi trong 30 ngày</span>
                 </div>
-                <div className={cx('forgot')}>Quên mật khẩu?</div>
             </div>
         </Auth>
     );

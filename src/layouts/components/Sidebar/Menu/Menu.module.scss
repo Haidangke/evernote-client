@@ -65,7 +65,7 @@
     display: flex;
     position: absolute;
     left: 5px;
-    color: var(--gray-icon);
+    color: var(--color-a6);
     transition: all 0.1s ease-in-out;
     &__active {
         transform: rotate(90deg);
@@ -77,7 +77,7 @@
     height: 24px;
     width: 24px;
     margin-right: 6px;
-    color: var(--gray-icon);
+    color: var(--color-a6);
 }
 
 .name {
@@ -100,7 +100,7 @@
         color: var(--gray);
     }
     & > svg {
-        color: var(--gray-icon);
+        color: var(--color-a6);
     }
 }
 
@@ -121,7 +121,7 @@
     }
 
     &-icon {
-        color: var(--gray-icon);
+        color: var(--color-a6);
         margin-right: 8px;
     }
 

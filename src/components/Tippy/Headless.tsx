@@ -22,6 +22,11 @@ function TippyHeadLess({ children, visible, setVisible, dropdown }: TippyHeadLes
     return (
         <div ref={ref}>
             <Tippy
+                onClickOutside={() => {
+                    if (visible) {
+                        setVisible(false);
+                    }
+                }}
                 placement='bottom-start'
                 onMount={() => setIsAnimation(true)}
                 onHide={(instance: any) => {

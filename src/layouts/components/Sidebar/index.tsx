@@ -69,7 +69,7 @@ function Sidebar() {
             <div className={cx('wrapper')}>
                 <div className={cx('main')}>
                     <Header isSmallSidebar={isSmallSidebar} />
-                    <Actions />
+                    <Actions isSmallSidebar={isSmallSidebar} />
                     <Menu isSmallSidebar={isSmallSidebar} />
                 </div>
                 <Slidebar />

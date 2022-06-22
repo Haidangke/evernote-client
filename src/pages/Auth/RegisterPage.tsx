@@ -65,23 +65,28 @@ function Register() {
         <Auth page='register'>
             <form onSubmit={handleSubmit(handleFormSubmit)}>
                 <InputField name='email' control={control} placeholder='Email' />
-                <InputField name='username' control={control} placeholder='Username' />
+                <InputField name='username' control={control} placeholder='Tên người dùng' />
                 <InputField
                     type='password'
                     name='password'
                     control={control}
-                    placeholder='Password'
+                    placeholder='Mật khẩu'
                 />
                 <InputField
                     type='password'
                     name='passwordConfirm'
                     control={control}
-                    placeholder='Password Confirm'
+                    placeholder='Nhập lại mật khẩu'
                 />
                 <button type='submit' className={styles.submit}>
                     {registering ? <ReactLoading height={22} width={22} type='spin' /> : ' Đăng kí'}
                 </button>
             </form>
+
+            <div className={styles.policy}>
+                Bằng việc tạo một tài khoản, bạn đồng ý với Điều khoản dịch vụ và Chính sách về
+                Quyền riêng tư.
+            </div>
         </Auth>
     );
 }

@@ -217,8 +217,10 @@ function OverflowToolbar() {
                 </div>
             )}
         >
-            <span>Khác</span>
-            <ArrowDownIcon width={8} height={24} />
+            
+                <span>Khác</span>
+                <ArrowDownIcon width={8} height={24} />
+            
         </DropdownButton>
     );
 }

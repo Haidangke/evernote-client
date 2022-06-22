@@ -178,3 +178,21 @@ export const TagSubIcon = ({ className }: IconProps) => (
         ></path>
     </svg>
 );
+
+export const TodoPrimaryIcon = ({ className }: IconProps) => (
+    <svg
+        className={className}
+        width='24'
+        height='24'
+        viewBox='0 0 24 24'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+    >
+        <path
+            fillRule='evenodd'
+            clipRule='evenodd'
+            d='M11.587 3a8.587 8.587 0 100 17.174 8.587 8.587 0 000-17.174zm4.029 6.166a.6.6 0 10-.933-.754L10.56 13.51l-2.128-1.96a.6.6 0 10-.813.882l2.6 2.395a.6.6 0 00.872-.065l4.525-5.596z'
+            fill='#fff'
+        ></path>
+    </svg>
+);

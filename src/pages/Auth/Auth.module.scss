@@ -1,54 +1,106 @@
 @import 'styles/mixin';
-.wrapper {
+.root {
     display: flex;
-    height: 100vh;
-
-    & * {
-        font-family: 'Rubik', sans-serif;
-    }
+    background-image: url('../../assets/images/auth_bg.png');
 }
 
-//left
-
-.left,
-.right {
+.wrapper {
+    position: relative;
     @include flex(center, center);
     flex-direction: column;
     flex: 1;
 }
 
 .form {
-    transform: translateY(-4%);
-    width: 400px;
-    padding: 30px;
+    background-color: var(--white);
+    max-width: 512px;
+    padding: 62px 100px 48px;
+    width: 512px;
+    box-shadow: 0px 4px 24px rgb(0 0 0 / 10%);
 }
 
 .logo {
-    margin-bottom: 24px;
-}
+    @include flex(center, unset);
+    flex-direction: column;
+    margin: -10px 0 10px 0;
 
-.form-header {
-}
+    & > svg {
+        width: 72px;
+        height: 72px;
+    }
 
-.form-title {
-    color: #313e49;
-    font-size: 2.8rem;
-    margin-bottom: 16px;
-    line-height: 1.2;
+    & > span {
+        font-size: 4.4rem;
+        font-family: none;
+        font-weight: 700;
+
+        line-height: 1;
+        font-family: 'Source Serif Pro', serif;
+    }
 }
 
 .form-description {
     margin-bottom: 40px;
-    font-size: 1.54rem;
-    color: #b0b0b0;
+    font-size: 1.6rem;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.method-item {
+    @include flex(center, center);
+    height: 42px;
+    border: 1px solid var(--color-d9);
+    margin-bottom: 8px;
+
+    border-radius: 4px;
+    background-color: var(--white);
+    cursor: pointer;
+    & > svg {
+        width: 20px;
+        height: 20px;
+    }
+    & > span {
+        padding-left: 6px;
+        color: var(--color-6a);
+        font-size: 1.5rem;
+    }
+
+    &:hover {
+        background-color: var(--color-f8);
+    }
+}
+
+.or {
+    position: relative;
+    text-align: center;
+    color: #ababab;
+    font-size: 1.4rem;
+    margin: 16px 0;
+    &::after,
+    &::before {
+        content: '';
+        position: absolute;
+        height: 1px;
+        width: 45%;
+        background-color: #ababab;
+        top: 50%;
+    }
+    &::after {
+        left: 0;
+    }
+    &::before {
+        right: 0;
+    }
 }
 
 .form-main {
     display: flex;
     flex-direction: column;
-    & > form > input {
+    input {
         font-family: 'Roboto', sans-serif;
         font-size: 1.6rem;
+        border-radius: 6px;
+        border: 1px solid #e6e6e6;
     }
     & > form {
         order: 1;
@@ -57,13 +109,14 @@
 
 .actions {
     @include flex(unset, space-between);
-    margin-top: 24px;
+    margin-top: 10px;
     order: 3;
 }
 
 .remember {
     @include flex(center, unset);
-    color: #b0b0b0;
+    margin: 0 auto;
+    color: var(--color-73);
     & > input {
         margin-right: 6px;
         width: 16px;
@@ -87,17 +140,20 @@
 }
 
 .submit {
+    position: relative;
     @include flex(center, center);
     width: 100%;
-    height: 40px;
-    margin-top: 32px;
+    height: 46px;
+
+    margin-top: 10px;
     padding: 8px 16px;
+
     background-color: var(--primary-color);
     border-radius: 4px;
     font-size: 1.6rem;
     color: var(--white);
     transition: var(--transition-base);
-
+    z-index: 1;
     &:hover {
         background-color: var(--primary-hover);
     }
@@ -112,7 +168,6 @@
     color: var(--color-red);
     font-size: 1.26rem;
     min-height: 20px;
-    padding-top: 8px;
     height: 24px;
     order: 2;
 }
@@ -122,9 +177,9 @@
     font-size: 14px;
     text-align: center;
     order: 4;
-    & > span {
-        margin-right: 6px;
-        color: #b0b0b0;
+    & > div {
+        color: var(--text-color);
+        margin-bottom: 6px;
     }
     & > a {
         color: var(--primary-color);
@@ -135,29 +190,24 @@
     }
 }
 
-//right
-.right {
-    background-color: #e2f9e4;
-}
-
-.right-wrapper {
-    width: 300px;
-    transform: translateY(-4%);
-}
-
-.intro {
-    margin-top: 40px;
+.policy {
+    font-size: 1.2rem;
+    color: var(--color-a6);
+    order: 4;
     text-align: center;
 }
 
-.intro-title {
-    font-size: 2.4rem;
-    margin-bottom: 16px;
-    color: hsla(124, 72%, 20%, 1);
-    font-weight: 700;
+@keyframes hide {
+    0% {
+        height: 0;
+    }
+    100% {
+        height: 42px;
+    }
 }
 
-.intro-description {
-    font-size: 1.6rem;
-    margin-bottom: 16px;
+.input-hide {
+    position: relative;
+    z-index: 0;
+    animation: hide 0.3s;
 }

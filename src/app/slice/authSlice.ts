@@ -3,7 +3,8 @@ import { RootState } from 'app/store';
 import { User } from 'types';
 import { login, logout, register } from '../thunk/authThunk';
 
-const user = JSON.parse(localStorage.getItem('user') as string);
+const userLocal = localStorage.getItem('user');
+const user = userLocal ? JSON.parse(userLocal) : null;
 
 interface InitialState {
     user?: User;

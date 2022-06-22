@@ -3,7 +3,10 @@ import { LoginParams, RegisterParams, User } from 'types/auth';
 import axiosClient from 'utils/axiosClient';
 
 const authService = {
-    async login(params: LoginParams): Promise<Response<User>> {
+    checkEmail(params: { email: string }): Promise<Response<boolean>> {
+        return axiosClient.post('/auth/email', params);
+    },
+    login(params: LoginParams): Promise<Response<User>> {
         return axiosClient.post('/auth/login', params);
     },
     logout() {

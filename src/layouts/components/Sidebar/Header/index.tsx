@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TippyHeadLess } from 'components/Tippy';
+import { TippyHeadless } from 'components/Tippy';
 import classnames from 'classnames/bind';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
@@ -8,7 +8,7 @@ import { logout } from 'app/thunk/authThunk';
 import { TippyButton } from 'components/Tippy';
 import { ArrowDownIcon, CheckIcon, Setting, TriangleIcon } from 'assets/icons';
 
-import avatar_default from 'assets/images/avatar_default';
+import avatar_default from 'assets/images/avatar';
 import styles from './Header.module.scss';
 
 interface HeaderProps {
@@ -24,7 +24,7 @@ function Header({ isSmallSidebar }: HeaderProps) {
     return (
         <div className={cx('wrapper', { small: isSmallSidebar })}>
             <div className={cx('left')}>
-                <TippyHeadLess
+                <TippyHeadless
                     visible={visible}
                     setVisible={setVisible}
                     dropdown={
@@ -62,7 +62,7 @@ function Header({ isSmallSidebar }: HeaderProps) {
                             <ArrowDownIcon />
                         </div>
                     </div>
-                </TippyHeadLess>
+                </TippyHeadless>
             </div>
             <TippyButton className={cx('logo')} placement='right' content='Cập nhật chế độ cài đặt'>
                 <Setting />
