@@ -6,9 +6,12 @@ import classNames from 'classnames/bind';
 import useWindowSize from 'hooks/useWindowSize';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { fetchListNote } from 'app/thunk/listNoteThunk';
+import List from './components/List';
+import Actions from './components/Actions';
 
+import { NoteListIcon } from 'assets/icons';
 import styles from './NoteList.module.scss';
-import { FilterIcon, NoteListIcon, SortIcon, ViewIcon } from 'assets/icons';
+import { ActionsType } from 'config/actions';
 
 const cx = classNames.bind(styles);
 
@@ -21,10 +24,13 @@ function NoteList() {
 
     const [resizable, setResizable] = useState({ width: 320, height: '100vh' });
     const [maxWidth, setMaxWidth] = useState(600);
+    const [actions, setActions] = useState<ActionsType>({ sort: 'updatedAt' });
     const [widthWindow] = useWindowSize();
 
     useEffect(() => {
-        if (!listNote.some((note) => note._id === noteId) && listNote.length !== 0) {
+        if (listNote.length === 0) return;
+
+        if (!listNote.some((note) => note._id === noteId)) {
             searchParams.set('noteId', listNote[0]._id);
             setSearchParams(searchParams);
         }
@@ -64,53 +70,23 @@ function NoteList() {
         >
             <div className={cx('wrapper')}>
                 <header className={cx('header')}>
-                    <div className={cx('top')}>
-                        <NoteListIcon className={cx('top-icon')} />
-                        <div className={cx('top-title')}>Ghi chú</div>
+                    <div className={cx('title')}>
+                        <NoteListIcon className={cx('title-icon')} />
+                        <span>Ghi chú</span>
                     </div>
-                    <div className={cx('bottom')}>
-                        <div className={cx('bottom-total')}>{listNote?.length} ghi chú</div>
-                        <div className={cx('bottom-btn')}>
-                            <SortIcon className={cx('bottom-icon')} />
-                            <FilterIcon className={cx('bottom-icon')} />
-                            <ViewIcon className={cx('bottom-icon')} />
-                        </div>
+                    <div className={cx('concern')}>
+                        <div className={cx('total')}>{listNote?.length} ghi chú</div>
+                        <Actions actions={actions} setActions={setActions} />
                     </div>
                 </header>
-                <div className={cx('main')}>
-                    <div className={cx('list', 'list-header')}>
-                        <div className={cx('item', 'item-header')}>Tiêu đề</div>
-                        <div className={cx('item', 'item-header')}>Đã cập nhật</div>
-                        <div className={cx('item', 'item-header')}>Thẻ</div>
+                <div className={cx('table')}>
+                    <div className={cx('table-header')}>
+                        <div className={cx('column-header')}>Tiêu đề</div>
+                        <div className={cx('column-header')}>Đã cập nhật</div>
+                        <div className={cx('column-header')}>Thẻ</div>
                     </div>
 
-                    {/* data fetch */}
-
-                    {listNote.length === 0 ? (
-                        <></>
-                    ) : (
-                        <div className={cx('list-body')}>
-                            {listNote?.map((item, index) => (
-                                <div
-                                    onClick={() => {
-                                        searchParams.set('noteId', item._id);
-                                        setSearchParams(searchParams);
-                                    }}
-                                    key={item._id}
-                                    className={cx('list', 'item-main', {
-                                        'list-b-h': index % 2 === 0,
-                                        'item-main__active': noteId === item._id,
-                                    })}
-                                >
-                                    <div className={cx('item', 'item-body')}>
-                                        {item.title || 'Chưa có tiêu đề'}
-                                    </div>
-                                    <div className={cx('item', 'item-body')}>34 phút trước</div>
-                                    <div className={cx('item', 'item-body')}></div>
-                                </div>
-                            ))}
-                        </div>
-                    )}
+                    <List actions={actions} />
                 </div>
             </div>
         </Resizable>

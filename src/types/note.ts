@@ -7,8 +7,8 @@ export interface Note<T> {
     contain: string[];
     todo?: Todo[];
     tags: T;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
 }
 
 export interface ListParams {

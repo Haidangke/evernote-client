@@ -31,7 +31,6 @@ export const login = createAsyncThunk(
             if (params.remember) {
                 if (data?.accessToken) {
                     localStorage.setItem('user', JSON.stringify(data));
-                    console.log('Thunk');
                 }
             } else {
                 localStorage.removeItem('user');

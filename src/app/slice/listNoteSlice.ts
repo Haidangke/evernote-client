@@ -28,8 +28,12 @@ const listNoteSlice = createSlice({
             const note = action.payload;
             const { _id } = note;
             const index = state.listNote?.map((note) => note._id).indexOf(_id);
-
+            const isodate = new Date().toISOString();
+            state.listNote[index].updatedAt = isodate;
             state.listNote[index].title = note.title;
+        },
+        setListNote(state, action: PayloadAction<Note<Tag>[]>) {
+            state.listNote = action.payload;
         },
     },
     extraReducers: (builder) => {

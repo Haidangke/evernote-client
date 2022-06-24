@@ -1,40 +1,34 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import classNames from 'classnames/bind';
 
 import Topbar from './components/Topbar';
 import Footer from './components/Footer';
-
-import useOnClickOutside from 'hooks/useOnclickOutside';
 
 import styles from './NoteEditor.module.scss';
 import Editor from './components/Editor';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { fetchNote } from 'app/thunk/noteThunk';
-const cx = classNames.bind(styles);
 
 function NoteEditor() {
     const dispatch = useAppDispatch();
     const [searchParams] = useSearchParams();
     const { listNote } = useAppSelector((state) => state.listNote);
-
-    const [isToolbar, setIsToolbar] = useState(true);
-
-    const editorRef = useRef<any>(null);
+    const { note } = useAppSelector((state) => state.note);
 
     const noteId = searchParams.get('noteId');
+
     useEffect(() => {
-        if (listNote.some((note) => note._id === noteId) && noteId) {
+        if (!noteId) return;
+
+        if (listNote.some((note) => note._id === noteId) && noteId !== note?._id) {
             dispatch(fetchNote(noteId));
         }
-    }, [noteId, dispatch, listNote]);
-
-    useOnClickOutside(editorRef, () => setIsToolbar(false));
+    }, [noteId, dispatch, listNote, note?._id]);
 
     return (
-        <div ref={editorRef} className={cx('wrapper')}>
+        <div className={styles.wrapper}>
             <Topbar />
-            <Editor isToolbar={isToolbar} setIsToolbar={setIsToolbar} />
+            <Editor />
             <Footer />
         </div>
     );

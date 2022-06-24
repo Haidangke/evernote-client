@@ -1,6 +1,7 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { authReducer, noteReducer, toolbarReducer, listNoteReducer } from './slice';
 import listTagReducer from './slice/listTagSlice';
+import notebookReducer from './slice/notebookSlice';
 
 export const store = configureStore({
     reducer: {
@@ -8,6 +9,7 @@ export const store = configureStore({
         note: noteReducer,
         listNote: listNoteReducer,
         listTag: listTagReducer,
+        notebook: notebookReducer,
         toolbar: toolbarReducer,
     },
 });

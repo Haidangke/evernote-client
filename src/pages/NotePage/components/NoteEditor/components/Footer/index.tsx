@@ -12,7 +12,7 @@ function SlateFooter() {
     const [status, setStatus] = useState('Đã lưu mọi thay đổi');
 
     useEffect(() => {
-        if (isLoading) {
+        if (isLoading || isUpdating) {
             setStatus('Đang lưu...');
         }
         if (!isLoading && isUpdateSuccess) {

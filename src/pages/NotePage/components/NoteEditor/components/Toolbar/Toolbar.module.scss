@@ -1,4 +1,13 @@
 @import 'styles/mixin';
+.info-update {
+    height: 52px;
+    display: flex;
+    align-items: center;
+    color: #737373;
+    font-size: 1.4rem;
+    padding: 0 16px;
+    box-shadow: inset 0 -1px 0 0 var(--color-f2);
+}
 .toolbar {
     position: relative;
     @include flex(center, unset);

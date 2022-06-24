@@ -11,9 +11,13 @@ import {
     TodoPrimaryIcon,
 } from 'assets/icons';
 import Popper from 'components/Popper';
-import { useAppSelector } from 'app/hooks';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 import styles from './Actions.module.scss';
 import useOnClickOutside from 'hooks/useOnclickOutside';
+import noteService from 'services/noteService';
+import { fetchListNote } from 'app/thunk/listNoteThunk';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { listNoteActions } from 'app/slice/listNoteSlice';
 
 interface ActionsProps {
     isSmallSidebar: boolean;
@@ -22,18 +26,36 @@ interface ActionsProps {
 const cx = classnames.bind(styles);
 
 function Actions({ isSmallSidebar }: ActionsProps) {
+    const dispatch = useAppDispatch();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const navigate = useNavigate();
     const { listNote } = useAppSelector((state) => state.listNote);
+    const { notebooks } = useAppSelector((state) => state.notebook);
     const [filter, setFilter] = useState('');
     const [isSearch, setIsSearch] = useState(false);
 
     const [isAdd, setIsAdd] = useState(false);
     const addRef = useRef(null);
 
-    const handleAdd = () => {
+    const handleAdd = async () => {
         if (!isAdd) {
             setIsAdd(true);
         } else {
-            //api
+            const notebookDf = notebooks.find((notebook) => notebook.isDefault);
+            if (notebookDf?._id) {
+                noteService
+                    .create(notebookDf._id)
+                    .then(() => {
+                        return noteService.getAll();
+                    })
+                    .then((res) => {
+                        if (!res.data) return;
+                        dispatch(listNoteActions.setListNote(res.data));
+                        searchParams.set('noteId', res.data[0]._id);
+                        setSearchParams(searchParams);
+                    })
+                    .catch();
+            }
         }
     };
 

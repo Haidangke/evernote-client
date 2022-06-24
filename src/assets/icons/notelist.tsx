@@ -69,3 +69,27 @@ export const ViewIcon = ({ className }: IconProps) => (
         />
     </svg>
 );
+
+export const TwoWayArrowIcon = ({ className }: IconProps) => (
+    <svg
+        width='24'
+        height='24'
+        viewBox='0 0 24 24'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+        className={className}
+    >
+        <path
+            fillRule='evenodd'
+            clipRule='evenodd'
+            d='M17 19a.75.75 0 01-.75-.75V7.56l-2.72 2.72a.75.75 0 11-1.06-1.06l4-4a.75.75 0 011.06 0l4 4a.75.75 0 11-1.06 1.06l-2.72-2.72v10.69A.75.75 0 0117 19z'
+            fill='#0081c2'
+        ></path>
+        <path
+            fillRule='evenodd'
+            clipRule='evenodd'
+            d='M7 5a.75.75 0 00-.75.75v10.69l-2.72-2.72a.75.75 0 00-1.06 1.06l4 4a.75.75 0 001.06 0l4-4a.75.75 0 10-1.06-1.06l-2.72 2.72V5.75A.75.75 0 007 5z'
+            fill='#E6E6E6'
+        ></path>
+    </svg>
+);

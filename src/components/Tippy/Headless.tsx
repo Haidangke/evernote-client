@@ -47,7 +47,7 @@ function TippyHeadLess({ children, visible, setVisible, dropdown }: TippyHeadLes
                     <div
                         className='tippy-box'
                         data-state={isAnimation ? 'visible' : 'hidden'}
-                        data-animation='shift-away'
+                        data-animation={'shift-away'}
                         style={{
                             transitionDuration: isAnimation ? '400ms' : '0',
                             pointerEvents: 'all',

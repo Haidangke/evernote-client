@@ -6,7 +6,7 @@ const noteService = {
         return axiosClientSecret.get(`/note/${id}`);
     },
 
-    getAll(params?: ListParams): Promise<Response<Note<string>[]>> {
+    getAll(params?: ListParams): Promise<Response<Note<Tag>[]>> {
         return axiosClientSecret.get('/note', {
             params,
         });

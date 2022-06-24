@@ -31,12 +31,7 @@ const createEditorWithPlugins = pipe(
 
 const cx = classNames.bind(styles);
 
-interface EditorProps {
-    isToolbar: boolean;
-    setIsToolbar: any;
-}
-
-function SlateEditor({ isToolbar, setIsToolbar }: EditorProps) {
+function Editor() {
     const dispatch = useAppDispatch();
     const { note, isFetchSuccess } = useAppSelector((state) => state.note);
 
@@ -44,11 +39,7 @@ function SlateEditor({ isToolbar, setIsToolbar }: EditorProps) {
     const noteId = searchParams.get('noteId') || '';
 
     //state
-    const [date, setDate] = useState({
-        day: '',
-        month: '',
-        year: '',
-    });
+    const [isToolbar, setIsToolbar] = useState(false);
     const [search, setSearch] = useState('');
     const [onHeader, setOnHeader] = useState(false);
 
@@ -86,18 +77,9 @@ function SlateEditor({ isToolbar, setIsToolbar }: EditorProps) {
         };
     }, [debouncedChangeHandler, noteId]);
 
-    useEffect(() => {
-        if (note?.updatedAt) {
-            let new_date = new Date(note?.updatedAt);
-            const [day, month, year] = new_date.toLocaleDateString().split('/');
-            setDate((prev) => ({ ...prev, day, month, year }));
-        }
-    }, [note?.updatedAt]);
-
     const [width] = useWindowSize();
 
     useEffect(() => setIsToolbar(false), [setIsToolbar, width]);
-
     return note && condition ? (
         <div ref={editorRef} className={cx('editor')}>
             <Slate
@@ -113,13 +95,8 @@ function SlateEditor({ isToolbar, setIsToolbar }: EditorProps) {
                     }
                 }}
             >
-                {isToolbar ? (
-                    <Toolbar onHeader={onHeader} editor={editor} setSearch={setSearch} />
-                ) : (
-                    <div className={cx('info-update')}>
-                        Chỉnh sửa lần cuối vào {date.day} thg {date.month}, {date.year}
-                    </div>
-                )}
+                <Toolbar isToolbar={isToolbar} onHeader={onHeader} setSearch={setSearch} />
+
                 <div className={cx('editable')}>
                     <DebounceInput
                         onFocus={() => {
@@ -143,7 +120,7 @@ function SlateEditor({ isToolbar, setIsToolbar }: EditorProps) {
                             placeholder='Bắt đầu viết những suy nghĩ, hoặc công việc vào đây'
                             decorate={decorate}
                             onClick={() => setIsToolbar(true)}
-                            onFocus={(e) => {
+                            onFocus={() => {
                                 setIsToolbar(true);
                                 setOnHeader(false);
                             }}
@@ -161,4 +138,4 @@ function SlateEditor({ isToolbar, setIsToolbar }: EditorProps) {
     );
 }
 
-export default SlateEditor;
+export default Editor;
