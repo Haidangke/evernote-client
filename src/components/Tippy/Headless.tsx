@@ -27,7 +27,7 @@ function TippyHeadLess({ children, visible, setVisible, dropdown }: TippyHeadLes
                         setVisible(false);
                     }
                 }}
-                placement='bottom-start'
+                placement='bottom-end'
                 onMount={() => setIsAnimation(true)}
                 onHide={(instance: any) => {
                     setIsAnimation(false);

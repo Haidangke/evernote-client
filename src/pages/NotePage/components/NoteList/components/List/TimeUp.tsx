@@ -6,10 +6,15 @@ import useConvertISODate from 'hooks/useConvertIOSDate';
 import styles from './List.module.scss';
 const cx = classNames.bind(styles);
 
-function TimeUp({ updatedAt }: { updatedAt: string }) {
+interface TimeUpProps {
+    updatedAt: string;
+    className?: string;
+}
+
+function TimeUp({ updatedAt, className }: TimeUpProps) {
     const time = useConvertISODate(updatedAt);
 
-    return <div className={cx('column')}>{time}</div>;
+    return <div className={cx(className || 'column')}>{time}</div>;
 }
 
 export default memo(TimeUp);

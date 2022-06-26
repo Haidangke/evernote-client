@@ -4,7 +4,7 @@ import tagService from 'services/tagService';
 export const fetchListTag = createAsyncThunk('listTag/fetchListTag', async (params, thunkAPI) => {
     try {
         const response = await tagService.get();
-        return response.data;
+        return response;
     } catch (error: any) {
         console.log({ error });
         return thunkAPI.rejectWithValue('');

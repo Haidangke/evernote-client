@@ -7,7 +7,7 @@ export const fetchNotebooks = createAsyncThunk(
     async (params: undefined, thunkAPI) => {
         try {
             const response = await notebookService.get();
-            return response.data;
+            return response;
         } catch (error: any) {
             console.log({ error });
             return thunkAPI.rejectWithValue('');

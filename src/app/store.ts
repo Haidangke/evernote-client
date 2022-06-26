@@ -1,18 +1,33 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import { authReducer, noteReducer, toolbarReducer, listNoteReducer } from './slice';
-import listTagReducer from './slice/listTagSlice';
-import notebookReducer from './slice/notebookSlice';
+import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit';
+import createSagaMiddleware from 'redux-saga';
 
-export const store = configureStore({
-    reducer: {
-        auth: authReducer,
-        note: noteReducer,
-        listNote: listNoteReducer,
-        listTag: listTagReducer,
-        notebook: notebookReducer,
-        toolbar: toolbarReducer,
-    },
+import {
+    authReducer,
+    noteReducer,
+    toolbarReducer,
+    listNoteReducer,
+    listTagReducer,
+    notebookReducer,appReducer
+} from './slice';
+import rootSaga from './saga';
+
+const sagaMiddleware = createSagaMiddleware();
+
+const rootReducer = combineReducers({
+    app: appReducer,
+    auth: authReducer,
+    note: noteReducer,
+    listNote: listNoteReducer,
+    listTag: listTagReducer,
+    notebook: notebookReducer,
+    toolbar: toolbarReducer,
 });
+export const store = configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
+});
+
+sagaMiddleware.run(rootSaga);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

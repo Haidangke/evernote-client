@@ -1,8 +1,8 @@
-import { Notebook, Response, UpdateNoteParams } from 'types';
+import { Notebook, UpdateNoteParams } from 'types';
 import axiosClientSecret from 'utils/axiosClientSecret';
 
 const notebookService = {
-    get(): Promise<Response<Notebook>> {
+    get(): Promise<Notebook> {
         return axiosClientSecret.get('/notebook');
     },
     create(params: { name: string }) {

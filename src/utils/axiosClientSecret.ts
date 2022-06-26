@@ -48,7 +48,7 @@ axiosClientSecret.interceptors.request.use(
 
 axiosClientSecret.interceptors.response.use(
     function (response) {
-        return response.data;
+        return response.data.data;
     },
     function (error) {
         return Promise.reject(error);

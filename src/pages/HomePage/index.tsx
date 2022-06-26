@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
+import { Scratch, NoteList } from './components/Widgets';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { CustomHome } from 'assets/icons';
 
@@ -10,8 +11,6 @@ import background from 'assets/images/background.png';
 import { fetchListNote } from 'app/thunk/listNoteThunk';
 
 import styles from './HomePage.module.scss';
-import NoteList from './components/NoteList';
-import Element from './components/Element';
 const cx = classNames.bind(styles);
 
 function Home() {
@@ -40,10 +39,10 @@ function Home() {
                 </div>
             </header>
             <div className={cx('main')}>
-                <NoteList />
-                <Element title={<span>Giấy nháp</span>}>
-                    <div></div>
-                </Element>
+                <div className={cx('elements')}>
+                    <NoteList />
+                    <Scratch />
+                </div>
             </div>
         </div>
     );

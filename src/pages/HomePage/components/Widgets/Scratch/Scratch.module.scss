@@ -1,0 +1,16 @@
+.wrapper {
+    width: calc(100% / 3) !important;
+    background-color: #fff4ba;
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    width: 100%;
+    flex: 1;
+    resize: none;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    padding: 0 16px 10px;
+}

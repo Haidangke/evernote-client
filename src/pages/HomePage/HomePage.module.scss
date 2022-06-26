@@ -68,5 +68,12 @@
 
 //main
 .main {
+    @include flex(center, unset);
+    flex-direction: column;
     margin-top: -35vh;
+}
+
+.elements {
+    width: 100%;
+    padding: 0 24px 24px;
 }

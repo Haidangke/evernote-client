@@ -6,13 +6,13 @@ function useSearchKey() {
     const [searchParams, setSearchParams] = useSearchParams();
     const location = useLocation();
 
-    useEffect(() => {
-        // searchKeysConfig.keyRefresh.forEach((key) => {
-        //     searchParams.delete(key);
-        //     setSearchParams(searchParams);
-        // });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    // useEffect(() => {
+    //     searchKeysConfig.keyRefresh.forEach((key) => {
+    //         searchParams.delete(key);
+    //         setSearchParams(searchParams);
+    //     });
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, []);
 
     useEffect(() => {
         const searchs = location.search.substring(1, location.search.length).split('&');

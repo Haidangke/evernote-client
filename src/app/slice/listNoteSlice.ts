@@ -29,11 +29,29 @@ const listNoteSlice = createSlice({
             const { _id } = note;
             const index = state.listNote?.map((note) => note._id).indexOf(_id);
             const isodate = new Date().toISOString();
+            state.listNote[index] = note;
             state.listNote[index].updatedAt = isodate;
-            state.listNote[index].title = note.title;
         },
         setListNote(state, action: PayloadAction<Note<Tag>[]>) {
             state.listNote = action.payload;
+        },
+
+        fetchListNote(state) {
+            state.isFetching = true;
+            state.isSuccess = false;
+            state.isFailed = false;
+        },
+        fetchListNoteSucess(state, action: PayloadAction<Note<Tag>[]>) {
+            state.isFetching = false;
+            state.isSuccess = true;
+            state.isFailed = false;
+            state.listNote = action.payload;
+        },
+        fetchListNoteFailed(state) {
+            state.isFetching = false;
+            state.isSuccess = false;
+            state.isFailed = true;
+            state.listNote = [];
         },
     },
     extraReducers: (builder) => {

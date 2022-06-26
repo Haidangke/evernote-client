@@ -1,11 +1,15 @@
+import { Fragment } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { useAppSelector } from 'app/hooks';
 import { ArrowLeftIcon } from 'assets/icons';
-import { useNavigate } from 'react-router-dom';
-import Element from '../Element';
-import Tab from '../Tab';
-import styles from './NoteList.module.scss';
+import TimeUp from 'pages/NotePage/components/NoteList/components/List/TimeUp';
+import Element from '../../Element';
+import Tab from '../../Tab';
 import NoteListLoading from './NoteListLoading';
 
+import styles from './NoteList.module.scss';
+import useAddNote from 'hooks/useAddNote';
 function NoteList() {
     const navigate = useNavigate();
     const { listNote } = useAppSelector((state) => state.listNote);
@@ -17,18 +21,25 @@ function NoteList() {
         });
     };
 
+    const addNote = useAddNote();
+
     return (
         <Element
+            menu={[
+                { title: 'Chuyển đến ghi chú', handle: () => navigate('/note') },
+                { title: 'Tạo ghi chú mới', handle: addNote },
+                { title: 'Xóa tiện ích', handle: () => {} },
+            ]}
             title={
-                <>
+                <Fragment>
                     <span>Ghi chú</span>
                     <ArrowLeftIcon width={14} height={14} />
-                </>
+                </Fragment>
             }
         >
             <Tab />
             <div className={styles.wrapper}>
-                {true ? (
+                {listNote.length === 0 ? (
                     <NoteListLoading />
                 ) : (
                     listNote.map((note) => (
@@ -43,7 +54,7 @@ function NoteList() {
                                 </div>
                                 <div className={styles.content}>Đây là nội dung của ghi chú</div>
                             </div>
-                            <div className={styles.time}>1 phút trước</div>
+                            <TimeUp className={styles.time} updatedAt={note.updatedAt} />
                         </div>
                     ))
                 )}

@@ -1,8 +1,7 @@
-import { Response, Todo } from 'types';
 import axiosClientSecret from 'utils/axiosClientSecret';
 
 const todoService = {
-    create(params: { noteId: string }): Promise<Response<Todo>> {
+    create(params: { noteId: string }) {
         return axiosClientSecret.post('/todo', params);
     },
     update(id: string) {

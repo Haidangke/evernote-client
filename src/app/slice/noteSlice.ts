@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Note, Tag } from 'types';
-import { fetchNote, updateNote } from '../thunk/noteThunk';
+import { Note, Tag, UpdateNoteParams } from 'types';
 
 interface InitialState {
     isFetching: boolean;
@@ -11,8 +10,7 @@ interface InitialState {
     isUpdateSuccess: boolean;
     isUpdateFailed: boolean;
 
-    isLoading: boolean;
-    note?: Note<Tag>;
+    listNote: Note<Tag>[];
 }
 
 const initialState: InitialState = {
@@ -24,57 +22,54 @@ const initialState: InitialState = {
     isUpdateSuccess: false,
     isUpdateFailed: false,
 
-    isLoading: false,
-    note: undefined,
+    listNote: [],
 };
 
 const noteSlice = createSlice({
     name: 'note',
     initialState,
     reducers: {
-        setIsLoading(state, action: PayloadAction<boolean>) {
-            state.isLoading = action.payload;
-        },
-    },
-    extraReducers: (builder) => {
-        builder.addCase(fetchNote.pending, (state) => {
+        fetch(state) {
             state.isFetching = true;
             state.isFetchSuccess = false;
             state.isFetchFailed = false;
-        });
-        builder.addCase(fetchNote.fulfilled, (state, action: any) => {
+        },
+        fetchSuccess(state, action: PayloadAction<Note<Tag>[]>) {
             state.isFetching = false;
             state.isFetchSuccess = true;
             state.isFetchFailed = false;
-
-            state.note = action.payload;
-        });
-
-        builder.addCase(fetchNote.rejected, (state) => {
+            state.listNote = action.payload;
+        },
+        fetchFailed(state) {
             state.isFetching = false;
-            state.isFetchSuccess = true;
-            state.isFetchFailed = false;
+            state.isFetchSuccess = false;
+            state.isFetchFailed = true;
+            state.listNote = [];
+        },
 
-            state.note = undefined;
-        });
-
-        builder.addCase(updateNote.pending, (state, action: any) => {
+        update(state, action: PayloadAction<{ id: string; params: UpdateNoteParams }>) {
             state.isUpdating = true;
             state.isUpdateSuccess = false;
             state.isUpdateFailed = false;
-        });
-
-        builder.addCase(updateNote.fulfilled, (state, action: any) => {
+        },
+        updateSuccess(state) {
             state.isUpdating = false;
             state.isUpdateSuccess = true;
             state.isUpdateFailed = false;
-        });
-
-        builder.addCase(updateNote.rejected, (state) => {
+        },
+        updateFailed(state) {
             state.isUpdating = false;
             state.isUpdateSuccess = false;
             state.isUpdateFailed = true;
-        });
+        },
+        updateNote(state, action: PayloadAction<Note<Tag>>) {
+            const note = action.payload;
+            const { _id } = note;
+            const index = state.listNote?.map((note) => note._id).indexOf(_id);
+            const isodate = new Date().toISOString();
+            state.listNote[index] = note;
+            state.listNote[index].updatedAt = isodate;
+        },
     },
 });
 

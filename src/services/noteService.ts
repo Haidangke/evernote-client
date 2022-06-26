@@ -1,30 +1,30 @@
-import { ListParams, Note, Response, UpdateNoteParams, Tag } from 'types';
+import { ListParams, Note, UpdateNoteParams, Tag } from 'types';
 import axiosClientSecret from 'utils/axiosClientSecret';
 
 const noteService = {
-    get(id: string): Promise<Response<Note<Tag[]>>> {
+    get(id: string): Promise<Note<Tag[]>> {
         return axiosClientSecret.get(`/note/${id}`);
     },
 
-    getAll(params?: ListParams): Promise<Response<Note<Tag>[]>> {
+    getAll(params?: ListParams): Promise<Note<Tag>[]> {
         return axiosClientSecret.get('/note', {
             params,
         });
     },
 
-    create(notebookId?: string): Promise<Response<Note<string>>> {
+    create(notebookId?: string) {
         return axiosClientSecret.post('/note', { notebookId });
     },
 
-    update(id: string, params: UpdateNoteParams): Promise<Response<Note<string>>> {
+    update(id: string, params: UpdateNoteParams) {
         return axiosClientSecret.put(`/note/${id}`, params);
     },
 
-    delete(id: string): Promise<Response<null>> {
+    delete(id: string) {
         return axiosClientSecret.delete(`/note/${id}`);
     },
 
-    clean(): Promise<Response<null>> {
+    clean() {
         return axiosClientSecret.delete('/note');
     },
 };

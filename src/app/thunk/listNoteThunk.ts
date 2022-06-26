@@ -7,7 +7,7 @@ export const fetchListNote = createAsyncThunk(
     async (params: ListParams, thunkAPI) => {
         try {
             const response = await noteService.getAll(params);
-            return response.data;
+            return response;
         } catch (error: any) {
             console.log({ error });
             return thunkAPI.rejectWithValue('');

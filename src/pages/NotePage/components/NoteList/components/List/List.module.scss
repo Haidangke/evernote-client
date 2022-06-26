@@ -10,17 +10,17 @@
     &:hover {
         background-color: var(--white);
     }
-    &__active {
-        background-color: var(--white);
-        border-bottom: 1px solid var(--gray);
-        border-top: 1px solid var(--gray);
-    }
-    &__active:hover {
-        background-color: var(--white);
-    }
 
     &__hl {
         background-color: var(--color-f2);
+    }
+    &__active {
+        background-color: var(--white);
+        border-bottom: 2px solid var(--color-blue);
+        border-top: 2px solid var(--color-blue);
+    }
+    &__active:hover {
+        background-color: var(--white);
     }
 }
 

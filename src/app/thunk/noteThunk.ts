@@ -6,7 +6,7 @@ import { noteActions } from '../slice/noteSlice';
 export const fetchNote = createAsyncThunk('note/fetchNote', async (id: string, thunkAPI) => {
     try {
         const response = await noteService.get(id);
-        return response.data;
+        return response;
     } catch (error: any) {
         console.log({ error });
         return thunkAPI.rejectWithValue('');
@@ -19,9 +19,9 @@ export const updateNote = createAsyncThunk(
         const { id, params } = obj;
         try {
             await noteService.update(id, params);
-            thunkAPI.dispatch(noteActions.setIsLoading(false));
+            thunkAPI.dispatch(noteActions.updateSuccess());
         } catch (error: any) {
-            thunkAPI.dispatch(noteActions.setIsLoading(false));
+            thunkAPI.dispatch(noteActions.updateFailed());
             return thunkAPI.rejectWithValue('');
         }
     }

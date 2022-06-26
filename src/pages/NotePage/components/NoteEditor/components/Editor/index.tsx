@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { createEditor } from 'slate';
 import { Editable, Slate, withReact } from 'slate-react';
@@ -33,10 +33,11 @@ const cx = classNames.bind(styles);
 
 function Editor() {
     const dispatch = useAppDispatch();
-    const { note, isFetchSuccess } = useAppSelector((state) => state.note);
+    const { listNote } = useAppSelector((state) => state.listNote);
 
     const [searchParams] = useSearchParams();
     const noteId = searchParams.get('noteId') || '';
+    const note = useMemo(() => listNote.find((note) => note._id === noteId), [listNote, noteId]);
 
     //state
     const [isToolbar, setIsToolbar] = useState(false);
@@ -44,32 +45,28 @@ function Editor() {
     const [onHeader, setOnHeader] = useState(false);
 
     const decorate = useDecorate(search);
-    const editorRef = useRef(null);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const editor = useMemo(() => createEditorWithPlugins(createEditor()), [noteId]);
 
     const renderElement = useCallback((props: any) => <SlateElement {...props} />, []);
     const renderLeaf = useCallback((props: any) => <SlateLeaf {...props} />, []);
 
-    //condition render slate
-    const initialContent = useMemo(
-        () => (note?.content ? JSON.parse(note?.content || '') : ''),
-        [note]
-    );
-
-    const condition = useMemo(
-        () => isFetchSuccess && initialContent && note?._id === noteId,
-        [isFetchSuccess, initialContent, note, noteId]
-    );
-
     //update note
-    const changeHandler = (e: any) => {
-        const content = JSON.stringify(e);
-        if (noteId) {
-            dispatch(updateNote({ id: noteId, params: { content } }));
-        }
-    };
+    const changeHandler = useCallback(
+        (e: any) => {
+            if (noteId && note) {
+                const content = JSON.stringify(e);
+                // dispatch(updateNote({ id: noteId, params: { content } }));
 
-    const debouncedChangeHandler = useMemo(() => debounce(changeHandler, 700), [noteId]);
+                dispatch(noteActions.update({ id: noteId, params: { content } }));
+                dispatch(listNoteActions.updateNote({ ...note, content }));
+            }
+        },
+        [dispatch, note, noteId]
+    );
+
+    const debouncedChangeHandler = useMemo(() => debounce(changeHandler, 700), [changeHandler]);
 
     useEffect(() => {
         return () => {
@@ -80,18 +77,22 @@ function Editor() {
     const [width] = useWindowSize();
 
     useEffect(() => setIsToolbar(false), [setIsToolbar, width]);
-    return note && condition ? (
-        <div ref={editorRef} className={cx('editor')}>
+    return note ? (
+        <div className={cx('editor')}>
             <Slate
                 editor={editor}
-                value={initialContent}
+                value={JSON.parse(note.content)}
+                key={noteId}
                 onChange={(e: any) => {
                     const isAstChange = editor.operations.some(
                         (op: any) => 'set_selection' !== op.type
                     );
                     if (isAstChange) {
-                        dispatch(noteActions.setIsLoading(true));
-                        debouncedChangeHandler(e);
+                        const content = JSON.stringify(e);
+                        // dispatch(updateNote({ id: noteId, params: { content } }));
+
+                        dispatch(noteActions.update({ id: noteId, params: { content } }));
+                        // debouncedChangeHandler(e);
                     }
                 }}
             >
@@ -112,7 +113,7 @@ function Editor() {
                         onChange={(e) => {
                             const title = e.target.value;
                             dispatch(listNoteActions.updateNote({ ...note, title }));
-                            dispatch(updateNote({ id: noteId, params: { title } }));
+                            // dispatch(updateNote({ id: noteId, params: { title } }));
                         }}
                     />
                     <div className={cx('editable-main')}>

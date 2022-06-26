@@ -16,4 +16,5 @@ export interface User {
     avatar: string;
     role: string;
     accessToken: string;
+    scratch: string;
 }

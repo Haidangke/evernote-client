@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useSlate } from 'slate-react';
 import classNames from 'classnames/bind';
 
@@ -22,6 +22,7 @@ import ListStyle from './ListStyle';
 import TextIndent from './TextIndent';
 
 import styles from './Toolbar.module.scss';
+import { useSearchParams } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 interface ToolbarProps {
@@ -37,7 +38,12 @@ function Toolbar({ onHeader, setSearch, isToolbar }: ToolbarProps) {
         year: '',
     });
     const editor = useSlate();
-    const { note } = useAppSelector((state) => state.note);
+
+    const [searchParams] = useSearchParams();
+    const noteId = searchParams.get('noteId');
+    const { listNote } = useAppSelector((state) => state.listNote);
+
+    const note = useMemo(() => listNote.find((note) => note._id === noteId), [listNote, noteId]);
 
     useEffect(() => {
         if (note?.updatedAt) {
