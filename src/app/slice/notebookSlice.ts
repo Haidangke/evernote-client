@@ -1,5 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { fetchNotebooks } from 'app/thunk/notebookThunk';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Notebook } from 'types';
 
 interface InitialState {
@@ -21,28 +20,26 @@ const initialState: InitialState = {
 const notebookSlice = createSlice({
     name: 'notebook',
     initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder.addCase(fetchNotebooks.pending, (state) => {
+    reducers: {
+        fetch(state) {
             state.isFetching = true;
             state.isFetchSuccess = false;
             state.isFetchFailed = false;
-        });
-        builder.addCase(fetchNotebooks.fulfilled, (state, action: any) => {
+        },
+        fetchSuccess(state, action: PayloadAction<Notebook[]>) {
             state.isFetching = false;
             state.isFetchSuccess = true;
             state.isFetchFailed = false;
 
             state.notebooks = action.payload;
-        });
-
-        builder.addCase(fetchNotebooks.rejected, (state) => {
+        },
+        fetchFailed(state) {
             state.isFetching = false;
             state.isFetchSuccess = true;
             state.isFetchFailed = false;
 
             state.notebooks = [];
-        });
+        },
     },
 });
 

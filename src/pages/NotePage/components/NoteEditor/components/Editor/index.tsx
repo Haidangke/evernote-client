@@ -3,8 +3,6 @@ import { useSearchParams } from 'react-router-dom';
 import { createEditor } from 'slate';
 import { Editable, Slate, withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
-import { DebounceInput } from 'react-debounce-input';
-import { debounce } from 'lodash';
 import pipe from 'lodash/fp/pipe';
 import classNames from 'classnames/bind';
 
@@ -12,11 +10,9 @@ import Toolbar from '../Toolbar';
 import styles from './Editor.module.scss';
 import useDecorate from 'hooks/useDecorate';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { updateNote } from 'app/thunk/noteThunk';
 import { LoadingIcon } from 'assets/icons';
 import { noteActions } from 'app/slice/noteSlice';
 import useWindowSize from 'hooks/useWindowSize';
-import { listNoteActions } from 'app/slice/listNoteSlice';
 
 import { withChecklists, withLinks, withKeyCommands } from '../../plugins';
 import { SlateElement, SlateLeaf } from '../../elements';
@@ -33,7 +29,7 @@ const cx = classNames.bind(styles);
 
 function Editor() {
     const dispatch = useAppDispatch();
-    const { listNote } = useAppSelector((state) => state.listNote);
+    const { listNote } = useAppSelector((state) => state.note);
 
     const [searchParams] = useSearchParams();
     const noteId = searchParams.get('noteId') || '';
@@ -52,28 +48,6 @@ function Editor() {
     const renderElement = useCallback((props: any) => <SlateElement {...props} />, []);
     const renderLeaf = useCallback((props: any) => <SlateLeaf {...props} />, []);
 
-    //update note
-    const changeHandler = useCallback(
-        (e: any) => {
-            if (noteId && note) {
-                const content = JSON.stringify(e);
-                // dispatch(updateNote({ id: noteId, params: { content } }));
-
-                dispatch(noteActions.update({ id: noteId, params: { content } }));
-                dispatch(listNoteActions.updateNote({ ...note, content }));
-            }
-        },
-        [dispatch, note, noteId]
-    );
-
-    const debouncedChangeHandler = useMemo(() => debounce(changeHandler, 700), [changeHandler]);
-
-    useEffect(() => {
-        return () => {
-            debouncedChangeHandler.cancel();
-        };
-    }, [debouncedChangeHandler, noteId]);
-
     const [width] = useWindowSize();
 
     useEffect(() => setIsToolbar(false), [setIsToolbar, width]);
@@ -89,22 +63,20 @@ function Editor() {
                     );
                     if (isAstChange) {
                         const content = JSON.stringify(e);
-                        // dispatch(updateNote({ id: noteId, params: { content } }));
 
                         dispatch(noteActions.update({ id: noteId, params: { content } }));
-                        // debouncedChangeHandler(e);
+                        dispatch(noteActions.updateNote({ ...note, content }));
                     }
                 }}
             >
                 <Toolbar isToolbar={isToolbar} onHeader={onHeader} setSearch={setSearch} />
 
                 <div className={cx('editable')}>
-                    <DebounceInput
+                    <input
                         onFocus={() => {
                             setOnHeader(true);
                             setIsToolbar(true);
                         }}
-                        debounceTimeout={1000}
                         onBlur={() => setOnHeader(false)}
                         type='text'
                         placeholder='Tiêu đề'
@@ -112,8 +84,8 @@ function Editor() {
                         value={note?.title}
                         onChange={(e) => {
                             const title = e.target.value;
-                            dispatch(listNoteActions.updateNote({ ...note, title }));
-                            // dispatch(updateNote({ id: noteId, params: { title } }));
+                            dispatch(noteActions.updateNote({ ...note, title }));
+                            dispatch(noteActions.update({ id: noteId, params: { title } }));
                         }}
                     />
                     <div className={cx('editable-main')}>

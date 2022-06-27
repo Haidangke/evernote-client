@@ -4,8 +4,7 @@ import { Resizable } from 're-resizable';
 import classNames from 'classnames/bind';
 
 import useWindowSize from 'hooks/useWindowSize';
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { fetchListNote } from 'app/thunk/listNoteThunk';
+import { useAppSelector } from 'app/hooks';
 import List from './components/List';
 import Actions from './components/Actions';
 
@@ -16,11 +15,10 @@ import { ActionsType } from 'config/actions';
 const cx = classNames.bind(styles);
 
 function NoteList() {
-    const dispatch = useAppDispatch();
     const [searchParams, setSearchParams] = useSearchParams();
     const noteId = searchParams.get('noteId');
 
-    const { listNote, isFetched } = useAppSelector((state) => state.listNote);
+    const { listNote } = useAppSelector((state) => state.note);
 
     const [resizable, setResizable] = useState({ width: 320, height: '100vh' });
     const [maxWidth, setMaxWidth] = useState(600);
@@ -35,12 +33,6 @@ function NoteList() {
             setSearchParams(searchParams);
         }
     }, [listNote, noteId, searchParams, setSearchParams]);
-
-    useEffect(() => {
-        if (!isFetched) {
-            dispatch(fetchListNote({}));
-        }
-    }, [dispatch, isFetched]);
 
     useEffect(() => {
         if (widthWindow > 0) {

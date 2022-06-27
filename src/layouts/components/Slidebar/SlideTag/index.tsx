@@ -11,7 +11,7 @@ const cx = classNames.bind(styles);
 
 function SlideTag() {
     const [searchValue, setSearchValue] = useState('');
-    const { listTag } = useAppSelector((state) => state.listTag);
+    const { listTag } = useAppSelector((state) => state.tag);
     const titles = useMemo(
         () => _.uniq(listTag.map((tag) => tag.name.trim().substring(0, 1)).sort()),
         [listTag]

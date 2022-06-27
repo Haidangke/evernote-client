@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { listNoteActions } from 'app/slice/listNoteSlice';
 import noteService from 'services/noteService';
+import { noteActions } from 'app/slice/noteSlice';
 
 function useAddNote() {
     const dispatch = useAppDispatch();
@@ -19,7 +19,7 @@ function useAddNote() {
                 })
                 .then((res) => {
                     if (!res) return;
-                    dispatch(listNoteActions.setListNote(res));
+                    dispatch(noteActions.setListNote(res));
                     navigate({
                         pathname: '/note',
                         search: '?noteId=' + res[0]._id,

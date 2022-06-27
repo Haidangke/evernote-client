@@ -41,7 +41,7 @@ function Toolbar({ onHeader, setSearch, isToolbar }: ToolbarProps) {
 
     const [searchParams] = useSearchParams();
     const noteId = searchParams.get('noteId');
-    const { listNote } = useAppSelector((state) => state.listNote);
+    const { listNote } = useAppSelector((state) => state.note);
 
     const note = useMemo(() => listNote.find((note) => note._id === noteId), [listNote, noteId]);
 

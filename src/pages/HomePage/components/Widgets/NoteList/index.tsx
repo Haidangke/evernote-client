@@ -12,7 +12,7 @@ import styles from './NoteList.module.scss';
 import useAddNote from 'hooks/useAddNote';
 function NoteList() {
     const navigate = useNavigate();
-    const { listNote } = useAppSelector((state) => state.listNote);
+    const { listNote } = useAppSelector((state) => state.note);
 
     const handleToNote = (_id: string) => {
         navigate({

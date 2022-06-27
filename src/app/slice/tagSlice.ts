@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Tag } from 'types';
-import { fetchListTag } from '../thunk/listTagThunk';
 
 interface InitialState {
     isFetching: boolean;
     isFetchSuccess: boolean;
     isFetchFailed: boolean;
+
     listTag: Tag[];
 }
 
@@ -13,42 +13,41 @@ const initialState: InitialState = {
     isFetching: false,
     isFetchSuccess: false,
     isFetchFailed: false,
+
     listTag: [],
 };
 
-const listTagSlice = createSlice({
-    name: 'listTag',
+const tagSlice = createSlice({
+    name: 'tag',
     initialState,
     reducers: {
-        setListtag(state, action: PayloadAction<Tag[]>) {
+        setListTag(state, action: PayloadAction<Tag[]>) {
             state.listTag = action.payload;
         },
-    },
-    extraReducers: (builder) => {
-        builder.addCase(fetchListTag.pending, (state) => {
+
+        fetch(state) {
             state.isFetching = true;
             state.isFetchSuccess = false;
             state.isFetchFailed = false;
-        });
-        builder.addCase(fetchListTag.fulfilled, (state, action: any) => {
+        },
+        fetchSuccess(state, action: PayloadAction<Tag[]>) {
             state.isFetching = false;
             state.isFetchSuccess = true;
             state.isFetchFailed = false;
 
             state.listTag = action.payload;
-        });
-
-        builder.addCase(fetchListTag.rejected, (state) => {
+        },
+        fetchFailed(state) {
             state.isFetching = false;
-            state.isFetchSuccess = true;
-            state.isFetchFailed = false;
+            state.isFetchSuccess = false;
+            state.isFetchFailed = true;
 
             state.listTag = [];
-        });
+        },
     },
 });
 
-export const tagActions = listTagSlice.actions;
+export const tagActions = tagSlice.actions;
 
-const listTagReducer = listTagSlice.reducer;
-export default listTagReducer;
+const tagReducer = tagSlice.reducer;
+export default tagReducer;

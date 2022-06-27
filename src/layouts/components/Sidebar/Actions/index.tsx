@@ -26,7 +26,7 @@ interface ActionsProps {
 const cx = classnames.bind(styles);
 
 function Actions({ isSmallSidebar }: ActionsProps) {
-    const { listNote } = useAppSelector((state) => state.listNote);
+    const { listNote } = useAppSelector((state) => state.note);
     const [filter, setFilter] = useState('');
     const [isSearch, setIsSearch] = useState(false);
 

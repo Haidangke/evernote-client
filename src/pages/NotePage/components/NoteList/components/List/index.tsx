@@ -13,7 +13,7 @@ interface ListProps {
 }
 
 function List({ actions }: ListProps) {
-    const { listNote } = useAppSelector((state) => state.listNote);
+    const { listNote } = useAppSelector((state) => state.note);
     const [searchParams, setSearchParams] = useSearchParams();
     const noteId = searchParams.get('noteId');
 

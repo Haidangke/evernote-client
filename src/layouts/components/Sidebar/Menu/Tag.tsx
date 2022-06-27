@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -9,8 +9,8 @@ import ModalForm from 'components/Modal/ModalForm';
 import tagService from 'services/tagService';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { fetchListTag } from 'app/thunk/listTagThunk';
 import MenuItem from '../Menu/MenuItem';
+import { tagActions } from 'app/slice/tagSlice';
 
 interface FormTag {
     name: string;
@@ -29,7 +29,7 @@ const schema = yup
 
 function Tag() {
     const dispatch = useAppDispatch();
-    const { listTag } = useAppSelector((state) => state.listTag);
+    const { listTag } = useAppSelector((state) => state.tag);
     const [isModal, setIsModal] = useState(false);
 
     const { control, handleSubmit, reset } = useForm<FormTag>({
@@ -51,13 +51,9 @@ function Tag() {
             await tagService.create(nameTag);
             reset({ name: '' });
             setIsModal(false);
-            dispatch(fetchListTag());
+            dispatch(tagActions.fetch());
         }
     };
-
-    useEffect(() => {
-        dispatch(fetchListTag());
-    }, [dispatch]);
 
     return (
         <>

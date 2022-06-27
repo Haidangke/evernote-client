@@ -2,7 +2,7 @@ import { AddNoteParams, DeleteNoteParams, Tag } from 'types';
 import axiosClientSecret from 'utils/axiosClientSecret';
 
 const tagService = {
-    get(): Promise<Tag[]> {
+    getAll(): Promise<Tag[]> {
         return axiosClientSecret.get('/tag');
     },
     create(name: string) {

@@ -70,6 +70,9 @@ const noteSlice = createSlice({
             state.listNote[index] = note;
             state.listNote[index].updatedAt = isodate;
         },
+        setListNote(state, action: PayloadAction<Note<Tag>[]>) {
+            state.listNote = action.payload;
+        },
     },
 });
 

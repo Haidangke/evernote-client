@@ -5,9 +5,9 @@ import {
     authReducer,
     noteReducer,
     toolbarReducer,
-    listNoteReducer,
-    listTagReducer,
-    notebookReducer,appReducer
+    tagReducer,
+    notebookReducer,
+    appReducer,
 } from './slice';
 import rootSaga from './saga';
 
@@ -17,8 +17,7 @@ const rootReducer = combineReducers({
     app: appReducer,
     auth: authReducer,
     note: noteReducer,
-    listNote: listNoteReducer,
-    listTag: listTagReducer,
+    tag: tagReducer,
     notebook: notebookReducer,
     toolbar: toolbarReducer,
 });
