@@ -1,13 +1,15 @@
+import useFetchData from 'hooks/useFetchData';
+import useSearchKey from 'hooks/useSearchKey';
 import { Route, Routes as Switch } from 'react-router-dom';
 
 import { privateRoute, publicRoute } from 'routes';
 import PrivateRoute from 'routes/PrivateRoute';
-import useSearchKey from './hooks/useSearchKey';
 
 import DefaultLayout from './layouts/DefaultLayout';
 
 function App() {
     useSearchKey();
+    useFetchData();
     return (
         <Switch>
             {publicRoute.map((route) => {

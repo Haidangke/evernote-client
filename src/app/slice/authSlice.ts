@@ -3,8 +3,7 @@ import { RootState } from 'app/store';
 import { User } from 'types';
 import { login, logout, register } from '../thunk/authThunk';
 
-const userLocal = localStorage.getItem('user');
-const user = userLocal ? JSON.parse(userLocal) : null;
+const access_token = localStorage.getItem('access_token');
 
 interface InitialState {
     user?: User;
@@ -14,21 +13,13 @@ interface InitialState {
     message: string;
 }
 
-const initialState: InitialState = user
-    ? {
-          user,
-          isLoggedIn: true,
-          logging: false,
-          message: '',
-          registering: false,
-      }
-    : {
-          user: undefined,
-          isLoggedIn: false,
-          logging: false,
-          message: '',
-          registering: false,
-      };
+const initialState: InitialState = {
+    user: undefined,
+    isLoggedIn: Boolean(access_token),
+    logging: false,
+    message: '',
+    registering: false,
+};
 
 const authSlice = createSlice({
     name: 'auth',

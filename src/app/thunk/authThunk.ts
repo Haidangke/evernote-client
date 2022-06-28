@@ -29,11 +29,11 @@ export const login = createAsyncThunk(
             const response = await authService.login(params.formValue);
             const { data } = response;
             if (params.remember) {
-                if (data?.accessToken) {
-                    localStorage.setItem('user', JSON.stringify(data));
+                if (data) {
+                    localStorage.setItem('access_token', JSON.stringify(data));
                 }
             } else {
-                localStorage.removeItem('user');
+                localStorage.removeItem('access_token');
             }
             thunkAPI.dispatch(authActions.clearMessage());
             return data;

@@ -1,5 +1,6 @@
 import { useAppSelector } from 'app/hooks';
 import { DebounceInput } from 'react-debounce-input';
+import userService from 'services/userService';
 import Element from '../../Element';
 import styles from './Scratch.module.scss';
 
@@ -8,14 +9,17 @@ function Scratch() {
     return (
         <Element menu={[]} className={styles.wrapper} title={<span>Giấy nháp</span>}>
             <DebounceInput
-                debounceTimeout={1000}
-                type='text'
+                debounceTimeout={700}
+                element='textarea'
                 placeholder='Tiêu đề'
                 className={styles.input}
                 value={scratch}
                 onChange={(e) => {
-                    const title = e.target.value;
-                    console.log(title);
+                    const content = e.target.value;
+                    // dispatch()
+                    userService.updateScratch(content).then((res) => {
+                        console.log(res);
+                    });
                 }}
             />
         </Element>

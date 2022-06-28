@@ -7,9 +7,8 @@ function* tagSaga() {
     yield takeLatest(tagActions.fetch.type, fetchListTag);
 }
 
-export function* fetchListTag() {
+function* fetchListTag() {
     try {
-        yield put(tagActions.fetch());
         const response: Tag[] = yield call(tagService.getAll);
         yield put(tagActions.fetchSuccess(response));
     } catch (error) {

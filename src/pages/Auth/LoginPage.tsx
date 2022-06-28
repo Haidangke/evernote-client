@@ -17,7 +17,7 @@ import { BsApple } from 'react-icons/bs';
 
 import styles from './Auth.module.scss';
 import authService from 'services/authService';
-const defaultValues = { email: '', password: '' };
+const defaultValues = { email: 'vatcmnvo@gmail.com', password: 'Haidangker12345' };
 
 const schema = yup
     .object()

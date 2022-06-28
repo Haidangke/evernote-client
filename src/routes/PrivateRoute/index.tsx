@@ -7,10 +7,11 @@ interface RequireAuthProps {
 }
 
 function PrivateRoute({ children }: RequireAuthProps) {
-    const { user } = useAppSelector((state) => state.auth);
+    const { isLoggedIn } = useAppSelector((state) => state.auth);
+    console.log({ isLoggedIn });
     let location = useLocation();
 
-    if (!user) {
+    if (!isLoggedIn) {
         return <Navigate to='/login' state={{ from: location }} replace />;
     } else {
         return children;
