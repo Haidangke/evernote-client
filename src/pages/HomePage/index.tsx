@@ -6,6 +6,7 @@ import { Scratch, NoteList } from './components/Widgets';
 import { CustomHome } from 'assets/icons';
 
 import background from 'assets/images/background.png';
+import Upload from 'components/Upload';
 
 import styles from './HomePage.module.scss';
 const cx = classNames.bind(styles);
@@ -31,6 +32,7 @@ function Home() {
                 <div className={cx('elements')}>
                     <NoteList />
                     <Scratch />
+                    <Upload />
                 </div>
             </div>
         </div>

@@ -1,6 +1,5 @@
-import classNames from 'classnames/bind';
 import { useMemo } from 'react';
-import { ArrowDownIcon } from 'assets/icons';
+import classNames from 'classnames/bind';
 
 import { CheckIcon } from 'assets/icons/toolbar';
 import { toolbarConfig } from 'config';
@@ -21,6 +20,8 @@ function FontSize({ editor }: any) {
     const FontSizeTextDefault = isFontSizeTextDefault || '16';
     return (
         <DropdownButton
+            minWidth='21px'
+            value={FontSizeTextDefault.replace('px', '')}
             dropdown={() => (
                 <div className={cx('dropdown-wrapper')}>
                     {toolbarConfig.fontSize.map((item) => (
@@ -41,10 +42,7 @@ function FontSize({ editor }: any) {
                     ))}
                 </div>
             )}
-        >
-            <span>{FontSizeTextDefault.replace('px', '')}</span>
-            <ArrowDownIcon width={8} height={24} />
-        </DropdownButton>
+        />
     );
 }
 

@@ -35,9 +35,7 @@ const Heading = ({ editor }: any) => {
                     ))}
                 </div>
             )}
-        >
-            <ArrowDownIcon width={8} height={24} />
-        </DropdownButton>
+        />
     );
 };
 

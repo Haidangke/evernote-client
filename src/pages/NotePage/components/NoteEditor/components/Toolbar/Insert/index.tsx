@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { useSlate } from 'slate-react';
 import classNames from 'classnames/bind';
 
@@ -5,7 +6,6 @@ import Popper from 'components/Popper';
 import { DropdownButton } from '../../Button';
 import { toggleMark } from '../../../utils/mark';
 
-import { ArrowDownIcon } from 'assets/icons';
 import { CodeIcon, InsertIcon, TodoIcon } from 'assets/icons/toolbar';
 import styles from './Insert.module.scss';
 
@@ -16,6 +16,12 @@ function Insert() {
 
     return (
         <DropdownButton
+            value={
+                <Fragment>
+                    <InsertIcon className={cx('icon')} />
+                    <span>Chèn</span>
+                </Fragment>
+            }
             dropdown={() => (
                 <Popper>
                     <div className={cx('insert')}>
@@ -48,11 +54,7 @@ function Insert() {
                     </div>
                 </Popper>
             )}
-        >
-            <InsertIcon className={cx('icon')} />
-            <span>Chèn</span>
-            <ArrowDownIcon width={8} height={24} />
-        </DropdownButton>
+        />
     );
 }
 

@@ -1,3 +1,4 @@
+@import 'styles/mixin';
 .btn {
     position: relative;
     height: 28px;
@@ -42,7 +43,8 @@
     padding: 0;
     margin: 0;
     & > span {
-        display: inline-block;
+        text-align: left;
+        @include flex(center, unset);
         padding: 0 4px;
         color: var(--color-4d);
         font-weight: 700;

@@ -20,6 +20,7 @@ function Align({ editor }: any) {
     const AlignLeftIconDefault = isAlignLeftIconDefault || AlignLeftIcon;
     return (
         <DropdownButton
+            value={<AlignLeftIconDefault />}
             formats={['left', 'center', 'right']}
             dropdown={() => (
                 <div className={cx('dropdown-wrapper')}>
@@ -47,10 +48,7 @@ function Align({ editor }: any) {
                     })}
                 </div>
             )}
-        >
-            <AlignLeftIconDefault />
-            <ArrowDownIcon width={8} height={24} />
-        </DropdownButton>
+        />
     );
 }
 

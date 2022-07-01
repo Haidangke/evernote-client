@@ -4,7 +4,6 @@ import { useSlate } from 'slate-react';
 
 import { useAppSelector } from 'app/hooks';
 import {
-    ArrowDownIcon,
     AlignCenterIcon,
     AlignLeftIcon,
     AlignRightIcon,
@@ -108,6 +107,7 @@ function OverflowToolbar() {
     return (
         <DropdownButton
             isOther
+            value='Khác'
             dropdown={() => (
                 <div className={cx('wrapper')}>
                     <div className={cx('list')}>
@@ -216,10 +216,7 @@ function OverflowToolbar() {
                     </div>
                 </div>
             )}
-        >
-            <span>Khác</span>
-            <ArrowDownIcon width={8} height={24} />
-        </DropdownButton>
+        />
     );
 }
 

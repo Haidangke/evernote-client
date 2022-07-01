@@ -9,19 +9,20 @@ import useWindowSize from 'hooks/useWindowSize';
 import { useAppDispatch } from 'app/hooks';
 import { toolbarActions } from 'app/slice/toolbarSlice';
 import checkOverflow from '../../utils/checkOverflow';
+import { ArrowDownIcon } from 'assets/icons';
 
 interface DropDownProps {
-    children: any;
     className?: string;
     dropdown: any;
-    value?: string;
+    value?: any;
     isOther?: boolean;
     formats?: string[];
+    minWidth?: string;
 }
 
 const cx = classNames.bind(styles);
 
-function DropDown({ value, children, className, dropdown, isOther, formats }: DropDownProps) {
+function DropDown({ value, className, dropdown, isOther, formats, minWidth }: DropDownProps) {
     const dispatch = useAppDispatch();
     const [visible, setVisible] = useState(false);
 
@@ -63,8 +64,8 @@ function DropDown({ value, children, className, dropdown, isOther, formats }: Dr
                     onClick={() => setVisible(!visible)}
                     className={`${cx('dropdown-btn', 'btn')}  ${className || ''}`}
                 >
-                    <span>{value}</span>
-                    {children}
+                    <span style={{ minWidth }}>{value}</span>
+                    <ArrowDownIcon width={8} height={24} />
                 </button>
             </TippyHeadless>
         </div>

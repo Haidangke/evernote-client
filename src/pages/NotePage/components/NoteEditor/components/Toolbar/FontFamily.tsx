@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import classNames from 'classnames/bind';
 
-import { ArrowDownIcon } from 'assets/icons';
 import { toolbarConfig } from 'config';
 import { DropdownButton } from '../Button';
 
@@ -22,6 +21,7 @@ function FontFamily({ editor }: any) {
         toolbarConfig.fontFamily.find((font) => font.value === isFontFamily)?.name || 'Sans Serif';
     return (
         <DropdownButton
+            minWidth='68px'
             value={fontFamily}
             dropdown={() => (
                 <div className={cx('dropdown-wrapper')}>
@@ -42,9 +42,7 @@ function FontFamily({ editor }: any) {
                     ))}
                 </div>
             )}
-        >
-            <ArrowDownIcon width={8} height={24} />
-        </DropdownButton>
+        />
     );
 }
 
