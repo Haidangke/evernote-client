@@ -2,12 +2,13 @@ import classNames from 'classnames/bind';
 
 import { ArrowDownIcon } from 'assets/icons';
 import { ColorPickerIcon } from 'assets/icons/toolbar';
+import { BiCheck } from 'react-icons/bi';
 import { toolbarConfig } from 'config';
-import { isBlockActive, toggleBlock } from '../../utils/block';
 import { DropdownButton } from '../Button';
 
 import colorPicker from 'assets/images/cl_pick.png';
 import styles from './Toolbar.module.scss';
+import { isMarkActive, toggleMark } from '../../utils/mark';
 const cx = classNames.bind(styles);
 
 function ColorPicker({ editor }: any) {
@@ -19,15 +20,20 @@ function ColorPicker({ editor }: any) {
                         <button
                             key={item}
                             className={cx('color-btn', {
-                                'color-btn-light': item === 'rgb(255, 255, 255)',
-                                'color-btn-active': isBlockActive(editor, item, 'color'),
+                                'color-btn__light': item === 'rgb(255, 255, 255)',
                             })}
                             onClick={(event: any) => {
                                 event.preventDefault();
-                                toggleBlock(editor, item);
+                                toggleMark(editor, item);
                             }}
                         >
-                            <span style={{ backgroundColor: item }}></span>
+                            <span style={{ backgroundColor: item }}>
+                                {isMarkActive(editor, item) && (
+                                    <BiCheck
+                                        color={item === 'rgb(255, 255, 255)' ? 'black' : 'white'}
+                                    />
+                                )}
+                            </span>
                         </button>
                     ))}
                 </div>

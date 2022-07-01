@@ -8,7 +8,7 @@ interface RequireAuthProps {
 
 function PrivateRoute({ children }: RequireAuthProps) {
     const { isLoggedIn } = useAppSelector((state) => state.auth);
-    console.log({ isLoggedIn });
+
     let location = useLocation();
 
     if (!isLoggedIn) {

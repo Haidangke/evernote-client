@@ -2,14 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
 interface InitialState {
-    overflowToolbar: Array<{
+    toolbar: Array<{
         isOverflow: boolean;
         format: string;
     }>;
 }
 
 const initialState: InitialState = {
-    overflowToolbar: [
+    toolbar: [
         {
             isOverflow: false,
             format: 'bold',
@@ -77,15 +77,13 @@ const toolbarSlice = createSlice({
     reducers: {
         setOverflow(state, action: PayloadAction<{ format: string; value: boolean }>) {
             const { format, value } = action.payload;
-            const index = state.overflowToolbar.map((x) => x.format).indexOf(format);
-            state.overflowToolbar[index].isOverflow = value;
+            const index = state.toolbar.map((x) => x.format).indexOf(format);
+            state.toolbar[index].isOverflow = value;
         },
     },
 });
 
 export const toolbarActions = toolbarSlice.actions;
-
-export const selectOverflowToolbar = (state: RootState) => state.toolbar.overflowToolbar;
 
 const toolbarReducer = toolbarSlice.reducer;
 

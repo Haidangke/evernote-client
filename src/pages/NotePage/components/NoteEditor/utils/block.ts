@@ -21,14 +21,13 @@ const isBlockActive = (editor: any, format: any, type = 'type') => {
 const toggleBlock = (editor: any, format: any) => {
     const isList = LIST_TYPES.includes(format);
     const isTextAlign = TEXT_ALIGN_TYPES.includes(format);
-    const isFontSize = toolbarConfig.fontSize.includes(format);
+
     const isColor = toolbarConfig.color.includes(format);
 
     const isFontFamily = toolbarConfig.fontFamily.map((item) => item.value).includes(format);
 
     let type = 'type';
     if (isTextAlign) type = 'align';
-    if (isFontSize) type = 'fontSize';
     if (isColor) type = 'color';
     if (isFontFamily) type = 'isFontFamily';
 
@@ -39,18 +38,13 @@ const toggleBlock = (editor: any, format: any) => {
             !Editor.isEditor(n) &&
             SlateElement.isElement(n) &&
             LIST_TYPES.includes(n.type) &&
-            !isTextAlign &&
-            !isFontSize,
+            !isTextAlign,
         split: true,
     });
     let newProperties: Partial<SlateElement>;
     if (isColor) {
         newProperties = {
             color: isActive ? undefined : format,
-        };
-    } else if (isFontSize) {
-        newProperties = {
-            fontSize: isActive ? undefined : format,
         };
     } else if (isTextAlign) {
         newProperties = {

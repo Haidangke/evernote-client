@@ -11,6 +11,10 @@ interface InitialState {
     logging: boolean;
     registering: boolean;
     message: string;
+
+    isLoading: boolean;
+    isSuccess: boolean;
+    isFailed: boolean;
 }
 
 const initialState: InitialState = {
@@ -19,6 +23,10 @@ const initialState: InitialState = {
     logging: false,
     message: '',
     registering: false,
+
+    isLoading: false,
+    isSuccess: false,
+    isFailed: false,
 };
 
 const authSlice = createSlice({
@@ -30,6 +38,24 @@ const authSlice = createSlice({
         },
         clearMessage(state) {
             state.message = '';
+        },
+
+        getUser(state) {
+            state.isLoading = true;
+            state.isSuccess = false;
+            state.isFailed = false;
+        },
+        getUserSuccess(state, action: PayloadAction<User>) {
+            state.user = action.payload;
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.isFailed = false;
+        },
+        getUserFailed(state) {
+            state.user = undefined;
+            state.isLoading = false;
+            state.isSuccess = false;
+            state.isFailed = true;
         },
     },
     extraReducers: (builder) => {
@@ -67,10 +93,6 @@ const authSlice = createSlice({
         });
     },
 });
-
-export const selectIsLoggedIn = (state: RootState) => state.auth.isLoggedIn;
-export const selectLogging = (state: RootState) => state.auth.logging;
-export const selectCurrentUser = (state: RootState) => state.auth.user;
 
 export const authActions = authSlice.actions;
 

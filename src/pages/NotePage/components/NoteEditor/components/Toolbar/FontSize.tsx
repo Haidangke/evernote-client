@@ -4,16 +4,18 @@ import { ArrowDownIcon } from 'assets/icons';
 
 import { CheckIcon } from 'assets/icons/toolbar';
 import { toolbarConfig } from 'config';
-import { isBlockActive, toggleBlock } from '../../utils/block';
 import { DropdownButton } from '../Button';
 
 import styles from './Toolbar.module.scss';
+import { getMarks, isMarkActive, toggleMark } from '../../utils/mark';
 const cx = classNames.bind(styles);
 
 function FontSize({ editor }: any) {
+    const marks = getMarks(editor);
+
     const isFontSizeTextDefault = useMemo(
-        () => toolbarConfig.fontSize.filter((item) => isBlockActive(editor, item, 'fontSize'))[0],
-        [editor]
+        () => marks.find((mark) => toolbarConfig.fontSize.includes(mark)),
+        [marks]
     );
 
     const FontSizeTextDefault = isFontSizeTextDefault || '16';
@@ -27,11 +29,11 @@ function FontSize({ editor }: any) {
                             className={cx('dropdown-align')}
                             onClick={(event: any) => {
                                 event.preventDefault();
-                                toggleBlock(editor, item);
+                                toggleMark(editor, item);
                             }}
                         >
                             <div className={cx('dropdown-align-check')}>
-                                {(isBlockActive(editor, item, 'fontSize') ||
+                                {(isMarkActive(editor, item) ||
                                     (!isFontSizeTextDefault && item === '16px')) && <CheckIcon />}
                             </div>
                             {item.replace('px', '')}

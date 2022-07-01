@@ -1,3 +1,4 @@
+import { toolbarConfig } from 'config';
 import CheckListItemElement from '../elements/CheckList';
 import Link from './Link';
 
@@ -83,31 +84,49 @@ const SlateElement = (props: any) => {
 };
 
 const SlateLeaf = ({ attributes, children, leaf }: any) => {
+    const style = {
+        fontSize: '16px',
+        fontFamily: '"Source Sans Pro", sans-serif',
+        color: 'rgb(0, 0, 0)',
+    };
+    for (const key in leaf) {
+        if (toolbarConfig.fontSize.includes(key)) {
+            style.fontSize = key;
+        }
+        if (toolbarConfig.fontFamily.map((item) => item.value).includes(key)) {
+            style.fontFamily = key;
+        }
+
+        if (toolbarConfig.color.includes(key)) {
+            style.color = key;
+        }
+    }
+
     if (leaf.bold) {
-        children = <strong>{children}</strong>;
+        children = <strong style={style}>{children}</strong>;
     }
 
     if (leaf.code) {
-        children = <code>{children}</code>;
+        children = <code style={style}>{children}</code>;
     }
 
     if (leaf.italic) {
-        children = <em>{children}</em>;
+        children = <em style={style}>{children}</em>;
     }
 
     if (leaf.underline) {
-        children = <u>{children}</u>;
+        children = <u style={style}>{children}</u>;
     }
 
     if (leaf.sup) {
-        children = <sup>{children}</sup>;
+        children = <sup style={style}>{children}</sup>;
     }
 
     if (leaf.sub) {
-        children = <sub>{children}</sub>;
+        children = <sub style={style}>{children}</sub>;
     }
     if (leaf.through) {
-        children = <s>{children}</s>;
+        children = <s style={style}>{children}</s>;
     }
 
     return (
@@ -115,6 +134,7 @@ const SlateLeaf = ({ attributes, children, leaf }: any) => {
             {...attributes}
             {...(leaf.highlight && { 'data-cy': 'search-highlighted' })}
             style={{
+                ...style,
                 fontWeight: leaf.bold && 'bold',
                 backgroundColor: leaf.highlight && '#ffeeba',
             }}

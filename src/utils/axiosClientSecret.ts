@@ -11,17 +11,20 @@ const axiosClientSecret = axios.create({
     },
 });
 
-async function refreshToken(config: any) {
-    try {
-        const { data } = await authService.refresh();
-        if (data) {
-            config.headers['Authorization'] = 'Bearer ' + data;
-            localStorage.setItem('access_token', data);
-        }
-    } catch (error) {
-        window.location.reload();
-        await authService.logout();
-    }
+function refreshToken(config: any) {
+    authService
+        .refresh()
+        .then((res) => {
+            const access_token = res.data;
+            if (access_token) {
+                config.headers['Authorization'] = 'Bearer ' + access_token;
+                localStorage.setItem('access_token', access_token);
+            }
+        })
+        .catch(() => {
+            window.location.reload();
+            authService.logout();
+        });
 }
 
 axiosClientSecret.interceptors.request.use(
@@ -29,12 +32,13 @@ axiosClientSecret.interceptors.request.use(
         const access_token = JSON.parse(localStorage.getItem('access_token') || '');
 
         if (access_token) {
-            config.headers['Authorization'] = 'Bearer ' + access_token;
             const tokenDecode: any = jwtDecode(access_token);
             const date = new Date();
 
             if (tokenDecode.exp < date.getTime() / 1000) {
-                await refreshToken(config);
+                refreshToken(config);
+            } else {
+                config.headers['Authorization'] = 'Bearer ' + access_token;
             }
         }
 

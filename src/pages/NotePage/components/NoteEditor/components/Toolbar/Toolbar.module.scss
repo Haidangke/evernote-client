@@ -45,7 +45,7 @@
 
 //color
 .color-wrapper {
-    width: 252px;
+    width: 210px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -53,30 +53,30 @@
 }
 
 .color-btn {
-    padding: 3px;
+    padding: 2px;
     margin-top: 4px;
     border-radius: 50%;
     & > span {
-        position: relative;
-        display: inline-block;
-        width: 26px;
-        height: 26px;
+        @include flex(center, center);
+        width: 24px;
+        height: 24px;
         border-radius: 50%;
         transition: all ease-in 0.1s;
         border: 1px solid var(--white);
     }
 
-    & > span:hover {
-        transform: scale(1.3);
+    & > span > svg {
+        width: 18px;
+        height: 18px;
     }
-}
 
-.color-btn-active > span {
-    transform: scale(1.3);
-}
+    & > span:hover {
+        transform: scale(1.05);
+    }
 
-.color-btn-light > span {
-    border: 1px solid var(--color-d9);
+    &__light > span {
+        border: 1px solid var(--color-d9);
+    }
 }
 
 .color-picker {

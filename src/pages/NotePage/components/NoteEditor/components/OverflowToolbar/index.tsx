@@ -3,7 +3,6 @@ import { useCallback } from 'react';
 import { useSlate } from 'slate-react';
 
 import { useAppSelector } from 'app/hooks';
-import { selectOverflowToolbar } from 'app/slice/toolbarSlice';
 import {
     ArrowDownIcon,
     AlignCenterIcon,
@@ -94,17 +93,18 @@ const textFormat = [
 
 function OverflowToolbar() {
     const editor = useSlate();
-    const overflowToolbar = useAppSelector(selectOverflowToolbar);
-    const ifOverflowToolbar = overflowToolbar.filter((item) => item.isOverflow).length > 0;
+    const { toolbar } = useAppSelector((state) => state.toolbar);
+
+    const isOverflowToolbar = toolbar.find((item) => item.isOverflow);
 
     const isOverflow = useCallback(
         (format: string) => {
-            return overflowToolbar.filter((item) => item.format === format)[0].isOverflow;
+            return toolbar.filter((item) => item.format === format)[0].isOverflow;
         },
-        [overflowToolbar]
+        [toolbar]
     );
 
-    if (!ifOverflowToolbar) return <></>;
+    if (!isOverflowToolbar) return <></>;
     return (
         <DropdownButton
             isOther
@@ -217,10 +217,8 @@ function OverflowToolbar() {
                 </div>
             )}
         >
-            
-                <span>Khác</span>
-                <ArrowDownIcon width={8} height={24} />
-            
+            <span>Khác</span>
+            <ArrowDownIcon width={8} height={24} />
         </DropdownButton>
     );
 }

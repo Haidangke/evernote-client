@@ -24,6 +24,4 @@ export interface ButtonProps {
     className?: string;
 }
 
-
-
 export { BlockButton, MarkButton, HandleButton, DropdownButton };

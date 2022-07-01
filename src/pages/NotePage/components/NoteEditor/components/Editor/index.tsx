@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { createEditor } from 'slate';
 import { Editable, Slate, withReact } from 'slate-react';
@@ -16,6 +16,7 @@ import useWindowSize from 'hooks/useWindowSize';
 
 import { withChecklists, withLinks, withKeyCommands } from '../../plugins';
 import { SlateElement, SlateLeaf } from '../../elements';
+import useOnClickOutside from 'hooks/useOnclickOutside';
 
 const createEditorWithPlugins = pipe(
     withReact,
@@ -28,6 +29,7 @@ const createEditorWithPlugins = pipe(
 const cx = classNames.bind(styles);
 
 function Editor() {
+    const editorRef = useRef(null);
     const dispatch = useAppDispatch();
     const { listNote } = useAppSelector((state) => state.note);
 
@@ -51,8 +53,9 @@ function Editor() {
     const [width] = useWindowSize();
 
     useEffect(() => setIsToolbar(false), [setIsToolbar, width]);
+    useOnClickOutside(editorRef, () => setIsToolbar(false));
     return note ? (
-        <div className={cx('editor')}>
+        <div ref={editorRef} className={cx('editor')}>
             <Slate
                 editor={editor}
                 value={JSON.parse(note.content)}

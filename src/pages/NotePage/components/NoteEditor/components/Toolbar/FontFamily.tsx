@@ -1,16 +1,25 @@
-import { useState } from 'react';
+import { useMemo } from 'react';
 import classNames from 'classnames/bind';
 
 import { ArrowDownIcon } from 'assets/icons';
 import { toolbarConfig } from 'config';
-import { toggleBlock } from '../../utils/block';
 import { DropdownButton } from '../Button';
 
+import { getMarks, toggleMark } from '../../utils/mark';
 import styles from './Toolbar.module.scss';
 const cx = classNames.bind(styles);
 
 function FontFamily({ editor }: any) {
-    const [fontFamily, setFontFamily] = useState('Sans Serif');
+    const marks = getMarks(editor);
+
+    const isFontFamily = useMemo(
+        () =>
+            marks.find((mark) => toolbarConfig.fontFamily.map((font) => font.value).includes(mark)),
+        [marks]
+    );
+
+    const fontFamily =
+        toolbarConfig.fontFamily.find((font) => font.value === isFontFamily)?.name || 'Sans Serif';
     return (
         <DropdownButton
             value={fontFamily}
@@ -25,8 +34,7 @@ function FontFamily({ editor }: any) {
                             key={item.value}
                             onClick={(event: any) => {
                                 event.preventDefault();
-                                toggleBlock(editor, item.value);
-                                setFontFamily(item.name);
+                                toggleMark(editor, item.value);
                             }}
                         >
                             {item.name}
