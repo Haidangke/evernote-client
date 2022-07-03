@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store';
-
 interface InitialState {
+    rectX: number;
+    isToolbar: boolean;
     toolbar: Array<{
         isOverflow: boolean;
         format: string;
@@ -9,6 +9,8 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
+    isToolbar: false,
+    rectX: 0,
     toolbar: [
         {
             isOverflow: false,
@@ -46,6 +48,10 @@ const initialState: InitialState = {
         },
         {
             isOverflow: false,
+            format: 'align',
+        },
+        {
+            isOverflow: false,
             format: 'left',
         },
         {
@@ -75,6 +81,12 @@ const toolbarSlice = createSlice({
     name: 'toolbar',
     initialState,
     reducers: {
+        setRectX(state, action: PayloadAction<number>) {
+            state.rectX = action.payload;
+        },
+        setIsToolbar(state, action: PayloadAction<boolean>) {
+            state.isToolbar = action.payload;
+        },
         setOverflow(state, action: PayloadAction<{ format: string; value: boolean }>) {
             const { format, value } = action.payload;
             const index = state.toolbar.map((x) => x.format).indexOf(format);

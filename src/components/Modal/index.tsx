@@ -10,7 +10,7 @@ import './Modal.scss';
 export interface ModalProps {
     children: any;
     isOpen: boolean;
-    setIsOpen: (isOpen: boolean) => void;
+    setIsOpen?: (isOpen: boolean) => void;
     isCenter?: boolean;
 }
 
@@ -22,7 +22,9 @@ function Modal({ children, isOpen, setIsOpen, isCenter }: ModalProps, ref: any) 
 
     const overplayRef = useRef(null);
 
-    useOnClickOutside(modalRef, () => setIsOpen(false));
+    useOnClickOutside(modalRef, () => {
+        if (setIsOpen !== undefined) setIsOpen(false);
+    });
     return (
         <>
             <CSSTransition

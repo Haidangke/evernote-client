@@ -1,5 +1,5 @@
-import NoteList from './components/NoteList';
-import NoteEditor from './components/NoteEditor';
+import NoteList from './NoteList';
+import NoteEditor from './NoteEditor';
 
 function NotePage() {
     return (

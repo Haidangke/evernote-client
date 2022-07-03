@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useAppSelector } from 'app/hooks';
 import { ArrowLeftIcon } from 'assets/icons';
-import TimeUp from 'pages/NotePage/components/NoteList/components/List/TimeUp';
+import TimeUp from 'pages/NotePage/NoteList/components/List/TimeUp';
 import Element from '../../Element';
 import Tab from '../../Tab';
 import NoteListLoading from './NoteListLoading';

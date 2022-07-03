@@ -10,6 +10,7 @@ interface ModalFormProps extends ModalProps {
     title: string;
     description: string;
     onSubmit: () => void;
+    setIsOpen: (isOpen: boolean) => void;
 }
 
 const cx = classNames.bind(styles);

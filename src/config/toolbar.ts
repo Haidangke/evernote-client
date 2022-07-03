@@ -55,4 +55,62 @@ const toolbar = {
     ],
 };
 
+export const overflowToolbar = [
+    {
+        format: 'color',
+        limit: 582,
+    },
+    {
+        format: 'bold',
+        limit: 612,
+    },
+    {
+        format: 'italic',
+        limit: 644,
+    },
+    {
+        format: 'underline',
+        limit: 676,
+    },
+    {
+        format: 'bulleted-list',
+        limit: 714,
+    },
+    {
+        format: 'numbered-list',
+        limit: 745,
+    },
+    {
+        format: 'check-list-item',
+        limit: 778,
+    },
+    {
+        format: 'indent',
+        limit: 901,
+    },
+    {
+        format: 'outdent',
+        limit: 933,
+    },
+    {
+        format: 'align',
+        limit: 871,
+    },
+    {
+        format: 'sup',
+        limit: 1002,
+    },
+    {
+        format: 'sub',
+        limit: 1034,
+    },
+    {
+        format: 'through',
+        limit: 970,
+    },
+    {
+        format: 'link',
+        limit: 1026,
+    },
+];
 export default toolbar;
