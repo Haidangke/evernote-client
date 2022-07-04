@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from 'app/store';
 import { User } from 'types';
 import { login, logout, register } from '../thunk/authThunk';
 
@@ -50,12 +49,16 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = true;
             state.isFailed = false;
+
+            state.isLoggedIn = true;
         },
         getUserFailed(state) {
             state.user = undefined;
             state.isLoading = false;
             state.isSuccess = false;
             state.isFailed = true;
+
+            state.isLoggedIn = false;
         },
     },
     extraReducers: (builder) => {

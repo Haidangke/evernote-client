@@ -72,7 +72,7 @@ function Actions({ isSmallSidebar }: ActionsProps) {
                                             >
                                                 {filter ? <SearchIcon /> : <NoteSolidIcon />}
                                                 <div className={cx('search-focus__name')}>
-                                                    {note.title}
+                                                    {note.title || 'Chưa có tiêu đề'}
                                                 </div>
                                             </div>
                                         ))}

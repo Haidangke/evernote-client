@@ -8,16 +8,20 @@ import { authActions } from 'app/slice/authSlice';
 
 function useFetchData() {
     const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
-
+    const email = useAppSelector((state) => state.auth.user?.email);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         if (!isLoggedIn) return;
         dispatch(authActions.getUser());
+    }, [dispatch, isLoggedIn]);
+
+    useEffect(() => {
+        if (!isLoggedIn && !email) return;
         dispatch(noteActions.fetch());
         dispatch(tagActions.fetch());
         dispatch(notebookActions.fetch());
-    }, [dispatch, isLoggedIn]);
+    }, [dispatch, isLoggedIn, email]);
 }
 
 export default useFetchData;
