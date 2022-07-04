@@ -54,10 +54,10 @@ function Header({ isSmallSidebar }: HeaderProps) {
                         </div>
                     }
                 >
-                    <div className={cx('info')}>
+                    <div className={cx('info')} onClick={() => setVisible(!visible)}>
                         <div className={cx('avatar')}>{avatar_default}</div>
 
-                        <div onClick={() => setVisible(!visible)} className={cx('email')}>
+                        <div className={cx('email')}>
                             <p>{user?.email}</p>
                             <ArrowDownIcon />
                         </div>

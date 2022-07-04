@@ -12,7 +12,7 @@ const noteService = {
         });
     },
 
-    create(notebookId?: string) {
+    create(notebookId?: string): Promise<Note<Tag>> {
         return axiosClientSecret.post('/note', { notebookId });
     },
 

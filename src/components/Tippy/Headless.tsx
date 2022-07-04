@@ -20,8 +20,9 @@ function TippyHeadLess({ children, visible, setVisible, dropdown }: TippyHeadLes
         }
     });
     return (
-        <div ref={ref}>
+        <div style={{ width: 'inherit' }} ref={ref}>
             <Tippy
+                offset={[0, 0]}
                 onClickOutside={() => {
                     if (visible) {
                         setVisible(false);
@@ -51,6 +52,7 @@ function TippyHeadLess({ children, visible, setVisible, dropdown }: TippyHeadLes
                         style={{
                             transitionDuration: isAnimation ? '400ms' : '0',
                             pointerEvents: 'all',
+                            width: '100%',
                         }}
                         {...attrs}
                     >

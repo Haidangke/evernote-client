@@ -58,8 +58,9 @@
     .avatar {
         height: 56px;
         @include flex(center, unset);
+        cursor: pointer;
     }
-    .info {
+    .email {
         display: none;
     }
     .logo {
@@ -67,6 +68,13 @@
         flex-basis: 36px;
         margin-right: unset;
         align-items: flex-end;
+    }
+    .left {
+        padding: 0;
+        width: 100%;
+    }
+    .info {
+        justify-content: center;
     }
 }
 

@@ -1,15 +1,18 @@
 import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
+import classNames from 'classnames/bind';
 
 import { useAppSelector } from 'app/hooks';
-import { ArrowLeftIcon } from 'assets/icons';
+import useAddNote from 'hooks/useAddNote';
+import { AddNoteIcon, ArrowLeftIcon, NewNoteIcon } from 'assets/icons';
 import TimeUp from 'pages/NotePage/NoteList/components/List/TimeUp';
 import Element from '../../Element';
 import Tab from '../../Tab';
 import NoteListLoading from './NoteListLoading';
 
 import styles from './NoteList.module.scss';
-import useAddNote from 'hooks/useAddNote';
+const cx = classNames.bind(styles);
+
 function NoteList() {
     const navigate = useNavigate();
     const { listNote } = useAppSelector((state) => state.note);
@@ -57,6 +60,12 @@ function NoteList() {
                             <TimeUp className={styles.time} updatedAt={note.updatedAt} />
                         </div>
                     ))
+                )}
+                {listNote.length !== 0 && (
+                    <div onClick={addNote} className={cx('item', 'item__new')}>
+                        <NewNoteIcon />
+                        <h4>Tạo ghi chú mới</h4>
+                    </div>
                 )}
             </div>
         </Element>

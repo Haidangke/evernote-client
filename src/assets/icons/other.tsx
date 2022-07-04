@@ -56,7 +56,7 @@ export const FullSizeIcon = ({ className }: IconProps) => (
     </svg>
 );
 
-export const CustomHome = ({ className }: IconProps) => (
+export const CustomHome = () => (
     <svg width='25' height='25' viewBox='0 0 25 25' xmlns='http://www.w3.org/2000/svg'>
         <path
             fillRule='evenodd'
@@ -87,5 +87,31 @@ export const AddNoteIcon = ({ className }: IconProps) => (
             d='M15.996 8.163a.75.75 0 01-.75.75H8.761a.75.75 0 110-1.5h6.486a.75.75 0 01.75.75zm-.75 4.499a.75.75 0 000-1.5H8.761a.75.75 0 000 1.5h6.486zm-4.485 3.75a.75.75 0 100-1.5h-2a.75.75 0 000 1.5h2zm9.204-.156a.75.75 0 00-1.5 0v2.285h-2.216a.75.75 0 100 1.5h2.216v2.215a.75.75 0 101.5 0v-2.215h2.284a.75.75 0 000-1.5h-2.284v-2.285z'
             fill='currentColor'
         ></path>
+    </svg>
+);
+
+export const NewNoteIcon = ({ className }: IconProps) => (
+    <svg
+        width='24'
+        height='24'
+        viewBox='0 0 24 24'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+        className={className}
+    >
+        <circle cx='12' cy='12' r='12' fill='#00A82D'></circle>
+        <g clipPath='url(#new-note)' fill='#fff'>
+            <path
+                fillRule='evenodd'
+                clipRule='evenodd'
+                d='M15.39 6.222H8.67a1.28 1.28 0 00-1.28 1.28v8.958c0 .706.573 1.28 1.28 1.28h4.607a3.52 3.52 0 013.393-4.626V7.502a1.28 1.28 0 00-1.28-1.28zm-.835 3.04a.48.48 0 01-.48.48h-4.15a.48.48 0 110-.96h4.15a.48.48 0 01.48.48zm-1.888 3.201a.48.48 0 100-.96H9.924a.48.48 0 100 .96h2.743zm-.983 2.234a.48.48 0 01-.48.48h-1.28a.48.48 0 110-.96h1.28a.48.48 0 01.48.48z'
+            ></path>
+            <path d='M17.1 14.718a.48.48 0 10-.96 0v1.462H14.72a.48.48 0 100 .96h1.418v1.418a.48.48 0 10.96 0V17.14h1.462a.48.48 0 100-.96H17.1v-1.462z'></path>
+        </g>
+        <defs>
+            <clipPath id='new-note'>
+                <path fill='#fff' transform='translate(4.32 4.32)' d='M0 0h15.36v15.36H0z'></path>
+            </clipPath>
+        </defs>
     </svg>
 );

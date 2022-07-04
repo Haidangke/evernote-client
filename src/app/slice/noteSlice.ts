@@ -73,6 +73,9 @@ const noteSlice = createSlice({
         setListNote(state, action: PayloadAction<Note<Tag>[]>) {
             state.listNote = action.payload;
         },
+        addNote(state, action: PayloadAction<Note<Tag>>) {
+            state.listNote.unshift(action.payload);
+        },
     },
 });
 
