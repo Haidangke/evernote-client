@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 import { useAppSelector } from 'app/hooks';
 import useAddNote from 'hooks/useAddNote';
 import { AddNoteIcon, ArrowLeftIcon, NewNoteIcon } from 'assets/icons';
-import TimeUp from 'pages/NotePage/NoteList/components/List/TimeUp';
+import TimeUp from 'pages/Note/NoteList/components/List/TimeUp';
 import Element from '../../Element';
 import Tab from '../../Tab';
 import NoteListLoading from './NoteListLoading';

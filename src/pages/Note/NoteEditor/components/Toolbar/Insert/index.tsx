@@ -7,7 +7,7 @@ import { DropdownButton } from '../../Button';
 import { toggleMark } from '../../../utils/mark';
 
 import { CodeIcon, InsertIcon, TodoIcon } from 'assets/icons/toolbar';
-import InsertImage from 'pages/NotePage/NoteEditor/elements/Image/InsertImage';
+import InsertImage from 'pages/Note/NoteEditor/elements/Image/InsertImage';
 import styles from './Insert.module.scss';
 
 const cx = classNames.bind(styles);

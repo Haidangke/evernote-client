@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSlateStatic } from 'slate-react';
 
-import { insertImage, isImageUrl } from 'pages/NotePage/NoteEditor/plugins/withImages';
+import { insertImage, isImageUrl } from 'pages/Note/NoteEditor/plugins/withImages';
 import cloudinaryServices from 'services/cloudinaryService';
 import Modal from 'components/Modal';
 

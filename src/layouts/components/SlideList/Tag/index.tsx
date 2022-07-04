@@ -1,15 +1,17 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import _ from 'lodash';
 import classNames from 'classnames/bind';
 
-import { OtherSmallIcon, SearchIcon, SortIcon, TagIcon } from 'assets/icons';
+import { OtherSmallIcon, SortIcon, TagIcon } from 'assets/icons';
 import { TippyButton } from 'components/Tippy';
+import { useAppSelector } from 'app/hooks';
+import SearchInput from 'components/SearchInput';
 
 import styles from './SlideTag.module.scss';
-import { useAppSelector } from 'app/hooks';
 const cx = classNames.bind(styles);
 
 function SlideTag() {
+    const tagRef = useRef<HTMLDivElement>(null);
     const [searchValue, setSearchValue] = useState('');
     const { listTag } = useAppSelector((state) => state.tag);
     const titles = useMemo(
@@ -35,7 +37,7 @@ function SlideTag() {
     );
 
     return (
-        <div className={cx('wrapper')}>
+        <div ref={tagRef} className={cx('wrapper')}>
             <header className={cx('header')}>
                 <div className={cx('topbar')}>
                     <span>Thẻ</span>
@@ -48,14 +50,7 @@ function SlideTag() {
                         </TippyButton>
                     </div>
                 </div>
-                <div className={cx('search')}>
-                    <input
-                        onChange={(e) => setSearchValue(e.target.value)}
-                        type='text'
-                        placeholder='Tìm thẻ'
-                    />
-                    <SearchIcon />
-                </div>
+                <SearchInput placeholder='Tìm thẻ' value={searchValue} setValue={setSearchValue} />
             </header>
             <main className={cx('main')}>
                 {tagsDivide.map((tagDivide) => (

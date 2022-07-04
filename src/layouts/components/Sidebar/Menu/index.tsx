@@ -1,19 +1,12 @@
 import classNames from 'classnames/bind';
 
-import {
-    DeleteIcon,
-    HomeIcon,
-    NotebookIcon,
-    NoteIcon,
-    NoteSolidIcon,
-    StarIcon,
-    MissionIcon,
-} from 'assets/icons';
+import { DeleteIcon, HomeIcon, NoteIcon, NoteSolidIcon, StarIcon, MissionIcon } from 'assets/icons';
 
 import styles from './Menu.module.scss';
 
 import MenuItem from './MenuItem';
 import Tag from './Tag';
+import Notebook from './Notebook';
 
 interface MenuProps {
     isSmallSidebar: boolean;
@@ -55,14 +48,7 @@ function Menu({ isSmallSidebar }: MenuProps) {
             />
             <div className={cx('line-space')}></div>
 
-            <MenuItem
-                value='notebook'
-                name='Sổ tay'
-                path='/notebook'
-                icon={NotebookIcon}
-                types={['link', 'menu']}
-                onAdd={() => {}}
-            />
+            <Notebook />
             <Tag />
             <div className={cx('line-space')}></div>
             <MenuItem

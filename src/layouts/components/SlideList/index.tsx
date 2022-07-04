@@ -1,12 +1,12 @@
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import SlideTag from './SlideTag';
+import SlideTag from './Tag';
 
-import styles from './Slidebar.module.scss';
+import styles from './SlideList.module.scss';
 const cx = classNames.bind(styles);
 
-function Slidebar() {
+function SlideList() {
     const [searchParams, setSearchParams] = useSearchParams();
     const [isOpen, setIsOpen] = useState(false);
     let Component = null;
@@ -15,15 +15,26 @@ function Slidebar() {
     if (tag) Component = SlideTag;
 
     useEffect(() => {
-        setIsOpen(tag === 'true' ? true : false);
+        if (tag === 'true') {
+            setIsOpen(true);
+        } else {
+            setIsOpen(false);
+        }
     }, [tag]);
+
+    const handleClose = () => {
+        if (tag === 'true') {
+            searchParams.delete('tag');
+        }
+        setSearchParams(searchParams);
+    };
 
     return (
         <>
-            {isOpen && <div className={cx('overplay')}></div>}
+            {isOpen && <div className={cx('overplay')} onClick={handleClose}></div>}
             <div className={cx('wrapper', { open: isOpen })}>{Component && <Component />}</div>
         </>
     );
 }
 
-export default Slidebar;
+export default SlideList;

@@ -18,7 +18,7 @@ import {
     UnderlineIcon,
     UpperIndexIcon,
 } from 'assets/icons/toolbar';
-import { BlockButton, HandleButton, MarkButton } from 'pages/NotePage/NoteEditor/components/Button';
+import { BlockButton, HandleButton, MarkButton } from 'pages/Note/NoteEditor/components/Button';
 
 import InsertBtn from './Insert';
 import OverflowToolbar from '../OverflowToolbar';

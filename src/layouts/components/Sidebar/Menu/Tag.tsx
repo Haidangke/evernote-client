@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -37,7 +37,7 @@ function Tag() {
         resolver: yupResolver(schema),
     });
 
-    const isValid = useCallback(
+    const handleValid = useCallback(
         (name: string) => {
             return listTag.filter((tag) => tag.name === name).length > 0;
         },
@@ -47,7 +47,7 @@ function Tag() {
     const handleFormSubmit = async (formValue: FormTag) => {
         const nameTag = formValue.name;
 
-        if (!isValid(nameTag)) {
+        if (!handleValid(nameTag)) {
             await tagService.create(nameTag);
             reset({ name: '' });
             setIsModal(false);
@@ -78,10 +78,16 @@ function Tag() {
                 setIsOpen={setIsModal}
                 onSubmit={handleSubmit(handleFormSubmit)}
             >
-                <InputField isValid={isValid} name='name' control={control} placeholder='Tên thẻ' />
+                <InputField
+                    handleValid={handleValid}
+                    name='name'
+                    control={control}
+                    placeholder='Tên thẻ'
+                    errorProp='Tên thẻ này đã được sử dụng'
+                />
             </ModalForm>
         </>
     );
 }
 
-export default Tag;
+export default memo(Tag);

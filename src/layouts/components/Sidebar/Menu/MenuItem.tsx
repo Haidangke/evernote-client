@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import classnames from 'classnames/bind';
 import Tippy from '@tippyjs/react';
@@ -37,18 +37,15 @@ function MenuItem({ icon, addIcon, name, path, types, items, onAdd, value }: Men
     const param = searchParams.get(value);
     const handleClickContent = () => {
         if (types.includes('sidebar')) {
-            searchParams.set(value, param ? (param === 'true' ? 'false' : 'true') : 'true');
+            if (param === 'true') {
+                searchParams.delete(value);
+            } else {
+                searchParams.set(value, 'true');
+            }
             setSearchParams(searchParams);
         }
         if (types.includes('link') && path && !(pathname === path)) navigate(path);
     };
-
-    useEffect(() => {
-        if (param && !['true', 'false'].includes(param)) {
-            searchParams.set(value, 'false');
-            setSearchParams(searchParams);
-        }
-    }, [param, searchParams, setSearchParams, value]);
 
     return (
         <Fragment>

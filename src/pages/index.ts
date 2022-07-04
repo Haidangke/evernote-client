@@ -1,9 +1,9 @@
-import Home from './HomePage';
-import Recycle from './RecyclePage';
-import Login from './Auth/LoginPage';
-import Register from './Auth/RegisterPage';
-import Note from './NotePage';
-import Notebook from './NotebookPage';
+import Home from './Home';
+import Recycle from './Recycle';
+import Login from './Auth/Login';
+import Register from './Auth/Register';
+import Note from './Note';
+import Notebook from './Notebook';
 
 export {
     Home as HomePage,
@@ -11,5 +11,5 @@ export {
     Login as LoginPage,
     Note as NotePage,
     Notebook as NotebookPage,
-    Register as RegisterPage
+    Register as RegisterPage,
 };

@@ -33,4 +33,8 @@
     max-height: 400px;
     color: var(--color-red);
     margin-top: 4px;
+
+   &__height{
+        min-height: 20px;
+   }
 }

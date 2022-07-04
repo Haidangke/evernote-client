@@ -8,9 +8,9 @@ import Actions from './Actions';
 import Menu from './Menu';
 import Header from './Header';
 
-import styles from './Sidebar.module.scss';
 import './Sidebar.scss';
-import Slidebar from '../Slidebar';
+import SlideList from '../SlideList';
+import styles from './Sidebar.module.scss';
 
 const cx = classnames.bind(styles);
 
@@ -72,7 +72,7 @@ function Sidebar() {
                     <Actions isSmallSidebar={isSmallSidebar} />
                     <Menu isSmallSidebar={isSmallSidebar} />
                 </div>
-                <Slidebar />
+                <SlideList />
             </div>
         </Resizable>
     );
