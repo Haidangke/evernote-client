@@ -15,17 +15,9 @@ interface ModalFormProps extends ModalProps {
 
 const cx = classNames.bind(styles);
 
-function ModalForm({
-    isOpen,
-    setIsOpen,
-    children,
-    title,
-    description,
-    onSubmit,
-    isCenter,
-}: ModalFormProps) {
+function ModalForm({ isOpen, setIsOpen, children, title, description, onSubmit }: ModalFormProps) {
     return (
-        <Modal isCenter={isCenter} isOpen={isOpen} setIsOpen={setIsOpen}>
+        <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
             <div className={cx('header')}>
                 <h2 className={cx('title')}>
                     <span>{title}</span>

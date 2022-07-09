@@ -70,36 +70,6 @@ export const AddIconSmall = ({ className }: IconProps) => (
     </svg>
 );
 
-export const OtherIcon = ({ width = '2.4rem', height = '2.4rem', className }: IconProps) => (
-    <svg
-        width={width}
-        height={height}
-        xmlns='http://www.w3.org/2000/svg'
-        className={className}
-        aria-hidden='true'
-    >
-        <path d='M4.5 12a1.5 1.5 0 103 0 1.5 1.5 0 00-3 0zm7.501 1.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm6 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3z' />
-    </svg>
-);
-
-export const OtherSmallIcon = ({ className }: IconProps) => (
-    <svg
-        width='16'
-        height='16'
-        viewBox='0 0 16 16'
-        fill='none'
-        xmlns='http://www.w3.org/2000/svg'
-        className={className}
-    >
-        <path
-            fillRule='evenodd'
-            clipRule='evenodd'
-            d='M9 12a1 1 0 11-2 0 1 1 0 012 0zm0-4a1 1 0 11-2 0 1 1 0 012 0zm0-4a1 1 0 11-2 0 1 1 0 012 0z'
-            fill='currentColor'
-        ></path>
-    </svg>
-);
-
 export const LoadingIcon = ({ width = '6rem', height = '6rem', className }: IconProps) => (
     <svg
         width={width}

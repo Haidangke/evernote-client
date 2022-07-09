@@ -71,7 +71,6 @@ function Tag() {
                 }
             />
             <ModalForm
-                isCenter
                 title='Tạo thẻ mới'
                 description='Dùng thẻ để bổ sung từ khóa vào ghi chú, giúp bạn dễ dàng tìm kiếm và duyệt xem hơn.'
                 isOpen={isModal}

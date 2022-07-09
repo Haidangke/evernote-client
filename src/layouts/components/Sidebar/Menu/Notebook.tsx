@@ -1,13 +1,15 @@
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-import { useAppSelector } from 'app/hooks';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { NotebookIcon, NotebookSubDfIcon, NotebookSubIcon } from 'assets/icons';
 import { InputField } from 'components/FormFields';
 import ModalForm from 'components/Modal/ModalForm';
 import MenuItem from './MenuItem';
-import { yupResolver } from '@hookform/resolvers/yup';
+import notebookService from 'services/notebookService';
+import { notebookActions } from 'app/slice/notebookSlice';
 
 interface FormNotebook {
     name: string;
@@ -25,6 +27,8 @@ const schema = yup
     .required();
 
 function Notebook() {
+    const email = useAppSelector((state) => state.auth.user?.email);
+    const dispatch = useAppDispatch();
     const [isModal, setIsModal] = useState(false);
     const { notebooks } = useAppSelector((state) => state.notebook);
     const { control, handleSubmit, reset } = useForm<FormNotebook>({
@@ -34,17 +38,19 @@ function Notebook() {
 
     const handleValid = useCallback(
         (name: string) => {
-            return notebooks.filter((notebook) => notebook.name === name).length > 0;
+            return notebooks.some((notebook) => notebook.name === name);
         },
         [notebooks]
     );
 
-    const handleFormSubmit = (formValue: FormNotebook) => {
-        const notebook = formValue.name
-        if(handleValid(notebook)){
-            
+    const handleFormSubmit = async (formValue: FormNotebook) => {
+        const notebook = formValue.name;
+        if (!handleValid(notebook) && email) {
+            await notebookService.create({ name: notebook, creator: email });
+            dispatch(notebookActions.fetch());
+            reset({ name: '' });
+            setIsModal(false);
         }
-        console.log({ formValue });
     };
     return (
         <>
@@ -67,7 +73,6 @@ function Notebook() {
                 }
             />
             <ModalForm
-                isCenter
                 title='Tạo sổ tay mới'
                 description='Sổ tay giúp ích cho việc nhóm các ghi chú có chung chủ đề. Chúng có thể đặt trong chế độ riêng tư hoặc dùng chung.'
                 isOpen={isModal}

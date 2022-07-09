@@ -6,6 +6,7 @@
     height: 100%;
 }
 
+//header
 .header {
     display: flex;
     flex-direction: column;
@@ -35,16 +36,17 @@
     color: var(--color-73);
 }
 
+.search {
+    height: 40px;
+}
 
-
+//main
 .main {
     flex: 1;
     padding: 0px 24px 0;
     overflow-y: auto;
 }
 
-.component {
-}
 
 .title {
     height: 46px;
@@ -52,9 +54,6 @@
     display: flex;
     font-weight: 700;
     align-items: flex-end;
-}
-
-.list {
 }
 
 .item {

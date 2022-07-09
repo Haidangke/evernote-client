@@ -1,6 +1,8 @@
 import classNames from 'classnames/bind';
+import { IoIosMore } from 'react-icons/io';
+
 import { TippyButton } from 'components/Tippy';
-import { FullSizeIcon, NoteMainIcon, NoteToIcon, OtherIcon } from 'assets/icons';
+import { FullSizeIcon, NoteMainIcon, NoteToIcon } from 'assets/icons';
 import styles from './Topbar.module.scss';
 
 const cx = classNames.bind(styles);
@@ -42,7 +44,7 @@ function Topbar() {
                 <div className={cx('share-btn')}>Chia sẻ</div>
                 <div className={cx('other-btn')}>
                     <TippyButton content='Thao tác khác' placement='bottom'>
-                        <OtherIcon />
+                        <IoIosMore />
                     </TippyButton>
                 </div>
             </div>

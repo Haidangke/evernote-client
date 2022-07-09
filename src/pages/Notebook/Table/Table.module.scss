@@ -1,0 +1,101 @@
+@import 'styles/mixin';
+
+.wrapper {
+}
+
+.header {
+    & > .row {
+        @include flex(center, unset);
+        height: 36px;
+        background-color: var(--color-f8);
+    }
+    & > .row:hover {
+        background-color: var(--color-f8);
+    }
+
+    & .column {
+        text-transform: uppercase;
+        color: #b3b3b3;
+        font-size: 11px;
+    }
+
+    & .column:first-child {
+        cursor: default;
+    }
+
+    & .column:first-child > svg {
+        margin-left: 2px;
+    }
+}
+
+.row {
+    display: flex;
+
+    &:hover {
+        background-color: var(--color-f2);
+    }
+
+    &__hightlight {
+        background-color: var(--color-f8);
+    }
+}
+
+.column {
+    flex: 1;
+    padding: 8px;
+    color: var(--color-77);
+    font-size: 1.4rem;
+
+    &__sub {
+        padding-left: 58px;
+    }
+    & > span {
+        color: var(--color-b3);
+        font-size: 1.4rem;
+        margin-left: 4px;
+    }
+
+    & > svg {
+        color: var(--color-77);
+    }
+
+    &:first-child {
+        @include flex(center, unset);
+        flex-basis: 30%;
+        cursor: pointer;
+    }
+
+    &:last-child {
+        text-align: right;
+    }
+}
+
+.arrow {
+    width: 22px;
+    height: 22px;
+    transition: var(--transition-base);
+    &:hover {
+        color: var(--color-b3);
+        transform: rotateZ(0deg) scale(1.4);
+    }
+    &__open {
+        transform: rotateZ(90deg);
+    }
+    &__open:hover {
+        transform: rotateZ(90deg) scale(1.4);
+    }
+}
+
+.name {
+    font-size: 1.4rem;
+    margin-left: 4px;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.note {
+    width: 24px;
+    height: 24px;
+}

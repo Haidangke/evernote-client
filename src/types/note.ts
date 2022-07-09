@@ -7,6 +7,7 @@ export interface Note<T> {
     contain: string[];
     todo?: Todo[];
     tags: T;
+    notebook: string;
     createdAt: string;
     updatedAt: string;
 }

@@ -1,0 +1,35 @@
+@import 'styles/mixin';
+
+.wrapper {
+    @include flex(center, space-between);
+    height: 24px;
+    margin: 10px 0;
+}
+.left {
+    font-weight: 700;
+}
+.right {
+    @include flex(center, unset);
+    & > svg {
+        color: var(--color-73);
+        margin-left: 18px;
+    }
+}
+
+.new {
+    @include flex(center, unset);
+    cursor: pointer;
+    & > span {
+        font-size: 1.4rem;
+        color: var(--primary-color);
+        font-weight: 700;
+    }
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.icon {
+    margin: 0px 2px;
+    color: var(--primary-color);
+}

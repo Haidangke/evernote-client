@@ -4,6 +4,9 @@
     left: 0;
     width: 100vw;
     height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 99998;
 }
 
@@ -23,11 +26,4 @@
     min-height: 200px;
     min-width: 550px;
     width: min-content;
-}
-
-.isCenter {
-    top: 50%;
-    left: 50%;
-    z-index: 99999;
-    transform: translate(-50%, -70%);
 }

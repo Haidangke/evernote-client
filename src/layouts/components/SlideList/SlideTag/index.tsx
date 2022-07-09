@@ -1,8 +1,9 @@
 import { useMemo, useRef, useState } from 'react';
 import _ from 'lodash';
 import classNames from 'classnames/bind';
+import { IoIosMore } from 'react-icons/io';
 
-import { OtherSmallIcon, SortIcon, TagIcon } from 'assets/icons';
+import { SortIcon, TagIcon } from 'assets/icons';
 import { TippyButton } from 'components/Tippy';
 import { useAppSelector } from 'app/hooks';
 import SearchInput from 'components/SearchInput';
@@ -50,13 +51,19 @@ function SlideTag() {
                         </TippyButton>
                     </div>
                 </div>
-                <SearchInput placeholder='Tìm thẻ' value={searchValue} setValue={setSearchValue} />
+                <div className={cx('search')}>
+                    <SearchInput
+                        placeholder='Tìm thẻ'
+                        value={searchValue}
+                        setValue={setSearchValue}
+                    />
+                </div>
             </header>
             <main className={cx('main')}>
                 {tagsDivide.map((tagDivide) => (
                     <div key={tagDivide.title} className={cx('component')}>
                         <div className={cx('title')}>{tagDivide.title.toUpperCase()}</div>
-                        <div className={cx('list')}>
+                        <>
                             {tagDivide.list
                                 .filter((tag) => tag.name.includes(searchValue.trim()))
                                 .map((tag) => (
@@ -64,11 +71,11 @@ function SlideTag() {
                                         <span className={cx('name')}>{tag.name}</span>
                                         <span className={cx('quantity')}>({tag.quantity})</span>
                                         <span className={cx('other')}>
-                                            <OtherSmallIcon width={16} height={16} />
+                                            <IoIosMore width={16} height={16} />
                                         </span>
                                     </div>
                                 ))}
-                        </div>
+                        </>
                     </div>
                 ))}
             </main>

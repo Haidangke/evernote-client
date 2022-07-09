@@ -1,18 +1,24 @@
-import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import SlideTag from './Tag';
+import { CSSTransition } from 'react-transition-group';
 
+import SlideTag from './SlideTag';
 import styles from './SlideList.module.scss';
-const cx = classNames.bind(styles);
+import './SlideList.scss';
 
 function SlideList() {
-    const [searchParams, setSearchParams] = useSearchParams();
     const [isOpen, setIsOpen] = useState(false);
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const modalRef = useRef(null);
+    const overplayRef = useRef(null);
+
     let Component = null;
     const tag = searchParams.get('tag');
 
-    if (tag) Component = SlideTag;
+    if (tag) {
+        Component = SlideTag;
+    }
 
     useEffect(() => {
         if (tag === 'true') {
@@ -30,10 +36,22 @@ function SlideList() {
     };
 
     return (
-        <>
-            {isOpen && <div className={cx('overplay')} onClick={handleClose}></div>}
-            <div className={cx('wrapper', { open: isOpen })}>{Component && <Component />}</div>
-        </>
+        <Fragment>
+            <CSSTransition
+                nodeRef={overplayRef}
+                in={isOpen}
+                timeout={300}
+                classNames='overplay'
+                unmountOnExit
+            >
+                <div ref={overplayRef} className={styles.overplay} onClick={handleClose}></div>
+            </CSSTransition>
+            <CSSTransition nodeRef={modalRef} in={isOpen} timeout={300} classNames='slide-list'>
+                <div ref={modalRef} className={styles.wrapper}>
+                    {Component && <Component />}
+                </div>
+            </CSSTransition>
+        </Fragment>
     );
 }
 

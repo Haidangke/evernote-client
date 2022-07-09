@@ -1,10 +1,11 @@
 import { Fragment, useState } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { IoMdArrowDropright } from 'react-icons/io';
 import classnames from 'classnames/bind';
 import Tippy from '@tippyjs/react';
 
 import styles from './Menu.module.scss';
-import { AddIconSmall, IconProps, TriangleIcon } from 'assets/icons';
+import { AddIconSmall, IconProps } from 'assets/icons';
 
 const cx = classnames.bind(styles);
 
@@ -58,7 +59,7 @@ function MenuItem({ icon, addIcon, name, path, types, items, onAdd, value }: Men
                         className={cx('triangle', { triangle__active: isMenu })}
                         onClick={() => setIsMenu(!isMenu)}
                     >
-                        <TriangleIcon width={16} height={16} />
+                        <IoMdArrowDropright width={16} height={16} />
                     </div>
                 )}
 

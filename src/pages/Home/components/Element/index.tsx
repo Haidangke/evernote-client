@@ -1,7 +1,8 @@
 import { ReactNode, useState } from 'react';
 import classNames from 'classnames/bind';
 
-import { AddNoteIcon, OtherIcon } from 'assets/icons';
+import { IoIosMore } from 'react-icons/io';
+import { AddNoteIcon } from 'assets/icons';
 import { TippyHeadless } from 'components/Tippy';
 import styles from './Element.module.scss';
 
@@ -42,7 +43,7 @@ function Element({ children, className, title, menu }: ElementProps) {
                     }
                 >
                     <div className={styles.btn} onClick={() => setIsOther(!isOther)}>
-                        <OtherIcon />
+                        <IoIosMore />
                     </div>
                 </TippyHeadless>
             </div>

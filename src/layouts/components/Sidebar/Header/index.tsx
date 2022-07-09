@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { TippyHeadless } from 'components/Tippy';
+import { IoMdArrowDropright } from 'react-icons/io';
 import classnames from 'classnames/bind';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { logout } from 'app/thunk/authThunk';
 
 import { TippyButton } from 'components/Tippy';
-import { ArrowDownIcon, CheckIcon, Setting, TriangleIcon } from 'assets/icons';
+import { ArrowDownIcon, CheckIcon, Setting } from 'assets/icons';
 
 import avatar_default from 'assets/images/avatar';
 import styles from './Header.module.scss';
@@ -41,7 +42,7 @@ function Header({ isSmallSidebar }: HeaderProps) {
                                 <div className={cx('drdown-list')}>
                                     <div className={cx('drdown-item')}>Thông tin tài khoản...</div>
                                     <div className={cx('drdown-item')}>
-                                        Ưu tiên <TriangleIcon />
+                                        Ưu tiên <IoMdArrowDropright />
                                     </div>
                                 </div>
                             </div>

@@ -11,12 +11,12 @@ export interface ModalProps {
     children: any;
     isOpen: boolean;
     setIsOpen?: (isOpen: boolean) => void;
-    isCenter?: boolean;
+    // isCenter?: boolean;
 }
 
 const cx = classNames.bind(styles);
 
-function Modal({ children, isOpen, setIsOpen, isCenter }: ModalProps, ref: any) {
+function Modal({ children, isOpen, setIsOpen }: ModalProps) {
     const modalRef = useRef(null);
     const wrapperRef = useRef(null);
 
@@ -40,11 +40,11 @@ function Modal({ children, isOpen, setIsOpen, isCenter }: ModalProps, ref: any) 
                 nodeRef={wrapperRef}
                 in={isOpen}
                 timeout={300}
-                classNames='wrapper'
+                classNames='modal'
                 unmountOnExit
             >
                 <div ref={wrapperRef} className={styles.wrapper}>
-                    <div className={cx('content', { isCenter })}>
+                    <div className={styles.content}>
                         <Popper>{children}</Popper>
                     </div>
                 </div>

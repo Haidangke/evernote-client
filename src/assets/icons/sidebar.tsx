@@ -176,18 +176,6 @@ export const DeleteIcon = ({ className }: IconProps) => (
     </svg>
 );
 
-export const TriangleIcon = ({ className }: IconProps) => (
-    <svg
-        width={16}
-        height={16}
-        className={className}
-        xmlns='http://www.w3.org/2000/svg'
-        viewBox='0 0 16 16'
-    >
-        <path fillRule='evenodd' d='M6 4l4 4-4 4z' fill='currentColor' />
-    </svg>
-);
-
 export const TagIcon = ({ className }: IconProps) => (
     <svg
         className={className}
