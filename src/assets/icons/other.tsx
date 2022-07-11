@@ -137,3 +137,26 @@ export const AddNotebookIcon = ({ className }: IconProps) => (
         ></path>
     </svg>
 );
+
+export const NotebookDfIcon = ({ className }: IconProps) => (
+    <svg
+        width='24'
+        height='24'
+        viewBox='0 0 24 24'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+        className={className}
+    >
+        <path d='M5.955 4.496H8.03v15H5.955v-15z' fill='currentColor'></path>
+        <path
+            fillRule='evenodd'
+            clipRule='evenodd'
+            d='M9.281 19.496v-15h7.09c.92 0 1.667.746 1.667 1.666v7.307h-.045a4.583 4.583 0 00-4.351 6.027h-4.36zm5.88-9.167a.75.75 0 000-1.5h-3a.75.75 0 100 1.5h3z'
+            fill='currentColor'
+        ></path>
+        <path
+            d='M17.816 14.858a.24.24 0 01.451 0l.687 1.728c.035.089.114.15.206.157l1.782.15c.216.017.304.3.139.449l-1.357 1.218c-.07.062-.1.16-.08.253l.416 1.821c.05.221-.18.396-.365.278l-1.526-.976a.235.235 0 00-.255 0l-1.525.976c-.186.118-.415-.057-.365-.278l.415-1.82a.263.263 0 00-.079-.255l-1.357-1.217c-.166-.148-.078-.431.139-.45l1.782-.15a.245.245 0 00.206-.156l.686-1.728z'
+            fill='currentColor'
+        ></path>
+    </svg>
+);

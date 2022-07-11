@@ -1,7 +1,16 @@
-import { AddNotebookIcon, SortIcon } from 'assets/icons';
+import { Dispatch, SetStateAction } from 'react';
+
+import { AddNotebookIcon } from 'assets/icons';
+import { TippySort } from 'components/Tippy';
+import { Sort } from 'config/actions';
 import styles from './Header.module.scss';
 
-function Header() {
+interface HeaderProps {
+    sort: Sort;
+    setSort: Dispatch<SetStateAction<Sort>>;
+}
+
+function Header({ sort, setSort }: HeaderProps) {
     return (
         <div className={styles.wrapper}>
             <div className={styles.left}>3 sổ tay</div>
@@ -10,8 +19,7 @@ function Header() {
                     <AddNotebookIcon className={styles.icon} />
                     <span>Sổ tay Mới</span>
                 </div>
-
-                <SortIcon />
+                <TippySort sort={sort} setSort={setSort} />
             </div>
         </div>
     );

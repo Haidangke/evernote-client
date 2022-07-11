@@ -1,16 +1,10 @@
 import { useRef, useState } from 'react';
+import { IoSearchSharp } from 'react-icons/io5';
 import classnames from 'classnames/bind';
 
 import Tippy from '@tippyjs/react/headless';
 
-import {
-    AddIcon,
-    ArrowDownIcon,
-    CloseIcon,
-    NoteSolidIcon,
-    SearchIcon,
-    TodoPrimaryIcon,
-} from 'assets/icons';
+import { AddIcon, ArrowDownIcon, CloseIcon, NoteSolidIcon, TodoPrimaryIcon } from 'assets/icons';
 
 import Popper from 'components/Popper';
 import { useAppSelector } from 'app/hooks';
@@ -70,7 +64,11 @@ function Actions({ isSmallSidebar }: ActionsProps) {
                                                 key={note._id}
                                                 className={cx('search-focus__item')}
                                             >
-                                                {filter ? <SearchIcon /> : <NoteSolidIcon />}
+                                                {filter ? (
+                                                    <IoSearchSharp className='search-icon' />
+                                                ) : (
+                                                    <NoteSolidIcon />
+                                                )}
                                                 <div className={cx('search-focus__name')}>
                                                     {note.title || 'Chưa có tiêu đề'}
                                                 </div>
@@ -82,7 +80,7 @@ function Actions({ isSmallSidebar }: ActionsProps) {
                     )}
                 >
                     <div className={cx('search', { 'search-focus': isSearch })}>
-                        <SearchIcon className={cx('search-icon')} />
+                        <IoSearchSharp className={cx('search-icon')} />
                         <div className={cx('search-input')}>
                             <input
                                 value={filter}

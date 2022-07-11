@@ -9,7 +9,7 @@ import List from './components/List';
 import Actions from './components/Actions';
 
 import { NoteListIcon } from 'assets/icons';
-import { ActionsType } from 'config/actions';
+import { Sort } from 'config/actions';
 import styles from './NoteList.module.scss';
 
 const cx = classNames.bind(styles);
@@ -22,7 +22,8 @@ function NoteList() {
 
     const [resizable, setResizable] = useState({ width: 320, height: '100vh' });
     const [maxWidth, setMaxWidth] = useState(600);
-    const [actions, setActions] = useState<ActionsType>({ sort: 'updatedAt' });
+    //action
+    const [sort, setSort] = useState<Sort>('updatedAt');
     const [width] = useWindowSize();
 
     useEffect(() => {
@@ -59,7 +60,7 @@ function NoteList() {
                     </div>
                     <div className={cx('concern')}>
                         <div className={cx('total')}>{listNote?.length} ghi chú</div>
-                        <Actions actions={actions} setActions={setActions} />
+                        <Actions sort={sort} setSort={setSort} />
                     </div>
                 </header>
                 <div className={cx('table')}>
@@ -69,7 +70,7 @@ function NoteList() {
                         <div className={cx('column-header')}>Thẻ</div>
                     </div>
 
-                    <List actions={actions} />
+                    <List sort={sort} />
                 </div>
             </div>
         </Resizable>

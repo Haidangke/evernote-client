@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { Sort } from 'config/actions';
 import SearchInput from 'components/SearchInput';
 import Header from './Header';
 import Table from './Table';
@@ -7,6 +8,7 @@ import styles from './Notebook.module.scss';
 
 function Notebook() {
     const [searchValue, setSearchValue] = useState('');
+    const [sort, setSort] = useState<Sort>('createdAt');
     return (
         <div className={styles.wrapper}>
             <div className={styles.topbar}>
@@ -19,9 +21,9 @@ function Notebook() {
                     />
                 </div>
             </div>
-            <Header />
+            <Header sort={sort} setSort={setSort} />
             <div className={styles.main}>
-                <Table />
+                <Table sort={sort} search={searchValue} />
             </div>
         </div>
     );

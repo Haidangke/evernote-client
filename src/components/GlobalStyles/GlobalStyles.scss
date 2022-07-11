@@ -3,6 +3,7 @@
 @import 'styles/variables';
 @import 'styles/tippy';
 @import 'styles/slate';
+@import 'styles/icon';
 
 * {
     margin: 0;
@@ -42,7 +43,6 @@ button {
     align-items: center;
 }
 
-
 ::-webkit-scrollbar {
     width: 6px;
     height: 8px;
@@ -58,8 +58,6 @@ button {
     background: rgb(160, 160, 160);
     border-radius: 4px;
 }
-
-
 
 .overplay-enter {
     opacity: 0;

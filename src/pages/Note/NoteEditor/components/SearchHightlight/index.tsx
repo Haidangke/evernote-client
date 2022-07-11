@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { SearchIcon } from 'assets/icons';
+import { IoSearchSharp } from 'react-icons/io5';
 import styles from './SearchHightlight.module.scss';
 
 const cx = classNames.bind(styles);
@@ -7,7 +7,7 @@ const cx = classNames.bind(styles);
 function SearchHightlight({ setSearch }: any) {
     return (
         <div className={cx('wrapper')}>
-            <SearchIcon className={cx('seach-icon')} />
+            <IoSearchSharp className={cx('search-icon')} />
             <input
                 type='search'
                 placeholder='Search the text...'

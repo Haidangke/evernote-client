@@ -2,13 +2,14 @@ import { useMemo, useState } from 'react';
 import { BsDash } from 'react-icons/bs';
 import { IoIosMore, IoMdArrowDropright } from 'react-icons/io';
 
-import { NotebookIcon, NoteSolidIcon } from 'assets/icons';
+import { NotebookDfIcon, NotebookIcon, NoteSolidIcon } from 'assets/icons';
 import styles from './Table.module.scss';
 import classNames from 'classnames/bind';
 import { Notebook } from 'types';
 import TimeUp from 'pages/Note/NoteList/components/List/TimeUp';
 import { useAppSelector } from 'app/hooks';
 import { useNavigate } from 'react-router-dom';
+import { TippyHeadless } from 'components/Tippy';
 
 interface RowProps {
     notebook: Notebook;
@@ -17,6 +18,7 @@ interface RowProps {
 
 const cx = classNames.bind(styles);
 function Row({ notebook, isHightlight }: RowProps) {
+    const [isMore, setIsMore] = useState(false);
     const navigate = useNavigate();
     const { listNote } = useAppSelector((state) => state.note);
 
@@ -45,7 +47,11 @@ function Row({ notebook, isHightlight }: RowProps) {
                             arrow__open: isOpen,
                         })}
                     />
-                    <NotebookIcon />
+                    {notebook.isDefault ? (
+                        <NotebookDfIcon width={24} height={24} />
+                    ) : (
+                        <NotebookIcon />
+                    )}
                     <div className={styles.name}>{notebook.name}</div>
                     <span>({notesOfNotebook.length})</span>
                 </div>
@@ -73,7 +79,15 @@ function Row({ notebook, isHightlight }: RowProps) {
                         <TimeUp updatedAt={note.updatedAt} className={styles.column} />
                         <div className={styles.column}>Chỉ bạn</div>
                         <div className={styles.column}>
-                            <IoIosMore />
+                            <TippyHeadless
+                                dropdown={<div>Render</div>}
+                                visible={isMore}
+                                setVisible={setIsMore}
+                            >
+                                <div onClick={() => setIsMore(true)} className={styles.more}>
+                                    <IoIosMore />
+                                </div>
+                            </TippyHeadless>
                         </div>
                     </div>
                 ))}

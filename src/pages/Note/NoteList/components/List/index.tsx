@@ -3,16 +3,17 @@ import { useSearchParams } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import { useAppSelector } from 'app/hooks';
+import { Sort } from 'config/actions';
 import TimeUp from './TimeUp';
+
 import styles from './List.module.scss';
-import { ActionsType } from 'config/actions';
 const cx = classNames.bind(styles);
 
 interface ListProps {
-    actions: ActionsType;
+    sort: Sort;
 }
 
-function List({ actions }: ListProps) {
+function List({ sort }: ListProps) {
     const { listNote } = useAppSelector((state) => state.note);
     const [searchParams, setSearchParams] = useSearchParams();
     const noteId = searchParams.get('noteId');
@@ -22,10 +23,8 @@ function List({ actions }: ListProps) {
         <div className={cx('wrapper')}>
             {[...listNote]
                 .sort((x, y) => {
-                    if (actions.sort === 'title') return x.title.localeCompare(y.title);
-                    return (
-                        new Date(y[actions.sort]).getTime() - new Date(x[actions.sort]).getTime()
-                    );
+                    if (sort === 'title') return x.title.localeCompare(y.title);
+                    return new Date(y[sort]).getTime() - new Date(x[sort]).getTime();
                 })
                 .map((note, index) => (
                     <div

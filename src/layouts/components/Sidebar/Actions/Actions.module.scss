@@ -27,7 +27,9 @@
     &-icon {
         color: var(--gray);
         position: absolute;
-        left: 6px;
+        width: 19px;
+        height: 19px;
+        margin-left: 3px;
     }
 
     &-cancel {
@@ -61,6 +63,10 @@
         z-index: 999;
         width: 19px;
         height: 19px;
+    }
+
+    & .search-input > input::placeholder {
+        color: var(--black);
     }
 }
 
@@ -126,6 +132,10 @@
         font-family: 'SegoeUI';
         font-size: 1.4rem;
     }
+}
+
+.search-input > input::placeholder {
+    color: white;
 }
 
 //add

@@ -2,11 +2,18 @@ import { AiOutlineArrowUp } from 'react-icons/ai';
 import classNames from 'classnames/bind';
 
 import Row from './Row';
-import styles from './Table.module.scss';
 import { useAppSelector } from 'app/hooks';
+import { Sort } from 'config/actions';
+
+import styles from './Table.module.scss';
 const cx = classNames.bind(styles);
 
-function Table() {
+interface TableProps {
+    sort: Sort;
+    search: string;
+}
+
+function Table({ sort, search }: TableProps) {
     const { notebooks } = useAppSelector((state) => state.notebook);
     return (
         <div className={styles.wrapper}>
@@ -23,9 +30,24 @@ function Table() {
                 </div>
             </header>
             <div className={styles.main}>
-                {notebooks.map((notebook, index) => (
-                    <Row key={notebook._id} notebook={notebook} isHightlight={index % 2 !== 0} />
-                ))}
+                {[...notebooks]
+                    .sort((notebookA, notebookB) => {
+                        if (sort === 'title') return notebookA.name.localeCompare(notebookB.name);
+                        return (
+                            new Date(notebookB[sort]).getTime() -
+                            new Date(notebookA[sort]).getTime()
+                        );
+                    })
+                    .filter((notebook) =>
+                        notebook.name.toLowerCase().includes(search.toLowerCase().trim())
+                    )
+                    .map((notebook, index) => (
+                        <Row
+                            key={notebook._id}
+                            notebook={notebook}
+                            isHightlight={index % 2 !== 0}
+                        />
+                    ))}
             </div>
         </div>
     );

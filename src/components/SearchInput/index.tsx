@@ -1,4 +1,4 @@
-import { SearchIcon } from 'assets/icons';
+import { IoSearchSharp } from 'react-icons/io5';
 import styles from './SearchInput.module.scss';
 
 interface SearchInputProps {
@@ -11,12 +11,19 @@ function SearchInput({ value, setValue, placeholder }: SearchInputProps) {
     return (
         <div className={styles.search}>
             <input
-                onChange={(e) => setValue(e.target.value)}
+                onChange={(e) => {
+                    const inputValue = e.target.value;
+                    if (inputValue.length <= 1) {
+                        setValue(inputValue.trim());
+                    } else {
+                        setValue(inputValue);
+                    }
+                }}
                 type='text'
                 placeholder={placeholder}
                 value={value}
             />
-            <SearchIcon />
+            <IoSearchSharp />
         </div>
     );
 }

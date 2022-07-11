@@ -1,3 +1,5 @@
 import TippyButton from './Button';
 import TippyHeadless from './Headless';
-export { TippyButton, TippyHeadless };
+import TippySort from './Sort';
+
+export { TippyButton, TippyHeadless, TippySort };

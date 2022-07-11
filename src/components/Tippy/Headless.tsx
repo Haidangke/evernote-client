@@ -1,8 +1,8 @@
 import { ReactNode, useRef, useState } from 'react';
 import Tippy from '@tippyjs/react';
 import Popper from 'components/Popper';
-import useOnClickOutside from 'hooks/useOnclickOutside';
 import 'tippy.js/animations/shift-away.css';
+import useOnClickOutside from 'hooks/useOnclickOutside';
 
 interface TippyHeadLessProps {
     children: ReactNode | any;
@@ -14,21 +14,12 @@ interface TippyHeadLessProps {
 function TippyHeadLess({ children, visible, setVisible, dropdown }: TippyHeadLessProps) {
     const ref = useRef(null);
     const [isAnimation, setIsAnimation] = useState(false);
-    useOnClickOutside(ref, () => {
-        if (visible) {
-            setVisible(false);
-        }
-    });
+    useOnClickOutside(ref, () => setVisible(false));
     return (
         <div style={{ width: 'inherit' }} ref={ref}>
             <Tippy
                 offset={[0, 0]}
-                onClickOutside={() => {
-                    if (visible) {
-                        setVisible(false);
-                    }
-                }}
-                placement='bottom-end'
+                // placement='bottom-end'
                 onMount={() => setIsAnimation(true)}
                 onHide={(instance: any) => {
                     setIsAnimation(false);
