@@ -4,18 +4,18 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import noteService from 'services/noteService';
 import { noteActions } from 'app/slice/noteSlice';
 
-function useAddNote(notebook?: string) {
+function useAddNote(notebookId?: string) {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const { notebooks } = useAppSelector((state) => state.notebook);
 
     const addNote = () => {
         const notebookDf = notebooks.find((notebook) => notebook.isDefault);
-        const notebookId = notebook || notebookDf?._id;
+        const notebook = notebookId || notebookDf?._id;
 
-        if (notebookId) {
+        if (notebook) {
             noteService
-                .create(notebookId)
+                .create(notebook)
 
                 .then((res) => {
                     if (!res) return;

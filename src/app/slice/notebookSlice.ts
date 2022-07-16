@@ -40,6 +40,9 @@ const notebookSlice = createSlice({
 
             state.notebooks = [];
         },
+        setNotebooks(state, action: PayloadAction<Notebook[]>) {
+            state.notebooks = action.payload;
+        },
     },
 });
 

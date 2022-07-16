@@ -1,4 +1,4 @@
-import { Notebook, UpdateNoteParams } from 'types';
+import { Notebook, UpdateNotebookParams } from 'types';
 import axiosClientSecret from 'utils/axiosClientSecret';
 
 const notebookService = {
@@ -8,7 +8,7 @@ const notebookService = {
     create(params: { name: string; creator: string }) {
         return axiosClientSecret.post('/notebook', params);
     },
-    update(id: string, params: UpdateNoteParams) {
+    update(id: string, params: UpdateNotebookParams) {
         return axiosClientSecret.put(`/notebook/${id}`, params);
     },
     delete(id: string) {

@@ -9,9 +9,10 @@ interface TippyHeadLessProps {
     visible: boolean;
     setVisible: (visible: boolean) => void;
     dropdown: ReactNode;
+    [key: string]: any;
 }
 
-function TippyHeadLess({ children, visible, setVisible, dropdown }: TippyHeadLessProps) {
+function TippyHeadLess({ children, visible, setVisible, dropdown, ...props }: TippyHeadLessProps) {
     const ref = useRef(null);
     const [isAnimation, setIsAnimation] = useState(false);
     useOnClickOutside(ref, () => setVisible(false));
@@ -50,6 +51,7 @@ function TippyHeadLess({ children, visible, setVisible, dropdown }: TippyHeadLes
                         <Popper>{dropdown}</Popper>
                     </div>
                 )}
+                {...props}
             >
                 {children}
             </Tippy>

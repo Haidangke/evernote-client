@@ -4,10 +4,12 @@ import styles from './Button.module.scss';
 
 const cx = classNames.bind(styles);
 
+export type Variant = 'primary' | 'outline' | 'danger';
+
 interface ButtonProps {
     content: string;
     onClick?: () => void;
-    variant: 'primary' | 'outline';
+    variant: Variant;
     disabled?: boolean;
     type?: 'submit' | 'reset' | 'button';
 }
@@ -22,6 +24,7 @@ function Button({ content, variant, onClick, disabled = false, type = 'button' }
                 disabled,
                 primary: variant === 'primary',
                 outline: variant === 'outline',
+                danger: variant === 'danger',
             })}
         >
             {content}

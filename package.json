@@ -25,6 +25,7 @@
         "react-debounce-input": "^3.3.0",
         "react-dom": "^18.1.0",
         "react-hook-form": "^7.32.1",
+        "react-hot-toast": "^2.3.0",
         "react-icons": "^4.4.0",
         "react-lazy-load-image-component": "^1.5.4",
         "react-loading": "^2.0.3",

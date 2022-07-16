@@ -1,10 +1,9 @@
+import { Route, Routes as Switch } from 'react-router-dom';
 import useFetchData from 'hooks/useFetchData';
 import useSearchKey from 'hooks/useSearchKey';
-import { Route, Routes as Switch } from 'react-router-dom';
 
 import { privateRoute, publicRoute } from 'routes';
 import PrivateRoute from 'routes/PrivateRoute';
-
 import DefaultLayout from './layouts/DefaultLayout';
 
 function App() {

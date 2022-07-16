@@ -1,25 +1,23 @@
 import { useMemo, useState } from 'react';
 import { BsDash } from 'react-icons/bs';
-import { IoIosMore, IoMdArrowDropright } from 'react-icons/io';
-
-import { NotebookDfIcon, NotebookIcon, NoteSolidIcon } from 'assets/icons';
-import styles from './Table.module.scss';
 import classNames from 'classnames/bind';
+import { IoMdArrowDropright } from 'react-icons/io';
+
+import { NotebookDfIcon, NotebookIcon } from 'assets/icons';
 import { Notebook } from 'types';
 import TimeUp from 'pages/Note/NoteList/components/List/TimeUp';
 import { useAppSelector } from 'app/hooks';
-import { useNavigate } from 'react-router-dom';
-import { TippyHeadless } from 'components/Tippy';
+import { TippyNotebookMore } from 'components/Tippy';
+import NoteRow from './Note';
+
+import styles from './Table.module.scss';
+const cx = classNames.bind(styles);
 
 interface RowProps {
     notebook: Notebook;
-    isHightlight: boolean;
 }
 
-const cx = classNames.bind(styles);
-function Row({ notebook, isHightlight }: RowProps) {
-    const [isMore, setIsMore] = useState(false);
-    const navigate = useNavigate();
+function Row({ notebook }: RowProps) {
     const { listNote } = useAppSelector((state) => state.note);
 
     const notesOfNotebook = useMemo(
@@ -28,32 +26,25 @@ function Row({ notebook, isHightlight }: RowProps) {
     );
 
     const [isOpen, setIsOpen] = useState(false);
-
-    const handleToNote = (_id: string) => {
-        navigate({
-            pathname: '/note',
-            search: '?noteId=' + _id,
-        });
-    };
     return (
         <>
-            <div
-                className={cx('row', { row__hightlight: isHightlight })}
-                onClick={() => setIsOpen(!isOpen)}
-            >
+            <div className={styles.row}>
                 <div className={styles.column}>
-                    <IoMdArrowDropright
-                        className={cx('arrow', {
-                            arrow__open: isOpen,
-                        })}
-                    />
-                    {notebook.isDefault ? (
-                        <NotebookDfIcon width={24} height={24} />
-                    ) : (
-                        <NotebookIcon />
-                    )}
-                    <div className={styles.name}>{notebook.name}</div>
-                    <span>({notesOfNotebook.length})</span>
+                    <div className={styles.info}>
+                        <IoMdArrowDropright
+                            onClick={() => setIsOpen(!isOpen)}
+                            className={cx('arrow', {
+                                arrow__open: isOpen,
+                            })}
+                        />
+                        {notebook.isDefault ? (
+                            <NotebookDfIcon width={24} height={24} />
+                        ) : (
+                            <NotebookIcon />
+                        )}
+                        <div className={styles.name}>{notebook.name}</div>
+                        <span className={styles.amount}>({notesOfNotebook.length})</span>
+                    </div>
                 </div>
                 <div className={styles.column}>{notebook.creator}</div>
                 <TimeUp updatedAt={notebook.updatedAt} className={styles.column} />
@@ -61,36 +52,10 @@ function Row({ notebook, isHightlight }: RowProps) {
                     <BsDash />
                 </div>
                 <div className={styles.column}>
-                    <IoIosMore />
+                    <TippyNotebookMore notebook={notebook} />
                 </div>
             </div>
-            {isOpen &&
-                notesOfNotebook.map((note) => (
-                    <div
-                        key={note._id}
-                        className={styles.row}
-                        onClick={() => handleToNote(note._id)}
-                    >
-                        <div className={cx('column', 'column__sub')}>
-                            <NoteSolidIcon className={styles.note} />
-                            <div className={styles.name}>{note.title || 'Chưa có tiêu đề'}</div>
-                        </div>
-                        <div className={styles.column}></div>
-                        <TimeUp updatedAt={note.updatedAt} className={styles.column} />
-                        <div className={styles.column}>Chỉ bạn</div>
-                        <div className={styles.column}>
-                            <TippyHeadless
-                                dropdown={<div>Render</div>}
-                                visible={isMore}
-                                setVisible={setIsMore}
-                            >
-                                <div onClick={() => setIsMore(true)} className={styles.more}>
-                                    <IoIosMore />
-                                </div>
-                            </TippyHeadless>
-                        </div>
-                    </div>
-                ))}
+            {isOpen && notesOfNotebook.map((note) => <NoteRow note={note} key={note._id} />)}
         </>
     );
 }

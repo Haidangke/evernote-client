@@ -1,11 +1,14 @@
 .wrapper {
-    padding: 8px 19px;
-    font-size: 1.4rem;
     display: inline-block;
-    border-radius: 4px;
+    height: 36px;
     line-height: 1.6rem;
+
+    padding: 8px 19px;
+    margin-left: 8px;
+    border-radius: 4px;
+
+    font-size: 1.4rem;
     transition: var(--transition-base);
-    margin-right: 8px;
 }
 
 .primary {
@@ -26,12 +29,20 @@
     }
 }
 
+.danger {
+    background-color: #e54e40;
+    border: 1px solid #e54e40;
+    color: var(--white);
+}
+
 .disabled {
     cursor: default;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--white);
+    background-color: var(--gray);
+    border: 1px solid var(--gray);
     &:hover {
-        color: rgba(255, 255, 255, 0.7);
-        background-color: var(--primary-color);
-        border: 1px solid var(--primary-color);
+        color: var(--white);
+        background-color: var(--gray);
+        border: 1px solid var(--gray);
     }
 }

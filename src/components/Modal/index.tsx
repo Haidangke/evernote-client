@@ -1,6 +1,6 @@
 import { useRef } from 'react';
-import classNames from 'classnames/bind';
 import { CSSTransition } from 'react-transition-group';
+import classNames from 'classnames/bind';
 
 import useOnClickOutside from 'hooks/useOnclickOutside';
 import Popper from '../Popper';
@@ -8,15 +8,13 @@ import styles from './Modal.module.scss';
 import './Modal.scss';
 
 export interface ModalProps {
-    children: any;
+    children?: any;
     isOpen: boolean;
-    setIsOpen?: (isOpen: boolean) => void;
-    // isCenter?: boolean;
+    setIsOpen: (isOpen: boolean) => void;
+    isSmall?: boolean;
 }
-
 const cx = classNames.bind(styles);
-
-function Modal({ children, isOpen, setIsOpen }: ModalProps) {
+function Modal({ children, isOpen, setIsOpen, isSmall }: ModalProps) {
     const modalRef = useRef(null);
     const wrapperRef = useRef(null);
 
@@ -44,7 +42,11 @@ function Modal({ children, isOpen, setIsOpen }: ModalProps) {
                 unmountOnExit
             >
                 <div ref={wrapperRef} className={styles.wrapper}>
-                    <div className={styles.content}>
+                    <div
+                        className={cx('content', {
+                            isSmall,
+                        })}
+                    >
                         <Popper>{children}</Popper>
                     </div>
                 </div>

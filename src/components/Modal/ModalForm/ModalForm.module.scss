@@ -1,7 +1,5 @@
 .header {
     padding: 20px 25px;
-    span {
-    }
 }
 
 .icon {
@@ -18,11 +16,17 @@
     justify-content: space-between;
     align-items: center;
     font-size: 1.8rem;
+
+    & > span {
+        color: var(--text-color);
+    }
 }
 
 .description {
     font-size: 1.4rem;
     padding-top: 15px;
+    color: var(--text-color);
+    text-align: left;
 }
 
 .form {

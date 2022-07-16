@@ -41,11 +41,10 @@ function Table({ sort, search }: TableProps) {
                     .filter((notebook) =>
                         notebook.name.toLowerCase().includes(search.toLowerCase().trim())
                     )
-                    .map((notebook, index) => (
+                    .map((notebook) => (
                         <Row
                             key={notebook._id}
                             notebook={notebook}
-                            isHightlight={index % 2 !== 0}
                         />
                     ))}
             </div>

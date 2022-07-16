@@ -35,7 +35,7 @@
         background-color: var(--color-f2);
     }
 
-    &__hightlight {
+    &:nth-child(2n) {
         background-color: var(--color-f8);
     }
 }
@@ -62,7 +62,6 @@
     &:first-child {
         @include flex(center, unset);
         flex-basis: 30%;
-        cursor: pointer;
     }
 
     &:last-child {
@@ -87,15 +86,42 @@
 }
 
 .name {
+    line-height: 24px;
     font-size: 1.4rem;
     margin-left: 4px;
+}
 
-    &:hover {
+.info {
+    display: flex;
+    cursor: pointer;
+    & > svg {
+        width: 24px;
+        height: 24px;
+    }
+    &:hover > .name {
         text-decoration: underline;
     }
 }
 
-.note {
+.amount {
+    line-height: 24px;
+    opacity: 0.8;
+    margin-left: 4px;
+}
+
+.more {
+    height: 100%;
     width: 24px;
-    height: 24px;
+    margin-left: auto;
+    @include flex(center, center);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: var(--transition-base);
+    &:hover {
+        background-color: var(--color-e6);
+    }
+    &-icon {
+        width: 20px;
+        height: 20px;
+    }
 }

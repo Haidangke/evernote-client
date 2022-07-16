@@ -1,6 +1,6 @@
-export interface NotebookUpParams {
+export interface UpdateNotebookParams {
     name?: string;
-    isDefault: string;
+    isDefault?: string;
 }
 
 export interface Notebook {

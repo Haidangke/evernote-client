@@ -1,6 +1,7 @@
-import classNames from 'classnames/bind';
 import { InputHTMLAttributes } from 'react';
 import { Control, useController } from 'react-hook-form';
+import * as yup from 'yup';
+import classNames from 'classnames/bind';
 
 import styles from './InputField.module.scss';
 
@@ -58,3 +59,14 @@ function InputField({
 }
 
 export default InputField;
+
+export const nameSchema = yup
+    .object()
+    .shape({
+        name: yup
+            .string()
+            .required('Trường tên của thẻ phải có độ dài tối thiểu 1')
+            .min(1, 'Trường tên của thẻ phải có độ dài tối thiểu 1')
+            .max(30, 'Trường tên của thẻ chỉ có độ dài tối đa 30'),
+    })
+    .required();
