@@ -4,6 +4,7 @@ const routes = {
     register: '/register',
     note: '/note',
     tag: '/tag',
+    notebooks: '/notebooks',
     notebook: '/notebook',
     recycle: '/recycle',
 };

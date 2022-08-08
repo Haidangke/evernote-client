@@ -46,16 +46,19 @@ function Tag() {
     return (
         <>
             <MenuItem
-                name='Thẻ'
-                value='tag'
-                icon={TagIcon}
-                addIcon={TagSubIcon}
-                types={['menu', 'sidebar']}
+                topic={{ title: 'Thẻ', value: 'tag' }}
+                icon={{ main: TagIcon, add: TagSubIcon }}
+                types={['menu', 'slide']}
                 onAdd={() => setIsModal(true)}
                 items={
                     listTag.length === 0
                         ? []
-                        : listTag.map((tag) => ({ name: tag.name, icon: TagSubIcon }))
+                        : listTag.map((tag) => ({
+                              _id: tag._id,
+                              name: tag.name,
+                              icon: TagSubIcon,
+                              type: 'tag',
+                          }))
                 }
             />
             <ModalForm

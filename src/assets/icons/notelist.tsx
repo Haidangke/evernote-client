@@ -1,6 +1,6 @@
 import { IconProps } from '.';
 
-export const NoteListIcon = ({ className }: IconProps) => (
+export const NoteTitleIcon = ({ className }: IconProps) => (
     <svg
         width={16}
         height={18}
@@ -15,6 +15,25 @@ export const NoteListIcon = ({ className }: IconProps) => (
             fill='currentColor'
         />
         <path d='M12.048 13.997h2.588l-2.528 3.231-.06.073v-3.304z' fill='currentColor' />
+    </svg>
+);
+
+export const BookTitleIcon = ({ className }: IconProps) => (
+    <svg
+        width='24'
+        height='24'
+        viewBox='0 0 24 24'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+        className={className}
+    >
+        <path d='M7.242 3H4.75v18h2.492V3z' fill='currentColor'></path>
+        <path
+            fillRule='evenodd'
+            clipRule='evenodd'
+            d='M8.742 3v18h8.508a2 2 0 002-2V5a2 2 0 00-2-2H8.742zm7.955 6.1a.9.9 0 01-.9.9h-3.6a.9.9 0 110-1.8h3.6a.9.9 0 01.9.9z'
+            fill='currentColor'
+        ></path>
     </svg>
 );
 

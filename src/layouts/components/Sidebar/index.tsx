@@ -3,7 +3,7 @@ import classnames from 'classnames/bind';
 import { Resizable } from 're-resizable';
 
 import { ArrowLeftIcon } from 'assets/icons';
-import useWindowSize from 'hooks/useWindowSize';
+import useWindowWidth from 'hooks/useWindowWidth';
 import Actions from './Actions';
 import Menu from './Menu';
 import Header from './Header';
@@ -25,7 +25,7 @@ function Sidebar() {
     const [isSmallSidebar, setIsSmallSidebar] = useState(isSmall);
     const [maxWidth, setMaxWidth] = useState(400);
 
-    const [widthWindow] = useWindowSize();
+    const widthWindow = useWindowWidth();
     useEffect(() => {
         if (widthWindow < 0) return;
         const limitWidth = widthWindow / 3;

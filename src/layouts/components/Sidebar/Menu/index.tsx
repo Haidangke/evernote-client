@@ -1,12 +1,12 @@
 import classNames from 'classnames/bind';
-
-import { DeleteIcon, HomeIcon, NoteIcon, NoteSolidIcon, StarIcon, MissionIcon } from 'assets/icons';
-
-import styles from './Menu.module.scss';
+import { DeleteIcon, HomeIcon, NoteIcon, MissionIcon } from 'assets/icons';
 
 import MenuItem from './MenuItem';
 import Tag from './Tag';
 import Notebook from './Notebook';
+import Shortcut from './Shortcut';
+
+import styles from './Menu.module.scss';
 
 interface MenuProps {
     isSmallSidebar: boolean;
@@ -17,32 +17,22 @@ const cx = classNames.bind(styles);
 function Menu({ isSmallSidebar }: MenuProps) {
     return (
         <div className={cx('menu', { menu__small: isSmallSidebar })}>
-            <MenuItem value='home' name='Trang chủ' path='/' icon={HomeIcon} types={['link']} />
             <MenuItem
-                icon={StarIcon}
-                name='Lối tắt'
-                value='shortcuts'
-                types={['menu']}
-                items={[
-                    { name: 'Chưa có tiêu đề', icon: NoteSolidIcon },
-                    { name: 'Chưa có tiêu đề', icon: NoteSolidIcon },
-                    { name: 'Chưa có tiêu đề', icon: NoteSolidIcon },
-                ]}
-            />
-            <MenuItem
-                icon={NoteIcon}
-                name='Ghi chú'
-                value='note'
+                topic={{ value: '', title: 'Trang chủ' }}
+                icon={{ main: HomeIcon }}
                 types={['link']}
-                path='/note'
+            />
+            <Shortcut />
+            <MenuItem
+                icon={{ main: NoteIcon }}
+                topic={{ value: 'note', title: 'Ghi chú' }}
+                types={['link']}
                 onAdd={() => {}}
             />
 
             <MenuItem
-                value='todo'
-                name='Nhiệm vụ'
-                path='/todo'
-                icon={MissionIcon}
+                topic={{ title: 'Nhiệm vụ', value: 'todo' }}
+                icon={{ main: MissionIcon }}
                 types={['menu']}
                 onAdd={() => {}}
             />
@@ -52,10 +42,8 @@ function Menu({ isSmallSidebar }: MenuProps) {
             <Tag />
             <div className={cx('line-space')}></div>
             <MenuItem
-                value='recycle'
-                name='Thùng rác'
-                path='/recycle'
-                icon={DeleteIcon}
+                topic={{ title: 'Thùng rác', value: 'recycle' }}
+                icon={{ main: DeleteIcon }}
                 types={['link']}
             />
         </div>

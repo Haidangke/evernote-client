@@ -4,9 +4,9 @@ import classNames from 'classnames/bind';
 import { SortIcon, TwoWayArrowIcon } from 'assets/icons';
 import { actionsConfig, Sort } from 'config/actions';
 import TippyHeadless from '../Headless';
+import useOnClickOutside from 'hooks/useOnclickOutside';
 
 import styles from './Sort.module.scss';
-import useOnClickOutside from 'hooks/useOnclickOutside';
 const cx = classNames.bind(styles);
 
 interface SortProps {
@@ -23,8 +23,10 @@ function TippySort({ sort, setSort }: SortProps) {
         if (!iconRef.current || iconRef.current.contains(event.target)) return;
         setIsSort(false);
     });
+
     return (
         <TippyHeadless
+            outside={false}
             visible={isSort}
             setVisible={setIsSort}
             dropdown={

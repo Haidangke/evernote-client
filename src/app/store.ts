@@ -1,7 +1,14 @@
 import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 
-import { authReducer, noteReducer, toolbarReducer, tagReducer, notebookReducer } from './slice';
+import {
+    authReducer,
+    noteReducer,
+    toolbarReducer,
+    tagReducer,
+    notebookReducer,
+    shortcutReducer,
+} from './slice';
 import rootSaga from './saga';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -12,6 +19,7 @@ const rootReducer = combineReducers({
     tag: tagReducer,
     notebook: notebookReducer,
     toolbar: toolbarReducer,
+    shortcut: shortcutReducer,
 });
 export const store = configureStore({
     reducer: rootReducer,

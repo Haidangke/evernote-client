@@ -22,7 +22,7 @@ function useAddNote(notebookId?: string) {
                     dispatch(noteActions.addNote(res));
                     navigate({
                         pathname: '/note',
-                        search: '?noteId=' + res._id,
+                        search: '?n=' + res._id,
                     });
                 })
                 .catch();

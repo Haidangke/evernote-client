@@ -97,3 +97,16 @@ export const ArrowLeftIcon = ({ width = '2.4rem', height = '2.4rem', className }
         />
     </svg>
 );
+
+export const MoreIcon = ({ width = '2.4rem', height = '2.4rem', className }: IconProps) => (
+    <svg
+        width={width}
+        height={height}
+        xmlns='http://www.w3.org/2000/svg'
+        className={className}
+        aria-hidden='true'
+        fill='#737373'
+    >
+        <path d='M4.5 12a1.5 1.5 0 103 0 1.5 1.5 0 00-3 0zm7.501 1.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm6 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3z'></path>
+    </svg>
+);

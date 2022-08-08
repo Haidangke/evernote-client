@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
@@ -10,30 +10,23 @@ import ModalForm from 'components/Modal/ModalForm';
 import MenuItem from './MenuItem';
 import notebookService from 'services/notebookService';
 import { notebookActions } from 'app/slice/notebookSlice';
+import { nameSchema } from 'components/FormFields/InputField';
 
 interface FormNotebook {
     name: string;
 }
 
-const schema = yup
-    .object()
-    .shape({
-        name: yup
-            .string()
-            .required('Tên của sổ tay phải có độ dài tối thiểu 1')
-            .min(1, 'Tên của sổ tay phải có độ dài tối thiểu 1')
-            .max(30, 'Tên của sổ tay chỉ có độ dài tối đa 30'),
-    })
-    .required();
-
 function Notebook() {
+    const [searchParams] = useSearchParams();
+    const notebookId = searchParams.get('b');
+
     const email = useAppSelector((state) => state.auth.user?.email);
     const dispatch = useAppDispatch();
     const [isModal, setIsModal] = useState(false);
     const { notebooks } = useAppSelector((state) => state.notebook);
     const { control, handleSubmit, reset } = useForm<FormNotebook>({
         defaultValues: { name: '' },
-        resolver: yupResolver(schema),
+        resolver: yupResolver(nameSchema),
     });
 
     const handleValid = useCallback(
@@ -55,20 +48,23 @@ function Notebook() {
     return (
         <>
             <MenuItem
-                value='notebook'
-                name='Sổ tay'
-                path='/notebook'
-                icon={NotebookIcon}
+                topic={{ title: 'Sổ tay', value: 'notebooks' }}
+                icon={{ main: NotebookIcon }}
                 types={['link', 'menu']}
                 onAdd={() => {
                     setIsModal(true);
                 }}
+                active={
+                    notebookId ? notebooks.map((notebook) => notebook._id).indexOf(notebookId) : -1
+                }
                 items={
                     notebooks.length === 0
                         ? []
                         : notebooks.map((notebook) => ({
+                              _id: notebook._id,
                               name: notebook.name,
                               icon: notebook.isDefault ? NotebookSubDfIcon : NotebookSubIcon,
+                              type: 'notebook',
                           }))
                 }
             />

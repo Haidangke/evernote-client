@@ -1,21 +1,32 @@
 import { ReactNode, useRef, useState } from 'react';
 import Tippy from '@tippyjs/react';
+
 import Popper from 'components/Popper';
-import 'tippy.js/animations/shift-away.css';
 import useOnClickOutside from 'hooks/useOnclickOutside';
+import 'tippy.js/animations/shift-away.css';
 
 interface TippyHeadLessProps {
     children: ReactNode | any;
+    outside?: boolean;
     visible: boolean;
     setVisible: (visible: boolean) => void;
     dropdown: ReactNode;
     [key: string]: any;
 }
 
-function TippyHeadLess({ children, visible, setVisible, dropdown, ...props }: TippyHeadLessProps) {
+function TippyHeadLess({
+    children,
+    visible,
+    setVisible,
+    dropdown,
+    outside = true,
+    ...props
+}: TippyHeadLessProps) {
     const ref = useRef(null);
     const [isAnimation, setIsAnimation] = useState(false);
-    useOnClickOutside(ref, () => setVisible(false));
+    useOnClickOutside(ref, () => {
+        if (outside) setVisible(false);
+    });
     return (
         <div style={{ width: 'inherit' }} ref={ref}>
             <Tippy

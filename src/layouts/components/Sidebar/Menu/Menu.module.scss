@@ -25,7 +25,7 @@
     }
 }
 
-.menu-item {
+.item {
     position: relative;
     @include flex(center, space-between);
     height: 32px;
@@ -33,26 +33,17 @@
     cursor: pointer;
     &:hover {
         background-color: #333;
+        .add-btn {
+            @include flex(center, center);
+        }
     }
 
     &:hover > .name {
         color: var(--white);
     }
-}
 
-.active {
-    background-color: #404040;
-    &:hover {
-        background-color: #404040;
-    }
-    & > .name {
+    &__active > .name {
         color: var(--white);
-    }
-}
-
-.menu-item:hover {
-    .add-btn {
-        @include flex(center, center);
     }
 }
 
@@ -76,7 +67,7 @@
     @include flex(center, center);
     height: 24px;
     width: 24px;
-    margin-right: 6px;
+    margin-right: 2px;
     color: var(--color-a6);
 }
 
@@ -104,19 +95,25 @@
     }
 }
 
-.menu-sub {
+.heading {
+    color: var(--gray);
+    font-size: 1.3rem;
+    font-weight: 400;
+    padding-left: 24px;
+    margin-top: 2px;
 }
 
-.item {
+.sub {
     @include flex(center, unset);
     height: 24px;
     padding: 0 8px 0 44px;
     cursor: pointer;
+
     &:hover {
         background-color: #333;
     }
 
-    &:hover > .item-name {
+    &:hover > .sub-name {
         color: var(--white);
     }
 
@@ -131,16 +128,28 @@
     }
 }
 
-.item__add {
-    & > .item-icon {
+.sub__active > .sub-name {
+    color: var(--white);
+}
+
+.item__active,
+.sub__active {
+    background-color: #404040;
+    &:hover {
+        background-color: #404040;
+    }
+}
+
+.sub-add {
+    & > .sub-icon {
         color: var(--primary-color);
     }
 
-    & > .item-name {
+    & > .sub-name {
         color: var(--primary-color);
     }
 
-    &:hover > .item-name {
+    &:hover > .sub-name {
         color: var(--primary-color);
     }
 }

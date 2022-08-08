@@ -1,10 +1,10 @@
-import { RecyclePage, HomePage, LoginPage, NotebookPage, NotePage, RegisterPage } from 'pages';
+import { RecyclePage, HomePage, LoginPage, NotebookPage, RegisterPage } from 'pages';
 import { routesConfig } from 'config';
+import NoteLayout from 'layouts/DefaultLayout';
 
 interface Route {
     path: string;
     component: any;
-    layout?: any;
 }
 
 const privateRoute: Route[] = [
@@ -15,12 +15,16 @@ const privateRoute: Route[] = [
 
     {
         path: routesConfig.note,
-        component: NotePage,
+        component: NoteLayout,
     },
 
     {
-        path: routesConfig.notebook,
+        path: routesConfig.notebooks,
         component: NotebookPage,
+    },
+    {
+        path: routesConfig.notebook,
+        component: NoteLayout,
     },
 
     {

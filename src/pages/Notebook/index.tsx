@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 import { Sort } from 'config/actions';
 import SearchInput from 'components/SearchInput';
-import Header from './Header';
-import Table from './Table';
+import Header from './components/Header';
+import Table from './components/Table';
 import styles from './Notebook.module.scss';
 
 function Notebook() {

@@ -1,19 +1,12 @@
-import { ReactNode } from 'react';
+import NoteList from './NoteList';
+import NoteEditor from './NoteEditor';
 
-import Sidebar from '../components/Sidebar';
-import styles from './DefaultLayout.module.scss';
-
-interface DefaultLayoutProps {
-    children: ReactNode;
-}
-
-function DefaultLayout({ children }: DefaultLayoutProps) {
+function DefaultLayout() {
     return (
-        <div className={styles.root}>
-            <Sidebar />
-
-            {children}
-        </div>
+        <>
+            <NoteList />
+            <NoteEditor />
+        </>
     );
 }
 

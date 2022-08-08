@@ -5,6 +5,7 @@ import { notebookActions } from 'app/slice/notebookSlice';
 import { noteActions } from 'app/slice/noteSlice';
 import { tagActions } from 'app/slice/tagSlice';
 import { authActions } from 'app/slice/authSlice';
+import { shortcutActions } from './../app/slice/shortcutSlice';
 
 function useFetchData() {
     const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
@@ -21,6 +22,7 @@ function useFetchData() {
         dispatch(noteActions.fetch());
         dispatch(tagActions.fetch());
         dispatch(notebookActions.fetch());
+        dispatch(shortcutActions.fetch());
     }, [dispatch, isLoggedIn, email]);
 }
 

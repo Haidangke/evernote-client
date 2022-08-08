@@ -4,40 +4,49 @@ import { IoMdArrowDropright } from 'react-icons/io';
 import classnames from 'classnames/bind';
 import Tippy from '@tippyjs/react';
 
-import styles from './Menu.module.scss';
+import useNavigateParams from 'hooks/useNavigateParams';
 import { AddIconSmall, IconProps } from 'assets/icons';
 
+import styles from './Menu.module.scss';
 const cx = classnames.bind(styles);
 
-type Type = 'menu' | 'link' | 'sidebar';
-
 interface MenuItemProps {
-    icon: (props: IconProps) => any;
-    addIcon?: (props: IconProps) => any;
-    name: string;
-    value: string;
-    path?: string;
-    types: Type[];
+    active?: number;
+    icon: {
+        main: (props: IconProps) => any;
+        add?: (props: IconProps) => any;
+    };
+
+    topic: { title: string; value: string };
+    types: Array<'menu' | 'link' | 'slide'>;
     items?: Array<{
+        _id: string;
         name: string;
         icon: (props: IconProps) => any;
         path?: string;
+        type: 'note' | 'notebook' | 'tag';
     }>;
     onAdd?: () => void;
+    heading?: string;
 }
 
-function MenuItem({ icon, addIcon, name, path, types, items, onAdd, value }: MenuItemProps) {
+function MenuItem({ icon, topic, types, items, onAdd, active = -1, heading }: MenuItemProps) {
     const [searchParams, setSearchParams] = useSearchParams();
     const [isMenu, setIsMenu] = useState(false);
     const { pathname } = useLocation();
     const navigate = useNavigate();
+    const navigateParams = useNavigateParams();
 
-    const Icon = icon;
-    const AddIcon = addIcon;
+    const Icon = icon.main;
+    const AddIcon = icon.add;
 
+    const { title, value } = topic;
     const param = searchParams.get(value);
+
+    const path = types.includes('link') ? `/${topic.value}` : '';
+
     const handleClickContent = () => {
-        if (types.includes('sidebar')) {
+        if (types.includes('slide')) {
             if (param === 'true') {
                 searchParams.delete(value);
             } else {
@@ -45,15 +54,16 @@ function MenuItem({ icon, addIcon, name, path, types, items, onAdd, value }: Men
             }
             setSearchParams(searchParams);
         }
-        if (types.includes('link') && path && !(pathname === path)) navigate(path);
+        if (path && !(pathname === path)) navigate(path);
     };
 
     return (
         <Fragment>
             <div
                 onClick={() => !onAdd && setIsMenu(!isMenu)}
-                className={cx('menu-item', { active: pathname === path })}
+                className={cx('item', { item__active: pathname === path })}
             >
+                {/* hình tam giác dùng để đóng mở menu */}
                 {types.includes('menu') && (
                     <div
                         className={cx('triangle', { triangle__active: isMenu })}
@@ -63,16 +73,18 @@ function MenuItem({ icon, addIcon, name, path, types, items, onAdd, value }: Men
                     </div>
                 )}
 
+                {/* nhấn vào nội dung bên trong của menu */}
                 <div onClick={() => handleClickContent()} className={cx('content')}>
                     <div className={cx('icon')}>
                         <Icon />
                     </div>
 
-                    <div className={cx('name')}>{name}</div>
+                    <div className={cx('name')}>{title}</div>
                 </div>
 
+                {/* tạo mới một cái gì đó */}
                 {onAdd && (
-                    <Tippy placement='right' content={`${name} mới`}>
+                    <Tippy placement='right' content={`${title} mới`}>
                         <div onClick={onAdd} className={cx('add-btn')}>
                             <AddIconSmall />
                         </div>
@@ -80,22 +92,34 @@ function MenuItem({ icon, addIcon, name, path, types, items, onAdd, value }: Men
                 )}
             </div>
 
+            {/* dành cho những item sử dụng menu có menu con*/}
+
             {isMenu && types.includes('menu') && (
-                <div className={cx('menu-sub')}>
+                <div>
                     {items?.map((item, index) => {
                         const ItemIcon = item.icon;
                         return (
-                            <div key={index} className={cx('item')}>
-                                <ItemIcon width={20} height={20} className={cx('item-icon')} />
-                                <div className={cx('item-name')}>{item.name}</div>
-                            </div>
+                            <Fragment key={item.name}>
+                                {heading && <h3 className={styles.heading}>{heading}</h3>}
+                                <div
+                                    className={cx('sub', { sub__active: active === index })}
+                                    onClick={() =>
+                                        !types.includes('slide') &&
+                                        navigateParams({ b: item._id }, `/${item.type}`)
+                                    }
+                                >
+                                    <ItemIcon width={20} height={20} className={cx('sub-icon')} />
+                                    <div className={cx('sub-name')}>{item.name}</div>
+                                </div>
+                            </Fragment>
                         );
                     })}
 
+                    {/* tạo mới trong phần menu con */}
                     {onAdd && AddIcon && (
-                        <div onClick={onAdd} className={cx('item', 'item__add')}>
-                            <AddIcon width={20} height={20} className={cx('item-icon')} />
-                            <div className={cx('item-name')}>{`${name} mới`}</div>
+                        <div onClick={onAdd} className={cx('sub', 'sub-add')}>
+                            <AddIcon width={20} height={20} className={cx('sub-icon')} />
+                            <div className={cx('sub-name')}>{`${title} mới`}</div>
                         </div>
                     )}
                 </div>

@@ -1,35 +1,29 @@
 import { Fragment } from 'react';
-import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import { useAppSelector } from 'app/hooks';
 import useAddNote from 'hooks/useAddNote';
 import { AddNoteIcon, ArrowLeftIcon, NewNoteIcon } from 'assets/icons';
-import TimeUp from 'pages/Note/NoteList/components/List/TimeUp';
 import Element from '../../Element';
 import Tab from '../../Tab';
 import NoteListLoading from './NoteListLoading';
+import TimeUp from 'layouts/DefaultLayout/NoteList/components/List/TimeUp';
+import useNavigateParams from 'hooks/useNavigateParams';
 
 import styles from './NoteList.module.scss';
 const cx = classNames.bind(styles);
 
 function NoteList() {
-    const navigate = useNavigate();
     const { listNote } = useAppSelector((state) => state.note);
 
-    const handleToNote = (_id: string) => {
-        navigate({
-            pathname: '/note',
-            search: '?noteId=' + _id,
-        });
-    };
+    const handleToNote = useNavigateParams();
 
     const addNote = useAddNote();
 
     return (
         <Element
             menu={[
-                { title: 'Chuyển đến ghi chú', handle: () => navigate('/note') },
+                { title: 'Chuyển đến ghi chú', handle: () => handleToNote({}, '/note') },
                 { title: 'Tạo ghi chú mới', handle: addNote },
                 { title: 'Xóa tiện ích', handle: () => {} },
             ]}
@@ -47,7 +41,7 @@ function NoteList() {
                 ) : (
                     listNote.map((note) => (
                         <div
-                            onClick={() => handleToNote(note._id)}
+                            onClick={() => handleToNote({ n: note._id }, '/note')}
                             key={note._id}
                             className={styles.item}
                         >

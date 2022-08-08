@@ -1,0 +1,57 @@
+@import 'styles/mixin';
+
+:root {
+    --height-header: 96px;
+    z-index: 1;
+}
+
+.wrapper {
+    border-right: 1px solid var(--color-e6);
+    height: 100%;
+    background-color: var(--color-f8);
+}
+
+//header
+.header {
+    height: var(--height-header);
+    padding: 18px 16px 0 20px;
+    border-bottom: 1px solid var(--color-e6);
+}
+
+.title {
+    @include flex(center, unset);
+    height: 28px;
+    line-height: 28px;
+    margin-bottom: 12px;
+
+    & > span {
+        font-size: 2rem;
+    }
+}
+
+.icon {
+    &-note {
+        margin-right: 8px;
+    }
+    &-book {
+        margin-right: 4px;
+    }
+}
+
+.concern {
+    @include flex(center, space-between);
+    padding-left: 4px;
+    margin-bottom: 12px;
+}
+
+.total {
+    color: var(--color-666);
+    font-size: 1.4rem;
+}
+
+//list
+
+.table {
+    height: calc(100vh - var(--height-header));
+    overflow-y: auto;
+}
