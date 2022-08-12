@@ -12,12 +12,14 @@ const privateRoute: Route[] = [
         path: routesConfig.home,
         component: HomePage,
     },
-
+    {
+        path: routesConfig.notes,
+        component: NoteLayout,
+    },
     {
         path: routesConfig.note,
         component: NoteLayout,
     },
-
     {
         path: routesConfig.notebooks,
         component: NotebookPage,

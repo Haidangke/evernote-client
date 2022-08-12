@@ -1,4 +1,6 @@
 import classNames from 'classnames/bind';
+
+import { routesConfig } from 'config';
 import { DeleteIcon, HomeIcon, NoteIcon, MissionIcon } from 'assets/icons';
 
 import MenuItem from './MenuItem';
@@ -18,23 +20,23 @@ function Menu({ isSmallSidebar }: MenuProps) {
     return (
         <div className={cx('menu', { menu__small: isSmallSidebar })}>
             <MenuItem
-                topic={{ value: '', title: 'Trang chủ' }}
+                topic={{ title: 'Trang chủ' }}
                 icon={{ main: HomeIcon }}
                 types={['link']}
+                navigate={{ path: routesConfig.home }}
             />
             <Shortcut />
             <MenuItem
                 icon={{ main: NoteIcon }}
-                topic={{ value: 'note', title: 'Ghi chú' }}
+                topic={{ title: 'Ghi chú' }}
                 types={['link']}
-                onAdd={() => {}}
+                navigate={{ path: routesConfig.notes, params: { an: true } }}
             />
 
             <MenuItem
                 topic={{ title: 'Nhiệm vụ', value: 'todo' }}
                 icon={{ main: MissionIcon }}
                 types={['menu']}
-                onAdd={() => {}}
             />
             <div className={cx('line-space')}></div>
 
@@ -42,9 +44,10 @@ function Menu({ isSmallSidebar }: MenuProps) {
             <Tag />
             <div className={cx('line-space')}></div>
             <MenuItem
-                topic={{ title: 'Thùng rác', value: 'recycle' }}
+                topic={{ title: 'Thùng rác' }}
                 icon={{ main: DeleteIcon }}
                 types={['link']}
+                navigate={{ path: routesConfig.recycle }}
             />
         </div>
     );

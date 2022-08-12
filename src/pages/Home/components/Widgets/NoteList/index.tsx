@@ -16,14 +16,14 @@ const cx = classNames.bind(styles);
 function NoteList() {
     const { listNote } = useAppSelector((state) => state.note);
 
-    const handleToNote = useNavigateParams();
+    const navigate = useNavigateParams();
 
     const addNote = useAddNote();
 
     return (
         <Element
             menu={[
-                { title: 'Chuyển đến ghi chú', handle: () => handleToNote({}, '/note') },
+                { title: 'Chuyển đến ghi chú', handle: () => navigate('/note') },
                 { title: 'Tạo ghi chú mới', handle: addNote },
                 { title: 'Xóa tiện ích', handle: () => {} },
             ]}
@@ -41,7 +41,7 @@ function NoteList() {
                 ) : (
                     listNote.map((note) => (
                         <div
-                            onClick={() => handleToNote({ n: note._id }, '/note')}
+                            onClick={() => navigate('/note', { n: note._id })}
                             key={note._id}
                             className={styles.item}
                         >

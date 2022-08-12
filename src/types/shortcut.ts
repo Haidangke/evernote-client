@@ -1,7 +1,10 @@
 export interface Shortcut {
     _id: string;
-    type: 'note' | 'notebook' | 'tag';
-    typeId: string;
+    type: {
+        _id: string;
+        name: 'notebook' | 'tag' | 'note';
+        value: 'n' | 'b' | 't';
+    };
     name: string;
 
     createdAt: string;
@@ -9,7 +12,10 @@ export interface Shortcut {
 }
 
 export interface ShortcutParams {
-    type: 'note' | 'notebook' | 'tag';
-    typeId: string;
+    type: {
+        _id: string;
+        name: 'notebook' | 'tag' | 'note';
+        value: 'n' | 'b' | 't';
+    };
     name: string;
 }

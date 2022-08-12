@@ -20,7 +20,7 @@ interface RowProps {
 
 function Row({ notebook }: RowProps) {
     const { listNote } = useAppSelector((state) => state.note);
-    const handleToNote = useNavigateParams();
+    const navigate = useNavigateParams();
     const notesOfNotebook = useMemo(
         () => listNote.filter((note) => note.notebook === notebook._id),
         [listNote, notebook._id]
@@ -39,7 +39,7 @@ function Row({ notebook }: RowProps) {
                     />
                     <div
                         className={styles.info}
-                        onClick={() => handleToNote({ b: notebook._id }, '/notebook')}
+                        onClick={() => navigate('/notebook', { b: notebook._id, an: true })}
                     >
                         {notebook.isDefault ? (
                             <NotebookDfIcon width={24} height={24} />

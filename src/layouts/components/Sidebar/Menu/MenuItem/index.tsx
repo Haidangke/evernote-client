@@ -1,52 +1,63 @@
 import { Fragment, useState } from 'react';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { IoMdArrowDropright } from 'react-icons/io';
 import classnames from 'classnames/bind';
 import Tippy from '@tippyjs/react';
 
 import useNavigateParams from 'hooks/useNavigateParams';
 import { AddIconSmall, IconProps } from 'assets/icons';
+import Item from './Item';
 
-import styles from './Menu.module.scss';
+import styles from '../Menu.module.scss';
 const cx = classnames.bind(styles);
 
+type Navigate = {
+    path?: string;
+    params?: { [key: string]: any };
+};
+
+export type ItemProps = Array<{
+    _id: string;
+    name: string;
+    icon: (props: IconProps) => any;
+    navigate?: Navigate;
+    type: { name: 'notebook' | 'note' | 'tag'; value: 'b' | 'n' | 't' };
+}>;
+
+export type Types = Array<'menu' | 'link' | 'slide'>;
+
 interface MenuItemProps {
-    active?: number;
     icon: {
         main: (props: IconProps) => any;
         add?: (props: IconProps) => any;
     };
 
-    topic: { title: string; value: string };
-    types: Array<'menu' | 'link' | 'slide'>;
-    items?: Array<{
-        _id: string;
-        name: string;
-        icon: (props: IconProps) => any;
-        path?: string;
-        type: 'note' | 'notebook' | 'tag';
-    }>;
+    topic: { title: string; value?: string };
+    types: Types;
+    items?: ItemProps;
+    itemSub?: {
+        heading?: string;
+        data: ItemProps;
+    };
     onAdd?: () => void;
-    heading?: string;
+    navigate?: Navigate;
 }
 
-function MenuItem({ icon, topic, types, items, onAdd, active = -1, heading }: MenuItemProps) {
+function MenuItem({ icon, topic, types, items, onAdd, itemSub, navigate }: MenuItemProps) {
     const [searchParams, setSearchParams] = useSearchParams();
     const [isMenu, setIsMenu] = useState(false);
     const { pathname } = useLocation();
-    const navigate = useNavigate();
     const navigateParams = useNavigateParams();
 
     const Icon = icon.main;
     const AddIcon = icon.add;
 
+    const path = navigate?.path;
     const { title, value } = topic;
-    const param = searchParams.get(value);
-
-    const path = types.includes('link') ? `/${topic.value}` : '';
 
     const handleClickContent = () => {
-        if (types.includes('slide')) {
+        if (types.includes('slide') && value) {
+            const param = value && searchParams.get(value);
             if (param === 'true') {
                 searchParams.delete(value);
             } else {
@@ -54,7 +65,13 @@ function MenuItem({ icon, topic, types, items, onAdd, active = -1, heading }: Me
             }
             setSearchParams(searchParams);
         }
-        if (path && !(pathname === path)) navigate(path);
+        if (types.includes('link')) {
+            const params = navigate?.params;
+
+            if (!path || pathname === path) return;
+
+            navigateParams(path, params);
+        }
     };
 
     return (
@@ -96,24 +113,13 @@ function MenuItem({ icon, topic, types, items, onAdd, active = -1, heading }: Me
 
             {isMenu && types.includes('menu') && (
                 <div>
-                    {items?.map((item, index) => {
-                        const ItemIcon = item.icon;
-                        return (
-                            <Fragment key={item.name}>
-                                {heading && <h3 className={styles.heading}>{heading}</h3>}
-                                <div
-                                    className={cx('sub', { sub__active: active === index })}
-                                    onClick={() =>
-                                        !types.includes('slide') &&
-                                        navigateParams({ b: item._id }, `/${item.type}`)
-                                    }
-                                >
-                                    <ItemIcon width={20} height={20} className={cx('sub-icon')} />
-                                    <div className={cx('sub-name')}>{item.name}</div>
-                                </div>
-                            </Fragment>
-                        );
-                    })}
+                    <Item data={items} types={types} page={value} />
+                    {itemSub && (
+                        <>
+                            <h3 className={styles.heading}>{itemSub.heading}</h3>
+                            <Item data={itemSub.data} types={types} page={value} />
+                        </>
+                    )}
 
                     {/* tạo mới trong phần menu con */}
                     {onAdd && AddIcon && (

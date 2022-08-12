@@ -14,11 +14,11 @@ type NoteProps = {
 
 const cx = classNames.bind(styles);
 function NoteRow({ note }: NoteProps) {
-    const handleToNote = useNavigateParams();
+    const navigate = useNavigateParams();
     return (
         <div key={note._id} className={styles.row}>
             <div className={cx('column', 'column__sub')}>
-                <div className={styles.info} onClick={() => handleToNote({ n: note._id }, '/note')}>
+                <div className={styles.info} onClick={() => navigate('/note', { n: note._id })}>
                     <NoteSolidIcon />
                     <div className={styles.name}>{note.title || 'Chưa có tiêu đề'}</div>
                 </div>

@@ -1,3 +1,3 @@
-const searchKeys = { all: ['n', 'tag', 'b'], keyRefresh: ['tag'] };
+const searchKeys = { all: ['n', 'tag', 'b', 'an', '_id'], keyRefresh: ['tag'] };
 
 export default searchKeys;

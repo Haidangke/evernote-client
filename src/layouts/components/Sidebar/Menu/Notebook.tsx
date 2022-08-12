@@ -1,5 +1,4 @@
 import { useCallback, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -17,9 +16,6 @@ interface FormNotebook {
 }
 
 function Notebook() {
-    const [searchParams] = useSearchParams();
-    const notebookId = searchParams.get('b');
-
     const email = useAppSelector((state) => state.auth.user?.email);
     const dispatch = useAppDispatch();
     const [isModal, setIsModal] = useState(false);
@@ -48,15 +44,11 @@ function Notebook() {
     return (
         <>
             <MenuItem
-                topic={{ title: 'Sổ tay', value: 'notebooks' }}
+                navigate={{ path: '/notebooks' }}
+                topic={{ title: 'Sổ tay', value: 'notebook' }}
                 icon={{ main: NotebookIcon }}
                 types={['link', 'menu']}
-                onAdd={() => {
-                    setIsModal(true);
-                }}
-                active={
-                    notebookId ? notebooks.map((notebook) => notebook._id).indexOf(notebookId) : -1
-                }
+                onAdd={() => setIsModal(true)}
                 items={
                     notebooks.length === 0
                         ? []
@@ -64,7 +56,15 @@ function Notebook() {
                               _id: notebook._id,
                               name: notebook.name,
                               icon: notebook.isDefault ? NotebookSubDfIcon : NotebookSubIcon,
-                              type: 'notebook',
+                              type: {
+                                  name: 'notebook',
+                                  value: 'b',
+                              },
+                              navigate: {
+                                  params: {
+                                      an: true,
+                                  },
+                              },
                           }))
                 }
             />

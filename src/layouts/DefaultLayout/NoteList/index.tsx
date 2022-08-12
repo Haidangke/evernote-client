@@ -21,6 +21,7 @@ function NoteList() {
     const [searchParams, setSearchParams] = useSearchParams();
     const noteId = searchParams.get('n');
     const notebookId = searchParams.get('b');
+    const isShow = searchParams.get('an');
 
     const { notebooks } = useAppSelector((state) => state.notebook);
     const { listNote } = useAppSelector((state) => state.note);
@@ -38,17 +39,20 @@ function NoteList() {
     const width = useWindowWidth();
 
     useEffect(() => {
-        if (listNote.length === 0) return;
-
-        if (!listNote.some((note) => note._id === noteId)) {
+        if (listNoteFilter.some((note) => note._id === noteId)) return;
+        if (listNoteFilter.length > 0) {
             searchParams.set('n', listNoteFilter[0]?._id);
+        } else {
+            searchParams.delete('n');
         }
         setSearchParams(searchParams);
-    }, [listNote, noteId, notebooks, listNoteFilter, page, searchParams, setSearchParams]);
+    }, [listNoteFilter, noteId, searchParams, setSearchParams]);
 
     useEffect(() => {
         if (width > 0) setMaxWidth(width / 3);
     }, [width]);
+
+    if (!isShow) return <></>;
 
     return (
         <Resizable

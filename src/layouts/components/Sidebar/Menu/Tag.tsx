@@ -57,7 +57,7 @@ function Tag() {
                               _id: tag._id,
                               name: tag.name,
                               icon: TagSubIcon,
-                              type: 'tag',
+                              type: { name: 'tag', value: 't' },
                           }))
                 }
             />

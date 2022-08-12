@@ -5,7 +5,7 @@ const shortcutService = {
     getAll(): Promise<Shortcut[]> {
         return axiosClientSecret.get('/shortcut');
     },
-    create(params: ShortcutParams) {
+    create(params: ShortcutParams): Promise<Shortcut> {
         return axiosClientSecret.post('/shortcut', params);
     },
 };

@@ -11,12 +11,13 @@ import InputField, { nameSchema } from 'components/FormFields/InputField';
 import Toast from 'components/Toast';
 import ModalForm from 'components/Modal/ModalForm';
 import notebookService from 'services/notebookService';
+import shortcutService from 'services/shortcutService';
 import { notebookActions } from 'app/slice/notebookSlice';
+import { noteActions } from 'app/slice/noteSlice';
 
 import More from 'components/Tippy/More';
 import styles from 'components/Tippy/More/More.module.scss';
-import { noteActions } from 'app/slice/noteSlice';
-import shortcutService from 'services/shortcutService';
+import { shortcutActions } from 'app/slice/shortcutSlice';
 const cx = classNames.bind(styles);
 
 interface NotebookMoreProps {
@@ -31,6 +32,8 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
     const dispatch = useAppDispatch();
     const notebooks = useAppSelector((state) => state.notebook.notebooks);
     const listNote = useAppSelector((state) => state.note.listNote);
+    const shortcuts = useAppSelector((state) => state.shortcut.shortcuts);
+    const isShortcut = shortcuts.find((shortcut) => shortcut.type._id === notebook._id);
 
     const [isDelete, setIsDelete] = useState(false);
     const [isChangeName, setIsChangeName] = useState(false);
@@ -107,12 +110,22 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
         });
     }, [dispatch, listNote, notebook._id, notebook.name, notebooks]);
 
-    const handleAddShortcut = () => {
-        shortcutService
-            .create({ type: 'notebook', typeId: notebook._id, name: notebook.name })
-            .then(() => {
-                console.log('Thêm vào lỗi tắt thành công');
-            });
+    const handleShortcut = () => {
+        if (isShortcut) {
+        } else {
+            shortcutService
+                .create({
+                    type: { _id: notebook._id, name: 'notebook', value: 'b' },
+                    name: notebook.name,
+                })
+                .then((data) => {
+                    const newShortcuts = [...shortcuts, data];
+                    dispatch(shortcutActions.setShortcuts(newShortcuts));
+
+                    toast.remove();
+                    notify(`Đã thêm "${data.name}" vào lỗi tắt`);
+                });
+        }
     };
 
     return (
@@ -139,8 +152,9 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
 
                         <div className={styles.lineThrough}></div>
 
-                        <div onClick={handleAddShortcut} className={styles.item}>
-                            Thêm vào lỗi tắt
+                        <div className={styles.item} onClick={handleShortcut}>
+                            {isShortcut ? 'Xóa khỏi ' : 'Thêm vào '}
+                            Lối tắt
                         </div>
                         {!notebook.isDefault && (
                             <div onClick={handleSetDefault} className={styles.item}>
