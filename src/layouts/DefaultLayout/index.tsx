@@ -1,11 +1,11 @@
-import NoteList from './NoteList';
-import NoteEditor from './NoteEditor';
+import NoteList from 'features/note/components/NoteList';
+import Editor from 'features/editor';
 
 function DefaultLayout() {
     return (
         <>
             <NoteList />
-            <NoteEditor />
+            <Editor />
         </>
     );
 }

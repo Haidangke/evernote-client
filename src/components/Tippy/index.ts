@@ -1,6 +1,7 @@
-import TippyButton from './Button';
-import TippyHeadless from './Headless';
-import TippySort from './Sort';
-import TippyNoteMore from './More/NoteMore';
+import TippyButton from './TippyButton';
+import TippyHeadless from './TippyHeadless';
+import TippySort from './TippySort';
+import TippyNotebookMore from './TippyMore/TippyNotebookMore';
 
-export { TippyButton, TippyHeadless, TippySort, TippyNoteMore };
+
+export { TippyButton, TippyHeadless, TippySort, TippyNotebookMore };

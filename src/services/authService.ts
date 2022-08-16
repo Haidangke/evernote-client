@@ -10,7 +10,6 @@ const authService = {
         return axiosClient.post('/auth/login', params);
     },
     logout() {
-        localStorage.removeItem('access_token');
         return axiosClient.post('/auth/logout');
     },
     register(params: RegisterParams): Promise<Response<any>> {

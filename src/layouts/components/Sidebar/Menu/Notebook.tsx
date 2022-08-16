@@ -8,7 +8,7 @@ import { InputField } from 'components/FormFields';
 import ModalForm from 'components/Modal/ModalForm';
 import MenuItem from './MenuItem';
 import notebookService from 'services/notebookService';
-import { notebookActions } from 'app/slice/notebookSlice';
+import { notebookActions } from 'features/notebook/notebookSlice';
 import { nameSchema } from 'components/FormFields/InputField';
 
 interface FormNotebook {

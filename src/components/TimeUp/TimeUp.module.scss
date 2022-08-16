@@ -1,0 +1,6 @@
+@import 'styles/mixin';
+.wrapper {
+    @include text-overflow(1);
+    font-size: 1.4rem;
+    padding: 0 8px;
+}

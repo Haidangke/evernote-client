@@ -1,0 +1,214 @@
+@import 'styles/mixin';
+.root {
+    display: flex;
+    background-image: url('../../../assets/images/auth_bg.png');
+}
+
+.wrapper {
+    position: relative;
+    @include flex(center, center);
+    flex-direction: column;
+    flex: 1;
+}
+
+.form {
+    background-color: var(--white);
+    max-width: 512px;
+    padding: 62px 100px 48px;
+    width: 512px;
+    box-shadow: 0px 4px 24px rgb(0 0 0 / 10%);
+}
+
+.logo {
+    @include flex(center, unset);
+    flex-direction: column;
+    margin: -10px 0 10px 0;
+
+    & > svg {
+        width: 72px;
+        height: 72px;
+    }
+
+    & > span {
+        font-size: 4.4rem;
+        font-family: none;
+        font-weight: 700;
+
+        line-height: 1;
+        font-family: 'Source Serif Pro', serif;
+    }
+}
+
+.form-description {
+    margin-bottom: 40px;
+    font-size: 1.6rem;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.method-item {
+    @include flex(center, center);
+    height: 42px;
+    border: 1px solid var(--color-d9);
+    margin-bottom: 8px;
+
+    border-radius: 4px;
+    background-color: var(--white);
+    cursor: pointer;
+    & > svg {
+        width: 20px;
+        height: 20px;
+    }
+    & > span {
+        padding-left: 6px;
+        color: var(--color-6a);
+        font-size: 1.5rem;
+    }
+
+    &:hover {
+        background-color: var(--color-f8);
+    }
+}
+
+.or {
+    position: relative;
+    text-align: center;
+    color: #ababab;
+    font-size: 1.4rem;
+    margin: 16px 0;
+    &::after,
+    &::before {
+        content: '';
+        position: absolute;
+        height: 1px;
+        width: 45%;
+        background-color: #ababab;
+        top: 50%;
+    }
+    &::after {
+        left: 0;
+    }
+    &::before {
+        right: 0;
+    }
+}
+
+.form-main {
+    display: flex;
+    flex-direction: column;
+    input {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.6rem;
+        border-radius: 6px;
+        border: 1px solid #e6e6e6;
+    }
+    & > form {
+        order: 1;
+    }
+}
+
+.actions {
+    @include flex(unset, space-between);
+    margin-top: 10px;
+    order: 3;
+}
+
+.remember {
+    @include flex(center, unset);
+    margin: 0 auto;
+    color: var(--color-73);
+    & > input {
+        margin-right: 6px;
+        width: 16px;
+        height: 16px;
+    }
+    & > span {
+        height: 100%;
+        @include flex(center, unset);
+        font-size: 1.4rem;
+    }
+}
+
+.forgot {
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 1.4rem;
+    &:hover {
+        text-decoration: underline;
+        color: var(--primary-hover);
+    }
+}
+
+.submit {
+    position: relative;
+    @include flex(center, center);
+    width: 100%;
+    height: 46px;
+
+    margin-top: 10px;
+    padding: 8px 16px;
+
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    font-size: 1.6rem;
+    color: var(--white);
+    transition: var(--transition-base);
+    z-index: 1;
+    &:hover {
+        background-color: var(--primary-hover);
+    }
+}
+
+.disable {
+    cursor: unset;
+    background-color: var(--primary-hover);
+}
+
+.error {
+    color: var(--color-red);
+    font-size: 1.26rem;
+    min-height: 20px;
+    height: 24px;
+    order: 2;
+}
+
+.form-footer {
+    margin-top: 40px;
+    font-size: 14px;
+    text-align: center;
+    order: 4;
+    & > div {
+        color: var(--text-color);
+        margin-bottom: 6px;
+    }
+    & > a {
+        color: var(--primary-color);
+    }
+    & > a:hover {
+        text-decoration: underline;
+        color: var(--primary-hover);
+    }
+}
+
+.policy {
+    font-size: 1.2rem;
+    color: var(--color-a6);
+    order: 4;
+    text-align: center;
+}
+
+@keyframes hide {
+    0% {
+        height: 0;
+    }
+    100% {
+        height: 42px;
+    }
+}
+
+.input-hide {
+    position: relative;
+    z-index: 0;
+    animation: hide 0.3s;
+    margin-top: 8px;
+}

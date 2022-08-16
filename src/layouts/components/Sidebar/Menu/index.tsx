@@ -9,16 +9,14 @@ import Notebook from './Notebook';
 import Shortcut from './Shortcut';
 
 import styles from './Menu.module.scss';
-
-interface MenuProps {
-    isSmallSidebar: boolean;
-}
+import { useAppSelector } from 'app/hooks';
 
 const cx = classNames.bind(styles);
 
-function Menu({ isSmallSidebar }: MenuProps) {
+function Menu() {
+    const { isSmall } = useAppSelector((state) => state.sidebar);
     return (
-        <div className={cx('menu', { menu__small: isSmallSidebar })}>
+        <div className={cx('menu', { menu__small: isSmall })}>
             <MenuItem
                 topic={{ title: 'Trang chủ' }}
                 icon={{ main: HomeIcon }}

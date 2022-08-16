@@ -1,13 +1,13 @@
-import { useNavigate } from 'react-router-dom';
-
+import { noteActions } from 'features/note/noteSlice';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import noteService from 'services/noteService';
-import { noteActions } from 'app/slice/noteSlice';
+import useNavigateParams from './useNavigateParams';
 
 function useAddNote(notebookId?: string) {
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
+    const navigate = useNavigateParams();
     const { notebooks } = useAppSelector((state) => state.notebook);
+    const { listNote } = useAppSelector((state) => state.note);
 
     const addNote = () => {
         const notebookDf = notebooks.find((notebook) => notebook.isDefault);
@@ -19,11 +19,9 @@ function useAddNote(notebookId?: string) {
 
                 .then((res) => {
                     if (!res) return;
-                    dispatch(noteActions.addNote(res));
-                    navigate({
-                        pathname: '/note',
-                        search: '?n=' + res._id,
-                    });
+
+                    dispatch(noteActions.setListNote([res, ...listNote]));
+                    navigate('/note', { n: res._id });
                 })
                 .catch();
         }

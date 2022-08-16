@@ -4,26 +4,23 @@ import { IoMdArrowDropright } from 'react-icons/io';
 import classnames from 'classnames/bind';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { logout } from 'app/thunk/authThunk';
 
 import { TippyButton } from 'components/Tippy';
 import { ArrowDownIcon, CheckIcon, Setting } from 'assets/icons';
 
 import avatar_default from 'assets/images/avatar';
 import styles from './Header.module.scss';
-
-interface HeaderProps {
-    isSmallSidebar: boolean;
-}
+import { authActions } from 'features/auth/authSlice';
 
 const cx = classnames.bind(styles);
 
-function Header({ isSmallSidebar }: HeaderProps) {
+function Header() {
     const { user } = useAppSelector((state) => state.auth);
     const dispatch = useAppDispatch();
     const [visible, setVisible] = useState(false);
+    const { isSmall } = useAppSelector((state) => state.sidebar);
     return (
-        <div className={cx('wrapper', { small: isSmallSidebar })}>
+        <div className={cx('wrapper', { small: isSmall })}>
             <div className={cx('left')}>
                 <TippyHeadless
                     visible={visible}
@@ -47,7 +44,7 @@ function Header({ isSmallSidebar }: HeaderProps) {
                                 </div>
                             </div>
                             <footer
-                                onClick={() => dispatch(logout())}
+                                onClick={() => dispatch(authActions.logout())}
                                 className={cx('drdown-footer')}
                             >
                                 Đăng xuất khỏi {user?.email}

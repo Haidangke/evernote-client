@@ -1,13 +1,14 @@
 import { Fragment } from 'react';
 import classNames from 'classnames/bind';
 
+import TimeUp from 'components/TimeUp';
 import { useAppSelector } from 'app/hooks';
 import useAddNote from 'hooks/useAddNote';
-import { AddNoteIcon, ArrowLeftIcon, NewNoteIcon } from 'assets/icons';
+import { ArrowLeftIcon, NewNoteIcon } from 'assets/icons';
 import Element from '../../Element';
 import Tab from '../../Tab';
 import NoteListLoading from './NoteListLoading';
-import TimeUp from 'layouts/DefaultLayout/NoteList/components/List/TimeUp';
+
 import useNavigateParams from 'hooks/useNavigateParams';
 
 import styles from './NoteList.module.scss';

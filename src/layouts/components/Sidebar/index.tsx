@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import classnames from 'classnames/bind';
 import { Resizable } from 're-resizable';
 
@@ -7,22 +7,23 @@ import useWindowWidth from 'hooks/useWindowWidth';
 import Actions from './Actions';
 import Menu from './Menu';
 import Header from './Header';
+import SlideList from '../SlideList';
 
 import './Sidebar.scss';
-import SlideList from '../SlideList';
 import styles from './Sidebar.module.scss';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { sidebarActions } from 'features/sidebar/sidebarSlice';
 
 const cx = classnames.bind(styles);
 
 const widthLocal = parseFloat(JSON.parse(localStorage.getItem('width-sidebar') as string));
 const width = typeof widthLocal === 'number' && !Number.isNaN(widthLocal) ? widthLocal : 320;
 
-const isSmallLocal = JSON.parse(localStorage.getItem('isSmall-sidebar') as string);
-const isSmall = typeof isSmallLocal === 'boolean' ? isSmallLocal : false;
-
 function Sidebar() {
+    const dispatch = useAppDispatch();
+    const { isSmall } = useAppSelector((state) => state.sidebar);
     const [resizable, setResizable] = useState({ width, height: '100vh' });
-    const [isSmallSidebar, setIsSmallSidebar] = useState(isSmall);
+
     const [maxWidth, setMaxWidth] = useState(400);
 
     const widthWindow = useWindowWidth();
@@ -39,7 +40,7 @@ function Sidebar() {
 
     return (
         <Resizable
-            className={cx('resizable', { 'resizable-small': isSmallSidebar })}
+            className={cx('resizable', { 'resizable-small': isSmall })}
             style={{ backgroundColor: '#1a1a1a' }}
             enable={{ right: true }}
             maxWidth={maxWidth}
@@ -58,9 +59,7 @@ function Sidebar() {
         >
             <div
                 onClick={() => {
-                    const value = !isSmallSidebar;
-                    setIsSmallSidebar(value);
-                    localStorage.setItem('isSmall-sidebar', JSON.stringify(value));
+                    dispatch(sidebarActions.setIsSmall(!isSmall));
                 }}
                 className={cx('resize-btn')}
             >
@@ -68,9 +67,9 @@ function Sidebar() {
             </div>
             <div className={cx('wrapper')}>
                 <div className={cx('main')}>
-                    <Header isSmallSidebar={isSmallSidebar} />
-                    <Actions isSmallSidebar={isSmallSidebar} />
-                    <Menu isSmallSidebar={isSmallSidebar} />
+                    <Header  />
+                    <Actions  />
+                    <Menu  />
                 </div>
                 <SlideList />
             </div>

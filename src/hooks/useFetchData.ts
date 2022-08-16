@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { notebookActions } from 'app/slice/notebookSlice';
-import { noteActions } from 'app/slice/noteSlice';
+import { notebookActions } from 'features/notebook/notebookSlice';
+import { noteActions } from 'features/note/noteSlice';
 import { tagActions } from 'app/slice/tagSlice';
-import { authActions } from 'app/slice/authSlice';
+import { authActions } from 'features/auth/authSlice';
 import { shortcutActions } from './../app/slice/shortcutSlice';
 
 function useFetchData() {

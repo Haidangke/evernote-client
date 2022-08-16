@@ -13,13 +13,11 @@ import useOnClickOutside from 'hooks/useOnclickOutside';
 import styles from './Actions.module.scss';
 import useAddNote from 'hooks/useAddNote';
 
-interface ActionsProps {
-    isSmallSidebar: boolean;
-}
 
 const cx = classnames.bind(styles);
 
-function Actions({ isSmallSidebar }: ActionsProps) {
+function Actions() {
+    const { isSmall } = useAppSelector((state) => state.sidebar);
     const { listNote } = useAppSelector((state) => state.note);
     const [filter, setFilter] = useState('');
     const [isSearch, setIsSearch] = useState(false);
@@ -40,7 +38,7 @@ function Actions({ isSmallSidebar }: ActionsProps) {
 
     useOnClickOutside(addRef, () => setIsAdd(false));
     return (
-        <div className={cx('wrapper', { small: isSmallSidebar })}>
+        <div className={cx('wrapper', { small: isSmall })}>
             <div>
                 <Tippy
                     placement='bottom-start'

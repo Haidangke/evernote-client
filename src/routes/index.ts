@@ -1,6 +1,9 @@
-import { RecyclePage, HomePage, LoginPage, NotebookPage, RegisterPage } from 'pages';
+import { RecyclePage, HomePage } from 'pages';
 import { routesConfig } from 'config';
-import NoteLayout from 'layouts/DefaultLayout';
+import DefaultLayout from 'layouts/DefaultLayout';
+import Notebook from 'features/notebook';
+import LoginPage from 'features/auth/pages/Login';
+import RegisterPage from 'features/auth/pages/Register';
 
 interface Route {
     path: string;
@@ -14,19 +17,19 @@ const privateRoute: Route[] = [
     },
     {
         path: routesConfig.notes,
-        component: NoteLayout,
+        component: DefaultLayout,
     },
     {
         path: routesConfig.note,
-        component: NoteLayout,
+        component: DefaultLayout,
     },
     {
         path: routesConfig.notebooks,
-        component: NotebookPage,
+        component: Notebook,
     },
     {
         path: routesConfig.notebook,
-        component: NoteLayout,
+        component: DefaultLayout,
     },
 
     {
