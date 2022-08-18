@@ -1,26 +1,23 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { memo, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 
-import { TagIcon, TagSubIcon } from 'assets/icons';
 import InputField, { nameSchema } from 'components/FormFields/InputField';
 import ModalForm from 'components/Modal/ModalForm';
+import SidebarMenuItem from 'features/sidebar/components/Menu/MenuItem';
+import { tagActions } from 'features/tag/tagSlice';
 import tagService from 'services/tagService';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import MenuItem from '../Menu/MenuItem';
-import { tagActions } from 'app/slice/tagSlice';
+import { TagIcon, TagSubIcon } from 'assets/icons';
+import { FormAdd } from 'types';
 
-interface FormTag {
-    name: string;
-}
-
-function Tag() {
+function TagItemSidebar() {
     const dispatch = useAppDispatch();
     const { listTag } = useAppSelector((state) => state.tag);
     const [isModal, setIsModal] = useState(false);
 
-    const { control, handleSubmit, reset } = useForm<FormTag>({
+    const { control, handleSubmit, reset } = useForm<FormAdd>({
         defaultValues: { name: '' },
         resolver: yupResolver(nameSchema),
     });
@@ -32,7 +29,7 @@ function Tag() {
         [listTag]
     );
 
-    const handleFormSubmit = async (formValue: FormTag) => {
+    const handleFormSubmit = async (formValue: FormAdd) => {
         const nameTag = formValue.name;
 
         if (!handleValid(nameTag)) {
@@ -45,21 +42,24 @@ function Tag() {
 
     return (
         <>
-            <MenuItem
+            <SidebarMenuItem
                 topic={{ title: 'Thẻ', value: 'tag' }}
                 icon={{ main: TagIcon, add: TagSubIcon }}
                 types={['menu', 'slide']}
                 onAdd={() => setIsModal(true)}
-                items={
-                    listTag.length === 0
-                        ? []
-                        : listTag.map((tag) => ({
-                              _id: tag._id,
-                              name: tag.name,
-                              icon: TagSubIcon,
-                              type: { name: 'tag', value: 't' },
-                          }))
-                }
+                menuSubs={[
+                    {
+                        data:
+                            listTag.length === 0
+                                ? []
+                                : listTag.map((tag) => ({
+                                      _id: tag._id,
+                                      name: tag.name,
+                                      icon: TagSubIcon,
+                                      type: { name: 'tag', value: 't' },
+                                  })),
+                    },
+                ]}
             />
             <ModalForm
                 title='Tạo thẻ mới'
@@ -80,4 +80,4 @@ function Tag() {
     );
 }
 
-export default memo(Tag);
+export default memo(TagItemSidebar);

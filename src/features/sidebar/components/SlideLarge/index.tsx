@@ -2,11 +2,12 @@ import { Fragment, useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 
-import SlideTag from './SlideTag';
-import styles from './SlideList.module.scss';
-import './SlideList.scss';
+import TagSlideLarge from 'features/tag/components/TagSlideLarge';
 
-function SlideList() {
+import '../Slide/Slide.scss';
+import styles from './SlideLarge.module.scss';
+
+function SlideLarge() {
     const [isOpen, setIsOpen] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -17,7 +18,7 @@ function SlideList() {
     const tag = searchParams.get('tag');
 
     if (tag) {
-        Component = SlideTag;
+        Component = TagSlideLarge;
     }
 
     useEffect(() => {
@@ -55,4 +56,4 @@ function SlideList() {
     );
 }
 
-export default SlideList;
+export default SlideLarge;

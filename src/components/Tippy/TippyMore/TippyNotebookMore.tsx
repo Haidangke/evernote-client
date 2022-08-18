@@ -7,16 +7,16 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { Notebook } from 'types';
 import useAddNote from 'hooks/useAddNote';
-import InputField, { nameSchema } from 'components/FormFields/InputField';
-import Toast from 'components/Toast';
-import ModalForm from 'components/Modal/ModalForm';
 import notebookService from 'services/notebookService';
 import shortcutService from 'services/shortcutService';
 import { notebookActions } from 'features/notebook/notebookSlice';
 import { noteActions } from 'features/note/noteSlice';
+import { shortcutActions } from 'features/shortcut/shortcutSlice';
 
+import InputField, { nameSchema } from 'components/FormFields/InputField';
+import ModalForm from 'components/Modal/ModalForm';
+import Toast from 'components/Toast';
 import More from 'components/Tippy/TippyMore';
-import { shortcutActions } from 'app/slice/shortcutSlice';
 
 import styles from './TippyMore.module.scss';
 const cx = classNames.bind(styles);

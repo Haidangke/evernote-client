@@ -1,18 +1,19 @@
-import { useEffect, useState } from 'react';
 import classnames from 'classnames/bind';
 import { Resizable } from 're-resizable';
+import { useEffect, useState } from 'react';
 
-import { ArrowLeftIcon } from 'assets/icons';
-import useWindowWidth from 'hooks/useWindowWidth';
-import Actions from './Actions';
-import Menu from './Menu';
-import Header from './Header';
-import SlideList from '../SlideList';
-
-import './Sidebar.scss';
-import styles from './Sidebar.module.scss';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { ArrowLeftIcon } from 'assets/icons';
 import { sidebarActions } from 'features/sidebar/sidebarSlice';
+import useWindowWidth from 'hooks/useWindowWidth';
+import Actions from './components/Actions';
+import Header from './components/Header';
+import Menu from './components/Menu';
+import SlideLarge from './components/SlideLarge';
+import SlideSmall from './components/SlideSmall';
+
+import styles from './Sidebar.module.scss';
+import './Sidebar.scss';
 
 const cx = classnames.bind(styles);
 
@@ -37,6 +38,8 @@ function Sidebar() {
             setMaxWidth(400);
         }
     }, [widthWindow]);
+
+    
 
     return (
         <Resizable
@@ -65,13 +68,20 @@ function Sidebar() {
             >
                 <ArrowLeftIcon width={14} height={14} />
             </div>
-            <div className={cx('wrapper')}>
+            <div
+                className={cx('wrapper')}
+                
+                onMouseLeave={() => {
+                    dispatch(sidebarActions.setIsSlide(false));
+                }}
+            >
                 <div className={cx('main')}>
-                    <Header  />
-                    <Actions  />
-                    <Menu  />
+                    <Header />
+                    <Actions />
+                    <Menu />
                 </div>
-                <SlideList />
+                <SlideSmall />
+                <SlideLarge />
             </div>
         </Resizable>
     );

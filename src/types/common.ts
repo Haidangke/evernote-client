@@ -3,3 +3,9 @@ export interface Response<T> {
     msg: string;
     data?: T;
 }
+
+export type Topic = 'tag' | 'notebook' | 'note' | 'shortcut';
+
+export interface FormAdd {
+    name: string;
+}

@@ -1,8 +1,8 @@
 import { Fragment, useMemo } from 'react';
 
+import MenuItem from 'features/sidebar/components/Menu/MenuItem';
 import { useAppSelector } from 'app/hooks';
 import { NotebookSubIcon, NoteSolidIcon, StarIcon } from 'assets/icons';
-import MenuItem from 'layouts/components/Sidebar/Menu/MenuItem';
 
 function ShortcutItemSidebar() {
     const { shortcuts } = useAppSelector((state) => state.shortcut);
@@ -20,32 +20,40 @@ function ShortcutItemSidebar() {
         <Fragment>
             <MenuItem
                 icon={{ main: StarIcon }}
-                topic={{ title: 'Lối tắt' }}
+                topic={{ title: 'Lối tắt', value: 'shortcut' }}
                 types={['menu']}
-                items={shortcuts.map((shortcut) => ({
-                    name: shortcut.name,
-                    _id: shortcut.type._id,
-                    icon: NotebookSubIcon,
-                    type: {
-                        name: shortcut.type.name,
-                        value: shortcut.type.value,
+                menuSubs={[
+                    {
+                        data: shortcuts.map((shortcut) => ({
+                            name: shortcut.name,
+                            _id: shortcut.type._id,
+                            icon: NotebookSubIcon,
+                            type: {
+                                name: shortcut.type.name,
+                                value: shortcut.type.value,
+                            },
+                            navigate: {
+                                params: { an: true },
+                            },
+                        })),
                     },
-                    navigate: {
-                        params: { an: true },
+                    {
+                        heading: 'Ghi chú gần đây',
+                        data: recentNotes.map((note) => ({
+                            _id: note._id,
+                            name: note.title,
+                            icon: NoteSolidIcon,
+                            type: {
+                                name: 'note',
+                                value: 'n',
+                            },
+                            navigate: {
+                                path: '/note',
+                                params: { an: true },
+                            },
+                        })),
                     },
-                }))}
-                itemSub={{
-                    heading: 'Ghi chú gần đây',
-                    data: recentNotes.map((note) => ({
-                        _id: note._id,
-                        name: note.title,
-                        icon: NoteSolidIcon,
-                        type: {
-                            name: 'note',
-                            value: 'n',
-                        },
-                    })),
-                }}
+                ]}
             />
         </Fragment>
     );

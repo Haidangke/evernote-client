@@ -6,7 +6,7 @@ type Page = 'notebook' | 'note' | 'notes' | '';
 const pages: Page[] = ['notebook', 'note' , 'notes'];
 
 function useLocationPage() {
-    const [page, setPage] = useState<Page>('');
+    const [page, setPage] = useState<string>('');
     const location = useLocation();
     const pathname = location.pathname;
 

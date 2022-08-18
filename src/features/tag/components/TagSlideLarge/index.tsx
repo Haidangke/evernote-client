@@ -1,17 +1,17 @@
-import { useMemo, useRef, useState } from 'react';
-import _ from 'lodash';
 import classNames from 'classnames/bind';
+import _ from 'lodash';
+import { useMemo, useRef, useState } from 'react';
 import { IoIosMore } from 'react-icons/io';
 
-import { SortIcon, TagIcon } from 'assets/icons';
-import { TippyButton } from 'components/Tippy';
 import { useAppSelector } from 'app/hooks';
+import { SortIcon, TagIcon } from 'assets/icons';
 import SearchInput from 'components/SearchInput';
+import { TippyButton } from 'components/Tippy';
 
-import styles from './SlideTag.module.scss';
+import styles from './TagSlideLarge.module.scss';
 const cx = classNames.bind(styles);
 
-function SlideTag() {
+function TagSlideLarge() {
     const tagRef = useRef<HTMLDivElement>(null);
     const [searchValue, setSearchValue] = useState('');
     const { listTag } = useAppSelector((state) => state.tag);
@@ -83,4 +83,4 @@ function SlideTag() {
     );
 }
 
-export default SlideTag;
+export default TagSlideLarge;

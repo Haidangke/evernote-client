@@ -2,12 +2,14 @@ import { useSearchParams } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import useNavigateParams from 'hooks/useNavigateParams';
-import { ItemProps, Types } from '.';
 
-import styles from '../Menu.module.scss';
+import styles from './Menu.module.scss';
+import { MenuSubProps, Types } from './MenuItem';
+import useLocationPage from 'hooks/useLocationPage';
 const cx = classNames.bind(styles);
 
-function Item({ data, types, page }: { data?: ItemProps; types: Types; page?: string }) {
+function MenuSub({ data, types }: { data: MenuSubProps; types: Types; }) {
+    const page = useLocationPage()
     const [searchParams] = useSearchParams();
     const navigate = useNavigateParams();
 
@@ -44,4 +46,4 @@ function Item({ data, types, page }: { data?: ItemProps; types: Types; page?: st
     );
 }
 
-export default Item;
+export default MenuSub;

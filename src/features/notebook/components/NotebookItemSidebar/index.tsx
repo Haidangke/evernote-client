@@ -1,26 +1,23 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { NotebookIcon, NotebookSubDfIcon, NotebookSubIcon } from 'assets/icons';
 import { InputField } from 'components/FormFields';
-import ModalForm from 'components/Modal/ModalForm';
-import MenuItem from './MenuItem';
-import notebookService from 'services/notebookService';
-import { notebookActions } from 'features/notebook/notebookSlice';
 import { nameSchema } from 'components/FormFields/InputField';
+import ModalForm from 'components/Modal/ModalForm';
+import { notebookActions } from 'features/notebook/notebookSlice';
+import MenuItem from 'features/sidebar/components/Menu/MenuItem';
+import notebookService from 'services/notebookService';
+import { FormAdd } from 'types';
 
-interface FormNotebook {
-    name: string;
-}
-
-function Notebook() {
+function NotebookItemSidebar() {
     const email = useAppSelector((state) => state.auth.user?.email);
     const dispatch = useAppDispatch();
     const [isModal, setIsModal] = useState(false);
     const { notebooks } = useAppSelector((state) => state.notebook);
-    const { control, handleSubmit, reset } = useForm<FormNotebook>({
+    const { control, handleSubmit, reset } = useForm<FormAdd>({
         defaultValues: { name: '' },
         resolver: yupResolver(nameSchema),
     });
@@ -32,7 +29,7 @@ function Notebook() {
         [notebooks]
     );
 
-    const handleFormSubmit = async (formValue: FormNotebook) => {
+    const handleFormSubmit = async (formValue: FormAdd) => {
         const notebook = formValue.name;
         if (!handleValid(notebook) && email) {
             await notebookService.create({ name: notebook, creator: email });
@@ -41,6 +38,7 @@ function Notebook() {
             setIsModal(false);
         }
     };
+
     return (
         <>
             <MenuItem
@@ -49,24 +47,29 @@ function Notebook() {
                 icon={{ main: NotebookIcon }}
                 types={['link', 'menu']}
                 onAdd={() => setIsModal(true)}
-                items={
-                    notebooks.length === 0
-                        ? []
-                        : notebooks.map((notebook) => ({
-                              _id: notebook._id,
-                              name: notebook.name,
-                              icon: notebook.isDefault ? NotebookSubDfIcon : NotebookSubIcon,
-                              type: {
-                                  name: 'notebook',
-                                  value: 'b',
-                              },
-                              navigate: {
-                                  params: {
-                                      an: true,
-                                  },
-                              },
-                          }))
-                }
+                menuSubs={[
+                    {
+                        data:
+                            notebooks.length === 0
+                                ? []
+                                : notebooks.map((notebook) => ({
+                                      _id: notebook._id,
+                                      name: notebook.name,
+                                      icon: notebook.isDefault
+                                          ? NotebookSubDfIcon
+                                          : NotebookSubIcon,
+                                      type: {
+                                          name: 'notebook',
+                                          value: 'b',
+                                      },
+                                      navigate: {
+                                          params: {
+                                              an: true,
+                                          },
+                                      },
+                                  })),
+                    },
+                ]}
             />
             <ModalForm
                 title='Tạo sổ tay mới'
@@ -87,4 +90,4 @@ function Notebook() {
     );
 }
 
-export default Notebook;
+export default NotebookItemSidebar;

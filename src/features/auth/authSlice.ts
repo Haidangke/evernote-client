@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { LoginParams, User, RegisterParams } from 'types';
 
-const access_token = localStorage.getItem('access_token');
+const access_token = JSON.parse(localStorage.getItem('access_token') as string);
 
 interface InitialState {
     user?: User;

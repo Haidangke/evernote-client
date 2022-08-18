@@ -5,9 +5,11 @@ import editorReducer from 'features/editor/editorSlice';
 import noteReducer from 'features/note/noteSlice';
 import authReducer from 'features/auth/authSlice';
 import notebookReducer from 'features/notebook/notebookSlice';
-import { tagReducer, shortcutReducer } from './slice';
-import rootSaga from './rootSaga';
 import sidebarReducer from 'features/sidebar/sidebarSlice';
+import tagReducer from 'features/tag/tagSlice';
+import shortcutReducer from 'features/shortcut/shortcutSlice';
+
+import rootSaga from './rootSaga';
 
 const sagaMiddleware = createSagaMiddleware();
 

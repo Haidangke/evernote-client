@@ -1,18 +1,14 @@
 @import 'styles/mixin';
 
-.menu {
+.wrapper {
     height: calc(100vh - 92px - 99px);
     overflow-y: auto;
 }
 
-.menu__small {
+.wrapper__small {
     overflow-y: hidden;
 
     .name {
-        display: none;
-    }
-
-    .menu-item:hover .add-btn {
         display: none;
     }
 
@@ -20,7 +16,11 @@
         display: none;
     }
 
-    .menu-sub {
+    .menu {
+        display: none;
+    }
+
+    .item:hover .add-btn {
         display: none;
     }
 }

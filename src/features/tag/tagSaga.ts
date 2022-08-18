@@ -1,5 +1,6 @@
-import { tagActions } from 'app/slice/tagSlice';
 import { call, put, takeLatest } from 'redux-saga/effects';
+
+import { tagActions } from './tagSlice';
 import tagService from 'services/tagService';
 import { Tag } from 'types';
 

@@ -1,8 +1,8 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { shortcutActions } from 'app/slice/shortcutSlice';
-import { Shortcut } from 'types';
+import { shortcutActions } from './shortcutSlice';
 import shortcutService from 'services/shortcutService';
+import { Shortcut } from 'types';
 
 function* shortcutSaga() {
     yield takeLatest(shortcutActions.fetch.type, fetchShortcuts);

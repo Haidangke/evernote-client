@@ -3,11 +3,12 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { notebookActions } from 'features/notebook/notebookSlice';
 import { noteActions } from 'features/note/noteSlice';
-import { tagActions } from 'app/slice/tagSlice';
+import { tagActions } from 'features/tag/tagSlice';
 import { authActions } from 'features/auth/authSlice';
-import { shortcutActions } from './../app/slice/shortcutSlice';
+import { shortcutActions } from 'features/shortcut/shortcutSlice';
 
 function useFetchData() {
+    
     const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
     const email = useAppSelector((state) => state.auth.user?.email);
     const dispatch = useAppDispatch();

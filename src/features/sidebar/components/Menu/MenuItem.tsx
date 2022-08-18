@@ -1,14 +1,17 @@
-import { Fragment, useState } from 'react';
-import { useLocation, useSearchParams } from 'react-router-dom';
-import { IoMdArrowDropright } from 'react-icons/io';
-import classnames from 'classnames/bind';
 import Tippy from '@tippyjs/react';
+import classnames from 'classnames/bind';
+import { Fragment, useState } from 'react';
+import { IoMdArrowDropright } from 'react-icons/io';
+import { useLocation, useSearchParams } from 'react-router-dom';
 
-import useNavigateParams from 'hooks/useNavigateParams';
 import { AddIconSmall, IconProps } from 'assets/icons';
-import Item from './Item';
+import useNavigateParams from 'hooks/useNavigateParams';
 
-import styles from '../Menu.module.scss';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { sidebarActions } from 'features/sidebar/sidebarSlice';
+import MenuSub from './MenuSub';
+
+import styles from './Menu.module.scss';
 const cx = classnames.bind(styles);
 
 type Navigate = {
@@ -16,12 +19,12 @@ type Navigate = {
     params?: { [key: string]: any };
 };
 
-export type ItemProps = Array<{
+export type MenuSubProps = Array<{
     _id: string;
     name: string;
     icon: (props: IconProps) => any;
+    type: { name: 'notebook' | 'note' | 'tag'; value: 'n' | 'b' | 't' };
     navigate?: Navigate;
-    type: { name: 'notebook' | 'note' | 'tag'; value: 'b' | 'n' | 't' };
 }>;
 
 export type Types = Array<'menu' | 'link' | 'slide'>;
@@ -34,16 +37,14 @@ interface MenuItemProps {
 
     topic: { title: string; value?: string };
     types: Types;
-    items?: ItemProps;
-    itemSub?: {
-        heading?: string;
-        data: ItemProps;
-    };
+    menuSubs?: Array<{ data: MenuSubProps; heading?: string }>;
     onAdd?: () => void;
     navigate?: Navigate;
 }
 
-function MenuItem({ icon, topic, types, items, onAdd, itemSub, navigate }: MenuItemProps) {
+function MenuItem({ icon, topic, types, onAdd, menuSubs, navigate }: MenuItemProps) {
+    const dispatch = useAppDispatch();
+    const { isSmall } = useAppSelector((state) => state.sidebar);
     const [searchParams, setSearchParams] = useSearchParams();
     const [isMenu, setIsMenu] = useState(false);
     const { pathname } = useLocation();
@@ -75,7 +76,16 @@ function MenuItem({ icon, topic, types, items, onAdd, itemSub, navigate }: MenuI
     };
 
     return (
-        <Fragment>
+        <div
+            className={cx({ slide: types.includes('menu') })}
+            onMouseOver={(e) => {
+                if (!isSmall) return;
+
+                const isOnSlide = Array.from(e.currentTarget.classList).includes(cx('slide'));
+
+                dispatch(sidebarActions.setIsSlide(isOnSlide));
+            }}
+        >
             <div
                 onClick={() => !onAdd && setIsMenu(!isMenu)}
                 className={cx('item', { item__active: pathname === path })}
@@ -112,14 +122,17 @@ function MenuItem({ icon, topic, types, items, onAdd, itemSub, navigate }: MenuI
             {/* dành cho những item sử dụng menu có menu con*/}
 
             {isMenu && types.includes('menu') && (
-                <div>
-                    <Item data={items} types={types} page={value} />
-                    {itemSub && (
-                        <>
-                            <h3 className={styles.heading}>{itemSub.heading}</h3>
-                            <Item data={itemSub.data} types={types} page={value} />
-                        </>
-                    )}
+                <div className={cx('menu')}>
+                    {menuSubs?.map((menuSub, index) => {
+                        const heading = menuSub.heading;
+                        const data = menuSub.data;
+                        return (
+                            <Fragment key={index}>
+                                {heading && <h3 className={styles.heading}>{heading}</h3>}
+                                <MenuSub data={data} types={types} />
+                            </Fragment>
+                        );
+                    })}
 
                     {/* tạo mới trong phần menu con */}
                     {onAdd && AddIcon && (
@@ -130,7 +143,7 @@ function MenuItem({ icon, topic, types, items, onAdd, itemSub, navigate }: MenuI
                     )}
                 </div>
             )}
-        </Fragment>
+        </div>
     );
 }
 

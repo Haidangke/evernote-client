@@ -1,47 +1,46 @@
 import classNames from 'classnames/bind';
 
+import { DeleteIcon, HomeIcon, MissionIcon, NoteIcon } from 'assets/icons';
 import { routesConfig } from 'config';
-import { DeleteIcon, HomeIcon, NoteIcon, MissionIcon } from 'assets/icons';
 
-import MenuItem from './MenuItem';
-import Tag from './Tag';
-import Notebook from './Notebook';
-import Shortcut from './Shortcut';
+import { useAppSelector } from 'app/hooks';
+import ShortcutItemSidebar from 'features/shortcut/components/ShortcutItemSidebar';
+import TagItemSidebar from 'features/tag/components/TagItemSidebar';
+import SidebarMenuItem from './MenuItem';
+import NotebookItemSidebar from 'features/notebook/components/NotebookItemSidebar';
 
 import styles from './Menu.module.scss';
-import { useAppSelector } from 'app/hooks';
-
 const cx = classNames.bind(styles);
 
 function Menu() {
     const { isSmall } = useAppSelector((state) => state.sidebar);
     return (
-        <div className={cx('menu', { menu__small: isSmall })}>
-            <MenuItem
+        <div className={cx('wrapper', { wrapper__small: isSmall })}>
+            <SidebarMenuItem
                 topic={{ title: 'Trang chủ' }}
                 icon={{ main: HomeIcon }}
                 types={['link']}
                 navigate={{ path: routesConfig.home }}
             />
-            <Shortcut />
-            <MenuItem
+            <ShortcutItemSidebar />
+            <SidebarMenuItem
                 icon={{ main: NoteIcon }}
                 topic={{ title: 'Ghi chú' }}
                 types={['link']}
                 navigate={{ path: routesConfig.notes, params: { an: true } }}
             />
 
-            <MenuItem
+            <SidebarMenuItem
                 topic={{ title: 'Nhiệm vụ', value: 'todo' }}
                 icon={{ main: MissionIcon }}
-                types={['menu']}
+                types={[]}
             />
             <div className={cx('line-space')}></div>
 
-            <Notebook />
-            <Tag />
+            <NotebookItemSidebar/>
+            <TagItemSidebar />
             <div className={cx('line-space')}></div>
-            <MenuItem
+            <SidebarMenuItem
                 topic={{ title: 'Thùng rác' }}
                 icon={{ main: DeleteIcon }}
                 types={['link']}
