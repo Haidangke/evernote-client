@@ -2,7 +2,7 @@ import { Fragment, useMemo } from 'react';
 
 import MenuItem from 'features/sidebar/components/Menu/MenuItem';
 import { useAppSelector } from 'app/hooks';
-import { NotebookSubIcon, NoteSolidIcon, StarIcon } from 'assets/icons';
+import { NotebookSubIcon, NoteSolidIcon, NoteSolidSubIcon, StarIcon } from 'assets/icons';
 
 function ShortcutItemSidebar() {
     const { shortcuts } = useAppSelector((state) => state.shortcut);
@@ -24,7 +24,10 @@ function ShortcutItemSidebar() {
                 types={['menu']}
                 menuSubs={[
                     {
+                        _id: '1',
+
                         data: shortcuts.map((shortcut) => ({
+                            topicValue: 'shortcut',
                             name: shortcut.name,
                             _id: shortcut.type._id,
                             icon: NotebookSubIcon,
@@ -33,16 +36,18 @@ function ShortcutItemSidebar() {
                                 value: shortcut.type.value,
                             },
                             navigate: {
+                                path: `/${shortcut.type.name}`,
                                 params: { an: true },
                             },
                         })),
                     },
                     {
+                        _id: '2',
                         heading: 'Ghi chú gần đây',
                         data: recentNotes.map((note) => ({
                             _id: note._id,
-                            name: note.title,
-                            icon: NoteSolidIcon,
+                            name: note.title || 'Chưa có tiêu đề',
+                            icon: NoteSolidSubIcon,
                             type: {
                                 name: 'note',
                                 value: 'n',

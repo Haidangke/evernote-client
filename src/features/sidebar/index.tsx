@@ -80,7 +80,6 @@ function Sidebar() {
                     <Actions />
                     <Menu />
                 </div>
-                <SlideSmall />
                 <SlideLarge />
             </div>
         </Resizable>

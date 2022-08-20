@@ -1,17 +1,17 @@
+import classNames from 'classnames/bind';
 import { useMemo, useState } from 'react';
 import { BsDash } from 'react-icons/bs';
-import classNames from 'classnames/bind';
 import { IoMdArrowDropright } from 'react-icons/io';
 
-import { NotebookDfIcon, NotebookIcon } from 'assets/icons';
-import { Notebook } from 'types';
-import TimeUp from 'components/TimeUp';
 import { useAppSelector } from 'app/hooks';
-import More from 'components/Tippy/TippyMore/TippyNotebookMore';
+import { NotebookDfIcon, NotebookIcon } from 'assets/icons';
+import TimeUp from 'components/TimeUp';
+import useNavigateParams from 'hooks/useNavigateParams';
+import { Notebook } from 'types';
+import NotebookMore from '../NotebookMore';
 import NoteItem from './NoteItem';
 
 import styles from './Table.module.scss';
-import useNavigateParams from 'hooks/useNavigateParams';
 const cx = classNames.bind(styles);
 
 interface NotebookItemProps {
@@ -56,7 +56,7 @@ function NotebookItem({ notebook }: NotebookItemProps) {
                     <BsDash />
                 </div>
                 <div className={styles.column}>
-                    <More notebook={notebook} />
+                    <NotebookMore notebook={notebook} />
                 </div>
             </div>
             {isOpen && notesOfNotebook.map((note) => <NoteItem note={note} key={note._id} />)}

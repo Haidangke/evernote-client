@@ -4,7 +4,7 @@ export interface Response<T> {
     data?: T;
 }
 
-export type Topic = 'tag' | 'notebook' | 'note' | 'shortcut';
+export type TopicValue = 'tag' | 'notebook' | 'note' | 'shortcut';
 
 export interface FormAdd {
     name: string;

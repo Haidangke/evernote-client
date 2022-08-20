@@ -27,6 +27,7 @@ export const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
 });
 
+
 sagaMiddleware.run(rootSaga);
 
 export type AppDispatch = typeof store.dispatch;

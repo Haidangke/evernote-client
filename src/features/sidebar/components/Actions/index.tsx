@@ -1,18 +1,24 @@
+import classnames from 'classnames/bind';
 import { useRef, useState } from 'react';
 import { IoSearchSharp } from 'react-icons/io5';
-import classnames from 'classnames/bind';
 
 import Tippy from '@tippyjs/react/headless';
 
-import { AddIcon, ArrowDownIcon, CloseIcon, NoteSolidIcon, TodoPrimaryIcon } from 'assets/icons';
+import {
+    AddIcon,
+    ArrowDownIcon,
+    CloseIcon,
+    NoteIcon,
+    NoteSolidIcon,
+    TodoPrimaryIcon,
+} from 'assets/icons';
 
-import Popper from 'components/Popper';
 import { useAppSelector } from 'app/hooks';
+import Popper from 'components/Popper';
+import useAddNote from 'hooks/useAddNote';
 import useOnClickOutside from 'hooks/useOnclickOutside';
 
 import styles from './Actions.module.scss';
-import useAddNote from 'hooks/useAddNote';
-
 
 const cx = classnames.bind(styles);
 
@@ -23,7 +29,6 @@ function Actions() {
     const [isSearch, setIsSearch] = useState(false);
 
     const [isAdd, setIsAdd] = useState(false);
-    const addRef = useRef(null);
 
     const addNote = useAddNote();
 
@@ -36,7 +41,9 @@ function Actions() {
         }
     };
 
-    useOnClickOutside(addRef, () => setIsAdd(false));
+    const newRef = useRef(null);
+
+    useOnClickOutside(newRef, () => setIsAdd(false));
     return (
         <div className={cx('wrapper', { small: isSmall })}>
             <div>
@@ -98,22 +105,32 @@ function Actions() {
                 </Tippy>
             </div>
 
-            <div ref={addRef} className={cx('new', { new__focus: isAdd })}>
-                <div onClick={handleAdd} className={cx('btn', 'btn-note')}>
+            <div className={cx('new')}>
+                <div onClick={handleAdd} className={cx('btn', 'btn-note', 'new-btn')}>
                     <div className={cx('btn-content')}>
                         <AddIcon />
                         <span>Mới</span>
                     </div>
                     <ArrowDownIcon className={cx('icon-arrow')} width={18} height={18} />
                 </div>
-                <div className={cx('new-menu')}>
-                    <div className={cx('btn', 'btn-todo')}>
-                        <div className={cx('btn-content')}>
-                            <TodoPrimaryIcon />
-                            <span>Nhiệm vụ</span>
+
+                {isAdd && (
+                    <div ref={newRef} className={cx('new-menu')}>
+                        <div className={cx('btn', 'btn-note')}>
+                            <div className={cx('btn-content')}>
+                                <NoteIcon />
+                                <span>Ghi chú</span>
+                            </div>
+                            <ArrowDownIcon className={cx('icon-arrow')} width={18} height={18} />
+                        </div>
+                        <div className={cx('btn', 'btn-todo')}>
+                            <div className={cx('btn-content')}>
+                                <TodoPrimaryIcon />
+                                <span>Nhiệm vụ</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                )}
             </div>
         </div>
     );

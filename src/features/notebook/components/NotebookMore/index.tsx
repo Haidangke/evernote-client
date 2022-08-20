@@ -18,7 +18,7 @@ import ModalForm from 'components/Modal/ModalForm';
 import Toast from 'components/Toast';
 import More from 'components/Tippy/TippyMore';
 
-import styles from './TippyMore.module.scss';
+import styles from './NotebookMore.module.scss';
 const cx = classNames.bind(styles);
 
 interface NotebookMoreProps {
@@ -29,7 +29,7 @@ interface UpdateName {
     name: string;
 }
 
-function TippyNotebookMore({ notebook }: NotebookMoreProps) {
+function NotebookMore({ notebook }: NotebookMoreProps) {
     const dispatch = useAppDispatch();
     const notebooks = useAppSelector((state) => state.notebook.notebooks);
     const listNote = useAppSelector((state) => state.note.listNote);
@@ -199,4 +199,4 @@ function TippyNotebookMore({ notebook }: NotebookMoreProps) {
     );
 }
 
-export default TippyNotebookMore;
+export default NotebookMore;

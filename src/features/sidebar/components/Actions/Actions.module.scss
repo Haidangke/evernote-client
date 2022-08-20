@@ -12,6 +12,7 @@
     box-shadow: 0 2px 6px rgb(0 0 0 / 15%);
     max-width: 300px;
     min-height: 340px;
+    border-radius: 0;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
 }
@@ -139,54 +140,51 @@
 }
 
 //add
+
 .new {
     position: relative;
 }
 
-.new__focus {
-    &::after {
-        position: absolute;
-        background-color: var(--white);
-        left: -5px;
-        top: -10px;
-        width: calc(100% + 10px);
-        height: calc(100% + 20px);
-        content: '';
-        z-index: 0;
-        border-radius: 10px 10px 0 0;
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
     }
 
-    & > .new-menu {
-        display: block;
-    }
-
-    .icon-arrow {
-        display: none;
+    100% {
+        opacity: 1;
     }
 }
 
 .new-menu {
     position: absolute;
-    display: none;
-    left: -5px;
-    width: calc(100% + 10px);
+    top: -9px;
+    left: -6px;
 
-    padding: 0 5px 5px;
-    background-color: var(--white);
-    z-index: 1;
-    border-radius: 0 0 10px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: calc(100% + 12px);
+    max-width: 300px;
+    padding: 9px 6px;
 
-    & > .btn {
-        margin-top: 4px;
-    }
+    box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+
+    border-radius: 12px;
+    background: var(--white);
+    z-index: 4;
+    animation-name: fadeIn;
+    animation-duration: .3s;
+}
+
+.new-btn {
+    margin: 11px 0 8px 0;
 }
 
 .btn {
     position: relative;
     @include flex(center, space-between);
     height: 36px;
-
-    margin: 11px 0 8px 0;
+    //
     color: var(--white);
     font-size: 1.4rem;
     border-radius: 50px;
@@ -219,7 +217,11 @@
 }
 
 .small {
-    .btn-content > span {
+    .new-menu {
+        min-width: 190px;
+    }
+
+    .new-btn > .btn-content >  span {
         display: none;
     }
 }

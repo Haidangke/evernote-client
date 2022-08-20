@@ -1,0 +1,26 @@
+.wrapper {
+    padding: 10px 0;
+}
+
+.item {
+    width: 100%;
+    padding: 6px 20px;
+    color: var(--text-color);
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.3;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--color-f2);
+    }
+
+    &__disable {
+        opacity: 0.5;
+        cursor: default;
+    }
+
+    &__disable:hover {
+        background-color: unset;
+    }
+}

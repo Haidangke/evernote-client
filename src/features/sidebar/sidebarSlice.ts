@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Topic } from 'types';
+import { TopicValue } from 'types';
 
 interface InitialState {
     isSmall: boolean;
 
     isSlide: boolean;
-    topic?: Topic;
+    topic?: string;
 }
 
 const initialState: InitialState = {
@@ -27,7 +27,7 @@ const sidebarSlice = createSlice({
             state.isSlide = action.payload;
         },
 
-        setTopic(state, action: PayloadAction<Topic>) {
+        setTopic(state, action: PayloadAction<string>) {
             state.topic = action.payload;
         },
     },

@@ -9,7 +9,7 @@ import { tagActions } from 'features/tag/tagSlice';
 import tagService from 'services/tagService';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { TagIcon, TagSubIcon } from 'assets/icons';
+import { TagAddIcon, TagIcon, TagSubIcon } from 'assets/icons';
 import { FormAdd } from 'types';
 
 function TagItemSidebar() {
@@ -44,11 +44,12 @@ function TagItemSidebar() {
         <>
             <SidebarMenuItem
                 topic={{ title: 'Thẻ', value: 'tag' }}
-                icon={{ main: TagIcon, add: TagSubIcon }}
+                icon={{ main: TagIcon, add: TagAddIcon }}
                 types={['menu', 'slide']}
                 onAdd={() => setIsModal(true)}
                 menuSubs={[
                     {
+                        _id: '1',
                         data:
                             listTag.length === 0
                                 ? []

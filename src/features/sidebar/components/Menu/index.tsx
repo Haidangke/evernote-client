@@ -31,7 +31,7 @@ function Menu() {
             />
 
             <SidebarMenuItem
-                topic={{ title: 'Nhiệm vụ', value: 'todo' }}
+                topic={{ title: 'Nhiệm vụ' }}
                 icon={{ main: MissionIcon }}
                 types={[]}
             />

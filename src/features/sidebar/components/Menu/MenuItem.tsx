@@ -1,6 +1,7 @@
 import Tippy from '@tippyjs/react';
 import classnames from 'classnames/bind';
-import { Fragment, useState } from 'react';
+import { constants } from 'config';
+import { Fragment, useCallback, useRef, useState } from 'react';
 import { IoMdArrowDropright } from 'react-icons/io';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
@@ -9,54 +10,65 @@ import useNavigateParams from 'hooks/useNavigateParams';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { sidebarActions } from 'features/sidebar/sidebarSlice';
+import { TopicValue } from 'types';
+import SlideSmall from '../SlideSmall';
 import MenuSub from './MenuSub';
 
 import styles from './Menu.module.scss';
 const cx = classnames.bind(styles);
 
-type Navigate = {
+export type Navigate = {
     path?: string;
     params?: { [key: string]: any };
 };
 
-export type MenuSubProps = Array<{
+export interface ItemSubProps {
     _id: string;
     name: string;
     icon: (props: IconProps) => any;
     type: { name: 'notebook' | 'note' | 'tag'; value: 'n' | 'b' | 't' };
     navigate?: Navigate;
-}>;
+    topicValue?: string;
+}
+
+export type MenuSubProps = Array<ItemSubProps>;
+
+export type MenuSubsProps = Array<{ data: MenuSubProps; heading?: string; _id: string }>;
 
 export type Types = Array<'menu' | 'link' | 'slide'>;
 
-interface MenuItemProps {
+export interface MenuItemProps {
     icon: {
         main: (props: IconProps) => any;
         add?: (props: IconProps) => any;
     };
 
-    topic: { title: string; value?: string };
+    topic: { title: string; value?: TopicValue };
     types: Types;
-    menuSubs?: Array<{ data: MenuSubProps; heading?: string }>;
+    menuSubs?: MenuSubsProps;
     onAdd?: () => void;
     navigate?: Navigate;
 }
 
 function MenuItem({ icon, topic, types, onAdd, menuSubs, navigate }: MenuItemProps) {
+    const intervalRef: { current: NodeJS.Timeout | null } = useRef(null);
     const dispatch = useAppDispatch();
     const { isSmall } = useAppSelector((state) => state.sidebar);
     const [searchParams, setSearchParams] = useSearchParams();
     const [isMenu, setIsMenu] = useState(false);
     const { pathname } = useLocation();
+
     const navigateParams = useNavigateParams();
 
     const Icon = icon.main;
     const AddIcon = icon.add;
 
     const path = navigate?.path;
+    const params = navigate?.params;
+
     const { title, value } = topic;
 
-    const handleClickContent = () => {
+    const handleClickContent = useCallback(() => {
         if (types.includes('slide') && value) {
             const param = value && searchParams.get(value);
             if (param === 'true') {
@@ -67,25 +79,43 @@ function MenuItem({ icon, topic, types, onAdd, menuSubs, navigate }: MenuItemPro
             setSearchParams(searchParams);
         }
         if (types.includes('link')) {
-            const params = navigate?.params;
-
             if (!path || pathname === path) return;
 
             navigateParams(path, params);
         }
+    }, [params, navigateParams, path, pathname, searchParams, setSearchParams, types, value]);
+
+    const startAnimation = (idEl: string, classEl: string) => {
+        const id = setTimeout(() => {
+            const isSlide = idEl === constants.ID_SLIDE;
+
+            dispatch(sidebarActions.setTopic(classEl));
+            dispatch(sidebarActions.setIsSlide(isSlide));
+        }, 200);
+        intervalRef.current = id;
     };
 
     return (
         <div
-            className={cx({ slide: types.includes('menu') })}
-            onMouseOver={(e) => {
+            id={types.includes('menu') ? constants.ID_SLIDE : ''}
+            className={cx({ [`${value}`]: types.includes('menu') })}
+            onMouseEnter={(e) => {
                 if (!isSmall) return;
-
-                const isOnSlide = Array.from(e.currentTarget.classList).includes(cx('slide'));
-
-                dispatch(sidebarActions.setIsSlide(isOnSlide));
+                const id = e.currentTarget.id;
+                const className = e.currentTarget.className;
+                startAnimation(id, className);
             }}
+            onMouseLeave={() => clearInterval(intervalRef.current as NodeJS.Timeout)}
         >
+            {types.includes('menu') && (
+                <SlideSmall
+                    onAdd={onAdd}
+                    AddIcon={AddIcon}
+                    menuSubs={menuSubs}
+                    title={title}
+                    topicValue={value}
+                />
+            )}
             <div
                 onClick={() => !onAdd && setIsMenu(!isMenu)}
                 className={cx('item', { item__active: pathname === path })}
@@ -123,11 +153,11 @@ function MenuItem({ icon, topic, types, onAdd, menuSubs, navigate }: MenuItemPro
 
             {isMenu && types.includes('menu') && (
                 <div className={cx('menu')}>
-                    {menuSubs?.map((menuSub, index) => {
+                    {menuSubs?.map((menuSub) => {
                         const heading = menuSub.heading;
                         const data = menuSub.data;
                         return (
-                            <Fragment key={index}>
+                            <Fragment key={menuSub._id}>
                                 {heading && <h3 className={styles.heading}>{heading}</h3>}
                                 <MenuSub data={data} types={types} />
                             </Fragment>

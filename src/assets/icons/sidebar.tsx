@@ -77,6 +77,27 @@ export const NoteSolidIcon = ({ className }: IconProps) => (
     </svg>
 );
 
+export const NoteSolidSubIcon = ({ className }: IconProps) => (
+    <svg
+        width='14'
+        height='14'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+        className={className}
+    >
+        <path
+            d='M9.162 5a.5.5 0 000-1H4.838a.5.5 0 000 1h4.324zm.5 2a.5.5 0 01-.5.5H4.838a.5.5 0 010-1h4.324a.5.5 0 01.5.5zm-3.49 3a.5.5 0 000-1H4.838a.5.5 0 100 1h1.334z'
+            fill='currentColor'
+        ></path>
+        <path
+            fillRule='evenodd'
+            clipRule='evenodd'
+            d='M2 2.833C2 1.821 2.82 1 3.833 1h6.334C11.179 1 12 1.82 12 2.833v6.24c0 .415-.14.816-.398 1.14L9.94 12.308A1.833 1.833 0 018.504 13h-4.67A1.833 1.833 0 012 11.167V2.833zM3.833 2A.833.833 0 003 2.833v8.334c0 .46.373.833.833.833h4.23V9.444a.5.5 0 01.5-.5H11v-6.11A.833.833 0 0010.167 2H3.833zm5.23 9.784v-1.84h1.476l-1.476 1.84z'
+            fill='currentColor'
+        ></path>
+    </svg>
+);
+
 export const MissionIcon = ({ className }: IconProps) => (
     <svg
         className={className}
@@ -155,6 +176,29 @@ export const NotebookSubDfIcon = ({ className }: IconProps) => (
     </svg>
 );
 
+export const NotebookAddIcon = ({ className }: IconProps) => (
+    <svg
+        width='24'
+        height='24'
+        viewBox='0 0 24 24'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+        style={{ width: '20px', marginLeft: '-2.5px', marginRight: '-3px' }}
+        className={className}
+    >
+        <path
+            fillRule='evenodd'
+            clipRule='evenodd'
+            d='M5.75 19.502v-15h10.208a2.292 2.292 0 012.292 2.292v6.67a4.685 4.685 0 00-1.25.106V6.793c0-.575-.466-1.041-1.042-1.041h-6.46v12.5h3.936c.02.435.1.855.233 1.25H5.75zM7 5.752v12.5h1.248v-12.5H7z'
+            fill='currentColor'
+        ></path>
+        <path
+            d='M14.755 10.449a.75.75 0 000-1.5h-3a.75.75 0 000 1.5h3zM18.637 15.547a.625.625 0 10-1.25 0v1.904h-1.846a.625.625 0 100 1.25h1.846v1.846a.625.625 0 101.25 0v-1.846h1.904a.625.625 0 000-1.25h-1.904v-1.904z'
+            fill='currentColor'
+        ></path>
+    </svg>
+);
+
 export const DeleteIcon = ({ className }: IconProps) => (
     <svg
         className={className}
@@ -206,6 +250,27 @@ export const TagSubIcon = ({ className }: IconProps) => (
             fillRule='evenodd'
             clipRule='evenodd'
             d='M2 6.273a2 2 0 01.52-1.345L5.89 1.22a1.5 1.5 0 012.22 0l3.37 3.707A2 2 0 0112 6.273V11a2 2 0 01-2 2H4a2 2 0 01-2-2V6.273zm9 0V11a1 1 0 01-1 1H4a1 1 0 01-1-1V6.273a1 1 0 01.26-.672l3.37-3.707a.5.5 0 01.74 0L10.74 5.6a1 1 0 01.26.672z'
+            fill='currentColor'
+        ></path>
+    </svg>
+);
+
+export const TagAddIcon = ({ className }: IconProps) => (
+    <svg
+        width='14'
+        height='14'
+        viewBox='0 0 12 14'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+        style={{ marginLeft: '1px' }}
+        className={className}
+    >
+        <path
+            d='M0 6.273a2 2 0 01.52-1.345L3.89 1.22a1.5 1.5 0 012.22 0l3.37 3.707A2 2 0 0110 6.273V7.5H9V6.273a1 1 0 00-.26-.672L5.37 1.894a.5.5 0 00-.74 0L1.26 5.6a1 1 0 00-.26.672V11a1 1 0 001 1h3.5v1H2a2 2 0 01-2-2V6.273z'
+            fill='currentColor'
+        ></path>
+        <path
+            d='M6 5.5a1 1 0 11-2 0 1 1 0 012 0zM9 9.5a.5.5 0 011 0V11h1.5a.5.5 0 010 1H10v1.5a.5.5 0 01-1 0V12H7.5a.5.5 0 010-1H9V9.5z'
             fill='currentColor'
         ></path>
     </svg>

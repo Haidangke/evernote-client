@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { NotebookIcon, NotebookSubDfIcon, NotebookSubIcon } from 'assets/icons';
+import { NotebookAddIcon, NotebookIcon, NotebookSubDfIcon, NotebookSubIcon } from 'assets/icons';
 import { InputField } from 'components/FormFields';
 import { nameSchema } from 'components/FormFields/InputField';
 import ModalForm from 'components/Modal/ModalForm';
@@ -44,11 +44,12 @@ function NotebookItemSidebar() {
             <MenuItem
                 navigate={{ path: '/notebooks' }}
                 topic={{ title: 'Sổ tay', value: 'notebook' }}
-                icon={{ main: NotebookIcon }}
+                icon={{ main: NotebookIcon, add: NotebookAddIcon }}
                 types={['link', 'menu']}
                 onAdd={() => setIsModal(true)}
                 menuSubs={[
                     {
+                        _id: '1',
                         data:
                             notebooks.length === 0
                                 ? []

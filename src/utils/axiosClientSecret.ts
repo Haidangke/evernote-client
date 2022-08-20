@@ -2,6 +2,8 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import authService from 'services/authService';
 import { constants } from 'config';
+import { store } from 'app/store';
+import { authActions } from 'features/auth/authSlice';
 
 const axiosClientSecret = axios.create({
     baseURL: constants.BASE_URL_API,
@@ -22,8 +24,8 @@ function refreshToken(config: any) {
             }
         })
         .catch(() => {
-            window.location.reload();
             authService.logout();
+            store.dispatch(authActions.logout());
         });
 }
 
