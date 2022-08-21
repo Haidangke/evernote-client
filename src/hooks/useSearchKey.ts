@@ -23,8 +23,10 @@ function useSearchKey() {
 
         // những key nào không tồn tại trong config sẽ bị xóa bỏ
         searchs.forEach((search) => {
-            const searchKey = search.split('=')[0];
-            if (searchKey && !searchKeysConfig.all.some((key) => key === searchKey)) {
+            const [searchKey, searchValue] = search.split('=');
+            if(!searchKey) return;
+
+            if ((searchKey && !searchKeysConfig.all.some((key) => key === searchKey)) ) {
                 searchParams.delete(searchKey);
                 setSearchParams(searchParams);
             }

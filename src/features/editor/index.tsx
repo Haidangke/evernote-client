@@ -21,6 +21,9 @@ import { SlateElement, SlateLeaf } from './slates';
 import { LoadingIcon } from 'assets/icons';
 
 import styles from './Editor.module.scss';
+import withIndent from './plugins/withIndent';
+import handleKeyboard from './utils/handleKeyboard';
+import isHotkey from 'is-hotkey';
 const cx = classNames.bind(styles);
 
 const createEditorWithPlugins = pipe(
@@ -29,7 +32,8 @@ const createEditorWithPlugins = pipe(
     withHistory,
     withChecklists,
     withLinks,
-    withKeyCommands
+    withKeyCommands,
+    withIndent
 );
 
 function Editor() {
@@ -110,12 +114,18 @@ function Editor() {
                             <div className={cx('editable-main')}>
                                 <Editable
                                     placeholder='Bắt đầu viết những suy nghĩ, hoặc công việc vào đây'
-                                    decorate={decorate}
+                                    // decorate={decorate}
                                     onClick={() => setIsToolbar(true)}
                                     onFocus={() => {
                                         setIsToolbar(true);
                                         setOnHeader(false);
                                     }}
+                                    // onKeyDown={(event) => {
+                                    //     // const isSaveHotkey = isHotkey('mod+s');
+                                    //     // if (isSaveHotkey(event)) {
+                                    //     //     console.log(event.key);
+                                    //     // }
+                                    // }}
                                     renderLeaf={renderLeaf}
                                     renderElement={renderElement}
                                 />

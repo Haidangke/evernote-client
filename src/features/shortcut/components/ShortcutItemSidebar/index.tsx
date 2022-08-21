@@ -54,7 +54,6 @@ function ShortcutItemSidebar() {
                             },
                             navigate: {
                                 path: '/note',
-                                params: { an: true },
                             },
                         })),
                     },

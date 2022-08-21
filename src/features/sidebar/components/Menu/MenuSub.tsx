@@ -23,7 +23,7 @@ function MenuSub({ data, types }: { data: MenuSubProps; types: Types; }) {
                 const params = item.navigate?.params;
                 return (
                     <div
-                        key={item.name}
+                        key={item._id}
                         className={cx('sub', {
                             sub__active:
                                 item._id === searchParams.get(item.type.value) &&

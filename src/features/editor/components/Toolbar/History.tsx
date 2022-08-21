@@ -24,7 +24,7 @@ const History = ({ editor }: any) => {
             {/* redo */}
             <HandleButton
                 disable={redos.length === 0}
-                handle={() => HistoryEditor.undo(editor)}
+                handle={() => HistoryEditor.redo(editor)}
                 content='Làm lại'
                 className={cx({ btn__disable: redos.length === 0 })}
             >
