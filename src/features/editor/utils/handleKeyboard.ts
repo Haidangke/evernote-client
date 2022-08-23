@@ -1,5 +1,6 @@
+import { textIndent } from './indent';
 import { KeyboardEvent } from 'react';
-import isHotkey from 'is-hotkey';
+import isHotkey, { isCodeHotkey } from 'is-hotkey';
 
 const HOTKEYS = {
     'mod+b': 'bold',
@@ -8,12 +9,20 @@ const HOTKEYS = {
     'mod+`': 'code',
 };
 
-function handleKeyboard(event: KeyboardEvent<HTMLDivElement>) {
-    // console.log(event.key);
-    event.preventDefault();
-    const isSaveHotkey = isHotkey('mod+s');
-    if (isSaveHotkey(event)) {
-        console.log(event.key);
+function handleKeyboard(event: KeyboardEvent<HTMLDivElement>, editor: any) {
+    const key = event.key;
+    const i = isHotkey('ctrl+Tab', event);
+    if(i) {
+        event.preventDefault();
+        console.log('h')
+    }
+
+    switch (key) {
+        case 'Tab': {
+            event.preventDefault();
+            textIndent(editor, 'indent');
+            // ReactEditor.focus(editor);
+        }
     }
 }
 

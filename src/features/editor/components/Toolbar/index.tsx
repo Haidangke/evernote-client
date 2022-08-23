@@ -8,7 +8,6 @@ import {
     BoldIcon,
     BulletedListIcon,
     CalendarIcon,
-    FileIcon,
     ItalicIcon,
     LineThrougnIcon,
     NumberListIcon,
@@ -33,7 +32,7 @@ import Link from './Link';
 import TextIndent from './TextIndent';
 import Info from './Info';
 
-import { toolbarActions } from 'features/editor/editorSlice';
+import { editorActions } from 'features/editor/editorSlice';
 import styles from './Toolbar.module.scss';
 const cx = classNames.bind(styles);
 
@@ -50,7 +49,7 @@ function Toolbar({ onHeader, setSearch }: ToolbarProps) {
     useEffect(() => {
         if (ref.current) {
             const clientX = ref.current.getBoundingClientRect().x;
-            dispatch(toolbarActions.setRectX(clientX));
+            dispatch(editorActions.setRectX(clientX));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ref.current?.getBoundingClientRect()]);
@@ -61,10 +60,6 @@ function Toolbar({ onHeader, setSearch }: ToolbarProps) {
 
             <div ref={ref} className={cx('toolbar', { 'toolbar-on-header': onHeader })}>
                 <InsertBtn />
-
-                <HandleButton handle={() => console.log('Handle')} content='Tệp đính kèm'>
-                    <FileIcon />
-                </HandleButton>
 
                 <HandleButton handle={() => console.log('Handle')} content='Nhiệm vụ'>
                     <TodoIcon />
@@ -80,15 +75,15 @@ function Toolbar({ onHeader, setSearch }: ToolbarProps) {
 
                 <div className={cx('line')}></div>
 
-                <Heading editor={editor} />
+                <Heading />
 
                 <div className={cx('line')}></div>
 
-                <FontFamily editor={editor} />
+                <FontFamily />
 
                 <div className={cx('line')}></div>
 
-                <FontSize editor={editor} />
+                <FontSize />
 
                 <div className={cx('line')}></div>
 

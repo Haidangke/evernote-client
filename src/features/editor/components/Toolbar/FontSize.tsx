@@ -1,27 +1,29 @@
-import { useMemo } from 'react';
 import classNames from 'classnames/bind';
+import { useMemo } from 'react';
+import { useSlate } from 'slate-react';
 
 import { CheckIcon } from 'assets/icons/toolbar';
 import { toolbarConfig } from 'config';
+import { getMarks, isMarkActive, toggleMark } from '../../utils/mark';
 import { DropdownButton } from '../SlateButton';
 
 import styles from './Toolbar.module.scss';
-import { getMarks, isMarkActive, toggleMark } from '../../utils/mark';
 const cx = classNames.bind(styles);
 
-function FontSize({ editor }: any) {
+function FontSize() {
+    const editor = useSlate()
     const marks = getMarks(editor);
 
-    const isFontSizeTextDefault = useMemo(
+    const fontSizeCur = useMemo(
         () => marks.find((mark) => toolbarConfig.fontSize.includes(mark)),
         [marks]
     );
 
-    const FontSizeTextDefault = isFontSizeTextDefault || '16';
+    const fontSizeDefault = fontSizeCur || '16';
     return (
         <DropdownButton
-            minWidth='21px'
-            value={FontSizeTextDefault.replace('px', '')}
+            minWidth='24px'
+            value={fontSizeDefault.replace('px', '')}
             dropdown={() => (
                 <div className={cx('dropdown-wrapper')}>
                     {toolbarConfig.fontSize.map((item) => (
@@ -30,12 +32,14 @@ function FontSize({ editor }: any) {
                             className={cx('dropdown-align')}
                             onClick={(event: any) => {
                                 event.preventDefault();
+                                if (item === fontSizeCur) return;
+
                                 toggleMark(editor, item);
                             }}
                         >
                             <div className={cx('dropdown-align-check')}>
                                 {(isMarkActive(editor, item) ||
-                                    (!isFontSizeTextDefault && item === '16px')) && <CheckIcon />}
+                                    (!fontSizeCur && item === '16px')) && <CheckIcon />}
                             </div>
                             {item.replace('px', '')}
                         </button>

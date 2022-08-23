@@ -5,9 +5,9 @@ import classNames from 'classnames/bind';
 import Popper from 'components/Popper';
 import { DropdownButton } from '../../SlateButton';
 import { toggleMark } from '../../../utils/mark';
+import InsertImage from '../InsertImage';
 
 import { CodeIcon, InsertIcon, TodoIcon } from 'assets/icons/toolbar';
-import InsertImage from '../../../slates/Image/InsertImage';
 
 import styles from './Insert.module.scss';
 const cx = classNames.bind(styles);

@@ -1,5 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+interface Upload {
+    isLoading: boolean;
+    messeage: string;
+}
+
 interface InitialState {
     rectX: number;
     isToolbar: boolean;
@@ -7,11 +12,17 @@ interface InitialState {
         isOverflow: boolean;
         format: string;
     }>;
+
+    upload: Upload;
 }
 
 const initialState: InitialState = {
     isToolbar: false,
     rectX: 0,
+    upload: {
+        isLoading: false,
+        messeage: '',
+    },
     toolbar: [
         {
             isOverflow: false,
@@ -93,11 +104,14 @@ const editorSlice = createSlice({
             const index = state.toolbar.map((x) => x.format).indexOf(format);
             state.toolbar[index].isOverflow = value;
         },
+        setUpload(state, action: PayloadAction<Upload>) {
+            state.upload = action.payload;
+        },
     },
 });
 
-export const toolbarActions = editorSlice.actions;
+export const editorActions = editorSlice.actions;
 
-const toolbarReducer = editorSlice.reducer;
+const editorReducer = editorSlice.reducer;
 
-export default toolbarReducer;
+export default editorReducer;

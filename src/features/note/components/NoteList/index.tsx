@@ -19,6 +19,7 @@ function NoteList() {
     const noteId = searchParams.get('n');
     const notebookId = searchParams.get('b');
     const isShow = searchParams.get('an');
+    const expand = searchParams.get('fs');
 
     const { notebooks } = useAppSelector((state) => state.notebook);
     const { listNote } = useAppSelector((state) => state.note);
@@ -49,7 +50,7 @@ function NoteList() {
         if (width > 0) setMaxWidth(width / 3);
     }, [width]);
 
-    if (!isShow) return <></>;
+    if (!isShow || expand) return <></>;
 
     return (
         <Resizable

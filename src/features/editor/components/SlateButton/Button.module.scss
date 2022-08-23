@@ -43,11 +43,12 @@
     padding: 0;
     margin: 0;
     & > span {
-        text-align: left;
         @include flex(center, unset);
+        text-align: left;
         padding: 0 4px;
         color: var(--color-4d);
         font-weight: 700;
+        font-size: 1.3rem;
     }
     & > svg {
         margin: 0 4px;

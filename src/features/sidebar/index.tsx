@@ -10,10 +10,10 @@ import Actions from './components/Actions';
 import Header from './components/Header';
 import Menu from './components/Menu';
 import SlideLarge from './components/SlideLarge';
-import SlideSmall from './components/SlideSmall';
 
 import styles from './Sidebar.module.scss';
 import './Sidebar.scss';
+import { useSearchParams } from 'react-router-dom';
 
 const cx = classnames.bind(styles);
 
@@ -21,6 +21,10 @@ const widthLocal = parseFloat(JSON.parse(localStorage.getItem('width-sidebar') a
 const width = typeof widthLocal === 'number' && !Number.isNaN(widthLocal) ? widthLocal : 320;
 
 function Sidebar() {
+    const [searchParams] = useSearchParams();
+
+    const expand = JSON.parse(searchParams.get('fs') || 'false');
+
     const dispatch = useAppDispatch();
     const { isSmall } = useAppSelector((state) => state.sidebar);
     const [resizable, setResizable] = useState({ width, height: '100vh' });
@@ -39,7 +43,7 @@ function Sidebar() {
         }
     }, [widthWindow]);
 
-    
+    if (expand) return <></>;
 
     return (
         <Resizable
@@ -70,7 +74,6 @@ function Sidebar() {
             </div>
             <div
                 className={cx('wrapper')}
-                
                 onMouseLeave={() => {
                     dispatch(sidebarActions.setIsSlide(false));
                 }}

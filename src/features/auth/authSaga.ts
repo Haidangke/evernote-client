@@ -11,7 +11,6 @@ function* authSaga() {
     yield takeLatest(authActions.login.type, login);
     yield takeLatest(authActions.getUser.type, getUser);
     yield takeLatest(authActions.register.type, register);
-    yield takeLatest(authActions.logout.type, logout);
 }
 
 function* login(action: PayloadAction<LoginParams>) {
@@ -61,12 +60,9 @@ function* getUser() {
         yield put(authActions.getUserSuccess(user));
     } catch (error) {
         yield put(authActions.getUserFailed());
+        yield call(authService.logout);
     }
 }
 
-function* logout() {
-    localStorage.removeItem('access_token');
-    yield call(authService.logout);
-}
 
 export default authSaga;

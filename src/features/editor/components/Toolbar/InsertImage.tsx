@@ -2,23 +2,28 @@ import { useState } from 'react';
 import { useSlateStatic } from 'slate-react';
 
 import cloudinaryServices from 'services/cloudinaryService';
-import { insertImage } from '../../plugins/withImages';
+import { useAppDispatch } from 'app/hooks';
+import { editorActions } from 'features/editor/editorSlice';
 
 function InsertImage() {
     const editor = useSlateStatic();
-    const [isLoading, setIsLoading] = useState(false);
+    const dispatch = useAppDispatch();
+
+    function isImage(url: string) {
+        return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
+    }
+
     const handleFileInputChange = (e: any) => {
         const file = e.target.files[0];
-        console.log(file);
-        // if (!isImageUrl(file)) {
-        //     alert('URL is not an image');
-        //     return;
-        // }
+        if (!file || !isImage(file.name)) {
+            alert('URL is not an image');
+            return;
+        }
         previewFile(file);
 
-        if (!file) return;
         const reader = new FileReader();
         reader.readAsDataURL(file);
+
         reader.onloadend = () => {
             uploadImage(reader.result);
         };
@@ -34,16 +39,17 @@ function InsertImage() {
 
     const uploadImage = async (base64EncodedImage: any) => {
         try {
-            setIsLoading(true);
+            dispatch(editorActions.setUpload({ isLoading: true, messeage: '' }));
+            console.log('Bắt dầu tải ảnh lên');
             const response: any = await cloudinaryServices.upload({
                 file: base64EncodedImage,
             });
-            setIsLoading(false);
+
             const url = response.url;
-            insertImage(editor, url);
-        } catch (err) {
-            setIsLoading(false);
-        }
+
+            console.log('Tải ảnh hoàn tất', url);
+            // insertImage(editor, url);
+        } catch (err) {}
     };
     return (
         <input

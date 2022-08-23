@@ -15,13 +15,16 @@ interface ListProps {
 }
 
 function List({ sort }: ListProps) {
-    const { listNote } = useAppSelector((state) => state.note);
+    const { listNote, isFetching, isFetchSuccess } = useAppSelector((state) => state.note);
     const [searchParams, setSearchParams] = useSearchParams();
 
     const noteId = searchParams.get('n');
     const notebookId = searchParams.get('b') as string;
-
-    if (listNote.filter((note) => (notebookId ? note.notebook === notebookId : note)).length === 0)
+    if (
+        listNote.filter((note) => (notebookId ? note.notebook === notebookId : note)).length ===
+            0 &&
+        isFetchSuccess
+    )
         return <Create notebookId={notebookId} />;
     return (
         <div className={cx('wrapper')}>
@@ -30,29 +33,33 @@ function List({ sort }: ListProps) {
                 <div className={cx('column-header')}>Đã cập nhật</div>
                 <div className={cx('column-header')}>Thẻ</div>
             </div>
-            {[...listNote]
-                .filter((note) => (notebookId ? note.notebook === notebookId : note))
-                .sort((x, y) => {
-                    if (sort === 'title') return x.title.localeCompare(y.title);
-                    return new Date(y[sort]).getTime() - new Date(x[sort]).getTime();
-                })
-                .map((note, index) => (
-                    <div
-                        key={note._id}
-                        onClick={() => {
-                            searchParams.set('n', note._id);
-                            setSearchParams(searchParams);
-                        }}
-                        className={cx('row', {
-                            row__hl: index % 2 === 0,
-                            row__active: noteId === note._id,
-                        })}
-                    >
-                        <div className={cx('column')}>{note.title || 'Chưa có tiêu đề'}</div>
-                        <TimeUp updatedAt={note.updatedAt} />
-                        <div className={cx('column')}></div>
-                    </div>
-                ))}
+            {!isFetching ? (
+                [...listNote]
+                    .filter((note) => (notebookId ? note.notebook === notebookId : note))
+                    .sort((x, y) => {
+                        if (sort === 'title') return x.title.localeCompare(y.title);
+                        return new Date(y[sort]).getTime() - new Date(x[sort]).getTime();
+                    })
+                    .map((note, index) => (
+                        <div
+                            key={note._id}
+                            onClick={() => {
+                                searchParams.set('n', note._id);
+                                setSearchParams(searchParams);
+                            }}
+                            className={cx('row', {
+                                row__hl: index % 2 === 0,
+                                row__active: noteId === note._id,
+                            })}
+                        >
+                            <div className={cx('column')}>{note.title || 'Chưa có tiêu đề'}</div>
+                            <TimeUp updatedAt={note.updatedAt} />
+                            <div className={cx('column')}></div>
+                        </div>
+                    ))
+            ) : (
+                <></>
+            )}
         </div>
     );
 }

@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 
 import { ButtonProps } from '.';
 import { useAppDispatch } from 'app/hooks';
-import { toolbarActions } from 'features/editor/editorSlice';
+import { editorActions } from 'features/editor/editorSlice';
 
 import { isBlockActive, toggleBlock } from '../../utils/block';
 import useCheckOverflow from '../../hooks/useCheckOverflow';
@@ -25,7 +25,7 @@ function Block({ format, children, content, className }: ButtonProps) {
     useEffect(() => {
         if (check !== undefined) {
             setIsOverflow(!check);
-            dispatch(toolbarActions.setOverflow({ format, value: !check }));
+            dispatch(editorActions.setOverflow({ format, value: !check }));
         }
     }, [dispatch, format, check]);
 

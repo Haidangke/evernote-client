@@ -23,32 +23,6 @@ const SlateElement = (props: any) => {
                 </blockquote>
             );
 
-        //heading
-        case 'heading-one':
-            return (
-                <h1 style={style} {...attributes}>
-                    {children}
-                </h1>
-            );
-        case 'heading-two':
-            return (
-                <h2 style={style} {...attributes}>
-                    {children}
-                </h2>
-            );
-        case 'heading-three':
-            return (
-                <h3 style={style} {...attributes}>
-                    {children}
-                </h3>
-            );
-        case 'heading-normal':
-            return (
-                <div style={style} {...attributes}>
-                    {children}
-                </div>
-            );
-
         //list
         case 'list-item':
             return (
@@ -122,11 +96,11 @@ const SlateLeaf = ({ attributes, children, leaf }: any) => {
     }
 
     if (leaf.sup) {
-        children = <sup style={style}>{children}</sup>;
+        children = <sup style={{ ...style, fontSize: 'none' }}>{children}</sup>;
     }
 
     if (leaf.sub) {
-        children = <sub style={style}>{children}</sub>;
+        children = <sub style={{ ...style, fontSize: 'none' }}>{children}</sub>;
     }
     if (leaf.through) {
         children = <s style={style}>{children}</s>;

@@ -2,8 +2,8 @@ import { IconProps } from '.';
 
 export const InsertIcon = ({ className }: IconProps) => (
     <svg
-        height={22}
-        width={22}
+        height={24}
+        width={24}
         viewBox='0 0 24 24'
         xmlns='http://www.w3.org/2000/svg'
         className={className}

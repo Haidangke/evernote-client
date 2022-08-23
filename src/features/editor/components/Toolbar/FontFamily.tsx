@@ -1,24 +1,26 @@
-import { useMemo } from 'react';
 import classNames from 'classnames/bind';
+import { useMemo } from 'react';
+import { useSlate } from 'slate-react';
 
 import { toolbarConfig } from 'config';
 import { DropdownButton } from '../SlateButton';
-
 import { getMarks, toggleMark } from '../../utils/mark';
+
 import styles from './Toolbar.module.scss';
 const cx = classNames.bind(styles);
 
-function FontFamily({ editor }: any) {
+function FontFamily() {
+    const editor = useSlate();
     const marks = getMarks(editor);
 
-    const isFontFamily = useMemo(
+    const fontFamilyCur = useMemo(
         () =>
             marks.find((mark) => toolbarConfig.fontFamily.map((font) => font.value).includes(mark)),
         [marks]
     );
 
     const fontFamily =
-        toolbarConfig.fontFamily.find((font) => font.value === isFontFamily)?.name || 'Sans Serif';
+        toolbarConfig.fontFamily.find((font) => font.value === fontFamilyCur)?.name || 'Sans Serif';
     return (
         <DropdownButton
             minWidth='68px'
@@ -33,6 +35,7 @@ function FontFamily({ editor }: any) {
                             style={{ fontFamily: item.value }}
                             key={item.value}
                             onClick={(event: any) => {
+                                if (item.value === fontFamilyCur) return;
                                 event.preventDefault();
                                 toggleMark(editor, item.value);
                             }}

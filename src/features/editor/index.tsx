@@ -1,29 +1,29 @@
+import classNames from 'classnames/bind';
+import pipe from 'lodash/fp/pipe';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { createEditor } from 'slate';
-import { Editable, Slate, withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
-import pipe from 'lodash/fp/pipe';
-import classNames from 'classnames/bind';
+import { Editable, Slate, withReact } from 'slate-react';
 
-import Toolbar from './components/Toolbar';
-import SlateTopbar from './components/SlateTopbar';
-import SlateFooter from './components/SlateFooter';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { editorActions } from 'features/editor/editorSlice';
 import { noteActions } from 'features/note/noteSlice';
-import { toolbarActions } from 'features/editor/editorSlice';
 import useDecorate from 'hooks/useDecorate';
-import useWindowWidth from 'hooks/useWindowWidth';
 import useOnClickOutside from 'hooks/useOnclickOutside';
+import useWindowWidth from 'hooks/useWindowWidth';
+import SlateFooter from './components/SlateFooter';
+import SlateTopbar from './components/SlateTopbar';
+import Toolbar from './components/Toolbar';
 
-import { withChecklists, withLinks, withKeyCommands, withImages } from './plugins';
-import { SlateElement, SlateLeaf } from './slates';
 import { LoadingIcon } from 'assets/icons';
+import { withChecklists, withImages, withKeyCommands, withLinks } from './plugins';
+import { SlateElement, SlateLeaf } from './slates';
 
-import styles from './Editor.module.scss';
 import withIndent from './plugins/withIndent';
 import handleKeyboard from './utils/handleKeyboard';
-import isHotkey from 'is-hotkey';
+
+import styles from './Editor.module.scss';
 const cx = classNames.bind(styles);
 
 const createEditorWithPlugins = pipe(
@@ -61,7 +61,7 @@ function Editor() {
 
     const setIsToolbar = useCallback(
         (isToolbar: boolean) => {
-            dispatch(toolbarActions.setIsToolbar(isToolbar));
+            dispatch(editorActions.setIsToolbar(isToolbar));
         },
         [dispatch]
     );
@@ -70,7 +70,7 @@ function Editor() {
         setIsToolbar(false);
     }, [setIsToolbar, width]);
 
-    useOnClickOutside(editorRef, () => dispatch(toolbarActions.setIsToolbar(false)));
+    useOnClickOutside(editorRef, () => dispatch(editorActions.setIsToolbar(false)));
     return (
         <div className={styles.wrapper}>
             <SlateTopbar />
@@ -114,20 +114,16 @@ function Editor() {
                             <div className={cx('editable-main')}>
                                 <Editable
                                     placeholder='Bắt đầu viết những suy nghĩ, hoặc công việc vào đây'
-                                    // decorate={decorate}
+                                    decorate={decorate}
                                     onClick={() => setIsToolbar(true)}
                                     onFocus={() => {
                                         setIsToolbar(true);
                                         setOnHeader(false);
                                     }}
-                                    // onKeyDown={(event) => {
-                                    //     // const isSaveHotkey = isHotkey('mod+s');
-                                    //     // if (isSaveHotkey(event)) {
-                                    //     //     console.log(event.key);
-                                    //     // }
-                                    // }}
+                                    onKeyDown={(event) => handleKeyboard(event, editor)}
                                     renderLeaf={renderLeaf}
                                     renderElement={renderElement}
+                                    autoFocus
                                 />
                             </div>
                         </div>

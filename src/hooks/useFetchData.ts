@@ -10,7 +10,7 @@ import { shortcutActions } from 'features/shortcut/shortcutSlice';
 function useFetchData() {
     
     const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
-    const email = useAppSelector((state) => state.auth.user?.email);
+    const user = useAppSelector(state => state.auth.user);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -19,12 +19,12 @@ function useFetchData() {
     }, [dispatch, isLoggedIn]);
 
     useEffect(() => {
-        if (!isLoggedIn && !email) return;
+        if (!user) return;
         dispatch(noteActions.fetch());
         dispatch(tagActions.fetch());
         dispatch(notebookActions.fetch());
         dispatch(shortcutActions.fetch());
-    }, [dispatch, isLoggedIn, email]);
+    }, [dispatch,user]);
 }
 
 export default useFetchData;

@@ -1,12 +1,6 @@
 import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from 'assets/icons';
 
 const toolbar = {
-    heading: [
-        { value: 'heading-one', name: 'Tiêu đề lớn', size: '2em' },
-        { value: 'heading-two', name: 'Tiêu đề trung bình', size: '1.5em' },
-        { value: 'heading-three', name: 'Tiêu đề nhỏ', size: '1.17em' },
-        { value: 'heading-normal', name: 'Văn bản thường', size: '1em' },
-    ],
 
     fontSize: [
         '8px',
@@ -53,6 +47,25 @@ const toolbar = {
         { value: '"Dancing Script", cursive', name: 'Mã' },
         { value: '"Kalam", cursive', name: 'Viết tay' },
     ],
+
+    heading: [
+        {
+            name: 'Tiêu đề lớn',
+            value: '30px',
+        },
+        {
+            name: 'Tiêu đề trung bình',
+            value: '24px',
+        },
+        {
+            name: 'Tiêu đề nhỏ',
+            value: '18px',
+        },
+        {
+            name: 'Văn bản thường',
+            value: '16px',
+        },
+    ]
 };
 
 export const overflowToolbar = [

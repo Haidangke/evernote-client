@@ -1,20 +1,27 @@
-import { useState } from 'react';
 import classNames from 'classnames/bind';
+import { useMemo, useState } from 'react';
+import { useSlate } from 'slate-react';
 
-import { ArrowDownIcon } from 'assets/icons';
-import { toolbarConfig } from 'config';
-import { toggleBlock } from '../../utils/block';
+import { getMarks, toggleMark } from 'features/editor/utils/mark';
 import { DropdownButton } from '../SlateButton';
+import { toolbarConfig } from 'config';
 
 import styles from './Toolbar.module.scss';
-
 const cx = classNames.bind(styles);
 
-const Heading = ({ editor }: any) => {
+function Heading() {
+    const editor = useSlate();
     const [heading, setHeading] = useState('Văn bản thường');
+    const marks = getMarks(editor);
+
+    const fontSizeCur = useMemo(
+        () => marks.find((mark) => toolbarConfig.fontSize.includes(mark)),
+        [marks]
+    );
     return (
         <DropdownButton
             value={heading}
+            minWidth='140px'
             dropdown={() => (
                 <div className={cx('dropdown-wrapper')}>
                     {toolbarConfig.heading.map((item) => (
@@ -22,11 +29,12 @@ const Heading = ({ editor }: any) => {
                             className={cx('dropdown-heading', {
                                 'dropdown-wrapper__active': heading === item.name,
                             })}
-                            style={{ fontSize: item.size }}
+                            style={{ fontSize: item.value }}
                             key={item.value}
                             onClick={(event: any) => {
+                                if (fontSizeCur === item.value) return;
                                 event.preventDefault();
-                                toggleBlock(editor, item.value);
+                                toggleMark(editor, item.value);
                                 setHeading(item.name);
                             }}
                         >
@@ -37,6 +45,6 @@ const Heading = ({ editor }: any) => {
             )}
         />
     );
-};
+}
 
 export default Heading;

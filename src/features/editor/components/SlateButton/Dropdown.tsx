@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 
 import Popper from 'components/Popper';
 import { useAppDispatch } from 'app/hooks';
-import { toolbarActions } from 'features/editor/editorSlice';
+import { editorActions } from 'features/editor/editorSlice';
 import { ArrowDownIcon } from 'assets/icons';
 import { overflowToolbar } from 'config/toolbar';
 import useCheckOverflow from '../../hooks/useCheckOverflow';
@@ -44,7 +44,7 @@ function DropDown({
         if (check !== undefined && formats) {
             setIsOverflow(!check);
             for (let i = 0; i < formats.length; i++) {
-                dispatch(toolbarActions.setOverflow({ format: formats[i], value: !check }));
+                dispatch(editorActions.setOverflow({ format: formats[i], value: !check }));
             }
         }
     }, [check, dispatch, formats]);
@@ -69,7 +69,7 @@ function DropDown({
                     className={`${cx('dropdown-btn', 'btn')}  ${className || ''}`}
                 >
                     <span style={{ minWidth }}>{value}</span>
-                    <ArrowDownIcon width={8} height={24} />
+                    <ArrowDownIcon width={10} height={24} />
                 </button>
             </TippyHeadless>
         </div>

@@ -6,7 +6,7 @@ import TippyHeadless from '@tippyjs/react/headless';
 import { ButtonProps } from '.';
 
 import { useAppDispatch } from 'app/hooks';
-import { toolbarActions } from 'features/editor/editorSlice';
+import { editorActions } from 'features/editor/editorSlice';
 import { isMarkActive, toggleMark } from '../../utils/mark';
 
 import { overflowToolbar } from 'config/toolbar';
@@ -27,7 +27,7 @@ function Mark({ format, children, content, className }: ButtonProps) {
     useEffect(() => {
         if (check !== undefined) {
             setIsOverflow(!check);
-            dispatch(toolbarActions.setOverflow({ format, value: !check }));
+            dispatch(editorActions.setOverflow({ format, value: !check }));
         }
     }, [dispatch, format, check]);
 

@@ -81,11 +81,7 @@ const authSlice = createSlice({
         },
         registerFailed(state) {
             state.registering = false;
-        },
-        logout(state) {
-            state.isLoggedIn = false;
-            state.user = undefined;
-        },
+        }
     },
 });
 

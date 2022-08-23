@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 
 import { useAppDispatch } from 'app/hooks';
 import useCheckOverflow from '../../hooks/useCheckOverflow';
-import { toolbarActions } from 'features/editor/editorSlice';
+import { editorActions } from 'features/editor/editorSlice';
 
 import { overflowToolbar } from 'config/toolbar';
 import styles from './Button.module.scss';
@@ -30,7 +30,7 @@ function Handle({ children, handle, className, content, disable, format, modal }
     useEffect(() => {
         if (check !== undefined && format) {
             setIsOverflow(!check);
-            dispatch(toolbarActions.setOverflow({ format, value: !check }));
+            dispatch(editorActions.setOverflow({ format, value: !check }));
         }
     }, [dispatch, format, check]);
 
