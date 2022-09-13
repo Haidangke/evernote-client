@@ -16,7 +16,7 @@ const noteService = {
         return axiosClientSecret.post('/note', { notebookId });
     },
 
-    update(id: string, params: UpdateNoteParams) {
+    update(id: string, params: UpdateNoteParams): Promise<Note<Tag>> {
         return axiosClientSecret.put(`/note/${id}`, params);
     },
 

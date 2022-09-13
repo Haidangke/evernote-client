@@ -6,7 +6,7 @@ interface Upload {
 }
 
 interface InitialState {
-    rectX: number;
+    width: number;
     isToolbar: boolean;
     toolbar: Array<{
         isOverflow: boolean;
@@ -18,7 +18,7 @@ interface InitialState {
 
 const initialState: InitialState = {
     isToolbar: false,
-    rectX: 0,
+    width: 0,
     upload: {
         isLoading: false,
         messeage: '',
@@ -93,8 +93,8 @@ const editorSlice = createSlice({
     name: 'editor',
     initialState,
     reducers: {
-        setRectX(state, action: PayloadAction<number>) {
-            state.rectX = action.payload;
+        setWidth(state, action: PayloadAction<number>) {
+            state.width = action.payload;
         },
         setIsToolbar(state, action: PayloadAction<boolean>) {
             state.isToolbar = action.payload;

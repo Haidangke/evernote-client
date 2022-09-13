@@ -8,15 +8,9 @@ export interface Note<T> {
     todo?: Todo[];
     tags: T;
     notebook: string;
+    isTrash: boolean;
     createdAt: string;
     updatedAt: string;
-}
-
-export interface ListParams {
-    _page?: string;
-    _limit?: string;
-    _sort?: string;
-    [key: string]: any;
 }
 
 export interface UpdateNoteParams {
@@ -24,6 +18,6 @@ export interface UpdateNoteParams {
     content?: string;
     tags?: string[];
     notebook?: string;
-    isDelete?: string;
+    isTrash?: boolean;
     contain?: string;
 }

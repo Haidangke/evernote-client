@@ -1,16 +1,15 @@
 import { useForm } from 'react-hook-form';
-import ReactLoading from 'react-loading';
 import * as yup from 'yup';
 
-import Auth from '.';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { InputField } from 'components/FormFields';
 import { RegisterParams } from 'types';
-
-import styles from './Auth.module.scss';
+import Auth from '.';
 import { yupResolver } from '@hookform/resolvers/yup';
+import Loading from 'components/Loading';
 import { authActions } from '../authSlice';
 
+import styles from './Auth.module.scss';
 const defaultValues = { username: '', password: '', email: '', passwordConfirm: '' };
 
 const schema = yup
@@ -71,7 +70,7 @@ function Register() {
                     placeholder='Nhập lại mật khẩu'
                 />
                 <button type='submit' className={styles.submit}>
-                    {registering ? <ReactLoading height={22} width={22} type='spin' /> : ' Đăng kí'}
+                    {registering ? <Loading height='22px' width='22px' /> : ' Đăng kí'}
                 </button>
             </form>
 

@@ -12,6 +12,7 @@
     padding: 0px 16px;
     color: var(--white);
     @include flex(center, unset);
+    font-size: 1.4rem;
 }
 
 .icon {

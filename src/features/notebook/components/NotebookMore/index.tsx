@@ -16,7 +16,7 @@ import { shortcutActions } from 'features/shortcut/shortcutSlice';
 import InputField, { nameSchema } from 'components/FormFields/InputField';
 import ModalForm from 'components/Modal/ModalForm';
 import Toast from 'components/Toast';
-import More from 'components/Tippy/TippyMore';
+import TippyMore from 'components/Tippy/TippyMore';
 
 import styles from './NotebookMore.module.scss';
 const cx = classNames.bind(styles);
@@ -131,7 +131,7 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
 
     return (
         <>
-            <More
+            <TippyMore
                 dropdown={
                     <div className={styles.wrapper}>
                         <div className={styles.item} onClick={addNote}>

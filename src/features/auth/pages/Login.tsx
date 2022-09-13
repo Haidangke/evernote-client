@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import ReactLoading from 'react-loading';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import classNames from 'classnames/bind';
@@ -17,6 +16,7 @@ import authService from 'services/authService';
 
 import styles from './Auth.module.scss';
 import { authActions } from '../authSlice';
+import Loading from 'components/Loading';
 const defaultValues = { email: 'vatcmnvo@gmail.com', password: 'Haidangker12345' };
 
 const schema = yup
@@ -104,7 +104,7 @@ function Login() {
                     className={cx('submit', { disable: logging })}
                 >
                     {logging ? (
-                        <ReactLoading height={22} width={22} type='spin' />
+                        <Loading height='22px' width="22px" />
                     ) : validEmail ? (
                         'Đăng nhập'
                     ) : (

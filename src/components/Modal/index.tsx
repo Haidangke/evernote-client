@@ -10,7 +10,7 @@ import './Modal.scss';
 export interface ModalProps {
     children?: any;
     isOpen: boolean;
-    setIsOpen: (isOpen: boolean) => void;
+    setIsOpen?: (isOpen: boolean) => void;
     isSmall?: boolean;
 }
 const cx = classNames.bind(styles);

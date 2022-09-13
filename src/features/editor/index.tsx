@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import pipe from 'lodash/fp/pipe';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { createEditor } from 'slate';
 import { withHistory } from 'slate-history';
@@ -11,23 +11,21 @@ import { editorActions } from 'features/editor/editorSlice';
 import { noteActions } from 'features/note/noteSlice';
 import useDecorate from 'hooks/useDecorate';
 import useOnClickOutside from 'hooks/useOnclickOutside';
-import useWindowWidth from 'hooks/useWindowWidth';
 import SlateFooter from './components/SlateFooter';
 import SlateTopbar from './components/SlateTopbar';
 import Toolbar from './components/Toolbar';
 
-import { LoadingIcon } from 'assets/icons';
-import { withChecklists, withImages, withKeyCommands, withLinks } from './plugins';
+import Loading from 'components/Loading';
+import UploadLoading from './components/UploadLoading';
+import { withChecklists, withKeyCommands, withLinks, withIndent } from './plugins';
 import { SlateElement, SlateLeaf } from './slates';
 
-import withIndent from './plugins/withIndent';
 import handleKeyboard from './utils/handleKeyboard';
 
 import styles from './Editor.module.scss';
 const cx = classNames.bind(styles);
 
 const createEditorWithPlugins = pipe(
-    withImages,
     withReact,
     withHistory,
     withChecklists,
@@ -57,8 +55,6 @@ function Editor() {
     const renderElement = useCallback((props: any) => <SlateElement {...props} />, []);
     const renderLeaf = useCallback((props: any) => <SlateLeaf {...props} />, []);
 
-    const width = useWindowWidth();
-
     const setIsToolbar = useCallback(
         (isToolbar: boolean) => {
             dispatch(editorActions.setIsToolbar(isToolbar));
@@ -66,16 +62,17 @@ function Editor() {
         [dispatch]
     );
 
-    useEffect(() => {
-        setIsToolbar(false);
-    }, [setIsToolbar, width]);
-
     useOnClickOutside(editorRef, () => dispatch(editorActions.setIsToolbar(false)));
+
     return (
         <div className={styles.wrapper}>
-            <SlateTopbar />
+            <UploadLoading />
+            <div className={styles.topbar}>
+                <SlateTopbar />
+            </div>
+
             {note ? (
-                <div ref={editorRef} className={cx('editor')}>
+                <div ref={editorRef} className={styles.editor}>
                     <Slate
                         editor={editor}
                         value={JSON.parse(note.content)}
@@ -92,7 +89,9 @@ function Editor() {
                             }
                         }}
                     >
-                        <Toolbar onHeader={onHeader} setSearch={setSearch} />
+                        <div className={styles.toolbar}>
+                            <Toolbar onHeader={onHeader} setSearch={setSearch} />
+                        </div>
 
                         <div className={cx('editable')}>
                             <input
@@ -123,20 +122,19 @@ function Editor() {
                                     onKeyDown={(event) => handleKeyboard(event, editor)}
                                     renderLeaf={renderLeaf}
                                     renderElement={renderElement}
-                                    autoFocus
                                 />
                             </div>
                         </div>
                     </Slate>
                 </div>
-            ) : isFetching ? (
-                <div className={cx('loading')}>
-                    <LoadingIcon className={cx('loading-icon')} />
-                </div>
             ) : (
-                <></>
+                <div className={cx('loading')}>
+                    {isFetching && <Loading width='42px' height='42px' />}
+                </div>
             )}
-            <SlateFooter />
+            <div className={styles.footer}>
+                <SlateFooter />
+            </div>
         </div>
     );
 }

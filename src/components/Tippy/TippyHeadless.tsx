@@ -28,7 +28,7 @@ function TippyHeadLess({
         if (outside) setVisible(false);
     });
     return (
-        <div style={{ width: 'inherit' }} ref={ref}>
+        <div style={{ width: 'inherit', height: '100%' }} ref={ref}>
             <Tippy
                 offset={[0, 0]}
                 // placement='bottom-end'

@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TopicValue } from 'types';
 
 interface InitialState {
     isSmall: boolean;

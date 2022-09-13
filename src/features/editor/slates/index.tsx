@@ -1,6 +1,5 @@
 import { toolbarConfig } from 'config';
 import CheckListItemElement from '../slates/CheckList';
-import Image from './Image';
 import Link from './Link';
 
 const SlateElement = (props: any) => {
@@ -49,8 +48,6 @@ const SlateElement = (props: any) => {
         case 'link':
             return <Link {...props} style={style} />;
 
-        case 'image':
-            return <Image {...props} />;
         default:
             return (
                 <p style={style} {...attributes}>

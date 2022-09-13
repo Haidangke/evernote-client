@@ -21,7 +21,7 @@ function useAddNote(notebookId?: string) {
                     if (!res) return;
 
                     dispatch(noteActions.setListNote([res, ...listNote]));
-                    navigate('/note', { n: res._id });
+                    navigate('/note', { n: res._id, an: true });
                 })
                 .catch();
         }

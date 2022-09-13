@@ -4,7 +4,7 @@ import useSearchKey from 'hooks/useSearchKey';
 
 import { privateRoute, publicRoute } from 'routes';
 import PrivateRoute from 'routes/PrivateRoute';
-import DefaultLayout from 'layouts/DefaultLayout';
+import DefaultLayout from 'components/DefaultLayout';
 import Sidebar from 'features/sidebar';
 
 import styles from './App.module.scss';

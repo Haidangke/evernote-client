@@ -116,7 +116,7 @@ function Actions() {
 
                 {isAdd && (
                     <div ref={newRef} className={cx('new-menu')}>
-                        <div className={cx('btn', 'btn-note')}>
+                        <div onClick={handleAdd} className={cx('btn', 'btn-note')}>
                             <div className={cx('btn-content')}>
                                 <NoteIcon />
                                 <span>Ghi chú</span>

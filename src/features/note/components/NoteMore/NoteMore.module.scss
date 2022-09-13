@@ -31,3 +31,14 @@
     background-color: var(--color-f2);
     margin: 6px 0;
 }
+
+//notify
+.value,
+.address {
+    font-weight: 700;
+}
+
+.address {
+    text-decoration: underline;
+    margin-left: 6px;
+}

@@ -29,7 +29,6 @@
         "react-hot-toast": "^2.3.0",
         "react-icons": "^4.4.0",
         "react-lazy-load-image-component": "^1.5.4",
-        "react-loading": "^2.0.3",
         "react-query": "^3.39.1",
         "react-redux": "^8.0.1",
         "react-resize-detector": "^7.1.2",

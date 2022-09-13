@@ -21,7 +21,7 @@ function Heading() {
     return (
         <DropdownButton
             value={heading}
-            minWidth='140px'
+            minWidth='120px'
             dropdown={() => (
                 <div className={cx('dropdown-wrapper')}>
                     {toolbarConfig.heading.map((item) => (

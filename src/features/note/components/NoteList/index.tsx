@@ -1,18 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Resizable } from 're-resizable';
-import classNames from 'classnames/bind';
 
 import useWindowWidth from 'hooks/useWindowWidth';
 import { useAppSelector } from 'app/hooks';
 import List from './List';
 import Actions from './Actions';
 import Title from './Title';
-
 import { Sort } from 'config/actions';
 
 import styles from './NoteList.module.scss';
-const cx = classNames.bind(styles);
 
 function NoteList() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -23,10 +20,14 @@ function NoteList() {
 
     const { notebooks } = useAppSelector((state) => state.notebook);
     const { listNote } = useAppSelector((state) => state.note);
+    const { isSmall } = useAppSelector((state) => state.sidebar);
 
     const notebook = notebooks.find((notebook) => notebook._id === notebookId);
     const listNoteFilter = useMemo(
-        () => listNote.filter((note) => (notebookId ? note.notebook === notebookId : note)),
+        () =>
+            listNote
+                .filter((note) => !note.isTrash)
+                .filter((note) => (notebookId ? note.notebook === notebookId : note)),
         [listNote, notebookId]
     );
 
@@ -47,8 +48,13 @@ function NoteList() {
     }, [listNoteFilter, noteId, searchParams, setSearchParams]);
 
     useEffect(() => {
-        if (width > 0) setMaxWidth(width / 3);
-    }, [width]);
+        if (width === 0) return;
+        if (isSmall) {
+            setMaxWidth(width - 560);
+        } else {
+            setMaxWidth(width - 900);
+        }
+    }, [width, isSmall]);
 
     if (!isShow || expand) return <></>;
 
@@ -65,16 +71,16 @@ function NoteList() {
                 });
             }}
         >
-            <div className={cx('wrapper')}>
+            <div className={styles.wrapper}>
                 <header className={styles.header}>
                     <Title notebook={notebook?.name} />
-                    <div className={cx('concern')}>
-                        <div className={cx('total')}>{listNoteFilter.length} ghi chú</div>
+                    <div className={styles.concern}>
+                        <div className={styles.total}>{listNoteFilter.length} ghi chú</div>
                         <Actions sort={sort} setSort={setSort} />
                     </div>
                 </header>
 
-                <div className={cx('list')}>
+                <div className={styles.list}>
                     <List sort={sort} />
                 </div>
             </div>

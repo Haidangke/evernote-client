@@ -1,13 +1,14 @@
+import { useSearchParams } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
+import NoteMore from 'features/note/components/NoteMore';
 import { TippyButton } from 'components/Tippy';
-import { FullSizeIcon, MoreIcon, NoteMainIcon, NoteToIcon } from 'assets/icons';
-import { useSearchParams } from 'react-router-dom';
+import { FullSizeIcon, NoteMainIcon, NoteToIcon } from 'assets/icons';
 
 import styles from './Topbar.module.scss';
 const cx = classNames.bind(styles);
 
-function Topbar() {
+function SlateTopbar() {
     const [searchParams, setSearchParams] = useSearchParams();
 
     const handleExpandEditor = () => {
@@ -56,13 +57,11 @@ function Topbar() {
                 <div className={cx('info-auth')}>Chỉ bạn</div>
                 <div className={cx('share-btn')}>Chia sẻ</div>
                 <div className={cx('other-btn')}>
-                    <TippyButton content='Thao tác khác' placement='bottom'>
-                        <MoreIcon />
-                    </TippyButton>
+                    <NoteMore />
                 </div>
             </div>
         </div>
     );
 }
 
-export default Topbar;
+export default SlateTopbar;

@@ -1,27 +1,13 @@
-import { memo, useEffect } from 'react';
+import { memo, useCallback } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 import { useSlate } from 'slate-react';
 import classNames from 'classnames/bind';
 
+import { editorActions } from 'features/editor/editorSlice';
 import { useAppDispatch } from 'app/hooks';
-import {
-    BoldIcon,
-    BulletedListIcon,
-    CalendarIcon,
-    ItalicIcon,
-    LineThrougnIcon,
-    NumberListIcon,
-    SubScriptIcon,
-    TestListIcon,
-    TodoIcon,
-    UnderlineIcon,
-    UpperIndexIcon,
-} from 'assets/icons/toolbar';
-import { BlockButton, HandleButton, MarkButton } from '../SlateButton';
 
-import InsertBtn from './Insert';
+import { BlockButton, MarkButton } from '../SlateButton';
 import OverflowToolbar from '../OverflowToolbar';
-
 import Align from './Align';
 import ColorPicker from './ColorPicker';
 import FontFamily from './FontFamily';
@@ -31,8 +17,20 @@ import History from './History';
 import Link from './Link';
 import TextIndent from './TextIndent';
 import Info from './Info';
+import Todo from './Todo';
 
-import { editorActions } from 'features/editor/editorSlice';
+import {
+    BoldIcon,
+    BulletedListIcon,
+    ItalicIcon,
+    LineThrougnIcon,
+    NumberListIcon,
+    SubScriptIcon,
+    TestListIcon,
+    UnderlineIcon,
+    UpperIndexIcon,
+} from 'assets/icons/toolbar';
+
 import styles from './Toolbar.module.scss';
 const cx = classNames.bind(styles);
 
@@ -42,32 +40,24 @@ interface ToolbarProps {
 }
 
 function Toolbar({ onHeader, setSearch }: ToolbarProps) {
-    const { ref } = useResizeDetector<HTMLDivElement>();
     const dispatch = useAppDispatch();
+    
     const editor = useSlate();
-
-    useEffect(() => {
-        if (ref.current) {
-            const clientX = ref.current.getBoundingClientRect().x;
-            dispatch(editorActions.setRectX(clientX));
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [ref.current?.getBoundingClientRect()]);
+    const onResize = useCallback(
+        (width: any) => {
+            if (!width) return;
+            dispatch(editorActions.setWidth(width));
+        },
+        [dispatch]
+    );
+    const { ref } = useResizeDetector<HTMLDivElement>({ onResize });
 
     return (
-        <div className={styles.wrapper}>
+        <div ref={ref}>
             <Info />
 
-            <div ref={ref} className={cx('toolbar', { 'toolbar-on-header': onHeader })}>
-                <InsertBtn />
-
-                <HandleButton handle={() => console.log('Handle')} content='Nhiệm vụ'>
-                    <TodoIcon />
-                </HandleButton>
-
-                <HandleButton handle={() => console.log('Handle')} content='Sự kiện trên lịch'>
-                    <CalendarIcon />
-                </HandleButton>
+            <div className={cx('toolbar', { 'toolbar-on-header': onHeader })}>
+                <Todo />
 
                 <div className={cx('line')}></div>
 
@@ -119,10 +109,8 @@ function Toolbar({ onHeader, setSearch }: ToolbarProps) {
 
                 <div className={cx('line')}></div>
 
-                {/* align */}
                 <Align editor={editor} />
 
-                {/* indent outdent */}
                 <TextIndent editor={editor} />
 
                 <div className={cx('line')}></div>

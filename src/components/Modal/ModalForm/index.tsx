@@ -34,7 +34,7 @@ function ModalForm({
             <div className={cx('header')}>
                 <h2 className={cx('title')}>
                     <span>{title}</span>
-                    <span onClick={() => setIsOpen(false)}>
+                    <span onClick={() => setIsOpen && setIsOpen(false)}>
                         <CloseIcon className={cx('icon')} />
                     </span>
                 </h2>
@@ -43,7 +43,11 @@ function ModalForm({
             <div className={cx('form')}>
                 {children}
                 <div className={cx('button')}>
-                    <Button onClick={() => setIsOpen(false)} variant='outline' content='Hủy' />
+                    <Button
+                        onClick={() => setIsOpen && setIsOpen(false)}
+                        variant='outline'
+                        content='Hủy'
+                    />
                     <Button
                         onClick={onSubmit}
                         variant={variant}

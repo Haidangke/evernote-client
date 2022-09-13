@@ -1,0 +1,18 @@
+@keyframes rotate {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.root {
+    animation: rotate 1s linear infinite;
+    & > circle {
+        stroke: var(--primary-color);
+        stroke-dasharray: 187;
+        stroke-dashoffset: 36;
+    }
+}

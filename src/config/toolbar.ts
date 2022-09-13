@@ -1,7 +1,6 @@
 import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from 'assets/icons';
 
 const toolbar = {
-
     fontSize: [
         '8px',
         '9px',
@@ -65,65 +64,66 @@ const toolbar = {
             name: 'Văn bản thường',
             value: '16px',
         },
-    ]
+    ],
 };
 
 export const overflowToolbar = [
     {
         format: 'color',
-        limit: 582,
+        limit: 460,
     },
     {
         format: 'bold',
-        limit: 612,
+        limit: 482,
     },
     {
         format: 'italic',
-        limit: 644,
+        limit: 514,
     },
     {
         format: 'underline',
-        limit: 676,
+        limit: 546,
     },
     {
         format: 'bulleted-list',
-        limit: 714,
+        limit: 606,
     },
     {
         format: 'numbered-list',
-        limit: 745,
+        limit: 638,
     },
     {
         format: 'check-list-item',
-        limit: 778,
-    },
-    {
-        format: 'indent',
-        limit: 901,
-    },
-    {
-        format: 'outdent',
-        limit: 933,
+        limit: 670,
     },
     {
         format: 'align',
-        limit: 871,
+        limit: 725,
+    },
+    {
+        format: 'indent',
+        limit: 754,
+    },
+    {
+        format: 'outdent',
+        limit: 786,
+    },
+
+    {
+        format: 'through',
+        limit: 823,
     },
     {
         format: 'sup',
-        limit: 1002,
-    },
-    {
-        format: 'sub',
-        limit: 1034,
-    },
-    {
-        format: 'through',
-        limit: 970,
+        limit: 855,
     },
     {
         format: 'link',
-        limit: 1026,
+        limit: 879,
+    },
+    {
+        format: 'sub',
+        limit: 885,
     },
 ];
 export default toolbar;

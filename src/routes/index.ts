@@ -1,6 +1,6 @@
 import { RecyclePage, HomePage } from 'pages';
 import { routesConfig } from 'config';
-import DefaultLayout from 'layouts/DefaultLayout';
+import DefaultLayout from 'components/DefaultLayout';
 import Notebook from 'features/notebook';
 import LoginPage from 'features/auth/pages/Login';
 import RegisterPage from 'features/auth/pages/Register';
