@@ -37,14 +37,14 @@ function Menu() {
             />
             <div className={cx('line-space')}></div>
 
-            <NotebookItemSidebar/>
+            <NotebookItemSidebar />
             <TagItemSidebar />
             <div className={cx('line-space')}></div>
             <SidebarMenuItem
                 topic={{ title: 'Thùng rác' }}
                 icon={{ main: DeleteIcon }}
                 types={['link']}
-                navigate={{ path: routesConfig.recycle }}
+                navigate={{ path: routesConfig.recycle, params: { an: true } }}
             />
         </div>
     );

@@ -6,7 +6,7 @@
     margin: 10px 0;
 }
 .left {
-    font-weight: 700;
+    font-weight: 600;
 }
 .right {
     @include flex(center, unset);
@@ -22,7 +22,7 @@
     & > span {
         font-size: 1.4rem;
         color: var(--primary-color);
-        font-weight: 700;
+        font-weight: 600;
     }
     &:hover {
         opacity: 0.8;

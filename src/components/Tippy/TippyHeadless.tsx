@@ -1,5 +1,6 @@
 import { ReactNode, useRef, useState } from 'react';
 import Tippy from '@tippyjs/react';
+import { Placement } from 'tippy.js';
 
 import Popper from 'components/Popper';
 import useOnClickOutside from 'hooks/useOnclickOutside';
@@ -12,6 +13,8 @@ interface TippyHeadLessProps {
     setVisible: (visible: boolean) => void;
     dropdown: ReactNode;
     [key: string]: any;
+    placement?: Placement;
+    className?: string;
 }
 
 function TippyHeadLess({
@@ -20,6 +23,8 @@ function TippyHeadLess({
     setVisible,
     dropdown,
     outside = true,
+    placement,
+    className,
     ...props
 }: TippyHeadLessProps) {
     const ref = useRef(null);
@@ -28,10 +33,11 @@ function TippyHeadLess({
         if (outside) setVisible(false);
     });
     return (
-        <div style={{ width: 'inherit', height: '100%' }} ref={ref}>
+        <>
             <Tippy
+                ref={ref}
                 offset={[0, 0]}
-                // placement='bottom-end'
+                placement={placement || 'bottom-end'}
                 onMount={() => setIsAnimation(true)}
                 onHide={(instance: any) => {
                     setIsAnimation(false);
@@ -59,14 +65,14 @@ function TippyHeadLess({
                         }}
                         {...attrs}
                     >
-                        <Popper>{dropdown}</Popper>
+                        <Popper className={className}>{dropdown}</Popper>
                     </div>
                 )}
                 {...props}
             >
                 {children}
             </Tippy>
-        </div>
+        </>
     );
 }
 

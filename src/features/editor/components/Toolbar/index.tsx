@@ -16,7 +16,7 @@ import Heading from './Heading';
 import History from './History';
 import Link from './Link';
 import TextIndent from './TextIndent';
-import Info from './Info';
+import Info from '../SlateInfo';
 import Todo from './Todo';
 
 import {

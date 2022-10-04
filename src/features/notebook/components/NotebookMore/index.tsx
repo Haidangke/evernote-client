@@ -14,7 +14,7 @@ import { noteActions } from 'features/note/noteSlice';
 import { shortcutActions } from 'features/shortcut/shortcutSlice';
 
 import InputField, { nameSchema } from 'components/FormFields/InputField';
-import ModalForm from 'components/Modal/ModalForm';
+import ModalCreate from 'components/Modal/ModalCreate';
 import Toast from 'components/Toast';
 import TippyMore from 'components/Tippy/TippyMore';
 
@@ -166,7 +166,7 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
                     </div>
                 }
             />
-            <ModalForm
+            <ModalCreate
                 isOpen={isDelete}
                 setIsOpen={setIsDelete}
                 onSubmit={handleDelete}
@@ -176,7 +176,7 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
                 description='Mọi ghi chú trong sổ tay sẽ được di chuyển vào Thùng rác. Thao tác này không thể hồi lại được.'
             />
 
-            <ModalForm
+            <ModalCreate
                 isOpen={isChangeName}
                 setIsOpen={setIsChangeName}
                 onSubmit={handleSubmit(handleChangeName)}
@@ -192,7 +192,7 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
                     placeholder='Tên sổ tay'
                     errorProp='Tên sổ tay này đã được sử dụng'
                 />
-            </ModalForm>
+            </ModalCreate>
 
             <Toaster />
         </>

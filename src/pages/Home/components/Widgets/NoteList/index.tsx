@@ -16,6 +16,7 @@ const cx = classNames.bind(styles);
 
 function NoteList() {
     const { listNote } = useAppSelector((state) => state.note);
+    const listNoteFilter = listNote.filter((note) => !note.isTrash);
 
     const navigate = useNavigateParams();
 
@@ -37,10 +38,10 @@ function NoteList() {
         >
             <Tab />
             <div className={styles.wrapper}>
-                {listNote.length === 0 ? (
+                {listNoteFilter.length === 0 ? (
                     <NoteListLoading />
                 ) : (
-                    listNote.map((note) => (
+                    listNoteFilter.map((note) => (
                         <div
                             onClick={() => navigate('/note', { n: note._id })}
                             key={note._id}

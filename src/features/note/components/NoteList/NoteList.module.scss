@@ -1,18 +1,21 @@
 @import 'styles/mixin';
 
 :root {
-    --height-header: 96px;
+    // --height-header: 96px;
     z-index: 1;
 }
 
 .wrapper {
     border-right: 1px solid var(--color-e6);
-    height: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
     background-color: var(--color-f8);
 }
 
 .header {
-    height: var(--height-header-list-note);
+    // height: var(--height-header-list-note);
+
     padding: 18px 16px 0 20px;
     border-bottom: 1px solid var(--color-e6);
 }
@@ -29,6 +32,7 @@
 }
 
 .list {
-    height: calc(100vh - var(--height-header));
+    // height: calc(100vh - var(--height-header));
+    flex: 1;
     overflow-y: auto;
 }

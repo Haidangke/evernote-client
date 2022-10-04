@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { NotebookAddIcon, NotebookIcon, NotebookSubDfIcon, NotebookSubIcon } from 'assets/icons';
 import { InputField } from 'components/FormFields';
 import { nameSchema } from 'components/FormFields/InputField';
-import ModalForm from 'components/Modal/ModalForm';
+import ModalCreate from 'components/Modal/ModalCreate';
 import { notebookActions } from 'features/notebook/notebookSlice';
 import MenuItem from 'features/sidebar/components/Menu/MenuItem';
 import notebookService from 'services/notebookService';
@@ -72,7 +72,7 @@ function NotebookItemSidebar() {
                     },
                 ]}
             />
-            <ModalForm
+            <ModalCreate
                 title='Tạo sổ tay mới'
                 description='Sổ tay giúp ích cho việc nhóm các ghi chú có chung chủ đề. Chúng có thể đặt trong chế độ riêng tư hoặc dùng chung.'
                 isOpen={isModal}
@@ -86,7 +86,7 @@ function NotebookItemSidebar() {
                     placeholder='Tên sổ tay'
                     errorProp='Tên sổ tay đã có người dùng'
                 />
-            </ModalForm>
+            </ModalCreate>
         </>
     );
 }

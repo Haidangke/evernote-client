@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { LoginParams, User, RegisterParams } from 'types';
 
-const access_token = JSON.parse(localStorage.getItem('access_token') as string);
+const access_token = localStorage.getItem('access_token');
 
 interface InitialState {
     user?: User;
@@ -17,7 +17,7 @@ interface InitialState {
 
 const initialState: InitialState = {
     user: undefined,
-    isLoggedIn: Boolean(access_token),
+    isLoggedIn: !!access_token,
     logging: false,
     message: '',
     registering: false,
@@ -81,7 +81,7 @@ const authSlice = createSlice({
         },
         registerFailed(state) {
             state.registering = false;
-        }
+        },
     },
 });
 

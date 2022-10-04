@@ -3,7 +3,7 @@ import { memo, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import InputField, { nameSchema } from 'components/FormFields/InputField';
-import ModalForm from 'components/Modal/ModalForm';
+import ModalCreate from 'components/Modal/ModalCreate';
 import SidebarMenuItem from 'features/sidebar/components/Menu/MenuItem';
 import { tagActions } from 'features/tag/tagSlice';
 import tagService from 'services/tagService';
@@ -24,7 +24,7 @@ function TagItemSidebar() {
 
     const handleValid = useCallback(
         (name: string) => {
-            return listTag.filter((tag) => tag.name === name).length > 0;
+            return listTag.filter((tag) => tag.name === name.trim()).length > 0;
         },
         [listTag]
     );
@@ -62,7 +62,7 @@ function TagItemSidebar() {
                     },
                 ]}
             />
-            <ModalForm
+            <ModalCreate
                 title='Tạo thẻ mới'
                 description='Dùng thẻ để bổ sung từ khóa vào ghi chú, giúp bạn dễ dàng tìm kiếm và duyệt xem hơn.'
                 isOpen={isModal}
@@ -76,7 +76,7 @@ function TagItemSidebar() {
                     placeholder='Tên thẻ'
                     errorProp='Tên thẻ này đã được sử dụng'
                 />
-            </ModalForm>
+            </ModalCreate>
         </>
     );
 }

@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Resizable } from 're-resizable';
 
 import useWindowWidth from 'hooks/useWindowWidth';
+import useLocationPage from 'hooks/useLocationPage';
 import { useAppSelector } from 'app/hooks';
 import List from './List';
 import Actions from './Actions';
@@ -12,11 +13,18 @@ import { Sort } from 'config/actions';
 import styles from './NoteList.module.scss';
 
 function NoteList() {
+    const [resizable, setResizable] = useState({ width: 320, height: '100vh' });
+    const [maxWidth, setMaxWidth] = useState(600);
+    //action
+    const [sort, setSort] = useState<Sort>('updatedAt');
+    const width = useWindowWidth();
+
+    const page = useLocationPage();
     const [searchParams, setSearchParams] = useSearchParams();
     const noteId = searchParams.get('n');
     const notebookId = searchParams.get('b');
     const isShow = searchParams.get('an');
-    const expand = searchParams.get('fs');
+    const expand = JSON.parse(searchParams.get('fs') || 'false');
 
     const { notebooks } = useAppSelector((state) => state.notebook);
     const { listNote } = useAppSelector((state) => state.note);
@@ -26,16 +34,14 @@ function NoteList() {
     const listNoteFilter = useMemo(
         () =>
             listNote
-                .filter((note) => !note.isTrash)
-                .filter((note) => (notebookId ? note.notebook === notebookId : note)),
-        [listNote, notebookId]
+                .filter((note) => (page === 'recycle' ? note.isTrash : !note.isTrash))
+                .filter((note) => (notebookId ? note.notebook === notebookId : note))
+                .sort((x, y) => {
+                    if (sort === 'title') return x.title.localeCompare(y.title);
+                    return new Date(y[sort]).getTime() - new Date(x[sort]).getTime();
+                }),
+        [listNote, notebookId, page, sort]
     );
-
-    const [resizable, setResizable] = useState({ width: 320, height: '100vh' });
-    const [maxWidth, setMaxWidth] = useState(600);
-    //action
-    const [sort, setSort] = useState<Sort>('updatedAt');
-    const width = useWindowWidth();
 
     useEffect(() => {
         if (listNoteFilter.some((note) => note._id === noteId)) return;
@@ -81,7 +87,7 @@ function NoteList() {
                 </header>
 
                 <div className={styles.list}>
-                    <List sort={sort} />
+                    <List listNote={listNoteFilter} />
                 </div>
             </div>
         </Resizable>

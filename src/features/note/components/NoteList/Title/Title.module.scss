@@ -1,24 +1,53 @@
 @import 'styles/mixin';
 
-
+.wrapper {
+    @include flex(flex-start, space-between);
+    margin-bottom: 10px;
+}
 
 .title {
     @include flex(center, unset);
-    height: 28px;
-    line-height: 28px;
-    margin-bottom: 12px;
+    font-size: 2rem;
+}
 
-    & > span {
-        font-size: 2rem;
+.title-recycle {
+    align-items: unset;
+    justify-content: space-between;
+    width: 100%;
+    &__name {
+        display: flex;
     }
 }
 
 .icon {
     &-note {
-        margin-right: 8px;
+        margin: 4px 8px 0 -2px;
     }
     &-book {
         margin-right: 4px;
     }
 }
 
+.clear {
+    @include flex(center, unset);
+
+    max-width: 136px;
+    line-height: 1.4rem;
+    padding: 8px 15px;
+    border: 1px solid var(--color-73);
+    border-radius: 4px;
+
+    text-align: center;
+    font-size: 1.4rem;
+    color: var(--color-73);
+    transition: var(--transition-base);
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--color-f2);
+    }
+
+    &:active {
+        background-color: var(--color-e6);
+    }
+}

@@ -4,9 +4,9 @@ import Button, { Variant } from 'components/Button';
 import { CloseIcon } from 'assets/icons';
 import Modal, { ModalProps } from '..';
 
-import styles from './ModalForm.module.scss';
+import styles from './ModalCreate.module.scss';
 
-interface ModalFormProps extends ModalProps {
+interface ModalCreateProps extends ModalProps {
     title: string;
     description?: string;
     onSubmit: () => void;
@@ -17,7 +17,7 @@ interface ModalFormProps extends ModalProps {
 
 const cx = classNames.bind(styles);
 
-function ModalForm({
+function ModalCreate({
     isOpen,
     setIsOpen,
     children,
@@ -28,7 +28,7 @@ function ModalForm({
     content = 'Tạo',
     isSmall,
     disabled,
-}: ModalFormProps) {
+}: ModalCreateProps) {
     return (
         <Modal isSmall={isSmall} isOpen={isOpen} setIsOpen={setIsOpen}>
             <div className={cx('header')}>
@@ -60,4 +60,4 @@ function ModalForm({
     );
 }
 
-export default ModalForm;
+export default ModalCreate;

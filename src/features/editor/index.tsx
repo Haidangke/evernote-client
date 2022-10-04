@@ -20,8 +20,6 @@ import UploadLoading from './components/UploadLoading';
 import { withChecklists, withKeyCommands, withLinks, withIndent } from './plugins';
 import { SlateElement, SlateLeaf } from './slates';
 
-import handleKeyboard from './utils/handleKeyboard';
-
 import styles from './Editor.module.scss';
 const cx = classNames.bind(styles);
 
@@ -119,7 +117,7 @@ function Editor() {
                                         setIsToolbar(true);
                                         setOnHeader(false);
                                     }}
-                                    onKeyDown={(event) => handleKeyboard(event, editor)}
+                                    // onKeyDown={(event) => handleKeyboard(event, editor)}
                                     renderLeaf={renderLeaf}
                                     renderElement={renderElement}
                                 />

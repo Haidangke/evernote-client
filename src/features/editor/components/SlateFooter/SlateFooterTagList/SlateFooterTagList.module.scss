@@ -1,0 +1,34 @@
+@import 'styles/mixin';
+
+
+
+.dropdown {
+    min-width: 150px;
+}
+
+.wrapper {
+    @include flex(center, unset);
+    height: 100%;
+}
+
+.item {
+    @include flex(center, unset);
+    height: 100%;
+    margin-right: 5px;
+    padding: 0px 12px;
+
+    border-radius: 50px;
+    background-color: var(--color-f2);
+    cursor: pointer;
+
+    & > span {
+        font-size: 1.3rem;
+        color: var(--text-color);
+    }
+    & > svg {
+        margin-left: 5px;
+        width: 14px;
+        height: 14px;
+        color: var(--text-color);
+    }
+}

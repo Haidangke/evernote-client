@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-type Page = 'notebook' | 'note' | 'notes' | '';
+type Page = 'notebook' | 'note' | 'notes' | 'recycle';
 
-const pages: Page[] = ['notebook', 'note' , 'notes'];
+const pages: Page[] = ['notebook', 'note', 'notes', 'recycle'];
 
 function useLocationPage() {
     const [page, setPage] = useState<string>('');

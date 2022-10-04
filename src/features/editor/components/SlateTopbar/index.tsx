@@ -1,15 +1,29 @@
+import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import classNames from 'classnames/bind';
+import { MdDelete } from 'react-icons/md';
 
 import NoteMore from 'features/note/components/NoteMore';
 import { TippyButton } from 'components/Tippy';
+import { useAppSelector } from 'app/hooks';
 import { FullSizeIcon, NoteMainIcon, NoteToIcon } from 'assets/icons';
 
 import styles from './Topbar.module.scss';
+import useLocationPage from 'hooks/useLocationPage';
 const cx = classNames.bind(styles);
 
 function SlateTopbar() {
+    const page = useLocationPage();
     const [searchParams, setSearchParams] = useSearchParams();
+    const noteId = searchParams.get('n');
+
+    const { listNote } = useAppSelector((state) => state.note);
+    const { notebooks } = useAppSelector((state) => state.notebook);
+
+    const notebook = useMemo(() => {
+        const notebookId = listNote.find((note) => note._id === noteId)?.notebook;
+        return notebooks.find((notebook) => notebook._id === notebookId);
+    }, [noteId, listNote, notebooks]);
 
     const handleExpandEditor = () => {
         const expand = JSON.parse(searchParams.get('fs') || 'false');
@@ -38,10 +52,17 @@ function SlateTopbar() {
                         placement='bottom'
                         height='100%'
                     >
-                        <>
-                            <NoteMainIcon />
-                            <span>Sổ tay mới</span>
-                        </>
+                        {page === 'recycle' ? (
+                            <>
+                                <MdDelete size={16} />
+                                <span>Thùng rác</span>
+                            </>
+                        ) : (
+                            <>
+                                <NoteMainIcon />
+                                <span>{notebook?.name}</span>
+                            </>
+                        )}
                     </TippyButton>
 
                     <TippyButton

@@ -8,7 +8,7 @@ import { store } from './app/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GlobalStyles from './components/GlobalStyles';
-import { NavigateSetter } from 'utils/history';
+import { NavigateSetter } from 'routes/history';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);

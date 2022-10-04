@@ -1,5 +1,5 @@
 import { User } from 'types';
-import axiosClientSecret from 'utils/axiosClientSecret';
+import axiosClientSecret from 'services/axiosClientSecret';
 
 const userService = {
     updateScratch(content: string) {

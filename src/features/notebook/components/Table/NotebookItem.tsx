@@ -22,7 +22,10 @@ function NotebookItem({ notebook }: NotebookItemProps) {
     const { listNote } = useAppSelector((state) => state.note);
     const navigate = useNavigateParams();
     const notesOfNotebook = useMemo(
-        () => listNote.filter((note) => note.notebook === notebook._id),
+        () =>
+            listNote
+                .filter((note) => !note.isTrash)
+                .filter((note) => note.notebook === notebook._id),
         [listNote, notebook._id]
     );
 

@@ -1,6 +1,5 @@
 import { toolbarConfig } from 'config';
 import CheckListItemElement from '../slates/CheckList';
-import Link from './Link';
 
 const SlateElement = (props: any) => {
     const { attributes, children, element } = props;
@@ -44,9 +43,6 @@ const SlateElement = (props: any) => {
 
         case 'check-list-item':
             return <CheckListItemElement {...props} />;
-
-        case 'link':
-            return <Link {...props} style={style} />;
 
         default:
             return (

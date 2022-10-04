@@ -1,6 +1,5 @@
 import Tippy from '@tippyjs/react';
-
-type Placement = 'top' | 'bottom' | 'left' | 'right';
+import { Placement } from 'tippy.js';
 
 interface TippyButtonProps {
     children: any;

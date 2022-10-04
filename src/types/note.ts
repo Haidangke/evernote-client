@@ -6,7 +6,7 @@ export interface Note<T> {
     content: string;
     contain: string[];
     todo?: Todo[];
-    tags: T;
+    tags: T[];
     notebook: string;
     isTrash: boolean;
     createdAt: string;

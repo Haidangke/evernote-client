@@ -1,7 +1,7 @@
 import { Response } from 'types';
 import { LoginParams, RegisterParams, User } from 'types/auth';
-import axiosClient from 'utils/axiosClient';
-import history from 'utils/history';
+import axiosClient from 'services/axiosClient';
+import history from 'routes/history';
 
 const authService = {
     checkEmail(params: { email: string }): Promise<Response<boolean>> {

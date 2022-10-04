@@ -1,4 +1,4 @@
-import { RecyclePage, HomePage } from 'pages';
+import { HomePage } from 'pages';
 import { routesConfig } from 'config';
 import DefaultLayout from 'components/DefaultLayout';
 import Notebook from 'features/notebook';
@@ -34,7 +34,7 @@ const privateRoute: Route[] = [
 
     {
         path: routesConfig.recycle,
-        component: RecyclePage,
+        component: DefaultLayout,
     },
 ];
 

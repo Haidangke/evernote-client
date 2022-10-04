@@ -160,3 +160,24 @@ export const NotebookDfIcon = ({ className }: IconProps) => (
         ></path>
     </svg>
 );
+
+export const AddTagIcon = ({ className }: IconProps) => (
+    <svg
+        width='24'
+        height='24'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+        className={className}
+    >
+        <path
+            fillRule='evenodd'
+            clipRule='evenodd'
+            d='M5 10.7a2 2 0 01.442-1.255l5-6.21a2 2 0 013.116 0l5 6.21A2 2 0 0119 10.699v3.052a5.5 5.5 0 00-5.002 7.238H7a2 2 0 01-2-2V10.7zm9-.654a1.999 1.999 0 01-2 1.998 1.999 1.999 0 112-1.998z'
+            fill='currentColor'
+        ></path>
+        <path
+            d='M19.965 16.254a.75.75 0 00-1.5 0v2.285H16.25a.75.75 0 000 1.5h2.215v2.215a.75.75 0 001.5 0V20.04h2.285a.75.75 0 000-1.5h-2.285v-2.285z'
+            fill='currentColor'
+        ></path>
+    </svg>
+);

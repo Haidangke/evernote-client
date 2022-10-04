@@ -1,5 +1,5 @@
 import { ListParams, Note, UpdateNoteParams, Tag } from 'types';
-import axiosClientSecret from 'utils/axiosClientSecret';
+import axiosClientSecret from 'services/axiosClientSecret';
 
 const noteService = {
     get(id: string): Promise<Note<Tag[]>> {
@@ -24,7 +24,7 @@ const noteService = {
         return axiosClientSecret.delete(`/note/${id}`);
     },
 
-    clean() {
+    deleteMany() {
         return axiosClientSecret.delete('/note');
     },
 };

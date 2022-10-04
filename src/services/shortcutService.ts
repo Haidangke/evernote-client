@@ -1,5 +1,5 @@
 import { Shortcut, ShortcutParams } from 'types';
-import axiosClientSecret from 'utils/axiosClientSecret';
+import axiosClientSecret from 'services/axiosClientSecret';
 
 const shortcutService = {
     getAll(): Promise<Shortcut[]> {

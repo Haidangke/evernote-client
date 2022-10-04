@@ -8,9 +8,8 @@ import { authActions } from 'features/auth/authSlice';
 import { shortcutActions } from 'features/shortcut/shortcutSlice';
 
 function useFetchData() {
-    
     const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
-    const user = useAppSelector(state => state.auth.user);
+    const user = useAppSelector((state) => state.auth.user);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -24,7 +23,7 @@ function useFetchData() {
         dispatch(tagActions.fetch());
         dispatch(notebookActions.fetch());
         dispatch(shortcutActions.fetch());
-    }, [dispatch,user]);
+    }, [dispatch, user]);
 }
 
 export default useFetchData;

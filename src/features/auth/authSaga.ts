@@ -4,7 +4,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import authService from 'services/authService';
 import userService from 'services/userService';
 import { LoginParams, RegisterParams, Response, User } from 'types';
-import history from 'utils/history';
+import history from 'routes/history';
 import { authActions } from './authSlice';
 
 function* authSaga() {

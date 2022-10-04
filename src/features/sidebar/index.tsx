@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router-dom';
 import classnames from 'classnames/bind';
 import { Resizable } from 're-resizable';
 import { useEffect, useState } from 'react';
@@ -13,7 +14,6 @@ import SlideLarge from './components/SlideLarge';
 
 import styles from './Sidebar.module.scss';
 import './Sidebar.scss';
-import { useSearchParams } from 'react-router-dom';
 
 const cx = classnames.bind(styles);
 

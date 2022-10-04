@@ -23,6 +23,7 @@ function PrivateRoutes() {
 
 function App() {
     useFetchData();
+
     return (
         <Routes>
             {publicRoute.map((route) => {

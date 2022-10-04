@@ -14,3 +14,24 @@
     opacity: 0;
     transform: rotate(90deg);
 }
+
+//dropdown
+.tippy__dropdown-wrapper {
+    margin-bottom: 10px;
+}
+.tippy__dropdown {
+    padding: 10px 0;
+}
+
+.tippy__dropdown-item {
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 1.4rem;
+    padding: 6px 20px;
+    transition: var(--transition-base);
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--color-f2);
+    }
+}
