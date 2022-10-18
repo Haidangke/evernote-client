@@ -40,7 +40,6 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
     const [isChangeName, setIsChangeName] = useState(false);
 
     const addNote = useAddNote(notebook._id);
-    const notify = (content: string) => toast.custom(<Toast content={content} />);
 
     const {
         control,
@@ -54,26 +53,21 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
 
     const handleChangeName = useCallback(
         (value: UpdateName) => {
-            notebookService
-                .update(notebook._id, value)
-                .then(() => {
-                    const newNotebooks = [...notebooks];
-                    const index = newNotebooks
-                        .map((notebook) => notebook._id)
-                        .indexOf(notebook._id);
-                    const updatedAt = new Date().toISOString();
-                    const notebookUpdate = { ...newNotebooks[index], name: value.name, updatedAt };
-                    newNotebooks[index] = notebookUpdate;
+            setIsChangeName(false);
+            notebookService.update(notebook._id, value).then(() => {
+                const newNotebooks = [...notebooks];
+                const index = newNotebooks.map((notebook) => notebook._id).indexOf(notebook._id);
+                const updatedAt = new Date().toISOString();
+                const notebookUpdate = { ...newNotebooks[index], name: value.name, updatedAt };
+                newNotebooks[index] = notebookUpdate;
 
-                    dispatch(notebookActions.setNotebooks(newNotebooks));
-                    reset({ name: value.name });
-                    setIsChangeName(false);
-                    toast.remove();
-                    notify('Đã đổi tên sổ tay');
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+                dispatch(notebookActions.setNotebooks(newNotebooks));
+                reset({ name: value.name });
+
+                toast.dismiss();
+
+                toast((t) => <Toast toastId={t.id} content='Đã đổi tên sổ tay' />);
+            });
         },
         [dispatch, notebook._id, notebooks, reset]
     );
@@ -90,15 +84,19 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
             newNotebooks[index] = notebookUpdate;
             dispatch(notebookActions.setNotebooks(newNotebooks));
 
-            toast.remove();
-            notify(`Đã đặt "${notebook.name}" làm sổ tay mặc định của bạn`);
+            toast.dismiss();
+            toast((t) => (
+                <Toast
+                    toastId={t.id}
+                    content={`Đã đặt "${notebook.name}" làm sổ tay mặc định của bạn`}
+                />
+            ));
         });
     }, [dispatch, notebook._id, notebook.name, notebooks]);
 
     const handleDelete = useCallback(() => {
+        setIsDelete(false);
         notebookService.delete(notebook._id).then(() => {
-            notify(`Đã xóa "${notebook.name}"`);
-
             const index = notebooks.map((notebook) => notebook.name).indexOf(notebook.name);
             const newNotebooks = [...notebooks];
             newNotebooks.splice(index, 1);
@@ -107,7 +105,8 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
             const newListNote = listNote.filter((note) => note.notebook !== notebook._id);
             dispatch(noteActions.setListNote(newListNote));
 
-            setIsDelete(false);
+            toast.dismiss();
+            toast((t) => <Toast toastId={t.id} content={`Đã xóa "${notebook.name}"`} />);
         });
     }, [dispatch, listNote, notebook._id, notebook.name, notebooks]);
 
@@ -123,8 +122,10 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
                     const newShortcuts = [...shortcuts, data];
                     dispatch(shortcutActions.setShortcuts(newShortcuts));
 
-                    toast.remove();
-                    notify(`Đã thêm "${data.name}" vào lỗi tắt`);
+                    toast.dismiss();
+                    toast((t) => (
+                        <Toast toastId={t.id} content={`Đã thêm "${data.name}" vào lỗi tắt`} />
+                    ));
                 });
         }
     };
@@ -172,7 +173,7 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
                 onSubmit={handleDelete}
                 title='Xóa sổ tay?'
                 variant='danger'
-                content='Xóa'
+                action='Xóa'
                 description='Mọi ghi chú trong sổ tay sẽ được di chuyển vào Thùng rác. Thao tác này không thể hồi lại được.'
             />
 
@@ -182,7 +183,7 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
                 onSubmit={handleSubmit(handleChangeName)}
                 title='Đổi tên sổ tay'
                 variant='primary'
-                content='Tiếp tục'
+                action='Tiếp tục'
                 isSmall={true}
                 disabled={!isDirty}
             >

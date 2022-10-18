@@ -1,58 +1,91 @@
-import { useEffect, useRef, useState } from 'react';
-import classNamesBind from 'classnames/bind';
 import classNames from 'classnames';
+import classNamesBind from 'classnames/bind';
+import { ChangeEvent, useEffect, useMemo, useRef, useState } from 'react';
 import AutosizeInput from 'react-input-autosize';
 
-import noteService from 'services/noteService';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { charMatchString } from 'utils/StringUtils';
-import { noteActions } from 'features/note/noteSlice';
-import { TippyButton, TippyHeadless } from 'components/Tippy';
 import { AddTagIcon } from 'assets/icons';
+import { TippyButton, TippyHeadLess } from 'components/Tippy';
+import { noteActions } from 'features/note/noteSlice';
+import { tagActions } from 'features/tag/tagSlice';
+import noteService from 'services/noteService';
+import tagService from 'services/tagService';
 import { Note, Tag } from 'types';
+import { charMatchString } from 'utils/StringUtils';
 
 import styles from './SlateFooterTagAdd.module.scss';
 const cx = classNamesBind.bind(styles);
 
 interface SlateFooterAddTagProps {
-    note?: Note<Tag>;
+    note: Note<Tag>;
 }
 
 function SlateFooterAddTag({ note }: SlateFooterAddTagProps) {
     const dispatch = useAppDispatch();
     const [visible, setVisible] = useState<boolean>(false);
-    const [valueTag, setValueTag] = useState('');
-    const [isFocus, setIsFocus] = useState(false);
-    const { listTag } = useAppSelector((state) => state.tag);
+    const [inputTag, setInputTag] = useState('');
     const inputRef = useRef<HTMLDivElement>(null);
+
+    const { listTag } = useAppSelector((state) => state.tag);
+    const tagOfNote = note.tags;
+
+    const isExistsTag = useMemo(
+        () => !!listTag.find((tag) => tag.name === inputTag),
+        [inputTag, listTag]
+    );
+
+    const matchTag = useMemo(
+        () =>
+            listTag
+                .filter((tag) => !tagOfNote.map((t) => t._id).includes(tag._id))
+                .filter((tag) => tag.name.toLowerCase().includes(inputTag.toLowerCase())),
+        [inputTag, listTag, tagOfNote]
+    );
 
     const handleAddTag = (tag: Tag) => {
         if (!note) return;
         noteService
-            .update(note._id, { tags: [...note.tags.map((tag) => tag._id), tag._id] })
+            .update(note._id, { tags: [...tagOfNote.map((tag) => tag._id), tag._id] })
             .then((data) => {
+                setInputTag('');
                 dispatch(noteActions.updateNote(data));
-                setValueTag('');
             });
     };
 
-    const handleCreateTag = (nameTag: string) => {};
+    const handleCreateTag = () => {
+        if (!note) return;
+        tagService
+            .create(inputTag.trim())
+            .then((data) => {
+                setInputTag('');
+                dispatch(tagActions.setListTag(data.listTag));
+                return noteService.update(note._id, {
+                    tags: [...tagOfNote.map((t) => t._id), data.tag._id],
+                });
+            })
+            .then((data) => {
+                dispatch(noteActions.updateNote(data));
+            });
+    };
+
+    const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+        const inputValue = e.target.value.toLowerCase();
+        if (inputValue.trim().length === 0) {
+            return setInputTag('');
+        }
+        setInputTag(inputValue);
+    };
 
     useEffect(() => {
-        if (isFocus) {
-            setVisible(true);
+        if (visible) {
             inputRef.current?.querySelector('input')?.focus();
-        } else {
-            setVisible(false);
         }
-    }, [isFocus]);
-
-    if (!note) return <></>;
+    }, [visible]);
 
     return (
         <>
             <TippyButton
-                onClick={() => setIsFocus(true)}
+                onClick={() => setVisible(true)}
                 className={styles.btn}
                 content='Thêm thẻ'
                 placement='top'
@@ -61,66 +94,69 @@ function SlateFooterAddTag({ note }: SlateFooterAddTagProps) {
                     <AddTagIcon />
                 </div>
             </TippyButton>
-            <TippyHeadless
-                visible={visible && Boolean(valueTag)}
+            <TippyHeadLess
+                disableClickOutside={true}
+                visible={visible && Boolean(inputTag)}
                 setVisible={setVisible}
                 placement='top-start'
-                className={cx('tippy')}
+                className={classNames('tippy', cx('dropdown-wrapper'))}
                 dropdown={
-                    <div className={classNames('tippy__dropdown', styles.dropdown)}>
-                        <div className={cx('dropdown-header')}>
-                            <div
-                                onClick={() => handleCreateTag(valueTag)}
-                                className={cx('dropdown-name')}
-                            >
-                                <AddTagIcon />
-                                Tạo thẻ <span>"{valueTag}"</span>
+                    <div
+                        className={classNames(styles.dropdown, {
+                            tippy__dropdown: !(isExistsTag && matchTag.length === 0),
+                        })}
+                    >
+                        {!isExistsTag && (
+                            <div className={cx('dropdown-header')}>
+                                <div onClick={handleCreateTag} className={cx('dropdown-name')}>
+                                    <AddTagIcon />
+                                    Tạo thẻ <span>"{inputTag}"</span>
+                                </div>
+                                <div className={cx('dropdown-tab')}>Tab</div>
                             </div>
-                            <div className={cx('dropdown-tab')}>Tab</div>
+                        )}
+
+                        <div
+                            className={cx({
+                                'dropdown-list': !isExistsTag && matchTag.length > 0,
+                            })}
+                        >
+                            {matchTag.map((tag) => {
+                                const result = charMatchString(tag.name, inputTag);
+
+                                return (
+                                    <div
+                                        onClick={() => handleAddTag(tag)}
+                                        key={tag._id}
+                                        className='tippy__dropdown-item'
+                                        style={{ fontWeight: 400 }}
+                                    >
+                                        <span style={{ fontWeight: 600 }}>{result.match}</span>
+                                        {result.noMatch}
+                                    </div>
+                                );
+                            })}
                         </div>
-
-                        <>
-                            {listTag
-                                .filter((tag) => !note.tags.map((t) => t._id).includes(tag._id))
-                                .filter((tag) =>
-                                    tag.name.toLowerCase().includes(valueTag.trim().toLowerCase())
-                                )
-                                .map((tag) => {
-                                    const result = charMatchString(tag.name, valueTag);
-
-                                    return (
-                                        <div
-                                            onClick={() => handleAddTag(tag)}
-                                            key={tag._id}
-                                            className='tippy__dropdown-item'
-                                        >
-                                            <span style={{ fontWeight: 600 }}>{result.match}</span>
-                                            {result.noMatch}
-                                        </div>
-                                    );
-                                })}
-                        </>
                     </div>
                 }
             >
                 <div ref={inputRef} className={styles.input__wrapper}>
                     <AutosizeInput
                         autoComplete='off'
-                        onFocus={() => setIsFocus(true)}
-                        onBlur={() => {
-                            setIsFocus(false);
-                        }}
+                        onFocus={() => setVisible(true)}
+                        onBlur={() => setVisible(false)}
                         className={cx('input', {
-                            input__focus: isFocus,
-                            input__blur: !isFocus && valueTag,
-                            input__hide: !isFocus && note.tags.length > 0 && !valueTag,
+                            input__focus: visible,
+                            input__blur: !visible && inputTag,
+                            input__hide: !visible && note.tags.length > 0 && !inputTag,
                         })}
-                        value={valueTag}
-                        onChange={(e) => setValueTag(e.target.value.toLowerCase())}
-                        placeholder={isFocus ? 'Nhập để thêm...' : 'Thêm thẻ'}
+                        value={inputTag}
+                        onChange={(e) => handleChangeInput(e)}
+                        maxLength={50}
+                        placeholder={visible ? 'Nhập để thêm...' : 'Thêm thẻ'}
                     />
                 </div>
-            </TippyHeadless>
+            </TippyHeadLess>
         </>
     );
 }

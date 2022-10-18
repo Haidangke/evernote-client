@@ -1,0 +1,12 @@
+.iconWrapper {
+    display: flex;
+}
+
+.icon {
+    color: var(--color-73);
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover {
+        background-color: var(--color-e6);
+    }
+}

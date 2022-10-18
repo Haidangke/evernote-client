@@ -1,5 +1,5 @@
 import { HomePage } from 'pages';
-import { routesConfig } from 'config';
+import { routesConfig } from 'config/routes';
 import DefaultLayout from 'components/DefaultLayout';
 import Notebook from 'features/notebook';
 import LoginPage from 'features/auth/pages/Login';

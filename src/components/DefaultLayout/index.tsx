@@ -1,10 +1,10 @@
-import NoteList from 'features/note/components/NoteList';
+import NoteTable from 'features/note/components/NoteTable';
 import Editor from 'features/editor';
 
 function DefaultLayout() {
     return (
         <>
-            <NoteList />
+            <NoteTable />
             <Editor />
         </>
     );

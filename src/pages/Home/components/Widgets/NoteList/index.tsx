@@ -15,9 +15,8 @@ import styles from './NoteList.module.scss';
 const cx = classNames.bind(styles);
 
 function NoteList() {
-    const { listNote } = useAppSelector((state) => state.note);
+    const { listNote, isFetching, isFetchSuccess } = useAppSelector((state) => state.note);
     const listNoteFilter = listNote.filter((note) => !note.isTrash);
-
     const navigate = useNavigateParams();
 
     const addNote = useAddNote();
@@ -38,9 +37,9 @@ function NoteList() {
         >
             <Tab />
             <div className={styles.wrapper}>
-                {listNoteFilter.length === 0 ? (
+                {isFetching ? (
                     <NoteListLoading />
-                ) : (
+                ) : listNoteFilter.length ? (
                     listNoteFilter.map((note) => (
                         <div
                             onClick={() => navigate('/note', { n: note._id })}
@@ -56,8 +55,10 @@ function NoteList() {
                             <TimeUp className={styles.time} updatedAt={note.updatedAt} />
                         </div>
                     ))
+                ) : (
+                    <></>
                 )}
-                {listNote.length !== 0 && (
+                {isFetchSuccess && !listNoteFilter.length && (
                     <div onClick={addNote} className={cx('item', 'item__new')}>
                         <NewNoteIcon />
                         <h4>Tạo ghi chú mới</h4>

@@ -1,24 +1,16 @@
-import { AddNoteParams, DeleteNoteParams, Tag } from 'types';
+import { Note, Tag } from 'types';
 import axiosClientSecret from 'services/axiosClientSecret';
 
 const tagService = {
     getAll(): Promise<Tag[]> {
         return axiosClientSecret.get('/tag');
     },
-    create(name: string) {
+    create(name: string): Promise<{ tag: Tag; listTag: Tag[] }> {
         return axiosClientSecret.post('/tag', { name });
     },
 
-    addToNote(params: AddNoteParams) {
-        return axiosClientSecret.put('/tag/note', params);
-    },
-
-    delete(id: string) {
+    delete(id: string): Promise<{ listNote: Note<Tag>[]; listTag: Tag[] }> {
         return axiosClientSecret.delete(`/tag/${id}`);
-    },
-
-    deleteToNote(params: DeleteNoteParams) {
-        return axiosClientSecret.post('/tag/note', params);
     },
 };
 

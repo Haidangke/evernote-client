@@ -1,6 +1,5 @@
 import classNames from 'classnames/bind';
 
-
 import { NoteSolidIcon } from 'assets/icons';
 
 import { Note, Tag } from 'types';
@@ -9,12 +8,13 @@ import useNavigateParams from 'hooks/useNavigateParams';
 import NoteMore from 'features/note/components/NoteMore';
 import TimeUp from 'components/TimeUp';
 
-import styles from './Table.module.scss';
-type NoteItemProps = {
-    note: Note<Tag>;
-};
-
+import styles from './NotebookTable.module.scss';
 const cx = classNames.bind(styles);
+
+interface NoteItemProps {
+    note: Note<Tag>;
+}
+
 function NoteItem({ note }: NoteItemProps) {
     const navigate = useNavigateParams();
     return (

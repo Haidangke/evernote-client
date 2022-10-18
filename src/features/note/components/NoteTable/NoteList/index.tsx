@@ -46,8 +46,10 @@ function List({ listNote }: ListProps) {
                     })}
                 >
                     <div className={cx('column')}>{note.title || 'Chưa có tiêu đề'}</div>
-                    <TimeUp updatedAt={note.updatedAt} />
-                    <div className={cx('column')}></div>
+                    <TimeUp className={cx('column')} updatedAt={note.updatedAt} />
+                    <div className={cx('column')}>
+                        {note.tags.map((tag) => tag.name).join(', ')}
+                    </div>
                 </div>
             ))}
         </>

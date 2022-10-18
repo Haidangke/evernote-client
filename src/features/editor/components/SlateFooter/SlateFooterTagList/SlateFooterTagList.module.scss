@@ -1,7 +1,5 @@
 @import 'styles/mixin';
 
-
-
 .dropdown {
     min-width: 150px;
 }
@@ -19,12 +17,26 @@
 
     border-radius: 50px;
     background-color: var(--color-f2);
+    border: 1px solid transparent;
     cursor: pointer;
 
     & > span {
-        font-size: 1.3rem;
-        color: var(--text-color);
+        @include flex(center, unset);
+        height: 100%;
     }
+
+    &__active {
+        border: 1px solid #66b3da;
+    }
+}
+
+.itemName {
+    font-size: 1.3rem;
+    color: var(--text-color);
+}
+
+.itemIcon {
+    height: 100%;
     & > svg {
         margin-left: 5px;
         width: 14px;

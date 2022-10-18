@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import TippyHeadless from '@tippyjs/react/headless';
+import TippyHeadLess from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 
 import Popper from 'components/Popper';
 import { useAppDispatch } from 'app/hooks';
 import { editorActions } from 'features/editor/editorSlice';
 import { ArrowDownIcon } from 'assets/icons';
-import { overflowToolbar } from 'config/toolbar';
+import { ovfToolbarConfig } from 'config/toolbar';
 import useCheckOverflow from '../../hooks/useCheckOverflow';
 
 import styles from './Button.module.scss';
@@ -38,7 +38,7 @@ function DropDown({
 
     const [isOverflow, setIsOverflow] = useState<boolean>(false);
 
-    const limit = overflowToolbar.find((item) => item.format === format)?.limit || 0;
+    const limit = ovfToolbarConfig.find((item) => item.format === format)?.limit || 0;
     const check = useCheckOverflow(limit);
     useEffect(() => {
         if (check !== undefined && formats) {
@@ -51,7 +51,7 @@ function DropDown({
 
     return !isOverflow || isOther ? (
         <div className={cx('dropdown-wrapper')}>
-            <TippyHeadless
+            <TippyHeadLess
                 placement='bottom-start'
                 interactive
                 visible={visible}
@@ -71,7 +71,7 @@ function DropDown({
                     <span style={{ minWidth }}>{value}</span>
                     <ArrowDownIcon width={10} height={24} />
                 </button>
-            </TippyHeadless>
+            </TippyHeadLess>
         </div>
     ) : (
         <></>

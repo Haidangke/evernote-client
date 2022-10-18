@@ -1,9 +1,9 @@
+import { useLocation, useSearchParams } from 'react-router-dom';
 import Tippy from '@tippyjs/react';
 import classnames from 'classnames/bind';
-import { constants } from 'config';
 import { Fragment, useCallback, useRef, useState } from 'react';
 import { IoMdArrowDropright } from 'react-icons/io';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { ID_SLIDE } from 'config/constants';
 
 import { AddIconSmall, IconProps } from 'assets/icons';
 import useNavigateParams from 'hooks/useNavigateParams';
@@ -87,7 +87,7 @@ function MenuItem({ icon, topic, types, onAdd, menuSubs, navigate }: MenuItemPro
 
     const startAnimation = (idEl: string, classEl: string) => {
         const id = setTimeout(() => {
-            const isSlide = idEl === constants.ID_SLIDE;
+            const isSlide = idEl === ID_SLIDE;
 
             dispatch(sidebarActions.setTopic(classEl));
             dispatch(sidebarActions.setIsSlide(isSlide));
@@ -97,7 +97,7 @@ function MenuItem({ icon, topic, types, onAdd, menuSubs, navigate }: MenuItemPro
 
     return (
         <div
-            id={types.includes('menu') ? constants.ID_SLIDE : ''}
+            id={types.includes('menu') ? ID_SLIDE : ''}
             className={cx({ [`${value}`]: types.includes('menu') })}
             onMouseEnter={(e) => {
                 if (!isSmall) return;
@@ -156,9 +156,12 @@ function MenuItem({ icon, topic, types, onAdd, menuSubs, navigate }: MenuItemPro
                     {menuSubs?.map((menuSub) => {
                         const heading = menuSub.heading;
                         const data = menuSub.data;
+
                         return (
                             <Fragment key={menuSub._id}>
-                                {heading && <h3 className={styles.heading}>{heading}</h3>}
+                                {heading && data.length > 0 && (
+                                    <h3 className={styles.heading}>{heading}</h3>
+                                )}
                                 <MenuSub data={data} types={types} />
                             </Fragment>
                         );

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import TippyHeadless from '@tippyjs/react/headless';
+import TippyHeadLess from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 
 import { useAppDispatch } from 'app/hooks';
 import useCheckOverflow from '../../hooks/useCheckOverflow';
 import { editorActions } from 'features/editor/editorSlice';
 
-import { overflowToolbar } from 'config/toolbar';
+import { ovfToolbarConfig } from 'config/toolbar';
 import styles from './Button.module.scss';
 
 interface HandleProps {
@@ -25,7 +25,7 @@ function Handle({ children, handle, className, content, disable, format, modal }
     const dispatch = useAppDispatch();
     const [isOverflow, setIsOverflow] = useState<boolean>(false);
 
-    const limit = overflowToolbar.find((item) => item.format === format)?.limit || 0;
+    const limit = ovfToolbarConfig.find((item) => item.format === format)?.limit || 0;
     const check = useCheckOverflow(limit);
     useEffect(() => {
         if (check !== undefined && format) {
@@ -36,7 +36,7 @@ function Handle({ children, handle, className, content, disable, format, modal }
 
     return !isOverflow ? (
         <div>
-            <TippyHeadless
+            <TippyHeadLess
                 placement='bottom-start'
                 interactive
                 delay={[500, 0]}
@@ -55,7 +55,7 @@ function Handle({ children, handle, className, content, disable, format, modal }
                 >
                     {children}
                 </button>
-            </TippyHeadless>
+            </TippyHeadLess>
             {modal}
         </div>
     ) : (

@@ -11,7 +11,7 @@ interface ModalCreateProps extends ModalProps {
     description?: string;
     onSubmit: () => void;
     variant?: Variant;
-    content?: string;
+    action?: string;
     disabled?: boolean;
 }
 
@@ -25,7 +25,7 @@ function ModalCreate({
     description,
     onSubmit,
     variant = 'primary',
-    content = 'Tạo',
+    action = 'Tạo',
     isSmall,
     disabled,
 }: ModalCreateProps) {
@@ -51,7 +51,7 @@ function ModalCreate({
                     <Button
                         onClick={onSubmit}
                         variant={variant}
-                        content={content}
+                        content={action}
                         disabled={disabled === undefined ? false : disabled}
                     />
                 </div>

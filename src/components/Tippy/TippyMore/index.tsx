@@ -1,7 +1,7 @@
 import { ReactElement, useState } from 'react';
 import { IoIosMore } from 'react-icons/io';
 
-import TippyHeadLess from '../TippyHeadless';
+import TippyHeadLess from '../TippyHeadLess';
 import styles from './TippyMore.module.scss';
 
 interface TippyMoreProps {

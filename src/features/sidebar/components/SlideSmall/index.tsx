@@ -4,7 +4,7 @@ import { TiDeleteOutline } from 'react-icons/ti';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { AddIconSmall } from 'assets/icons';
-import { constants } from 'config';
+import { ID_SLIDE } from 'config/constants';
 import { sidebarActions } from 'features/sidebar/sidebarSlice';
 import useNavigateParams from 'hooks/useNavigateParams';
 import { TopicValue } from 'types';
@@ -42,7 +42,7 @@ function SlideSmall({ onAdd, menuSubs, title, topicValue, AddIcon }: SlideSmallP
 
     return (
         <div
-            id={constants.ID_SLIDE}
+            id={ID_SLIDE}
             className={cx('wrapper', {
                 wrapper__active: isSlide,
                 wrapper__current: topic === topicValue,

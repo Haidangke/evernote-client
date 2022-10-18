@@ -11,14 +11,14 @@ import { Notebook } from 'types';
 import NotebookMore from '../NotebookMore';
 import NoteItem from './NoteItem';
 
-import styles from './Table.module.scss';
+import styles from './NotebookTable.module.scss';
 const cx = classNames.bind(styles);
 
-interface NotebookItemProps {
+interface NotebookTableItemProps {
     notebook: Notebook;
 }
 
-function NotebookItem({ notebook }: NotebookItemProps) {
+function NotebookTableItem({ notebook }: NotebookTableItemProps) {
     const { listNote } = useAppSelector((state) => state.note);
     const navigate = useNavigateParams();
     const notesOfNotebook = useMemo(
@@ -67,4 +67,4 @@ function NotebookItem({ notebook }: NotebookItemProps) {
     );
 }
 
-export default NotebookItem;
+export default NotebookTableItem;

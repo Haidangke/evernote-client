@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 
 import { DeleteIcon, HomeIcon, MissionIcon, NoteIcon } from 'assets/icons';
-import { routesConfig } from 'config';
+import { routesConfig } from 'config/routes';
 
 import { useAppSelector } from 'app/hooks';
 import ShortcutItemSidebar from 'features/shortcut/components/ShortcutItemSidebar';

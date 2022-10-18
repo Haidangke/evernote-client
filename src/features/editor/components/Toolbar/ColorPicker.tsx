@@ -3,20 +3,21 @@ import classNames from 'classnames/bind';
 import { BiCheck } from 'react-icons/bi';
 
 import { ColorPickerIcon } from 'assets/icons/toolbar';
-import { toolbarConfig } from 'config';
+import { colorConfig } from 'config/toolbar';
 import { DropdownButton } from '../SlateButton';
 import { isMarkActive, toggleMark } from '../../utils/mark';
 
 import colorPicker from 'assets/images/cl_pick.png';
-import styles from './Toolbar.module.scss';
-import { overflowToolbar } from 'config/toolbar';
+import { ovfToolbarConfig } from 'config/toolbar';
 import useCheckOverflow from '../../hooks/useCheckOverflow';
+
+import styles from './Toolbar.module.scss';
 const cx = classNames.bind(styles);
 
 function ColorPicker({ editor }: any) {
     const [isOverflow, setIsOverflow] = useState<boolean>(false);
 
-    const limit = overflowToolbar.find((item) => item.format === 'color')?.limit || 0;
+    const limit = ovfToolbarConfig.find((item) => item.format === 'color')?.limit || 0;
     const check = useCheckOverflow(limit);
 
     useEffect(() => {
@@ -34,7 +35,7 @@ function ColorPicker({ editor }: any) {
             }
             dropdown={() => (
                 <div className={cx('color-wrapper')}>
-                    {toolbarConfig.color.map((item) => (
+                    {colorConfig.map((item) => (
                         <button
                             key={item}
                             className={cx('color-btn', {

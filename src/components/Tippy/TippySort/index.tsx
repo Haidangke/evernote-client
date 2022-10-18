@@ -1,70 +1,56 @@
-import { Dispatch, SetStateAction, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import classNames from 'classnames/bind';
 
 import { SortIcon, TwoWayArrowIcon } from 'assets/icons';
-import { actionsConfig, Sort } from 'config/actions';
-import TippyHeadless from '../TippyHeadless';
-import useOnClickOutside from 'hooks/useOnclickOutside';
+import { sortConfig, SortConfig } from 'config/actions';
+import { TippyHeadLessOneWay } from '../TippyHeadLess';
 
-import styles from './Sort.module.scss';
+import styles from './TippySort.module.scss';
 const cx = classNames.bind(styles);
 
 interface SortProps {
-    setSort: Dispatch<SetStateAction<Sort>>;
-    sort: Sort;
+    setSort: Dispatch<SetStateAction<SortConfig>>;
+    sort: SortConfig;
 }
 
 function TippySort({ sort, setSort }: SortProps) {
-    const iconRef = useRef<HTMLDivElement>(null);
-    const dropdownRef = useRef(null);
-    const [isSort, setIsSort] = useState(false);
-
-    useOnClickOutside(dropdownRef, (event: any) => {
-        if (!iconRef.current || iconRef.current.contains(event.target)) return;
-        setIsSort(false);
-    });
+    const [visible, setVisible] = useState(false);
 
     return (
-        <TippyHeadless
-            outside={false}
-            visible={isSort}
-            setVisible={setIsSort}
+        <TippyHeadLessOneWay
+            visible={visible}
+            setVisible={setVisible}
+            placement='bottom-start'
             dropdown={
-                isSort ? (
-                    <div className={styles.wrapper} ref={dropdownRef}>
-                        <div className={styles.title}>Sắp xếp theo</div>
-                        {actionsConfig.sort.map((item) => {
-                            const active = item.value === sort;
-                            return (
-                                <div
-                                    key={item.value}
-                                    onClick={() => {
-                                        setSort(item.value);
-                                        setIsSort(false);
-                                    }}
-                                    className={cx('item', {
-                                        item__active: active,
-                                    })}
-                                >
-                                    {active && (
-                                        <div className={styles.icon}>
-                                            <TwoWayArrowIcon />
-                                        </div>
-                                    )}
-                                    {item.name}
-                                </div>
-                            );
-                        })}
-                    </div>
-                ) : (
-                    <></>
-                )
+                <>
+                    <div className={styles.title}>Sắp xếp theo</div>
+                    {sortConfig.map((item) => {
+                        const active = item.value === sort;
+                        return (
+                            <div
+                                key={item.value}
+                                onClick={() => {
+                                    setSort(item.value);
+                                    setVisible(false);
+                                }}
+                                className={cx('item', {
+                                    item__active: active,
+                                })}
+                            >
+                                {active && (
+                                    <div className={styles.icon}>
+                                        <TwoWayArrowIcon />
+                                    </div>
+                                )}
+                                {item.name}
+                            </div>
+                        );
+                    })}
+                </>
             }
         >
-            <div ref={iconRef} className={cx('sort')} onClick={() => setIsSort(!isSort)}>
-                <SortIcon className={cx('sort-icon')} />
-            </div>
-        </TippyHeadless>
+            <SortIcon className={cx('sort-icon')} />
+        </TippyHeadLessOneWay>
     );
 }
 

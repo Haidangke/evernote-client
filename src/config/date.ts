@@ -1,4 +1,4 @@
-const dailyConfig = [
+export const dailyConfig = [
     { value: 'Sun', name: 'Chủ nhật' },
     { value: 'Mon', name: 'Thứ hai' },
     { value: 'Tue', name: 'Thứ ba' },
@@ -7,5 +7,3 @@ const dailyConfig = [
     { value: 'Fri', name: 'Thứ sáu' },
     { value: 'Sat', name: 'Thứ bảy' },
 ];
-
-export { dailyConfig };

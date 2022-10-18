@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import classNames from 'classnames/bind';
 
 import { AlignLeftIcon, CheckIcon } from 'assets/icons/toolbar';
-import { toolbarConfig } from 'config';
+import { alignConfig } from 'config/toolbar';
 import { isBlockActive, toggleBlock } from '../../utils/block';
 import { DropdownButton } from '../SlateButton';
 
@@ -11,9 +11,7 @@ const cx = classNames.bind(styles);
 
 function Align({ editor }: any) {
     const isAlignLeftIconDefault = useMemo(
-        () =>
-            toolbarConfig.align.filter((item) => isBlockActive(editor, item.value, 'align'))[0]
-                ?.icon,
+        () => alignConfig.filter((item) => isBlockActive(editor, item.value, 'align'))[0]?.icon,
         [editor]
     );
     const AlignLeftIconDefault = isAlignLeftIconDefault || AlignLeftIcon;
@@ -24,7 +22,7 @@ function Align({ editor }: any) {
             format='align'
             dropdown={() => (
                 <div className={cx('dropdown-wrapper')}>
-                    {toolbarConfig.align.map((item) => {
+                    {alignConfig.map((item) => {
                         const Icon = item.icon;
                         return (
                             <button

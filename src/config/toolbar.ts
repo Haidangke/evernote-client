@@ -1,73 +1,74 @@
 import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from 'assets/icons';
 
-const toolbar = {
-    fontSize: [
-        '8px',
-        '9px',
-        '10px',
-        '14px',
-        '16px',
-        '18px',
-        '20px',
-        '24px',
-        '30px',
-        '36px',
-        '48px',
-        '64px',
-        '72px',
-        '96px',
-    ],
-    align: [
-        { value: 'left', icon: AlignLeftIcon },
-        { value: 'center', icon: AlignCenterIcon },
-        { value: 'right', icon: AlignRightIcon },
-    ],
-    color: [
-        'rgb(51, 51, 51)',
-        'rgb(90, 90, 90)',
-        'rgb(140, 140, 140)',
-        'rgb(191, 191, 191)',
-        'rgb(255, 255, 255)',
-        'rgb(87, 36, 194)',
-        'rgb(192, 41, 212)',
-        'rgb(252, 18, 51)',
-        'rgb(251, 95, 44)',
-        'rgb(229, 158, 37)',
-        'rgb(26, 196, 178)',
-        'rgb(24, 133, 226)',
-        'rgb(13, 58, 90)',
-        'rgb(24, 168, 65)',
-    ],
-    fontFamily: [
-        { value: '"Source Sans Pro", sans-serif', name: 'Sans Serif' },
-        { value: '"Source Serif Pro", serif', name: 'Serif' },
-        { value: '"Zilla Slab", serif', name: 'Slab Serif' },
-        { value: '"Source Code Pro", monospace', name: 'Đơn cách' },
-        { value: '"Dancing Script", cursive', name: 'Mã' },
-        { value: '"Kalam", cursive', name: 'Viết tay' },
-    ],
+export const fontSizeConfig = [
+    '8px',
+    '9px',
+    '10px',
+    '14px',
+    '16px',
+    '18px',
+    '20px',
+    '24px',
+    '30px',
+    '36px',
+    '48px',
+    '64px',
+    '72px',
+    '96px',
+];
 
-    heading: [
-        {
-            name: 'Tiêu đề lớn',
-            value: '30px',
-        },
-        {
-            name: 'Tiêu đề trung bình',
-            value: '24px',
-        },
-        {
-            name: 'Tiêu đề nhỏ',
-            value: '18px',
-        },
-        {
-            name: 'Văn bản thường',
-            value: '16px',
-        },
-    ],
-};
+export const alignConfig = [
+    { value: 'left', icon: AlignLeftIcon },
+    { value: 'center', icon: AlignCenterIcon },
+    { value: 'right', icon: AlignRightIcon },
+];
 
-export const overflowToolbar = [
+export const colorConfig = [
+    'rgb(51, 51, 51)',
+    'rgb(90, 90, 90)',
+    'rgb(140, 140, 140)',
+    'rgb(191, 191, 191)',
+    'rgb(255, 255, 255)',
+    'rgb(87, 36, 194)',
+    'rgb(192, 41, 212)',
+    'rgb(252, 18, 51)',
+    'rgb(251, 95, 44)',
+    'rgb(229, 158, 37)',
+    'rgb(26, 196, 178)',
+    'rgb(24, 133, 226)',
+    'rgb(13, 58, 90)',
+    'rgb(24, 168, 65)',
+];
+
+export const fontFamilyConfig = [
+    { value: '"Source Sans Pro", sans-serif', name: 'Sans Serif' },
+    { value: '"Source Serif Pro", serif', name: 'Serif' },
+    { value: '"Zilla Slab", serif', name: 'Slab Serif' },
+    { value: '"Source Code Pro", monospace', name: 'Đơn cách' },
+    { value: '"Dancing Script", cursive', name: 'Mã' },
+    { value: '"Kalam", cursive', name: 'Viết tay' },
+];
+
+export const headingConfig = [
+    {
+        name: 'Tiêu đề lớn',
+        value: '30px',
+    },
+    {
+        name: 'Tiêu đề trung bình',
+        value: '24px',
+    },
+    {
+        name: 'Tiêu đề nhỏ',
+        value: '18px',
+    },
+    {
+        name: 'Văn bản thường',
+        value: '16px',
+    },
+];
+
+export const ovfToolbarConfig = [
     {
         format: 'color',
         limit: 460,
@@ -126,4 +127,3 @@ export const overflowToolbar = [
         limit: 885,
     },
 ];
-export default toolbar;

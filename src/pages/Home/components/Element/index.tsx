@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 
 import { IoIosMore } from 'react-icons/io';
 import { AddNoteIcon } from 'assets/icons';
-import { TippyHeadless } from 'components/Tippy';
+import { TippyHeadLess } from 'components/Tippy';
 import styles from './Element.module.scss';
 
 interface ElementProps {
@@ -29,7 +29,7 @@ function Element({ children, className, title, menu }: ElementProps) {
                 {/* <span>
                         <AddNoteIcon />
                     </span> */}
-                <TippyHeadless
+                <TippyHeadLess
                     visible={isOther}
                     setVisible={setIsOther}
                     dropdown={
@@ -45,7 +45,7 @@ function Element({ children, className, title, menu }: ElementProps) {
                     <div className={styles.btn} onClick={() => setIsOther(!isOther)}>
                         <IoIosMore />
                     </div>
-                </TippyHeadless>
+                </TippyHeadLess>
             </div>
             {children}
         </div>

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
-import { searchKeysConfig } from 'config';
+import { searchKeysConfig } from 'config/searchKeys';
 import { useAppSelector } from 'app/hooks';
 
 function useSearchKey() {

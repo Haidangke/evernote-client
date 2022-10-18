@@ -130,9 +130,11 @@ function Editor() {
                     {isFetching && <Loading width='42px' height='42px' />}
                 </div>
             )}
-            <div className={styles.footer}>
-                <SlateFooter />
-            </div>
+            {note && (
+                <div className={styles.footer}>
+                    <SlateFooter />
+                </div>
+            )}
         </div>
     );
 }

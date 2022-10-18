@@ -4,12 +4,3 @@ export interface Tag {
     quantity: number;
 }
 
-export interface AddNoteParams {
-    tags: string[];
-    noteId: string;
-}
-
-export interface DeleteNoteParams {
-    tag: string;
-    noteId: string;
-}

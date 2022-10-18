@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import TippyHeadless from '@tippyjs/react/headless';
+import TippyHeadLess from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 
 import Button from 'components/Button';
@@ -31,7 +31,7 @@ function Link({ editor }: any) {
     useOnClickOutside(linkRef, () => setVisible(false));
     return !isOverflow ? (
         <div ref={linkRef} className={cx('wrapper')}>
-            <TippyHeadless
+            <TippyHeadLess
                 visible={visible}
                 placement='bottom-end'
                 interactive
@@ -81,7 +81,7 @@ function Link({ editor }: any) {
                 <button onClick={() => setVisible(!visible)} className={cx('btn')}>
                     <LinkIcon />
                 </button>
-            </TippyHeadless>
+            </TippyHeadLess>
         </div>
     ) : (
         <></>

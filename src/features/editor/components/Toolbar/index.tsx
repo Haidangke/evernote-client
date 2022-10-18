@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { memo, useEffect } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 import { useSlate } from 'slate-react';
 import classNames from 'classnames/bind';
@@ -41,16 +41,14 @@ interface ToolbarProps {
 
 function Toolbar({ onHeader, setSearch }: ToolbarProps) {
     const dispatch = useAppDispatch();
-    
     const editor = useSlate();
-    const onResize = useCallback(
-        (width: any) => {
-            if (!width) return;
-            dispatch(editorActions.setWidth(width));
-        },
-        [dispatch]
-    );
-    const { ref } = useResizeDetector<HTMLDivElement>({ onResize });
+
+    const { width, height, ref } = useResizeDetector();
+
+    useEffect(() => {
+        if (!width) return;
+        dispatch(editorActions.setWidth(width));
+    }, [width, dispatch]);
 
     return (
         <div ref={ref}>

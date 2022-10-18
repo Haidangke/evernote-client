@@ -36,3 +36,7 @@
     flex: 1;
     overflow-y: auto;
 }
+
+.actions {
+    @include flex(center, unset);
+}

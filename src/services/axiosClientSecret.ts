@@ -1,10 +1,10 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import authService from 'services/authService';
-import { constants } from 'config';
+import { BASE_URL_API } from 'config/constants';
 
 const axiosClientSecret = axios.create({
-    baseURL: constants.BASE_URL_API,
+    baseURL: BASE_URL_API,
     headers: {
         Accepted: 'appication/json',
         'Content-Type': 'application/json',

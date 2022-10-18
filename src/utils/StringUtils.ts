@@ -3,7 +3,7 @@ export const charMatchString = (string: string, match: string) => {
     for (let i = 0; i < match.length; i++) {
         const newMatch = result + match[i];
         if (string.match(newMatch)) {
-            result += string[i];
+            result += match[i];
         }
     }
     return { match: result, noMatch: string.slice(result.length, string.length) };

@@ -7,14 +7,15 @@ import styles from './Toast.module.scss';
 interface ToastProps {
     content?: string;
     children?: ReactElement;
+    toastId: string;
 }
 
-function Toast({ content, children }: ToastProps) {
+function Toast({ content, children, toastId }: ToastProps) {
     return (
         <div className={styles.wrapper}>
             <div className={styles.content}>{content || children}</div>
 
-            <div className={styles.icon} onClick={() => toast.remove()}>
+            <div className={styles.icon} onClick={() => toast.dismiss(toastId)}>
                 <IoMdClose />
             </div>
         </div>

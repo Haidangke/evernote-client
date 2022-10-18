@@ -1,16 +1,15 @@
 import { AiOutlineArrowUp } from 'react-icons/ai';
 import classNames from 'classnames/bind';
 
-
 import { useAppSelector } from 'app/hooks';
-import { Sort } from 'config/actions';
+import { SortConfig } from 'config/actions';
+import NotebookTableItem from './NotebookTableItem';
 
-import styles from './Table.module.scss';
-import NotebookItem from './NotebookItem';
+import styles from './NotebookTable.module.scss';
 const cx = classNames.bind(styles);
 
 interface TableProps {
-    sort: Sort;
+    sort: SortConfig;
     search: string;
 }
 
@@ -43,10 +42,7 @@ function Table({ sort, search }: TableProps) {
                         notebook.name.toLowerCase().includes(search.toLowerCase().trim())
                     )
                     .map((notebook) => (
-                        <NotebookItem
-                            key={notebook._id}
-                            notebook={notebook}
-                        />
+                        <NotebookTableItem key={notebook._id} notebook={notebook} />
                     ))}
             </div>
         </div>

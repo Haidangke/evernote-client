@@ -6,10 +6,10 @@ import { MdDelete } from 'react-icons/md';
 import NoteMore from 'features/note/components/NoteMore';
 import { TippyButton } from 'components/Tippy';
 import { useAppSelector } from 'app/hooks';
+import useLocationPage from 'hooks/useLocationPage';
 import { FullSizeIcon, NoteMainIcon, NoteToIcon } from 'assets/icons';
 
-import styles from './Topbar.module.scss';
-import useLocationPage from 'hooks/useLocationPage';
+import styles from './SlateTopbar.module.scss';
 const cx = classNames.bind(styles);
 
 function SlateTopbar() {
@@ -35,7 +35,7 @@ function SlateTopbar() {
         }
         setSearchParams(searchParams);
     };
-
+    if (page !== 'recycle' && !notebook) return <></>;
     return (
         <div className={cx('topbar')}>
             <div className={cx('left')}>

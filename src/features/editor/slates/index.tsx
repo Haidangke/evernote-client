@@ -1,4 +1,4 @@
-import { toolbarConfig } from 'config';
+import { fontFamilyConfig, fontSizeConfig, colorConfig } from 'config/toolbar';
 import CheckListItemElement from '../slates/CheckList';
 
 const SlateElement = (props: any) => {
@@ -60,14 +60,14 @@ const SlateLeaf = ({ attributes, children, leaf }: any) => {
         color: 'rgb(0, 0, 0)',
     };
     for (const key in leaf) {
-        if (toolbarConfig.fontSize.includes(key)) {
+        if (fontSizeConfig.includes(key)) {
             style.fontSize = key;
         }
-        if (toolbarConfig.fontFamily.map((item) => item.value).includes(key)) {
+        if (fontFamilyConfig.map((item) => item.value).includes(key)) {
             style.fontFamily = key;
         }
 
-        if (toolbarConfig.color.includes(key)) {
+        if (colorConfig.includes(key)) {
             style.color = key;
         }
     }

@@ -8,8 +8,8 @@ import { MenuSubProps, Types } from './MenuItem';
 import useLocationPage from 'hooks/useLocationPage';
 const cx = classNames.bind(styles);
 
-function MenuSub({ data, types }: { data: MenuSubProps; types: Types; }) {
-    const page = useLocationPage()
+function MenuSub({ data, types }: { data: MenuSubProps; types: Types }) {
+    const page = useLocationPage();
     const [searchParams] = useSearchParams();
     const navigate = useNavigateParams();
 

@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 
 import styles from './NoteMore.module.scss';
 import { noteActions } from 'features/note/noteSlice';
+import { tagActions } from 'features/tag/tagSlice';
 
 function NoteMore() {
     const [searchParams] = useSearchParams();
@@ -21,22 +22,22 @@ function NoteMore() {
 
     // const notify = (content?: string) => toast.custom(<Toast content={content} />);
 
-    const notify = (children?: ReactElement) => toast.custom(<Toast>{children}</Toast>);
-
     const handleMoveToTrash = useCallback(() => {
         if (!noteId) return;
         noteService.update(noteId, { isTrash: true }).then((note: Note<Tag>) => {
             dispatch(noteActions.updateNote(note));
 
-            notify(
-                <>
-                    <span>Đã di chuyển "</span>
-                    <span className={styles.value}> {note?.title || 'Chưa có tiêu đề'} </span>
-                    <span>" vào </span> <span className={styles.address}> Thùng rác</span>
-                </>
-            );
+            toast((t) => (
+                <Toast toastId={t.id}>
+                    <>
+                        <span>Đã di chuyển "</span>
+                        <span className={styles.value}> {note?.title || 'Chưa có tiêu đề'} </span>
+                        <span>" vào </span> <span className={styles.address}> Thùng rác</span>
+                    </>
+                </Toast>
+            ));
         });
-    }, [noteId]);
+    }, [dispatch, noteId]);
     return (
         <>
             <TippyMore

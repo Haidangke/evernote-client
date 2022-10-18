@@ -1,5 +1,5 @@
 import classnames from 'classnames/bind';
-import { TippyHeadless } from 'components/Tippy';
+import { TippyHeadLess } from 'components/Tippy';
 import { useState } from 'react';
 import { IoMdArrowDropright } from 'react-icons/io';
 
@@ -21,7 +21,7 @@ function Header() {
     return (
         <div className={cx('wrapper', { small: isSmall })}>
             <div className={cx('left')}>
-                <TippyHeadless
+                <TippyHeadLess
                     visible={visible}
                     setVisible={setVisible}
                     dropdown={
@@ -59,7 +59,7 @@ function Header() {
                             <ArrowDownIcon />
                         </div>
                     </div>
-                </TippyHeadless>
+                </TippyHeadLess>
             </div>
             <TippyButton className={cx('logo')} placement='right' content='Cập nhật chế độ cài đặt'>
                 <Setting />

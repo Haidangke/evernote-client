@@ -17,8 +17,12 @@ function SlateFooterTag() {
 
     return (
         <div className={styles.wrapper}>
-            <SlateFooterTagList note={note} />
-            <SlateFooterAddTag note={note} />
+            {note && (
+                <>
+                    <SlateFooterTagList note={note} />
+                    <SlateFooterAddTag note={note} />
+                </>
+            )}
         </div>
     );
 }

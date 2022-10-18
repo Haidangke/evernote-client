@@ -8,13 +8,14 @@ import 'tippy.js/animations/shift-away.css';
 
 interface TippyHeadLessProps {
     children: ReactNode | any;
-    outside?: boolean;
     visible: boolean;
     setVisible: (visible: boolean) => void;
     dropdown: ReactNode;
-    [key: string]: any;
+
+    disableClickOutside?: boolean;
     placement?: Placement;
     className?: string;
+    [key: string]: any;
 }
 
 function TippyHeadLess({
@@ -22,23 +23,36 @@ function TippyHeadLess({
     visible,
     setVisible,
     dropdown,
-    outside = true,
+    disableClickOutside,
     placement,
     className,
-    ...props
 }: TippyHeadLessProps) {
     const ref = useRef(null);
+    const instanceRef = useRef<any>(null);
     const [isAnimation, setIsAnimation] = useState(false);
-    useOnClickOutside(ref, () => {
-        if (outside) setVisible(false);
+
+    useOnClickOutside(ref, (event: any) => {
+        if (disableClickOutside) return;
+        const { popper, reference, state } = instanceRef.current;
+        if (
+            !popper.contains(event.target) &&
+            !reference.contains(event.target) &&
+            !(state.isVisible && reference.contains(event.target))
+        ) {
+            setVisible(false);
+        }
     });
+
     return (
         <>
             <Tippy
-                ref={ref}
+                onCreate={(instance) => {
+                    instanceRef.current = instance;
+                }}
                 offset={[0, 0]}
                 placement={placement || 'bottom-end'}
                 onMount={() => setIsAnimation(true)}
+                // onHidden={() => setVisible(false)}
                 onHide={(instance: any) => {
                     setIsAnimation(false);
                     const unmountInstance = () => {
@@ -55,6 +69,7 @@ function TippyHeadLess({
                 visible={visible}
                 render={(attrs) => (
                     <div
+                        ref={ref}
                         className='tippy-box'
                         data-state={isAnimation ? 'visible' : 'hidden'}
                         data-animation={'shift-away'}
@@ -68,11 +83,57 @@ function TippyHeadLess({
                         <Popper className={className}>{dropdown}</Popper>
                     </div>
                 )}
-                {...props}
             >
-                {children}
+                <div
+                    style={{ height: '100%' }}
+                    onClick={() => !disableClickOutside && setVisible(!visible)}
+                >
+                    {children}
+                </div>
             </Tippy>
         </>
+    );
+}
+
+export function TippyHeadLessOneWay({
+    children,
+    dropdown,
+    visible,
+    setVisible,
+    placement,
+}: TippyHeadLessProps) {
+    const ref = useRef<HTMLDivElement>(null);
+    const dropdownRef = useRef(null);
+
+    useOnClickOutside(dropdownRef, (event: any) => {
+        if (!ref.current || ref.current.contains(event.target)) return;
+        setVisible(false);
+    });
+
+    return (
+        <TippyHeadLess
+            placement={placement}
+            disableClickOutside={true}
+            visible={visible}
+            setVisible={setVisible}
+            dropdown={
+                visible ? (
+                    <div style={{ padding: '12px 0' }} ref={dropdownRef}>
+                        {dropdown}
+                    </div>
+                ) : (
+                    <></>
+                )
+            }
+        >
+            <div
+                ref={ref}
+                style={{ display: 'flex', alignItems: 'center' }}
+                onClick={() => setVisible(!visible)}
+            >
+                {children}
+            </div>
+        </TippyHeadLess>
     );
 }
 

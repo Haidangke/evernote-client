@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { useSlate } from 'slate-react';
 
 import { CheckIcon } from 'assets/icons/toolbar';
-import { toolbarConfig } from 'config';
+import { fontSizeConfig } from 'config/toolbar';
 import { getMarks, isMarkActive, toggleMark } from '../../utils/mark';
 import { DropdownButton } from '../SlateButton';
 
@@ -11,13 +11,10 @@ import styles from './Toolbar.module.scss';
 const cx = classNames.bind(styles);
 
 function FontSize() {
-    const editor = useSlate()
+    const editor = useSlate();
     const marks = getMarks(editor);
 
-    const fontSizeCur = useMemo(
-        () => marks.find((mark) => toolbarConfig.fontSize.includes(mark)),
-        [marks]
-    );
+    const fontSizeCur = useMemo(() => marks.find((mark) => fontSizeConfig.includes(mark)), [marks]);
 
     const fontSizeDefault = fontSizeCur || '16';
     return (
@@ -26,7 +23,7 @@ function FontSize() {
             value={fontSizeDefault.replace('px', '')}
             dropdown={() => (
                 <div className={cx('dropdown-wrapper')}>
-                    {toolbarConfig.fontSize.map((item) => (
+                    {fontSizeConfig.map((item) => (
                         <button
                             key={item}
                             className={cx('dropdown-align')}

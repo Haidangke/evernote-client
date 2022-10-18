@@ -2,7 +2,7 @@ import classnames from 'classnames/bind';
 import { useRef, useState } from 'react';
 import { IoSearchSharp } from 'react-icons/io5';
 
-import Tippy from '@tippyjs/react/headless';
+import TippyHeadLess from '@tippyjs/react/headless';
 
 import {
     AddIcon,
@@ -47,7 +47,7 @@ function Actions() {
     return (
         <div className={cx('wrapper', { small: isSmall })}>
             <div>
-                <Tippy
+                <TippyHeadLess
                     placement='bottom-start'
                     interactive
                     visible={isSearch}
@@ -102,7 +102,7 @@ function Actions() {
                             />
                         )}
                     </div>
-                </Tippy>
+                </TippyHeadLess>
             </div>
 
             <div className={cx('new')}>

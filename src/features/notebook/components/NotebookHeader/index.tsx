@@ -3,13 +3,13 @@ import { Dispatch, SetStateAction } from 'react';
 import { AddNotebookIcon } from 'assets/icons';
 import { useAppSelector } from 'app/hooks';
 import { TippySort } from 'components/Tippy';
-import { Sort } from 'config/actions';
+import { SortConfig } from 'config/actions';
 
-import styles from './Header.module.scss';
+import styles from './NotebookHeader.module.scss';
 
 interface HeaderProps {
-    sort: Sort;
-    setSort: Dispatch<SetStateAction<Sort>>;
+    sort: SortConfig;
+    setSort: Dispatch<SetStateAction<SortConfig>>;
 }
 
 function Header({ sort, setSort }: HeaderProps) {
