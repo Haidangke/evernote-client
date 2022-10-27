@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import classNames from 'classnames/bind';
 
-import { AlignLeftIcon, CheckIcon } from 'assets/icons/toolbar';
+import { AlignLeftIcon, CheckIcon } from 'components/Icons';
 import { alignConfig } from 'config/toolbar';
 import { isBlockActive, toggleBlock } from '../../utils/block';
 import { DropdownButton } from '../SlateButton';

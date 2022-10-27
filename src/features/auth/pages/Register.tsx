@@ -19,7 +19,7 @@ const schema = yup
             .string()
             .required('Email là bắt buộc ')
             .min(6, 'Email tối thiếu 6 kí tự')
-            .max(30, 'Email tối đa 30 kí tự')
+            .max(50, 'Email tối đa 50 kí tự')
             .email('Định dạng của email không hợp lệ'),
         username: yup
             .string()

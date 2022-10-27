@@ -3,7 +3,7 @@ import TippyHeadLess from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 
 import Button from 'components/Button';
-import { LinkIcon } from 'assets/icons/toolbar';
+import { LinkIcon } from 'components/Icons';
 import Popper from 'components/Popper';
 import useCheckOverflow from 'features/editor/hooks/useCheckOverflow';
 import useOnClickOutside from 'hooks/useOnclickOutside';

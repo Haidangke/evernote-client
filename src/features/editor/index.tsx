@@ -5,11 +5,12 @@ import { useSearchParams } from 'react-router-dom';
 import { createEditor } from 'slate';
 import { withHistory } from 'slate-history';
 import { Editable, Slate, withReact } from 'slate-react';
+import DraftWysiwyg from './DraftWysiwyg';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { editorActions } from 'features/editor/editorSlice';
 import { noteActions } from 'features/note/noteSlice';
-import useDecorate from 'hooks/useDecorate';
+import useDecorate from 'features/editor/hooks/useDecorate';
 import useOnClickOutside from 'hooks/useOnclickOutside';
 import SlateFooter from './components/SlateFooter';
 import SlateTopbar from './components/SlateTopbar';
@@ -45,7 +46,7 @@ function Editor() {
     const [search, setSearch] = useState('');
     const [onHeader, setOnHeader] = useState(false);
 
-    const decorate = useDecorate(search);
+    // const decorate = useDecorate(search);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const editor = useMemo(() => createEditorWithPlugins(createEditor()), [noteId]);
@@ -60,7 +61,7 @@ function Editor() {
         [dispatch]
     );
 
-    useOnClickOutside(editorRef, () => dispatch(editorActions.setIsToolbar(false)));
+    // useOnClickOutside(editorRef, () => dispatch(editorActions.setIsToolbar(false)));
 
     return (
         <div className={styles.wrapper}>
@@ -69,7 +70,9 @@ function Editor() {
                 <SlateTopbar />
             </div>
 
-            {note ? (
+            <DraftWysiwyg />
+
+            {/* {note ? (
                 <div ref={editorRef} className={styles.editor}>
                     <Slate
                         editor={editor}
@@ -129,7 +132,7 @@ function Editor() {
                 <div className={cx('loading')}>
                     {isFetching && <Loading width='42px' height='42px' />}
                 </div>
-            )}
+            )} */}
             {note && (
                 <div className={styles.footer}>
                     <SlateFooter />

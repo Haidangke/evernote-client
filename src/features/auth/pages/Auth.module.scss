@@ -1,7 +1,7 @@
-@import 'styles/mixin';
+@import "styles/mixin";
 .root {
     display: flex;
-    background-image: url('../../../assets/images/auth_bg.png');
+    background-image: url("../../../assets/images/auth_bg.png");
 }
 
 .wrapper {
@@ -12,7 +12,7 @@
 }
 
 .form {
-    background-color: var(--white);
+    background-color: var(--color-white);
     max-width: 512px;
     padding: 62px 100px 48px;
     width: 512px;
@@ -24,25 +24,25 @@
     flex-direction: column;
     margin: -10px 0 10px 0;
 
-    & > svg {
-        width: 72px;
-        height: 72px;
+    & > img {
+        margin-bottom: -36px;
     }
 
     & > span {
-        font-size: 4.4rem;
+        color: var(--color-black);
+        font-size: 4.5rem;
         font-family: none;
-        font-weight: 600;
+        font-weight: 700;
 
         line-height: 1;
-        font-family: 'Source Serif Pro', serif;
+        font-family: "Source Serif Pro", serif;
     }
 }
 
 .form-description {
     margin-bottom: 40px;
     font-size: 1.6rem;
-    color: var(--text-color);
+    color: var(--color-text);
     text-align: center;
 }
 
@@ -52,8 +52,8 @@
     border: 1px solid var(--color-d9);
     margin-bottom: 8px;
 
-    border-radius: 4px;
-    background-color: var(--white);
+    border-radius: 6px;
+    background-color: var(--color-white);
     cursor: pointer;
     & > svg {
         width: 20px;
@@ -78,7 +78,7 @@
     margin: 16px 0;
     &::after,
     &::before {
-        content: '';
+        content: "";
         position: absolute;
         height: 1px;
         width: 45%;
@@ -97,7 +97,7 @@
     display: flex;
     flex-direction: column;
     input {
-        font-family: 'Roboto', sans-serif;
+        font-family: "Roboto", sans-serif;
         font-size: 1.6rem;
         border-radius: 6px;
         border: 1px solid #e6e6e6;
@@ -135,7 +135,7 @@
     font-size: 1.4rem;
     &:hover {
         text-decoration: underline;
-        color: var(--primary-hover);
+        color: var(--primary-hover-color);
     }
 }
 
@@ -151,17 +151,17 @@
     background-color: var(--primary-color);
     border-radius: 4px;
     font-size: 1.6rem;
-    color: var(--white);
+    color: var(--color-white);
     transition: var(--transition-base);
     z-index: 1;
     &:hover {
-        background-color: var(--primary-hover);
+        background-color: var(--primary-hover-color);
     }
 }
 
 .disable {
     cursor: unset;
-    background-color: var(--primary-hover);
+    background-color: var(--primary-hover-color);
 }
 
 .error {
@@ -178,7 +178,7 @@
     text-align: center;
     order: 4;
     & > div {
-        color: var(--text-color);
+        color: var(--color-text);
         margin-bottom: 6px;
     }
     & > a {
@@ -186,7 +186,7 @@
     }
     & > a:hover {
         text-decoration: underline;
-        color: var(--primary-hover);
+        color: var(--primary-hover-color);
     }
 }
 

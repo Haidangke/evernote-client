@@ -7,7 +7,7 @@ import NoteMore from 'features/note/components/NoteMore';
 import { TippyButton } from 'components/Tippy';
 import { useAppSelector } from 'app/hooks';
 import useLocationPage from 'hooks/useLocationPage';
-import { FullSizeIcon, NoteMainIcon, NoteToIcon } from 'assets/icons';
+import { FullSizeIcon, NoteMainIcon, NoteToIcon } from 'components/Icons';
 
 import styles from './SlateTopbar.module.scss';
 const cx = classNames.bind(styles);

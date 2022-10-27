@@ -50,7 +50,7 @@ function TippyHeadLess({
                     instanceRef.current = instance;
                 }}
                 offset={[0, 0]}
-                placement={placement || 'bottom-end'}
+                placement={placement}
                 onMount={() => setIsAnimation(true)}
                 // onHidden={() => setVisible(false)}
                 onHide={(instance: any) => {
@@ -101,12 +101,13 @@ export function TippyHeadLessOneWay({
     visible,
     setVisible,
     placement,
+    disableClickOutside,
 }: TippyHeadLessProps) {
     const ref = useRef<HTMLDivElement>(null);
     const dropdownRef = useRef(null);
 
     useOnClickOutside(dropdownRef, (event: any) => {
-        if (!ref.current || ref.current.contains(event.target)) return;
+        if (!ref.current || ref.current.contains(event.target) || disableClickOutside) return;
         setVisible(false);
     });
 
@@ -128,7 +129,7 @@ export function TippyHeadLessOneWay({
         >
             <div
                 ref={ref}
-                style={{ display: 'flex', alignItems: 'center' }}
+                style={{ display: 'flex', alignItems: 'center', height: '100%' }}
                 onClick={() => setVisible(!visible)}
             >
                 {children}

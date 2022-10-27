@@ -1,9 +1,9 @@
 import { IconProps } from '.';
 
-export const NoteToIcon = ({ className }: IconProps) => (
+export const NoteToIcon = ({ className, width = 20, height = 20 }: IconProps) => (
     <svg
-        width={20}
-        height={20}
+        width={width}
+        height={height}
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
         className={className}
@@ -38,36 +38,6 @@ export const NoteMainIcon = ({ className }: IconProps) => (
             d='M11.448 8.639a.211.211 0 00-.396 0l-.605 1.52a.216.216 0 01-.18.139l-1.569.131c-.19.016-.268.265-.123.396l1.195 1.071a.232.232 0 01.07.224l-.366 1.602c-.044.195.158.349.322.244l1.342-.858a.207.207 0 01.224 0l1.342.858c.164.105.366-.05.322-.244l-.365-1.602a.232.232 0 01.069-.224l1.195-1.071c.145-.13.067-.38-.123-.396l-1.568-.131a.216.216 0 01-.181-.138l-.605-1.521zM10 5.5a.5.5 0 00-.5-.5h-3a.5.5 0 000 1h3a.5.5 0 00.5-.5z'
             fill='currentColor'
         />
-    </svg>
-);
-
-export const FullSizeIcon = ({ className }: IconProps) => (
-    <svg
-        width={24}
-        height={24}
-        viewBox='0 0 24 24'
-        xmlns='http://www.w3.org/2000/svg'
-        className={className}
-    >
-        <path
-            fillRule='evenodd'
-            d='M6.031 3a3 3 0 00-3 3v11a3 3 0 003 3h11a3 3 0 003-3V6a3 3 0 00-3-3h-11zm4.47 4.289H8.184l2.915 2.914a.625.625 0 01-.884.884L7.3 8.172v2.319a.625.625 0 11-1.25 0V6.674c0-.351.285-.635.635-.635h3.818a.625.625 0 010 1.25zM12.6 15.76h2.318l-2.915-2.915a.625.625 0 11.884-.884l2.915 2.915V12.56a.625.625 0 011.25 0v3.817c0 .35-.285.635-.635.635H12.6a.625.625 0 110-1.25z'
-        />
-    </svg>
-);
-
-export const CustomHome = () => (
-    <svg width='25' height='25' viewBox='0 0 25 25' xmlns='http://www.w3.org/2000/svg'>
-        <path
-            fillRule='evenodd'
-            clipRule='evenodd'
-            d='M19.657 15.1l-.266.267 1.568 1.558.263-.26c.43-.432.43-1.132 0-1.564a1.112 1.112 0 00-1.565 0zm-4.778 5.878c0 .059 0 .229.118.347.127.128.27.122.33.12l.018-.001c.414 0 1.405-.307 1.757-.662l2.993-2.994-1.565-1.557-2.989 2.99c-.351.35-.662 1.342-.662 1.757z'
-            fill='currentColor'
-        ></path>
-        <path
-            d='M6.726 11.618l-.904 1.012a.833.833 0 11-1.242-1.112l6.11-6.843a2.498 2.498 0 013.728 0l6.11 6.843a.835.835 0 01-1.243 1.112l-.904-1.012v2.402L17.03 15.37l.001.002-2.668 2.669c-.133.133-.25.282-.352.435v-4.145a1.458 1.458 0 10-2.914 0v4.924H8.393c-.92 0-1.667-.746-1.667-1.668v-5.97z'
-            fill='currentColor'
-        ></path>
     </svg>
 );
 
@@ -116,55 +86,73 @@ export const NewNoteIcon = ({ className }: IconProps) => (
     </svg>
 );
 
-export const AddNotebookIcon = ({ className }: IconProps) => (
+export const NoteIcon = ({ className }: IconProps) => (
     <svg
         className={className}
-        width='24'
-        height='24'
+        width={24}
+        height={24}
+        viewBox='0 0 24 24'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
+        fontSize={24}
     >
-        <path d='M5.955 4.5H8.03v15H5.955v-15z' fill='currentColor'></path>
         <path
             fillRule='evenodd'
             clipRule='evenodd'
-            d='M9.281 19.5v-15h7.09c.921 0 1.667.746 1.667 1.666v7.294h-.025a4.583 4.583 0 00-4.346 6.04H9.28zm5.88-9.167a.75.75 0 000-1.5h-3a.75.75 0 000 1.5h3z'
+            d='M7.665 4.5h8.75c.92 0 1.667.746 1.667 1.667v8.748h-3.334a.625.625 0 0 0-.625.624v3.958H7.665c-.92 0-1.667-.747-1.667-1.667V6.167c0-.92.747-1.667 1.667-1.667Zm7.037 4.584a.625.625 0 1 0 0-1.25H9.298a.625.625 0 1 0 0 1.25h5.404Zm.625 2.918c0 .345-.28.625-.625.625H9.298a.625.625 0 0 1 0-1.25h5.404c.345 0 .625.28.625.625Zm-4.363 4.158a.625.625 0 1 0 0-1.25H9.298a.625.625 0 1 0 0 1.25h1.666Z'
             fill='currentColor'
-        ></path>
-        <path
-            d='M18.638 15.549a.625.625 0 10-1.25 0v1.904h-1.846a.625.625 0 100 1.25h1.846v1.846a.625.625 0 001.25 0v-1.846h1.904a.625.625 0 100-1.25h-1.904v-1.904z'
-            fill='currentColor'
-        ></path>
+        />
+        <path d='M15.373 16.164h2.157l-2.107 2.693-.05.06v-2.753Z' fill='currentColor' />
     </svg>
 );
 
-export const NotebookDfIcon = ({ className }: IconProps) => (
+export const NoteSolidIcon = ({ className }: IconProps) => (
     <svg
-        width='24'
-        height='24'
+        width={18}
+        height={18}
         viewBox='0 0 24 24'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
         className={className}
     >
-        <path d='M5.955 4.496H8.03v15H5.955v-15z' fill='currentColor'></path>
+        <path
+            d='M14.702 9.426a.625.625 0 100-1.25H9.298a.625.625 0 000 1.25h5.404zm.625 2.499c0 .345-.28.625-.625.625H9.298a.625.625 0 110-1.25h5.404c.345 0 .625.28.625.625zm-4.363 3.75a.625.625 0 100-1.25H9.298a.625.625 0 100 1.25h1.666z'
+            fill='currentColor'
+        />
         <path
             fillRule='evenodd'
             clipRule='evenodd'
-            d='M9.281 19.496v-15h7.09c.92 0 1.667.746 1.667 1.666v7.307h-.045a4.583 4.583 0 00-4.351 6.027h-4.36zm5.88-9.167a.75.75 0 000-1.5h-3a.75.75 0 100 1.5h3z'
+            d='M5.75 6.792A2.292 2.292 0 018.042 4.5h7.916a2.292 2.292 0 012.292 2.292v7.8a2.29 2.29 0 01-.497 1.425l-2.08 2.617a2.292 2.292 0 01-1.793.866H8.041a2.292 2.292 0 01-2.292-2.292V6.792zM8.042 5.75C7.466 5.75 7 6.216 7 6.792v10.416c0 .576.466 1.042 1.042 1.042h5.287v-3.195c0-.346.28-.625.625-.625H17V6.792c0-.576-.466-1.042-1.042-1.042H8.042zm6.653 12.106a1.043 1.043 0 01-.116.124v-2.3h1.845l-1.729 2.176z'
+            fill='currentColor'
+        />
+    </svg>
+);
+
+export const NoteSolidSubIcon = ({ className }: IconProps) => (
+    <svg
+        width='14'
+        height='14'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+        className={className}
+    >
+        <path
+            d='M9.162 5a.5.5 0 000-1H4.838a.5.5 0 000 1h4.324zm.5 2a.5.5 0 01-.5.5H4.838a.5.5 0 010-1h4.324a.5.5 0 01.5.5zm-3.49 3a.5.5 0 000-1H4.838a.5.5 0 100 1h1.334z'
             fill='currentColor'
         ></path>
         <path
-            d='M17.816 14.858a.24.24 0 01.451 0l.687 1.728c.035.089.114.15.206.157l1.782.15c.216.017.304.3.139.449l-1.357 1.218c-.07.062-.1.16-.08.253l.416 1.821c.05.221-.18.396-.365.278l-1.526-.976a.235.235 0 00-.255 0l-1.525.976c-.186.118-.415-.057-.365-.278l.415-1.82a.263.263 0 00-.079-.255l-1.357-1.217c-.166-.148-.078-.431.139-.45l1.782-.15a.245.245 0 00.206-.156l.686-1.728z'
+            fillRule='evenodd'
+            clipRule='evenodd'
+            d='M2 2.833C2 1.821 2.82 1 3.833 1h6.334C11.179 1 12 1.82 12 2.833v6.24c0 .415-.14.816-.398 1.14L9.94 12.308A1.833 1.833 0 018.504 13h-4.67A1.833 1.833 0 012 11.167V2.833zM3.833 2A.833.833 0 003 2.833v8.334c0 .46.373.833.833.833h4.23V9.444a.5.5 0 01.5-.5H11v-6.11A.833.833 0 0010.167 2H3.833zm5.23 9.784v-1.84h1.476l-1.476 1.84z'
             fill='currentColor'
         ></path>
     </svg>
 );
 
-export const AddTagIcon = ({ className }: IconProps) => (
+export const NoteTitleIcon = ({ className, width = 16, height = 18 }: IconProps) => (
     <svg
-        width='24'
-        height='24'
+        width={width}
+        height={height}
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
         className={className}
@@ -172,12 +160,9 @@ export const AddTagIcon = ({ className }: IconProps) => (
         <path
             fillRule='evenodd'
             clipRule='evenodd'
-            d='M5 10.7a2 2 0 01.442-1.255l5-6.21a2 2 0 013.116 0l5 6.21A2 2 0 0119 10.699v3.052a5.5 5.5 0 00-5.002 7.238H7a2 2 0 01-2-2V10.7zm9-.654a1.999 1.999 0 01-2 1.998 1.999 1.999 0 112-1.998z'
+            d='M2.798 0h10.5a2 2 0 012 2v10.497h-4a.75.75 0 00-.75.75v4.749h-7.75a2 2 0 01-2-2V2a2 2 0 012-2zm8.445 5.5a.75.75 0 000-1.5H4.757a.75.75 0 100 1.5h6.486zm.75 3.502a.75.75 0 01-.75.75H4.757a.75.75 0 110-1.5h6.486a.75.75 0 01.75.75zm-5.236 4.99a.75.75 0 000-1.5h-2a.75.75 0 000 1.5h2z'
             fill='currentColor'
-        ></path>
-        <path
-            d='M19.965 16.254a.75.75 0 00-1.5 0v2.285H16.25a.75.75 0 000 1.5h2.215v2.215a.75.75 0 001.5 0V20.04h2.285a.75.75 0 000-1.5h-2.285v-2.285z'
-            fill='currentColor'
-        ></path>
+        />
+        <path d='M12.048 13.997h2.588l-2.528 3.231-.06.073v-3.304z' fill='currentColor' />
     </svg>
 );

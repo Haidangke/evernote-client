@@ -18,12 +18,12 @@
         background-color: var(--color-f2);
     }
     &__active > .icon {
-        background-color: var(--active-icon-toolbar);
+        background-color: var(--color-light-blue);
         border-radius: 4px;
     }
 
     &__active > .icon > svg {
-        fill: var(--white);
+        fill: var(--color-white);
     }
 
     &__hide {

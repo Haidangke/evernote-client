@@ -2,7 +2,7 @@ import { ReactNode, useState } from 'react';
 import classNames from 'classnames/bind';
 
 import { IoIosMore } from 'react-icons/io';
-import { AddNoteIcon } from 'assets/icons';
+import { AddNoteIcon } from 'components/Icons';
 import { TippyHeadLess } from 'components/Tippy';
 import styles from './Element.module.scss';
 

@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
 import { useAppDispatch } from 'app/hooks';
-import { ArrowDownIcon } from 'assets/icons';
+import { ArrowDownIcon } from 'components/Icons';
 import ModalCreate from 'components/Modal/ModalCreate';
 import { TippyHeadLess } from 'components/Tippy/';
 import Toast from 'components/Toast';

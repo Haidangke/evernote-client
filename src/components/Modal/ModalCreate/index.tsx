@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 
 import Button, { Variant } from 'components/Button';
-import { CloseIcon } from 'assets/icons';
+import { CloseIcon } from 'components/Icons';
 import Modal, { ModalProps } from '..';
 
 import styles from './ModalCreate.module.scss';

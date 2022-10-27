@@ -9,9 +9,10 @@ import NoteList from './NoteList';
 import NoteTitle from './NoteTitle';
 import NoteFilter from './NoteFilter';
 import NoteTableWrapper from './NoteTableWrapper';
-import { TippySort } from 'components/Tippy';
+import { TippyButton, TippySort } from 'components/Tippy';
 
 import styles from './NoteTable.module.scss';
+import { ViewIcon } from 'components/Icons';
 
 function NoteTable() {
     const [sort, setSort] = useState<SortConfig>('updatedAt');
@@ -58,9 +59,9 @@ function NoteTable() {
                             <TippySort sort={sort} setSort={setSort} />
                             <NoteFilter />
 
-                            {/* <TippyButton content='Chế độ xem' placement='top'>
-                                <ViewIcon className={cx('actions-icon')} />
-                            </TippyButton> */}
+                            <TippyButton content='Chế độ xem' placement='top'>
+                                <ViewIcon className={styles.icon} />
+                            </TippyButton>
                         </div>
                     </div>
                 </header>

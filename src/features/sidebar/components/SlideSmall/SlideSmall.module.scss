@@ -1,4 +1,4 @@
-@import 'styles/mixin';
+@import "styles/mixin";
 
 .wrapper {
     top: 0;
@@ -29,7 +29,7 @@
     font-size: 1.6rem;
     font-weight: 600;
     letter-spacing: 0.1rem;
-    color: var(--gray);
+    color: var(--color-gray);
 }
 
 .add {
@@ -44,7 +44,7 @@
         background-color: var(--color-77);
     }
     &:hover > svg {
-        color: var(--white);
+        color: var(--color-white);
     }
     & > svg {
         color: var(--color-b3);
@@ -54,7 +54,7 @@
 .heading {
     padding: 15px 0 10px 14px;
     height: 46px;
-    color: var(--gray);
+    color: var(--color-gray);
     font-size: 1.4rem;
     margin-top: 6px;
 }
@@ -79,13 +79,13 @@
 }
 
 .icon {
-    color: var(--gray);
+    color: var(--color-gray);
 }
 
 .name {
     margin-left: 8px;
     font-size: 1.3rem;
-    color: var(--gray);
+    color: var(--color-gray);
 }
 
 .item__add > .name {
@@ -104,6 +104,6 @@
     }
 
     &:hover > svg {
-        color: var(--white);
+        color: var(--color-white);
     }
 }

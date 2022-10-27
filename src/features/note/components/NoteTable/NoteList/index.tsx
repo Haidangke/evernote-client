@@ -18,15 +18,18 @@ interface ListProps {
 
 function List({ listNote }: ListProps) {
     const page = useLocationPage();
-    const { isFetching, isFetchSuccess } = useAppSelector((state) => state.note);
+    const { isFetchSuccess } = useAppSelector((state) => state.note);
     const [searchParams, setSearchParams] = useSearchParams();
 
     const noteId = searchParams.get('n');
     const notebookId = searchParams.get('b') as string;
 
+    if (!isFetchSuccess) return <></>;
+
     if (listNote.length === 0 && isFetchSuccess)
         return page === 'recycle' ? <EmptyTrash /> : <Create notebookId={notebookId} />;
-    return !isFetching ? (
+
+    return (
         <>
             <div className={cx('header')}>
                 <div className={cx('column-header')}>Tiêu đề</div>
@@ -53,8 +56,6 @@ function List({ listNote }: ListProps) {
                 </div>
             ))}
         </>
-    ) : (
-        <></>
     );
 }
 

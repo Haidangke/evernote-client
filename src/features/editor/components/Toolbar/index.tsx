@@ -29,7 +29,7 @@ import {
     TestListIcon,
     UnderlineIcon,
     UpperIndexIcon,
-} from 'assets/icons/toolbar';
+} from 'components/Icons';
 
 import styles from './Toolbar.module.scss';
 const cx = classNames.bind(styles);

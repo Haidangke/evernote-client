@@ -4,7 +4,7 @@ import { BsDash } from 'react-icons/bs';
 import { IoMdArrowDropright } from 'react-icons/io';
 
 import { useAppSelector } from 'app/hooks';
-import { NotebookDfIcon, NotebookIcon } from 'assets/icons';
+import { NotebookDfIcon, NotebookIcon } from 'components/Icons';
 import TimeUp from 'components/TimeUp';
 import useNavigateParams from 'hooks/useNavigateParams';
 import { Notebook } from 'types';

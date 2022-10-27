@@ -1,4 +1,4 @@
-@import 'styles/mixin';
+@import "styles/mixin";
 
 .header {
     padding: 0 8px;
@@ -14,19 +14,19 @@
     border-bottom: 1px solid transparent;
     cursor: pointer;
     &:hover {
-        background-color: var(--white);
+        background-color: var(--color-white);
     }
 
     &__hl {
         background-color: var(--color-f2);
     }
     &__active {
-        background-color: var(--white);
+        background-color: var(--color-white);
         border-bottom: 2px solid var(--color-blue);
         border-top: 2px solid var(--color-blue);
     }
     &__active:hover {
-        background-color: var(--white);
+        background-color: var(--color-white);
     }
 }
 

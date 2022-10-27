@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import { MdDelete } from 'react-icons/md';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { BookTitleIcon, NoteTitleIcon } from 'assets/icons';
+import { NotebookTitleIcon, NoteTitleIcon } from 'components/Icons';
 import { noteActions } from 'features/note/noteSlice';
 import useLocationPage from 'hooks/useLocationPage';
 import noteService from 'services/noteService';
@@ -44,7 +44,7 @@ function Title({ notebook }: TitleProps) {
                 )}
                 {notebook && (
                     <>
-                        <BookTitleIcon className={cx('icon-book')} />
+                        <NotebookTitleIcon className={cx('icon-book')} />
                         {notebook}
                     </>
                 )}

@@ -1,7 +1,7 @@
 import { HistoryEditor } from 'slate-history';
 
 import classNames from 'classnames';
-import { RedoIcon, UndoTcon } from 'assets/icons/toolbar';
+import { RedoIcon, UndoTcon } from 'components/Icons';
 import { HandleButton } from '../SlateButton';
 import styles from './Toolbar.module.scss';
 

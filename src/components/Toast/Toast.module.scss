@@ -1,4 +1,4 @@
-@import 'styles/mixin';
+@import "styles/mixin";
 
 div:has(div > .wrapper) {
     background: none;
@@ -16,7 +16,7 @@ div:has(div > .wrapper) {
     height: 100%;
     width: max-content;
     padding: 0px 16px;
-    color: var(--white);
+    color: var(--color-white);
     @include flex(center, unset);
     font-size: 1.4rem;
 }
@@ -28,7 +28,7 @@ div:has(div > .wrapper) {
     border-left: 1px solid #ffffff66;
     cursor: pointer;
     & > svg {
-        color: var(--white);
+        color: var(--color-white);
         width: 16px;
         height: 16px;
     }

@@ -5,11 +5,11 @@ import { IoMdArrowDropright } from 'react-icons/io';
 
 import { useAppSelector } from 'app/hooks';
 
-import { ArrowDownIcon, CheckIcon, Setting } from 'assets/icons';
+import { ArrowDownIcon, CheckIcon, Setting } from 'components/Icons';
 import { TippyButton } from 'components/Tippy';
 import authService from 'services/authService';
 
-import avatar_default from 'assets/images/avatar';
+import avatar_default from 'assets/images/avatar.png';
 import styles from './Header.module.scss';
 
 const cx = classnames.bind(styles);
@@ -30,7 +30,7 @@ function Header() {
                                 <div className={cx('drdown-title')}>Tài khoản</div>
                                 <div className={cx('info')}>
                                     <CheckIcon className={cx('drdown-icon')} />
-                                    <div className={cx('avatar')}>{avatar_default}</div>
+                                    {/* <div className={cx('avatar')}>{avatar_default}</div> */}
                                     <div className={cx('email')}>{user?.email}</div>
                                 </div>
                             </header>
@@ -52,7 +52,9 @@ function Header() {
                     }
                 >
                     <div className={cx('info')} onClick={() => setVisible(!visible)}>
-                        <div className={cx('avatar')}>{avatar_default}</div>
+                        <div className={cx('avatar')}>
+                            <img src={avatar_default} alt='avatar' />
+                        </div>
 
                         <div className={cx('email')}>
                             <p>{user?.email}</p>

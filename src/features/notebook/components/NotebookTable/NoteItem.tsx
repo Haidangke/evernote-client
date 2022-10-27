@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 
-import { NoteSolidIcon } from 'assets/icons';
+import { NoteSolidIcon } from 'components/Icons';
 
 import { Note, Tag } from 'types';
 import useNavigateParams from 'hooks/useNavigateParams';

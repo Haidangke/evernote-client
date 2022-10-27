@@ -15,17 +15,17 @@ const root = createRoot(container);
 
 const queryClient = new QueryClient();
 root.render(
-    <React.StrictMode>
-        <Router >
-            <NavigateSetter/>
-            <GlobalStyles>
-                <Provider store={store}>
-                    <QueryClientProvider client={queryClient}>
-                        <App />
-                    </QueryClientProvider>
-                </Provider>
-            </GlobalStyles>
-        </Router>
-    </React.StrictMode>
+    // <React.StrictMode>
+    <Router>
+        <NavigateSetter />
+        <GlobalStyles>
+            <Provider store={store}>
+                <QueryClientProvider client={queryClient}>
+                    <App />
+                </QueryClientProvider>
+            </Provider>
+        </GlobalStyles>
+    </Router>
+    //</React.StrictMode>
 );
 reportWebVitals();

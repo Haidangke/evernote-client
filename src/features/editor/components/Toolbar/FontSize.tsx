@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import { useMemo } from 'react';
 import { useSlate } from 'slate-react';
 
-import { CheckIcon } from 'assets/icons/toolbar';
+import { CheckIcon } from 'components/Icons';
 import { fontSizeConfig } from 'config/toolbar';
 import { getMarks, isMarkActive, toggleMark } from '../../utils/mark';
 import { DropdownButton } from '../SlateButton';

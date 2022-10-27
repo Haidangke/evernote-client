@@ -5,7 +5,7 @@ import { Fragment, useCallback, useRef, useState } from 'react';
 import { IoMdArrowDropright } from 'react-icons/io';
 import { ID_SLIDE } from 'config/constants';
 
-import { AddIconSmall, IconProps } from 'assets/icons';
+import { AddIconSmall, IconProps } from 'components/Icons';
 import useNavigateParams from 'hooks/useNavigateParams';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';

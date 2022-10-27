@@ -4,7 +4,7 @@ import { Resizable } from 're-resizable';
 import { useEffect, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { ArrowLeftIcon } from 'assets/icons';
+import { ArrowLeftIcon } from 'components/Icons';
 import { sidebarActions } from 'features/sidebar/sidebarSlice';
 import useWindowWidth from 'hooks/useWindowWidth';
 import Actions from './components/Actions';

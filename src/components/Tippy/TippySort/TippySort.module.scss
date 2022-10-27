@@ -1,4 +1,4 @@
-@import 'styles/mixin';
+@import "styles/mixin";
 .wrapper {
     padding: 12px 0;
 }
@@ -17,7 +17,7 @@
     line-height: 32px;
     padding: 0 20px 0 44px;
     font-size: 1.4rem;
-    color: var(--text-color);
+    color: var(--color-text);
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition-base);

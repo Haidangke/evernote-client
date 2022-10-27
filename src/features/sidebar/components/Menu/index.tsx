@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 
-import { DeleteIcon, HomeIcon, MissionIcon, NoteIcon } from 'assets/icons';
+import { DeleteIcon, HomeIcon, MissionIcon, NoteIcon } from 'components/Icons';
 import { routesConfig } from 'config/routes';
 
 import { useAppSelector } from 'app/hooks';

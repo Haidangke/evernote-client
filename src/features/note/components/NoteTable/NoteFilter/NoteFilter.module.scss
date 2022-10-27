@@ -1,6 +1,4 @@
-.iconWrapper {
-    display: flex;
-}
+@import "styles/mixin";
 
 .icon {
     color: var(--color-73);
@@ -8,5 +6,106 @@
     cursor: pointer;
     &:hover {
         background-color: var(--color-e6);
+    }
+}
+
+.wrapper {
+    width: 392px;
+}
+
+.header {
+    @include flex(unset, space-between);
+    height: 40px;
+    margin-bottom: 45px;
+    padding: 16px 24px 0 24px;
+}
+
+.title {
+    font-size: 1.6rem;
+    color: var(--color-text);
+}
+
+.delete {
+    font-size: 1.4rem;
+    color: var(--color-gray);
+}
+
+.list {
+}
+
+.item {
+    @include flex(center, space-between);
+    margin-bottom: 20px;
+    padding: 0px 24px;
+    height: 30px;
+}
+
+.left {
+    @include flex(center, unset);
+}
+
+.itemIcon {
+    margin-right: 15px;
+    color: var(--color-666);
+}
+
+.name {
+    font-size: 1.3rem;
+    color: var(--color-666);
+    font-weight: 600;
+}
+
+.right {
+    @include flex(center, unset);
+    width: 208px;
+    height: 100%;
+}
+
+.input {
+    height: 100%;
+    width: 192px;
+    padding: 0px 4px;
+    border: 1px solid transparent;
+    border-bottom: 1px solid var(--color-e6);
+    @include flex(center, unset);
+
+    cursor: pointer;
+
+    &:active {
+        border: 1px solid var(--color-light-blue);
+    }
+    & > input {
+        height: 100%;
+        pointer-events: none;
+    }
+
+    & > input::placeholder {
+        font-size: 1.3rem;
+        opacity: 0.8;
+    }
+
+    & > svg {
+        width: 20px;
+        height: 20px;
+        color: var(--color-666);
+    }
+}
+
+//dropdown
+.dropdown-list {
+    width: 320px;
+}
+
+.dropdown-item {
+    @include flex(center, unset);
+    transition: var(--transition-base);
+    &:hover {
+        background-color: var(--color-f2);
+    }
+    height: 32px;
+
+    & > span {
+        font-size: 1.4rem;
+        color: var(--color-text);
     }
 }

@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 
 import { useAppSelector } from 'app/hooks';
 
-import Logo from 'assets/images/logo';
+import logo from 'assets/svg/logo.svg';
 import styles from './Auth.module.scss';
 
 const cx = classNames.bind(styles);
@@ -38,7 +38,7 @@ function Auth({ page, children }: AuthProps) {
                 <div className={cx('form')}>
                     <div className={cx('form-header')}>
                         <div className={cx('logo')}>
-                            <Logo />
+                            <img src={logo} alt='logo' />
                             <span>Noteke</span>
                         </div>
                         <div className={cx('form-description')}>Ghi nhớ mọi thứ quan trọng</div>

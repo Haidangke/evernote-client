@@ -4,7 +4,7 @@ import { useMemo, useRef, useState } from 'react';
 import { IoIosMore } from 'react-icons/io';
 
 import { useAppSelector } from 'app/hooks';
-import { SortIcon, TagIcon } from 'assets/icons';
+import { SortIcon, TagIcon } from 'components/Icons';
 import SearchInput from 'components/SearchInput';
 import { TippyButton } from 'components/Tippy';
 

@@ -4,7 +4,7 @@ import { ChangeEvent, useEffect, useMemo, useRef, useState } from 'react';
 import AutosizeInput from 'react-input-autosize';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { AddTagIcon } from 'assets/icons';
+import { AddTagSolidIcon } from 'components/Icons';
 import { TippyButton, TippyHeadLess } from 'components/Tippy';
 import { noteActions } from 'features/note/noteSlice';
 import { tagActions } from 'features/tag/tagSlice';
@@ -91,7 +91,7 @@ function SlateFooterAddTag({ note }: SlateFooterAddTagProps) {
                 placement='top'
             >
                 <div className={styles.icon}>
-                    <AddTagIcon />
+                    <AddTagSolidIcon />
                 </div>
             </TippyButton>
             <TippyHeadLess
@@ -109,7 +109,7 @@ function SlateFooterAddTag({ note }: SlateFooterAddTagProps) {
                         {!isExistsTag && (
                             <div className={cx('dropdown-header')}>
                                 <div onClick={handleCreateTag} className={cx('dropdown-name')}>
-                                    <AddTagIcon />
+                                    <AddTagSolidIcon />
                                     Tạo thẻ <span>"{inputTag}"</span>
                                 </div>
                                 <div className={cx('dropdown-tab')}>Tab</div>

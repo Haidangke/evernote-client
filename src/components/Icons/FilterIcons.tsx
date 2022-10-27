@@ -1,42 +1,5 @@
 import { IconProps } from '.';
 
-export const NoteTitleIcon = ({ className }: IconProps) => (
-    <svg
-        width={16}
-        height={18}
-        fill='none'
-        xmlns='http://www.w3.org/2000/svg'
-        className={className}
-    >
-        <path
-            fillRule='evenodd'
-            clipRule='evenodd'
-            d='M2.798 0h10.5a2 2 0 012 2v10.497h-4a.75.75 0 00-.75.75v4.749h-7.75a2 2 0 01-2-2V2a2 2 0 012-2zm8.445 5.5a.75.75 0 000-1.5H4.757a.75.75 0 100 1.5h6.486zm.75 3.502a.75.75 0 01-.75.75H4.757a.75.75 0 110-1.5h6.486a.75.75 0 01.75.75zm-5.236 4.99a.75.75 0 000-1.5h-2a.75.75 0 000 1.5h2z'
-            fill='currentColor'
-        />
-        <path d='M12.048 13.997h2.588l-2.528 3.231-.06.073v-3.304z' fill='currentColor' />
-    </svg>
-);
-
-export const BookTitleIcon = ({ className }: IconProps) => (
-    <svg
-        width='24'
-        height='24'
-        viewBox='0 0 24 24'
-        fill='none'
-        xmlns='http://www.w3.org/2000/svg'
-        className={className}
-    >
-        <path d='M7.242 3H4.75v18h2.492V3z' fill='currentColor'></path>
-        <path
-            fillRule='evenodd'
-            clipRule='evenodd'
-            d='M8.742 3v18h8.508a2 2 0 002-2V5a2 2 0 00-2-2H8.742zm7.955 6.1a.9.9 0 01-.9.9h-3.6a.9.9 0 110-1.8h3.6a.9.9 0 01.9.9z'
-            fill='currentColor'
-        ></path>
-    </svg>
-);
-
 export const SortIcon = ({ className }: IconProps) => (
     <svg
         width={24}

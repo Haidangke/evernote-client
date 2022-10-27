@@ -4,7 +4,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import Widgets from './components/Widgets';
-import { CustomHome } from 'assets/icons';
+import { CustomHome } from 'components/Icons';
 import { dailyConfig } from 'config/date';
 
 import background from 'assets/images/background.png';

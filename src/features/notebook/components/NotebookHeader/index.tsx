@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import { AddNotebookIcon } from 'assets/icons';
+import { AddNotebookIcon } from 'components/Icons';
 import { useAppSelector } from 'app/hooks';
 import { TippySort } from 'components/Tippy';
 import { SortConfig } from 'config/actions';

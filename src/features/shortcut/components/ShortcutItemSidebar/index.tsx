@@ -2,7 +2,7 @@ import { Fragment, useMemo } from 'react';
 
 import MenuItem from 'features/sidebar/components/Menu/MenuItem';
 import { useAppSelector } from 'app/hooks';
-import { NotebookSubIcon, NoteSolidIcon, NoteSolidSubIcon, StarIcon } from 'assets/icons';
+import { NotebookSubIcon, NoteSolidIcon, NoteSolidSubIcon, StarIcon } from 'components/Icons';
 
 function ShortcutItemSidebar() {
     const { shortcuts } = useAppSelector((state) => state.shortcut);

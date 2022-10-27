@@ -1,4 +1,4 @@
-@import 'styles/mixin';
+@import "styles/mixin";
 
 .topbar {
     @include flex(center, space-between);
@@ -94,13 +94,13 @@
     background-color: var(--primary-color);
     border-radius: 4px;
     font-weight: 600;
-    color: var(--white);
+    color: var(--color-white);
     padding: 0px 16px;
     margin: 0px 8px 0 16px;
     cursor: pointer;
     transition: background-color ease-in 0.1s;
     &:hover {
-        background-color: var(--primary-bold);
+        background-color: var(--primary-bold-color);
     }
 }
 

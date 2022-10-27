@@ -11,7 +11,7 @@ import {
     NoteIcon,
     NoteSolidIcon,
     TodoPrimaryIcon,
-} from 'assets/icons';
+} from 'components/Icons';
 
 import { useAppSelector } from 'app/hooks';
 import Popper from 'components/Popper';

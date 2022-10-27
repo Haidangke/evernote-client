@@ -10,7 +10,7 @@
     padding: 8px 9px;
 }
 
-.tippy-tooltip[data-animation='rotate'][data-state='hidden'] {
+.tippy-tooltip[data-animation="rotate"][data-state="hidden"] {
     opacity: 0;
     transform: rotate(90deg);
 }
@@ -24,7 +24,7 @@
 }
 
 .tippy__dropdown-item {
-    color: var(--text-color);
+    color: var(--color-text);
     font-weight: 600;
     font-size: 1.4rem;
     padding: 6px 20px;

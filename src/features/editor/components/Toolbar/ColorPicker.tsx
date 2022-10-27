@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { BiCheck } from 'react-icons/bi';
 
-import { ColorPickerIcon } from 'assets/icons/toolbar';
+import { ColorPickerIcon } from 'components/Icons';
 import { colorConfig } from 'config/toolbar';
 import { DropdownButton } from '../SlateButton';
 import { isMarkActive, toggleMark } from '../../utils/mark';

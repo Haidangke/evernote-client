@@ -1,4 +1,4 @@
-import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from 'assets/icons';
+import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from 'components/Icons';
 
 export const fontSizeConfig = [
     '8px',

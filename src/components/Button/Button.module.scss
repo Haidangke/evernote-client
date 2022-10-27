@@ -12,12 +12,12 @@
 }
 
 .primary {
-    color: var(--white);
+    color: var(--color-white);
     background-color: var(--primary-color);
     border: 1px solid var(--primary-color);
     &:hover {
-        background-color: var(--primary-hover);
-        border: 1px solid var(--primary-hover);
+        background-color: var(--primary-hover-color);
+        border: 1px solid var(--primary-hover-color);
     }
 }
 
@@ -25,24 +25,24 @@
     color: var(--color-73);
     border: 1px solid var(--color-73);
     &:hover {
-        color: var(--black);
+        color: var(--color-black);
     }
 }
 
 .danger {
     background-color: #e54e40;
     border: 1px solid #e54e40;
-    color: var(--white);
+    color: var(--color-white);
 }
 
 .disabled {
     cursor: default;
-    color: var(--white);
-    background-color: var(--gray);
-    border: 1px solid var(--gray);
+    color: var(--color-white);
+    background-color: var(--color-gray);
+    border: 1px solid var(--color-gray);
     &:hover {
-        color: var(--white);
-        background-color: var(--gray);
-        border: 1px solid var(--gray);
+        color: var(--color-white);
+        background-color: var(--color-gray);
+        border: 1px solid var(--color-gray);
     }
 }

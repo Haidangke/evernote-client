@@ -18,7 +18,7 @@ import {
     TestListIcon,
     UnderlineIcon,
     UpperIndexIcon,
-} from 'assets/icons';
+} from 'components/Icons';
 import { DropdownButton } from '../SlateButton';
 import { textIndent } from '../../utils/indent';
 import { isMarkActive, toggleMark } from '../../utils/mark';

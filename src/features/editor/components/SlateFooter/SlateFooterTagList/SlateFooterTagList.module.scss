@@ -1,4 +1,4 @@
-@import 'styles/mixin';
+@import "styles/mixin";
 
 .dropdown {
     min-width: 150px;
@@ -32,7 +32,7 @@
 
 .itemName {
     font-size: 1.3rem;
-    color: var(--text-color);
+    color: var(--color-text);
 }
 
 .itemIcon {
@@ -41,6 +41,6 @@
         margin-left: 5px;
         width: 14px;
         height: 14px;
-        color: var(--text-color);
+        color: var(--color-text);
     }
 }

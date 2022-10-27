@@ -14,7 +14,7 @@
 }
 
 .header {
-    // height: var(--height-header-list-note);
+   
 
     padding: 18px 16px 0 20px;
     border-bottom: 1px solid var(--color-e6);
@@ -39,4 +39,14 @@
 
 .actions {
     @include flex(center, unset);
+}
+
+.icon {
+    color: var(--color-73);
+    border-radius: 4px;
+    margin-left: 5px;
+    cursor: pointer;
+    &:hover {
+        background-color: var(--color-e6);
+    }
 }

@@ -1,4 +1,4 @@
-@import 'styles/mixin';
+@import "styles/mixin";
 
 //animation
 @keyframes toTop {
@@ -69,7 +69,7 @@
     @include flex(center, space-between);
     line-height: 30px;
     padding: 16px 24px;
-    color: var(--white);
+    color: var(--color-white);
     z-index: 2;
 }
 
@@ -92,7 +92,7 @@
     @include flex(center, center);
     height: 32px;
     padding: 0px 8px;
-    background-color: var(--white);
+    background-color: var(--color-white);
     margin-left: 30px;
     font-weight: 600;
     border-radius: 4px;

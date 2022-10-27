@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import { TiDeleteOutline } from 'react-icons/ti';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { AddIconSmall } from 'assets/icons';
+import { AddIconSmall } from 'components/Icons';
 import { ID_SLIDE } from 'config/constants';
 import { sidebarActions } from 'features/sidebar/sidebarSlice';
 import useNavigateParams from 'hooks/useNavigateParams';

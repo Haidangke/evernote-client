@@ -1,9 +1,9 @@
 :root {
-    --font-family: 'Roboto', sans-serif;
+    --font-family: "Roboto", sans-serif;
 
-    --white: white;
-    --black: black;
-    --gray: #cccccc;
+    --color-white: white;
+    --color-black: black;
+    --color-gray: #cccccc;
 
     --color-e6: #e6e6e6;
     --color-a6: #a6a6a6;
@@ -20,18 +20,15 @@
     --color-77: #777;
 
     --primary-color: #00a82d;
-    --primary-hover: #0e753d;
-    --primary-bold: #008f26;
-    --active-icon-toolbar: #66b3da;
-    --text-color: #333333;
+    --primary-hover-color: #0e753d;
+    --primary-bold-color: #008f26;
+    --color-text: #333333;
     --color-blue: #0081c2;
+    --color-light-blue: #66b3da;
     --color-red: #ff7070;
     --color-violet: #a73dbc;
 
     --box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
 
     --transition-base: all 0.2s ease-in-out;
-
-    //px
-    --height-header-list-note: 96px;
 }

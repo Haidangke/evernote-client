@@ -1,4 +1,4 @@
-@import 'styles/mixin';
+@import "styles/mixin";
 
 .wrapper {
     height: calc(100vh - 92px - 99px);
@@ -39,11 +39,11 @@
     }
 
     &:hover > .name {
-        color: var(--white);
+        color: var(--color-white);
     }
 
     &__active > .name {
-        color: var(--white);
+        color: var(--color-white);
     }
 }
 
@@ -72,7 +72,7 @@
 }
 
 .name {
-    color: var(--gray);
+    color: var(--color-gray);
     font-size: 1.4rem;
     line-height: 2.4rem;
 }
@@ -88,7 +88,7 @@
         background-color: #666;
     }
     &:hover > svg {
-        color: var(--gray);
+        color: var(--color-gray);
     }
     & > svg {
         color: var(--color-a6);
@@ -96,7 +96,7 @@
 }
 
 .heading {
-    color: var(--gray);
+    color: var(--color-gray);
     font-size: 1.3rem;
     font-weight: 400;
     padding-left: 24px;
@@ -114,16 +114,15 @@
     }
 
     &:hover > .sub-name {
-        color: var(--white);
+        color: var(--color-white);
     }
 
     &-icon {
         color: var(--color-a6);
-        
     }
 
     &-name {
-        color: var(--gray);
+        color: var(--color-gray);
         font-size: 1.3rem;
         margin-left: 8px;
     }
@@ -136,7 +135,7 @@
 }
 
 .sub__active > .sub-name {
-    color: var(--white);
+    color: var(--color-white);
 }
 
 .item__active,

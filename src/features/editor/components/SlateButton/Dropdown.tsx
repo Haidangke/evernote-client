@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 import Popper from 'components/Popper';
 import { useAppDispatch } from 'app/hooks';
 import { editorActions } from 'features/editor/editorSlice';
-import { ArrowDownIcon } from 'assets/icons';
+import { ArrowDownIcon } from 'components/Icons';
 import { ovfToolbarConfig } from 'config/toolbar';
 import useCheckOverflow from '../../hooks/useCheckOverflow';
 

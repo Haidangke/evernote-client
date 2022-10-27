@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import classNames from 'classnames/bind';
 
-import { SortIcon, TwoWayArrowIcon } from 'assets/icons';
+import { SortIcon, TwoWayArrowIcon } from 'components/Icons';
 import { sortConfig, SortConfig } from 'config/actions';
 import { TippyHeadLessOneWay } from '../TippyHeadLess';
 

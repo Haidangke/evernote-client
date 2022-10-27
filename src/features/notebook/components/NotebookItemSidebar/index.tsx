@@ -3,7 +3,12 @@ import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { NotebookAddIcon, NotebookIcon, NotebookSubDfIcon, NotebookSubIcon } from 'assets/icons';
+import {
+    NotebookAddIcon,
+    NotebookIcon,
+    NotebookSubDfIcon,
+    NotebookSubIcon,
+} from 'components/Icons';
 import { InputField } from 'components/FormFields';
 import { nameSchema } from 'components/FormFields/InputField';
 import ModalCreate from 'components/Modal/ModalCreate';

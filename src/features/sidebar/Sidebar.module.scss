@@ -1,4 +1,4 @@
-@import 'styles/mixin';
+@import "styles/mixin";
 
 .wrapper {
     position: relative;
@@ -41,7 +41,7 @@
     bottom: 10px;
     cursor: pointer;
     & > svg {
-        color: var(--white);
+        color: var(--color-white);
     }
 }
 
