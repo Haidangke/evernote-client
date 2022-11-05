@@ -1,8 +1,8 @@
 import { Editor, Transforms, Element as SlateElement } from 'slate';
 import { fontFamilyConfig, colorConfig } from 'config/toolbar';
 
-const LIST_TYPES = ['numbered-list', 'bulleted-list'];
-const TEXT_ALIGN_TYPES = ['left', 'center', 'right', 'justify'];
+export const LIST_TYPES = ['numbered-list', 'bulleted-list'];
+export const TEXT_ALIGN_TYPES = ['left', 'center', 'right', 'justify'];
 
 const isBlockActive = (editor: any, format: any, type = 'type') => {
     const { selection } = editor;

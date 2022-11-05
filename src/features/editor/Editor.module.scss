@@ -1,4 +1,4 @@
-@import 'styles/mixin';
+@import "styles/mixin";
 
 :root {
     --toolbar-height: 52px;
@@ -62,8 +62,10 @@
     margin-top: 12px;
     padding: 0 40px;
 
-    & li {
-        margin-left: 24px;
+    & ul,
+    li,
+    ol {
+        padding: revert;
     }
 }
 
@@ -71,7 +73,7 @@
     position: absolute;
     color: rgb(171, 171, 171);
     font-weight: 400;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: "Source Sans Pro", sans-serif;
 }
 
 //loading

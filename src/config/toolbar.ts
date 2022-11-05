@@ -1,4 +1,5 @@
 import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from 'components/Icons';
+import { ElementType } from 'features/editor/slates';
 
 export const fontSizeConfig = [
     '8px',
@@ -85,6 +86,7 @@ export const ovfToolbarConfig = [
         format: 'underline',
         limit: 546,
     },
+
     {
         format: 'bulleted-list',
         limit: 606,
@@ -93,6 +95,7 @@ export const ovfToolbarConfig = [
         format: 'numbered-list',
         limit: 638,
     },
+
     {
         format: 'check-list-item',
         limit: 670,

@@ -6,6 +6,7 @@ import classNames from 'classnames/bind';
 import { editorActions } from 'features/editor/editorSlice';
 import { useAppDispatch } from 'app/hooks';
 
+import { ElementType } from 'features/editor/slates';
 import { BlockButton, MarkButton } from '../SlateButton';
 import OverflowToolbar from '../OverflowToolbar';
 import Align from './Align';
@@ -97,6 +98,7 @@ function Toolbar({ onHeader, setSearch }: ToolbarProps) {
                 <BlockButton content='Danh sách đánh số' format='numbered-list'>
                     <NumberListIcon />
                 </BlockButton>
+
                 <BlockButton content='Danh sách kiểm tra' format='check-list-item'>
                     <TestListIcon />
                 </BlockButton>

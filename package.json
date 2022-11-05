@@ -4,6 +4,7 @@
     "private": true,
     "dependencies": {
         "@hookform/resolvers": "^2.9.1",
+        "@prezly/slate-lists": "^0.69.2",
         "@reduxjs/toolkit": "^1.8.1",
         "@testing-library/jest-dom": "^5.16.4",
         "@testing-library/react": "^13.0.1",
@@ -28,7 +29,6 @@
         "react": "^18.1.0",
         "react-debounce-input": "^3.3.0",
         "react-dom": "^18.1.0",
-        "react-draft-wysiwyg": "^1.15.0",
         "react-hook-form": "^7.32.1",
         "react-hot-toast": "^2.3.0",
         "react-icons": "^4.4.0",

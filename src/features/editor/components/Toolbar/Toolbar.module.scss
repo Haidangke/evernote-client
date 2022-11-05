@@ -114,7 +114,7 @@
     padding: 10px 40px;
     border-bottom: 1px solid var(--color-f2);
     transition: all 0.15s ease-in;
-
+    font-family: "SegoeUI";
     &:last-child {
         border-bottom: unset;
     }
@@ -129,6 +129,7 @@
 
 .dropdown-align {
     padding: 6px 16px;
+    font-family: "SegoeUI";
     &-check {
         display: flex;
         align-items: center;

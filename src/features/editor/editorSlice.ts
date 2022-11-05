@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ElementType } from './slates';
 
 interface Upload {
     isLoading: boolean;
@@ -49,6 +50,9 @@ const initialState: InitialState = {
             isOverflow: false,
             format: 'check-list-item',
         },
+        //
+
+        //
 
         {
             isOverflow: false,

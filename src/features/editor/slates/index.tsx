@@ -1,6 +1,14 @@
 import { fontFamilyConfig, fontSizeConfig, colorConfig } from 'config/toolbar';
 import CheckListItemElement from '../slates/CheckList';
 
+export enum ElementType {
+    PARAGRAPH = 'paragraph',
+    NUMBERED_LIST = 'numbered-list',
+    BULLETED_LIST = 'bulleted-list',
+    LIST_ITEM = 'list-item',
+    LIST_ITEM_TEXT = 'list-item-text',
+}
+
 const SlateElement = (props: any) => {
     const { attributes, children, element } = props;
 
@@ -14,6 +22,9 @@ const SlateElement = (props: any) => {
 
     switch (element.type) {
         //block-quote
+        case ElementType.PARAGRAPH:
+            return <p {...attributes}>{children}</p>;
+
         case 'block-quote':
             return (
                 <blockquote style={style} {...attributes}>
@@ -44,11 +55,18 @@ const SlateElement = (props: any) => {
         case 'check-list-item':
             return <CheckListItemElement {...props} />;
 
+        case ElementType.LIST_ITEM_TEXT:
+            return (
+                <div style={style} {...attributes}>
+                    {children}
+                </div>
+            );
+
         default:
             return (
-                <p style={style} {...attributes}>
+                <div style={style} {...attributes}>
                     {children}
-                </p>
+                </div>
             );
     }
 };

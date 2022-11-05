@@ -1,11 +1,11 @@
 import classNames from 'classnames/bind';
 import pipe from 'lodash/fp/pipe';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { createEditor } from 'slate';
 import { withHistory } from 'slate-history';
 import { Editable, Slate, withReact } from 'slate-react';
-import DraftWysiwyg from './DraftWysiwyg';
+import { withListsReact, onKeyDown } from '@prezly/slate-lists';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { editorActions } from 'features/editor/editorSlice';
@@ -18,23 +18,26 @@ import Toolbar from './components/Toolbar';
 
 import Loading from 'components/Loading';
 import UploadLoading from './components/UploadLoading';
-import { withChecklists, withKeyCommands, withLinks, withIndent } from './plugins';
+import { withChecklists, withKeyCommands, withLinks, withIndent, withLists } from './plugins';
 import { SlateElement, SlateLeaf } from './slates';
 
 import styles from './Editor.module.scss';
 const cx = classNames.bind(styles);
 
 const createEditorWithPlugins = pipe(
+    withListsReact,
+    withLists,
     withReact,
-    withHistory,
-    withChecklists,
-    withLinks,
-    withKeyCommands,
-    withIndent
+    withHistory
+    // withChecklists,
+    // withLinks,
+    // withKeyCommands
+    // withIndent
 );
 
 function Editor() {
     const editorRef = useRef(null);
+    const xRef = useRef(null);
     const dispatch = useAppDispatch();
     const { listNote, isFetching } = useAppSelector((state) => state.note);
 
@@ -46,7 +49,7 @@ function Editor() {
     const [search, setSearch] = useState('');
     const [onHeader, setOnHeader] = useState(false);
 
-    // const decorate = useDecorate(search);
+    const decorate = useDecorate(search);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const editor = useMemo(() => createEditorWithPlugins(createEditor()), [noteId]);
@@ -61,7 +64,7 @@ function Editor() {
         [dispatch]
     );
 
-    // useOnClickOutside(editorRef, () => dispatch(editorActions.setIsToolbar(false)));
+    useOnClickOutside(editorRef, () => dispatch(editorActions.setIsToolbar(false)));
 
     return (
         <div className={styles.wrapper}>
@@ -70,9 +73,7 @@ function Editor() {
                 <SlateTopbar />
             </div>
 
-            <DraftWysiwyg />
-
-            {/* {note ? (
+            {note?.content ? (
                 <div ref={editorRef} className={styles.editor}>
                     <Slate
                         editor={editor}
@@ -111,7 +112,7 @@ function Editor() {
                                     dispatch(noteActions.update({ id: noteId, params: { title } }));
                                 }}
                             />
-                            <div className={cx('editable-main')}>
+                            <div ref={xRef} className={cx('editable-main')}>
                                 <Editable
                                     placeholder='Bắt đầu viết những suy nghĩ, hoặc công việc vào đây'
                                     decorate={decorate}
@@ -120,6 +121,7 @@ function Editor() {
                                         setIsToolbar(true);
                                         setOnHeader(false);
                                     }}
+                                    onKeyDown={(event) => onKeyDown(editor, event)}
                                     // onKeyDown={(event) => handleKeyboard(event, editor)}
                                     renderLeaf={renderLeaf}
                                     renderElement={renderElement}
@@ -132,7 +134,7 @@ function Editor() {
                 <div className={cx('loading')}>
                     {isFetching && <Loading width='42px' height='42px' />}
                 </div>
-            )} */}
+            )}
             {note && (
                 <div className={styles.footer}>
                     <SlateFooter />

@@ -1,6 +1,7 @@
 @import "styles/mixin";
 .root {
     display: flex;
+    height: 100vh;
     background-image: url("../../../assets/images/auth_bg.png");
 }
 
