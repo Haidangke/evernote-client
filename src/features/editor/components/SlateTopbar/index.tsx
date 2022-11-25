@@ -35,7 +35,8 @@ function SlateTopbar() {
         }
         setSearchParams(searchParams);
     };
-    if (page !== 'recycle' && !notebook) return <></>;
+    if (!notebook) return <></>;
+
     return (
         <div className={cx('topbar')}>
             <div className={cx('left')}>
@@ -75,10 +76,14 @@ function SlateTopbar() {
                 </div>
             </div>
             <div className={cx('right')}>
-                <div className={cx('info-auth')}>Chỉ bạn</div>
-                <div className={cx('share-btn')}>Chia sẻ</div>
+                {page !== 'recycle' && (
+                    <>
+                        <div className={cx('info-auth')}>Chỉ bạn</div>
+                        <div className={cx('share-btn')}>Chia sẻ</div>
+                    </>
+                )}
                 <div className={cx('other-btn')}>
-                    <NoteMore />
+                    <NoteMore page={page} />
                 </div>
             </div>
         </div>

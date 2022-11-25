@@ -17,9 +17,7 @@ function Scratch() {
                 onChange={(e) => {
                     const content = e.target.value;
                     // dispatch()
-                    userService.updateScratch(content).then((res) => {
-                        console.log(res);
-                    });
+                    userService.updateScratch(content);
                 }}
             />
         </Element>

@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import { useRef, useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 import { useAppDispatch } from 'app/hooks';
 import { ArrowDownIcon } from 'components/Icons';
@@ -120,7 +120,6 @@ function SlateFooterTagItem({ tag, note }: SlateFooterTagItemProps) {
                 variant='danger'
                 action='Có, hãy xóa thẻ'
             />
-            <Toaster />
         </>
     );
 }

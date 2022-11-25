@@ -1,6 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Note, Tag, UpdateNoteParams } from 'types';
 
+interface DateFilter {
+    title: string;
+    value: string;
+    date: Date[];
+}
+
+interface NoteFilter {
+    tags: string[];
+    createdAt: DateFilter | null;
+    updatedAt: DateFilter | null;
+    notebook: string | null;
+}
+
 interface InitialState {
     isFetching: boolean;
     isFetchSuccess: boolean;
@@ -11,6 +24,7 @@ interface InitialState {
     isUpdateFailed: boolean;
 
     listNote: Note<Tag>[];
+    filter: NoteFilter;
 }
 
 const initialState: InitialState = {
@@ -23,6 +37,12 @@ const initialState: InitialState = {
     isUpdateFailed: false,
 
     listNote: [],
+    filter: {
+        tags: [],
+        createdAt: null,
+        updatedAt: null,
+        notebook: null,
+    },
 };
 
 const noteSlice = createSlice({
@@ -72,6 +92,9 @@ const noteSlice = createSlice({
         },
         setListNote(state, action: PayloadAction<Note<Tag>[]>) {
             state.listNote = action.payload;
+        },
+        setFilter(state, action: PayloadAction<NoteFilter>) {
+            state.filter = action.payload;
         },
     },
 });

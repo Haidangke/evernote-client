@@ -48,6 +48,7 @@
     font-weight: 600;
     &::placeholder {
         color: rgb(135, 135, 135);
+        opacity: 0.8;
     }
 }
 
@@ -55,6 +56,11 @@
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
+
+    & html {
+        font-size: unset;
+        font-family: unset;
+    }
 }
 
 .editable-main {
@@ -99,5 +105,22 @@
         stroke: var(--primary-color);
         stroke-dasharray: 187;
         stroke-dashoffset: 36;
+    }
+}
+
+.input--disable {
+    pointer-events: none;
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+
+    & > svg {
+        margin-right: 4px;
+    }
+
+    & > svg > path {
+        fill: var(--color-white);
     }
 }

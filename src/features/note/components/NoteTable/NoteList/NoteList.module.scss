@@ -1,5 +1,10 @@
 @import "styles/mixin";
 
+.wrapper {
+    flex: 1;
+    overflow-y: auto;
+}
+
 .header {
     padding: 0 8px;
     height: 34px;

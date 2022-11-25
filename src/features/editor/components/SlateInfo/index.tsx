@@ -3,12 +3,14 @@ import { useSearchParams } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import { MdDelete } from 'react-icons/md';
 
+import useLocationPage from 'hooks/useLocationPage';
 import { useAppSelector } from 'app/hooks';
 
 import styles from './Info.module.scss';
 const cx = classNames.bind(styles);
 
 function SlateInfo() {
+    const page = useLocationPage();
     const [date, setDate] = useState({
         day: '',
         month: '',
@@ -21,7 +23,6 @@ function SlateInfo() {
     const noteId = searchParams.get('n');
 
     const note = useMemo(() => listNote.find((note) => note._id === noteId), [listNote, noteId]);
-    
 
     useEffect(() => {
         if (note?.updatedAt) {
@@ -32,7 +33,7 @@ function SlateInfo() {
     }, [note?.updatedAt]);
 
     return (
-        <div className={cx('wrapper', { hide: isToolbar })}>
+        <div className={cx('wrapper', { hide: isToolbar && page !== 'recycle' })}>
             {note?.isTrash && (
                 <div className={cx('is-trash')}>
                     <MdDelete size={18} color='#fff' />

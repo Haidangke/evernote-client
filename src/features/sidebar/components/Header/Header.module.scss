@@ -6,7 +6,7 @@
 }
 
 .left {
-    @include flex(unset, center);
+    @include flex(unset, flex-start);
     flex: 1;
     overflow: hidden;
     padding: 0 15px;
@@ -60,6 +60,10 @@
 .small {
     height: unset;
     flex-direction: column;
+    .left {
+        justify-content: center;
+    }
+
     .avatar {
         height: 56px;
         @include flex(center, unset);

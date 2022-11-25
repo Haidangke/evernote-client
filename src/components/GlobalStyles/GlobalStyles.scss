@@ -1,8 +1,6 @@
-@import "normalize.css";
 @import "styles/font";
 @import "styles/variables";
 @import "styles/tippy";
-@import "styles/slate";
 
 * {
     margin: 0;
@@ -20,7 +18,9 @@ body {
     line-height: 1.5;
     text-rendering: optimizespeed;
     color: var(--color-text);
-    overflow-y: overlay;
+    // overflow-y: overlay;
+    height: 100vh;
+    overflow-y: hidden;
     letter-spacing: 0.1px;
 }
 

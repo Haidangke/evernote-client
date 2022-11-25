@@ -1,7 +1,6 @@
-@import 'styles/mixin';
+@import "styles/mixin";
 
 :root {
-    // --height-header: 96px;
     z-index: 1;
 }
 
@@ -14,8 +13,6 @@
 }
 
 .header {
-   
-
     padding: 18px 16px 0 20px;
     border-bottom: 1px solid var(--color-e6);
 }
@@ -29,12 +26,6 @@
 .total {
     color: var(--color-666);
     font-size: 1.4rem;
-}
-
-.list {
-    // height: calc(100vh - var(--height-header));
-    flex: 1;
-    overflow-y: auto;
 }
 
 .actions {

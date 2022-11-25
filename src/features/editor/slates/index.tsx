@@ -99,7 +99,7 @@ const SlateLeaf = ({ attributes, children, leaf }: any) => {
     }
 
     if (leaf.italic) {
-        children = <em style={style}>{children}</em>;
+        children = <i style={style}>{children}</i>;
     }
 
     if (leaf.underline) {

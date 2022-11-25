@@ -6,17 +6,17 @@ import { useAppSelector } from 'app/hooks';
 import TimeUp from 'components/TimeUp';
 import useLocationPage from 'hooks/useLocationPage';
 import { Note, Tag } from 'types';
-import Create from './Create';
-import EmptyTrash from './EmptyTrash';
+import { EmptyTrash, EmptyCreate, EmptyFilter } from './NoteListEmpty';
 
-import styles from './List.module.scss';
+import styles from './NoteList.module.scss';
 const cx = classNames.bind(styles);
 
-interface ListProps {
+interface NoteListProps {
     listNote: Note<Tag>[];
+    isFilter: boolean;
 }
 
-function List({ listNote }: ListProps) {
+function NoteList({ listNote, isFilter }: NoteListProps) {
     const page = useLocationPage();
     const { isFetchSuccess } = useAppSelector((state) => state.note);
     const [searchParams, setSearchParams] = useSearchParams();
@@ -26,16 +26,22 @@ function List({ listNote }: ListProps) {
 
     if (!isFetchSuccess) return <></>;
 
-    if (listNote.length === 0 && isFetchSuccess)
-        return page === 'recycle' ? <EmptyTrash /> : <Create notebookId={notebookId} />;
+    if (listNote.length === 0 && isFetchSuccess) {
+        if (page === 'recycle') {
+            return <EmptyTrash />;
+        } else {
+            return isFilter ? <EmptyFilter /> : <EmptyCreate notebookId={notebookId} />;
+        }
+    }
 
     return (
-        <>
+        <div className={styles.wrapper}>
             <div className={cx('header')}>
                 <div className={cx('column-header')}>Tiêu đề</div>
                 <div className={cx('column-header')}>Đã cập nhật</div>
                 <div className={cx('column-header')}>Thẻ</div>
             </div>
+
             {listNote.map((note, index) => (
                 <div
                     key={note._id}
@@ -55,8 +61,8 @@ function List({ listNote }: ListProps) {
                     </div>
                 </div>
             ))}
-        </>
+        </div>
     );
 }
 
-export default memo(List);
+export default memo(NoteList);

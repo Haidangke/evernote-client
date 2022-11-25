@@ -2070,6 +2070,13 @@
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.4.tgz#cd667bcfdd025213aafb7ca5915a932590acdcdc"
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
+"@types/react-calendar@^3.9.0":
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/@types/react-calendar/-/react-calendar-3.9.0.tgz#b345707c9b593331a48963514f3e30ce0b3ca195"
+  integrity sha512-KpAu1MKAGFw5hNwlDnWsHWqI9i/igAB+8jH97YV7QpC2v7rlwNEU5i6VMFb73lGRacuejM/Zd2LklnEzkFV3XA==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-dom@^18.0.0", "@types/react-dom@^18.0.2":
   version "18.0.5"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.0.5.tgz#330b2d472c22f796e5531446939eacef8378444a"
@@ -2462,6 +2469,11 @@
   dependencies:
     "@webassemblyjs/ast" "1.11.1"
     "@xtuc/long" "4.2.2"
+
+"@wojtekmaj/date-utils@^1.0.2":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@wojtekmaj/date-utils/-/date-utils-1.0.3.tgz#2dcfd92881425c5923e429c2aec86fb3609032a1"
+  integrity sha512-1VPkkTBk07gMR1fjpBtse4G+oJqpmE+0gUFB0dg3VIL7qJmUVaBoD/vlzMm/jNeOPfvlmerl1lpnsZyBUFIRuw==
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
@@ -3240,6 +3252,11 @@ cliui@^7.0.2:
     string-width "^4.2.0"
     strip-ansi "^6.0.0"
     wrap-ansi "^7.0.0"
+
+clsx@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.2.1.tgz#0ddc4a20a549b59c93a4116bb26f5294ca17dc12"
+  integrity sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==
 
 co@^4.6.0:
   version "4.6.0"
@@ -4809,6 +4826,13 @@ get-symbol-description@^1.0.0:
     call-bind "^1.0.2"
     get-intrinsic "^1.1.1"
 
+get-user-locale@^1.2.0:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/get-user-locale/-/get-user-locale-1.5.1.tgz#18a9ba2cfeed0e713ea00968efa75d620523a5ea"
+  integrity sha512-WiNpoFRcHn1qxP9VabQljzGwkAQDrcpqUtaP0rNBEkFxJdh4f3tik6MfZsMYZc+UgQJdGCxWEjL9wnCUlRQXag==
+  dependencies:
+    lodash.memoize "^4.1.1"
+
 glob-parent@^5.1.2, glob-parent@~5.1.2:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-5.1.2.tgz#869832c58034fe68a4093c17dc15e8340d8401c4"
@@ -6217,7 +6241,7 @@ lodash.flow@^3.5.0:
   resolved "https://registry.yarnpkg.com/lodash.flow/-/lodash.flow-3.5.0.tgz#87bf40292b8cf83e4e8ce1a3ae4209e20071675a"
   integrity sha1-h79AKSuM+D5OjOGjrkIJ4gBxZ1o=
 
-lodash.memoize@^4.1.2:
+lodash.memoize@^4.1.1, lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
   integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
@@ -7493,7 +7517,7 @@ prompts@^2.0.1, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.5.8, prop-types@^15.6.2, prop-types@^15.8.1:
+prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -7599,6 +7623,16 @@ react-app-rewired@^2.2.1:
   integrity sha512-uFQWTErXeLDrMzOJHKp0h8P1z0LV9HzPGsJ6adOtGlA/B9WfT6Shh4j2tLTTGlXOfiVx6w6iWpp7SOC5pvk+gA==
   dependencies:
     semver "^5.6.0"
+
+react-calendar@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/react-calendar/-/react-calendar-4.0.0.tgz#99ad73dd0c7c5b25aa535a5fdeee3d71bfe45faa"
+  integrity sha512-y9Q5Oo3Mq869KExbOCP3aJ3hEnRZKZ0TqUa9QU1wJGgDZFrW1qTaWp5v52oZpmxTTrpAMTUcUGaC0QJcO1f8Nw==
+  dependencies:
+    "@wojtekmaj/date-utils" "^1.0.2"
+    clsx "^1.2.1"
+    get-user-locale "^1.2.0"
+    prop-types "^15.6.0"
 
 react-debounce-input@^3.3.0:
   version "3.3.0"

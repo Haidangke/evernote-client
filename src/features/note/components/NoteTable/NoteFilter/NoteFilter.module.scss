@@ -1,6 +1,7 @@
 @import "styles/mixin";
 
 .icon {
+    height: 24px;
     color: var(--color-73);
     border-radius: 4px;
     cursor: pointer;
@@ -28,16 +29,17 @@
 .delete {
     font-size: 1.4rem;
     color: var(--color-gray);
-}
-
-.list {
+    cursor: pointer;
+    &--active {
+        color: var(--color-blue);
+    }
 }
 
 .item {
     @include flex(center, space-between);
     margin-bottom: 20px;
     padding: 0px 24px;
-    height: 30px;
+    min-height: 30px;
 }
 
 .left {
@@ -62,7 +64,7 @@
 }
 
 .input {
-    height: 100%;
+    min-height: 30px;
     width: 192px;
     padding: 0px 4px;
     border: 1px solid transparent;
@@ -80,8 +82,9 @@
     }
 
     & > input::placeholder {
-        font-size: 1.3rem;
-        opacity: 0.8;
+        font-size: 1.2rem;
+        color: var(--color-text);
+        opacity: 0.9;
     }
 
     & > svg {
@@ -91,6 +94,47 @@
     }
 }
 
+.menu {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    margin-bottom: 4px;
+}
+
+.menu-tag {
+    width: fit-content;
+    padding: 2px 12px;
+
+    color: var(--color-text);
+    background-color: var(--color-f2);
+    border-radius: 50px;
+}
+
+.menu-date {
+    color: var(--color-blue);
+    letter-spacing: 0;
+}
+
+.menu-book {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 8px;
+    & > svg {
+        color: var(--color-blue);
+    }
+
+    & > span {
+        color: var(--color-blue);
+    }
+}
+
+.delete-icon {
+    fill: var(--color-a6);
+    cursor: pointer;
+}
+
 //dropdown
 .dropdown-list {
     width: 320px;
@@ -98,14 +142,58 @@
 
 .dropdown-item {
     @include flex(center, unset);
+    height: 32px;
+    padding-left: 28px;
+    cursor: pointer;
+
     transition: var(--transition-base);
     &:hover {
         background-color: var(--color-f2);
     }
-    height: 32px;
 
     & > span {
+        padding-left: 8px;
         font-size: 1.4rem;
         color: var(--color-text);
+    }
+
+    & > input {
+        height: 18px;
+        width: 18px;
+    }
+
+    &--book {
+        padding-left: 60px;
+        position: relative;
+    }
+}
+
+.dropdown-item--active {
+    background-color: var(--color-bold-blue);
+
+    & > svg {
+        color: var(--color-white);
+    }
+
+    & > span {
+        color: var(--color-white);
+    }
+
+    &:hover {
+        background-color: var(--color-bold-blue);
+    }
+
+    &:hover > span,
+    &:hover > svg {
+        color: var(--color-white);
+    }
+}
+
+.dropdown-icon {
+    color: var(--color-black);
+
+    &--check {
+        position: absolute;
+        left: 10px;
     }
 }

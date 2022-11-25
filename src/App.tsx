@@ -1,4 +1,6 @@
 import { Outlet, Route, Routes } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+
 import useFetchData from 'hooks/useFetchData';
 import useSearchKey from 'hooks/useSearchKey';
 
@@ -8,6 +10,7 @@ import DefaultLayout from 'components/DefaultLayout';
 import Sidebar from 'features/sidebar';
 
 import styles from './App.module.scss';
+import test from 'test';
 
 function PrivateRoutes() {
     useSearchKey();
@@ -16,6 +19,7 @@ function PrivateRoutes() {
             <div className={styles.root}>
                 <Sidebar />
                 <Outlet />
+                <Toaster />
             </div>
         </PrivateRoute>
     );
@@ -23,7 +27,7 @@ function PrivateRoutes() {
 
 function App() {
     useFetchData();
-
+    test();
     return (
         <Routes>
             {publicRoute.map((route) => {

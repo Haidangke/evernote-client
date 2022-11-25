@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import classNames from 'classnames/bind';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -194,8 +194,6 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
                     errorProp='Tên sổ tay này đã được sử dụng'
                 />
             </ModalCreate>
-
-            <Toaster />
         </>
     );
 }

@@ -149,3 +149,70 @@ export const NotebookDfIcon = ({ className }: IconProps) => (
         ></path>
     </svg>
 );
+
+export const NotebookFilterIcon = ({ className }: IconProps) => (
+    <svg
+        className={className}
+        width='24'
+        height='24'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+    >
+        <path
+            fillRule='evenodd'
+            clipRule='evenodd'
+            d='M5.75 4.5v15h10.208a2.292 2.292 0 002.292-2.292V6.792A2.292 2.292 0 0015.958 4.5H5.75zm3.748 1.25v12.5h6.46c.576 0 1.042-.466 1.042-1.042V6.792c0-.576-.466-1.042-1.042-1.042h-6.46zM7 18.25V5.75h1.248v12.5H7z'
+            fill='currentColor'
+        ></path>
+        <path
+            fillRule='evenodd'
+            clipRule='evenodd'
+            d='M15.505 9.697a.75.75 0 01-.75.75h-3a.75.75 0 010-1.5h3a.75.75 0 01.75.75z'
+            fill='currentColor'
+        ></path>
+    </svg>
+);
+
+export const NotebookFilterSelectIcon = ({ className }: IconProps) => (
+    <svg
+        width='14'
+        height='14'
+        viewBox='0 0 14 14'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+        className={className}
+    >
+        <path
+            d='M10 5.5a.5.5 0 00-.5-.5h-3a.5.5 0 000 1h3a.5.5 0 00.5-.5z'
+            fill='currentColor'
+        ></path>
+        <path
+            fillRule='evenodd'
+            clipRule='evenodd'
+            d='M10 1H2v12h8a2 2 0 002-2V3a2 2 0 00-2-2zM3 12V2h1v10H3zm2 0V2h5a1 1 0 011 1v8a1 1 0 01-1 1H5z'
+            fill='currentColor'
+        ></path>
+    </svg>
+);
+
+export const NotebookDefaultFilterSelectIcon = ({ className }: IconProps) => (
+    <svg
+        width='14'
+        height='14'
+        viewBox='0 0 14 14'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+        className={className}
+    >
+        <path
+            fillRule='evenodd'
+            clipRule='evenodd'
+            d='M2 1h8a2 2 0 012 2v4h-1V3a1 1 0 00-1-1H5v10h2.5v1H2V1zm1 11V2h1v10H3z'
+            fill='currentColor'
+        ></path>
+        <path
+            d='M11.448 8.639a.211.211 0 00-.396 0l-.605 1.52a.216.216 0 01-.18.139l-1.569.131c-.19.016-.268.265-.123.396l1.195 1.071a.232.232 0 01.07.224l-.366 1.602c-.044.195.158.349.322.244l1.342-.858a.207.207 0 01.224 0l1.342.858c.164.105.366-.05.322-.244l-.365-1.602a.232.232 0 01.069-.224l1.195-1.071c.145-.13.067-.38-.123-.396l-1.568-.131a.216.216 0 01-.181-.138l-.605-1.521zM10 5.5a.5.5 0 00-.5-.5h-3a.5.5 0 000 1h3a.5.5 0 00.5-.5z'
+            fill='currentColor'
+        ></path>
+    </svg>
+);

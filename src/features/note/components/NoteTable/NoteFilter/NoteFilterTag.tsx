@@ -1,31 +1,66 @@
-import { useAppSelector } from 'app/hooks';
-import { ArrowDownIcon, TagIcon } from 'components/Icons';
+import { forwardRef, useMemo, useState } from 'react';
 import classNames from 'classnames/bind';
-import { TippyHeadLessOneWay } from 'components/Tippy';
-import { useState } from 'react';
-import styles from './NoteFilter.module.scss';
 
+import { noteActions } from 'features/note/noteSlice';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { ArrowDownIcon, DeleteIcon, TagFilterIcon } from 'components/Icons';
+import { TippyHeadLessOneWay } from 'components/Tippy';
+
+import styles from './NoteFilter.module.scss';
 const cx = classNames.bind(styles);
 
-function NoteFilterTag() {
+interface NoteFilterTagProps {
+    fowardRef: any;
+}
+
+function NoteFilterTag({ fowardRef }: NoteFilterTagProps) {
+    const dispatch = useAppDispatch();
+
     const [visible, setVisible] = useState(false);
+
     const listTag = useAppSelector((state) => state.tag.listTag);
+    const filter = useAppSelector((state) => state.note.filter);
+
+    const tagFilter = filter.tags;
+
+    const handleCheckTag = (tagId: string) => {
+        const updateTags = tagFilter.includes(tagId)
+            ? tagFilter.filter((tag) => tag !== tagId)
+            : [...tagFilter, tagId];
+
+        dispatch(noteActions.setFilter({ ...filter, tags: updateTags }));
+    };
+
+    const listTagName = useMemo(
+        () => listTag.filter((tag) => tagFilter.includes(tag._id)),
+        [tagFilter, listTag]
+    );
+
     return (
         <div className={styles.item}>
             <div className={styles.left}>
-                <TagIcon className={styles.itemIcon} />
+                <TagFilterIcon className={styles.itemIcon} />
                 <div className={styles.name}>Thẻ</div>
             </div>
             <div className={styles.right}>
                 <TippyHeadLessOneWay
                     placement='bottom-start'
                     dropdown={
-                        <div className={cx('dropdown-list')}>
+                        <div ref={fowardRef} className={cx('dropdown-list')}>
                             {listTag.map((tag) => (
-                                <div key={tag._id} className={cx('dropdown-item')}>
-                                    <input type='checkbox' name='' id='' />
+                                <label
+                                    key={tag._id}
+                                    className={cx('dropdown-item')}
+                                    htmlFor={tag._id}
+                                >
+                                    <input
+                                        onChange={() => handleCheckTag(tag._id)}
+                                        id={tag._id}
+                                        type='checkbox'
+                                        defaultChecked={tagFilter.includes(tag._id)}
+                                    />
                                     <span>{tag.name}</span>
-                                </div>
+                                </label>
                             ))}
                         </div>
                     }
@@ -33,16 +68,25 @@ function NoteFilterTag() {
                     setVisible={setVisible}
                 >
                     <div className={styles.input}>
-                        {/* <div className='menu'></div> */}
-                        <input type='text' placeholder='Chọn...' />
+                        {tagFilter.length > 0 ? (
+                            <div className={cx('menu')}>
+                                {listTagName.map((tag) => (
+                                    <div className={cx('menu-tag')} key={tag._id}>
+                                        {tag.name}
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <input type='text' placeholder='Chọn...' />
+                        )}
                         <ArrowDownIcon />
                     </div>
                 </TippyHeadLessOneWay>
 
-                {/* <DeleteIcon /> */}
+                <DeleteIcon />
             </div>
         </div>
     );
 }
 
-export default NoteFilterTag;
+export default forwardRef((props, ref) => <NoteFilterTag {...props} fowardRef={ref} />);

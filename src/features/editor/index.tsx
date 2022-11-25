@@ -6,18 +6,23 @@ import { createEditor } from 'slate';
 import { withHistory } from 'slate-history';
 import { Editable, Slate, withReact } from 'slate-react';
 import { withListsReact, onKeyDown } from '@prezly/slate-lists';
+import toast from 'react-hot-toast';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { editorActions } from 'features/editor/editorSlice';
 import { noteActions } from 'features/note/noteSlice';
 import useDecorate from 'features/editor/hooks/useDecorate';
+
 import useOnClickOutside from 'hooks/useOnclickOutside';
+import useLocationPage from 'hooks/useLocationPage';
+import Toast from 'components/Toast';
+import { WarningIcon } from 'components/Icons';
 import SlateFooter from './components/SlateFooter';
 import SlateTopbar from './components/SlateTopbar';
 import Toolbar from './components/Toolbar';
-
 import Loading from 'components/Loading';
 import UploadLoading from './components/UploadLoading';
+
 import { withChecklists, withKeyCommands, withLinks, withIndent, withLists } from './plugins';
 import { SlateElement, SlateLeaf } from './slates';
 
@@ -36,8 +41,9 @@ const createEditorWithPlugins = pipe(
 );
 
 function Editor() {
+    const page = useLocationPage();
     const editorRef = useRef(null);
-    const xRef = useRef(null);
+
     const dispatch = useAppDispatch();
     const { listNote, isFetching } = useAppSelector((state) => state.note);
 
@@ -64,6 +70,21 @@ function Editor() {
         [dispatch]
     );
 
+    const handleChangeDisable = () => {
+        if (!(page === 'recycle')) return;
+        toast.remove();
+        toast((t) => {
+            return (
+                <Toast type='error' toastId={t.id}>
+                    <span className={styles.toast}>
+                        <WarningIcon />
+                        Bạn không thể cập nhật một ghi chú trong thùng rác
+                    </span>
+                </Toast>
+            );
+        });
+    };
+
     useOnClickOutside(editorRef, () => dispatch(editorActions.setIsToolbar(false)));
 
     return (
@@ -80,6 +101,8 @@ function Editor() {
                         value={JSON.parse(note.content)}
                         key={noteId}
                         onChange={(e: any) => {
+                            if (page === 'recycle') return;
+
                             const isAstChange = editor.operations.some(
                                 (op: any) => 'set_selection' !== op.type
                             );
@@ -95,7 +118,7 @@ function Editor() {
                             <Toolbar onHeader={onHeader} setSearch={setSearch} />
                         </div>
 
-                        <div className={cx('editable')}>
+                        <div onDoubleClick={handleChangeDisable} className={cx('editable')}>
                             <input
                                 onFocus={() => {
                                     setOnHeader(true);
@@ -104,21 +127,29 @@ function Editor() {
                                 onBlur={() => setOnHeader(false)}
                                 type='text'
                                 placeholder='Tiêu đề'
-                                className={cx('slate-header')}
+                                className={cx('slate-header', {
+                                    'input--disable': page === 'recycle',
+                                })}
                                 value={note?.title}
                                 onChange={(e) => {
+                                    if (page === 'recycle') return;
                                     const title = e.target.value;
                                     dispatch(noteActions.updateNote({ ...note, title }));
                                     dispatch(noteActions.update({ id: noteId, params: { title } }));
                                 }}
                             />
-                            <div ref={xRef} className={cx('editable-main')}>
+                            <div
+                                className={cx('editable-main', {
+                                    'input--disable': page === 'recycle',
+                                })}
+                            >
                                 <Editable
+                                    autoFocus
                                     placeholder='Bắt đầu viết những suy nghĩ, hoặc công việc vào đây'
                                     decorate={decorate}
                                     onClick={() => setIsToolbar(true)}
                                     onFocus={() => {
-                                        setIsToolbar(true);
+                                        // setIsToolbar(true);
                                         setOnHeader(false);
                                     }}
                                     onKeyDown={(event) => onKeyDown(editor, event)}
