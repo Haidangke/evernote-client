@@ -16,7 +16,10 @@ const cx = classNames.bind(styles);
 
 function NoteList() {
     const { listNote, isFetching, isFetchSuccess } = useAppSelector((state) => state.note);
-    const listNoteFilter = listNote.filter((note) => !note.isTrash);
+    const listNoteFilter = listNote
+        .filter((note) => !note.isTrash)
+        .map((note) => ({ ...note, content: JSON.parse(note.content) }));
+
     const navigate = useNavigateParams();
 
     const addNote = useAddNote();
@@ -40,21 +43,29 @@ function NoteList() {
                 {isFetching ? (
                     <NoteListLoading />
                 ) : listNoteFilter.length ? (
-                    listNoteFilter.map((note) => (
-                        <div
-                            onClick={() => navigate('/note', { n: note._id })}
-                            key={note._id}
-                            className={styles.item}
-                        >
-                            <div className={styles.body}>
-                                <div className={styles.title}>
-                                    {note.title || 'Chưa có tiêu đề'}
+                    listNoteFilter.map((note) => {
+                        const content = note?.content
+                            .map((item: any) => item?.children?.map((x: any) => x.text).join(''))
+                            .join(' ');
+
+                        return (
+                            <div
+                                onClick={() => navigate('/note', { n: note._id })}
+                                key={note._id}
+                                className={styles.item}
+                            >
+                                <div className={styles.body}>
+                                    <div className={styles.title}>
+                                        {note.title || 'Chưa có tiêu đề'}
+                                    </div>
+                                    <div className={styles.content}>
+                                        {content || 'Chưa có nội dung'}
+                                    </div>
                                 </div>
-                                <div className={styles.content}>Đây là nội dung của ghi chú</div>
+                                <TimeUp className={styles.time} updatedAt={note.updatedAt} />
                             </div>
-                            <TimeUp className={styles.time} updatedAt={note.updatedAt} />
-                        </div>
-                    ))
+                        );
+                    })
                 ) : (
                     <></>
                 )}

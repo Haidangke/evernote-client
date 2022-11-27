@@ -2,7 +2,7 @@ import { Fragment, useMemo } from 'react';
 
 import MenuItem from 'features/sidebar/components/Menu/MenuItem';
 import { useAppSelector } from 'app/hooks';
-import { NotebookSubIcon, NoteSolidIcon, NoteSolidSubIcon, StarIcon } from 'components/Icons';
+import { NotebookSubIcon, NoteSolidSubIcon, StarIcon } from 'components/Icons';
 
 function ShortcutItemSidebar() {
     const { shortcuts } = useAppSelector((state) => state.shortcut);
@@ -26,20 +26,27 @@ function ShortcutItemSidebar() {
                     {
                         _id: '1',
 
-                        data: shortcuts.map((shortcut) => ({
-                            topicValue: 'shortcut',
-                            name: shortcut.name,
-                            _id: shortcut.type._id,
-                            icon: NotebookSubIcon,
-                            type: {
-                                name: shortcut.type.name,
-                                value: shortcut.type.value,
-                            },
-                            navigate: {
-                                path: `/${shortcut.type.name}`,
-                                params: { an: true },
-                            },
-                        })),
+                        data: shortcuts.map((shortcut) => {
+                            let ShortcutIcon = NotebookSubIcon;
+                            if (shortcut.type.name === 'note') {
+                                ShortcutIcon = NoteSolidSubIcon;
+                            }
+
+                            return {
+                                topicValue: 'shortcut',
+                                name: shortcut.name,
+                                _id: shortcut.type._id,
+                                icon: ShortcutIcon,
+                                type: {
+                                    name: shortcut.type.name,
+                                    value: shortcut.type.value,
+                                },
+                                navigate: {
+                                    path: `/${shortcut.type.name}`,
+                                    params: shortcut.type.name !== 'note' ? { an: true } : {},
+                                },
+                            };
+                        }),
                     },
                     {
                         _id: '2',

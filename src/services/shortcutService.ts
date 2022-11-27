@@ -8,6 +8,9 @@ const shortcutService = {
     create(params: ShortcutParams): Promise<Shortcut> {
         return axiosClientSecret.post('/shortcut', params);
     },
+    delete(id: string) {
+        return axiosClientSecret.delete(`/shortcut/${id}`);
+    },
 };
 
 export default shortcutService;

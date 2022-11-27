@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ElementType } from './slates';
 
 interface Upload {
     isLoading: boolean;
@@ -15,6 +14,7 @@ interface InitialState {
     }>;
 
     upload: Upload;
+    search: string;
 }
 
 const initialState: InitialState = {
@@ -24,6 +24,7 @@ const initialState: InitialState = {
         isLoading: false,
         messeage: '',
     },
+    search: '',
     toolbar: [
         {
             isOverflow: false,
@@ -110,6 +111,9 @@ const editorSlice = createSlice({
         },
         setUpload(state, action: PayloadAction<Upload>) {
             state.upload = action.payload;
+        },
+        setSearch(state, action: PayloadAction<string>) {
+            state.search = action.payload;
         },
     },
 });

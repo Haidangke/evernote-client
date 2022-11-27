@@ -29,7 +29,7 @@ function NoteItem({ note }: NoteItemProps) {
             <TimeUp updatedAt={note.updatedAt} className={styles.column} />
             <div className={styles.column}>Chỉ bạn</div>
             <div className={styles.column}>
-                <NoteMore />
+                <NoteMore noteId={note._id} />
             </div>
         </div>
     );

@@ -105,6 +105,29 @@ export const NotebookTitleIcon = ({ className }: IconProps) => (
     </svg>
 );
 
+export const NotebookDfTitleIcon = ({ className }: IconProps) => (
+    <svg
+        width='24'
+        height='24'
+        viewBox='0 0 24 24'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+        className={className}
+    >
+        <path d='M4.746 2.995h2.492v18H4.746v-18z' fill='currentColor'></path>
+        <path
+            fillRule='evenodd'
+            clipRule='evenodd'
+            d='M8.738 20.995v-18h8.508a2 2 0 012 2v8.768h-.054a5.5 5.5 0 00-5.222 7.232H8.738zm7.055-11a.9.9 0 100-1.8h-3.6a.9.9 0 000 1.8h3.6z'
+            fill='currentColor'
+        ></path>
+        <path
+            d='M18.98 15.43a.288.288 0 01.54 0l.825 2.073a.294.294 0 00.247.188l2.138.18c.26.022.365.361.167.539l-1.629 1.461a.316.316 0 00-.094.305l.498 2.185c.06.265-.216.475-.439.333l-1.83-1.17a.282.282 0 00-.306 0l-1.83 1.17c-.223.142-.499-.068-.438-.333l.497-2.185a.316.316 0 00-.094-.305l-1.629-1.461c-.198-.178-.093-.517.167-.54l2.138-.179a.295.295 0 00.248-.188l.823-2.074z'
+            fill='currentColor'
+        ></path>
+    </svg>
+);
+
 export const AddNotebookIcon = ({ className }: IconProps) => (
     <svg
         className={className}

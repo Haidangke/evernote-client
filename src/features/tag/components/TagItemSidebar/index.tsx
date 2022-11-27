@@ -17,10 +17,12 @@ function TagItemSidebar() {
     const { listTag } = useAppSelector((state) => state.tag);
     const [isModal, setIsModal] = useState(false);
 
-    const { control, handleSubmit, reset } = useForm<FormAdd>({
+    const { control, handleSubmit, reset, watch } = useForm<FormAdd>({
         defaultValues: { name: '' },
         resolver: yupResolver(nameSchema),
     });
+
+    const watchNameField = watch('name');
 
     const handleValid = useCallback(
         (name: string) => {
@@ -68,6 +70,7 @@ function TagItemSidebar() {
                 isOpen={isModal}
                 setIsOpen={setIsModal}
                 onSubmit={handleSubmit(handleFormSubmit)}
+                disabled={!watchNameField}
             >
                 <InputField
                     handleValid={handleValid}

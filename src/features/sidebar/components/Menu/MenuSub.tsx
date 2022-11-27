@@ -1,11 +1,11 @@
 import { useSearchParams } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
+import { MenuSubProps, Types } from './MenuItem';
+import useLocationPage from 'hooks/useLocationPage';
 import useNavigateParams from 'hooks/useNavigateParams';
 
 import styles from './Menu.module.scss';
-import { MenuSubProps, Types } from './MenuItem';
-import useLocationPage from 'hooks/useLocationPage';
 const cx = classNames.bind(styles);
 
 function MenuSub({ data, types }: { data: MenuSubProps; types: Types }) {

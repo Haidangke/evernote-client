@@ -53,7 +53,8 @@ function Header() {
                 >
                     <div className={cx('info')} onClick={() => setVisible(!visible)}>
                         <div className={cx('avatar')}>
-                            <img src={avatar_default} alt='avatar' />
+                            {/* <img src={avatar_default} alt='avatar' /> */}
+                            <span>{user?.email && user.email[0]}</span>
                         </div>
 
                         <div className={cx('email')}>
@@ -63,9 +64,9 @@ function Header() {
                     </div>
                 </TippyHeadLess>
             </div>
-            <TippyButton className={cx('logo')} placement='right' content='Cập nhật chế độ cài đặt'>
+            {/* <TippyButton className={cx('logo')} placement='right' content='Cập nhật chế độ cài đặt'>
                 <Setting />
-            </TippyButton>
+            </TippyButton> */}
         </div>
     );
 }

@@ -55,7 +55,8 @@
 
     border-radius: 6px;
     background-color: var(--color-white);
-    cursor: pointer;
+    opacity: 0.6;
+    cursor: default;
     & > svg {
         width: 20px;
         height: 20px;
@@ -64,10 +65,6 @@
         padding-left: 6px;
         color: var(--color-6a);
         font-size: 1.5rem;
-    }
-
-    &:hover {
-        background-color: var(--color-f8);
     }
 }
 
@@ -82,52 +79,38 @@
         content: "";
         position: absolute;
         height: 1px;
-        width: 45%;
-        background-color: #ababab;
+        width: 42%;
+        background-color: var(--color-e6);
         top: 50%;
     }
     &::after {
-        left: 0;
+        left: -1px;
     }
     &::before {
-        right: 0;
+        right: -1px;
     }
 }
 
-.form-main {
-    display: flex;
-    flex-direction: column;
-    input {
-        font-family: "Roboto", sans-serif;
-        font-size: 1.6rem;
-        border-radius: 6px;
-        border: 1px solid #e6e6e6;
-    }
-    & > form {
-        order: 1;
+.input {
+    width: 100%;
+    height: 45px;
+    padding: 0 10px;
+    border: 1px solid var(--color-e6);
+    border-radius: 8px;
+
+    color: var(--color-text);
+    font-size: 1.6rem;
+    font-family: "SegoeUI";
+
+    &:focus {
+        border: 1px solid var(--primary-color);
     }
 }
 
-.actions {
-    @include flex(unset, space-between);
-    margin-top: 10px;
-    order: 3;
-}
-
-.remember {
-    @include flex(center, unset);
-    margin: 0 auto;
-    color: var(--color-73);
-    & > input {
-        margin-right: 6px;
-        width: 16px;
-        height: 16px;
-    }
-    & > span {
-        height: 100%;
-        @include flex(center, unset);
-        font-size: 1.4rem;
-    }
+.input-error {
+    margin: 5px 0;
+    color: var(--color-red);
+    font-size: 1.26rem;
 }
 
 .forgot {
@@ -167,14 +150,15 @@
 
 .error {
     color: var(--color-red);
-    font-size: 1.26rem;
+    font-size: 1.36rem;
     min-height: 20px;
     height: 24px;
-    order: 2;
+    text-align: center;
+    margin-top: 16px;
 }
 
 .form-footer {
-    margin-top: 40px;
+    margin-top: 28px;
     font-size: 14px;
     text-align: center;
     order: 4;
@@ -192,6 +176,7 @@
 }
 
 .policy {
+    margin-top: 8px;
     font-size: 1.2rem;
     color: var(--color-a6);
     order: 4;

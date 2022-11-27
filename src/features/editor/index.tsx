@@ -52,7 +52,7 @@ function Editor() {
     const note = useMemo(() => listNote.find((note) => note._id === noteId), [listNote, noteId]);
 
     //state
-    const [search, setSearch] = useState('');
+    const search = useAppSelector((state) => state.editor.search);
     const [onHeader, setOnHeader] = useState(false);
 
     const decorate = useDecorate(search);
@@ -115,7 +115,7 @@ function Editor() {
                         }}
                     >
                         <div className={styles.toolbar}>
-                            <Toolbar onHeader={onHeader} setSearch={setSearch} />
+                            <Toolbar onHeader={onHeader} />
                         </div>
 
                         <div onDoubleClick={handleChangeDisable} className={cx('editable')}>

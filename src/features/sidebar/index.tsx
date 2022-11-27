@@ -13,7 +13,6 @@ import Menu from './components/Menu';
 import SlideLarge from './components/SlideLarge';
 
 import styles from './Sidebar.module.scss';
-import './Sidebar.scss';
 
 const cx = classnames.bind(styles);
 

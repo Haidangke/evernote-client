@@ -2,16 +2,17 @@ import classNames from 'classnames/bind';
 import { MdDelete } from 'react-icons/md';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { NotebookTitleIcon, NoteTitleIcon } from 'components/Icons';
+import { NotebookDfTitleIcon, NotebookTitleIcon, NoteTitleIcon } from 'components/Icons';
 import { noteActions } from 'features/note/noteSlice';
 import useLocationPage from 'hooks/useLocationPage';
 import noteService from 'services/noteService';
+import { Notebook } from 'types';
 
 import styles from './Title.module.scss';
 const cx = classNames.bind(styles);
 
 interface TitleProps {
-    notebook?: string;
+    notebook?: Notebook;
 }
 
 function Title({ notebook }: TitleProps) {
@@ -44,8 +45,12 @@ function Title({ notebook }: TitleProps) {
                 )}
                 {notebook && (
                     <>
-                        <NotebookTitleIcon className={cx('icon-book')} />
-                        {notebook}
+                        {notebook.isDefault ? (
+                            <NotebookDfTitleIcon className={cx('icon-book')} />
+                        ) : (
+                            <NotebookTitleIcon className={cx('icon-book')} />
+                        )}
+                        {notebook.name}
                     </>
                 )}
                 {page === 'recycle' && amountNoteInTrash > 0 && (

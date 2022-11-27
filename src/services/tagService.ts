@@ -9,6 +9,9 @@ const tagService = {
         return axiosClientSecret.post('/tag', { name });
     },
 
+    remove(id: string): Promise<{ listNote: Note<Tag>[] }> {
+        return axiosClientSecret.post(`/tag/${id}`);
+    },
     delete(id: string): Promise<{ listNote: Note<Tag>[]; listTag: Tag[] }> {
         return axiosClientSecret.delete(`/tag/${id}`);
     },

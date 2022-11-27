@@ -37,10 +37,9 @@ const cx = classNames.bind(styles);
 
 interface ToolbarProps {
     onHeader: boolean;
-    setSearch: any;
 }
 
-function Toolbar({ onHeader, setSearch }: ToolbarProps) {
+function Toolbar({ onHeader }: ToolbarProps) {
     const dispatch = useAppDispatch();
     const editor = useSlate();
 

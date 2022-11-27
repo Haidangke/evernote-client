@@ -49,7 +49,10 @@ function ModalCreate({
                         content='Hủy'
                     />
                     <Button
-                        onClick={onSubmit}
+                        onClick={() => {
+                            setIsOpen && setIsOpen(false);
+                            onSubmit();
+                        }}
                         variant={variant}
                         content={action}
                         disabled={disabled === undefined ? false : disabled}

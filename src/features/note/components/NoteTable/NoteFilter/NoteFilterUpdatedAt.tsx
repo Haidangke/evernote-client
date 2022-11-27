@@ -22,7 +22,7 @@ function NoteFilterUpdatedAt({ fowardRef }: NoteFilterUpdatedAtProps) {
         <div className={styles.item}>
             <div className={styles.left}>
                 <UpdatedAtFilterIcon className={styles.itemIcon} />
-                <div className={styles.name}>Ngày chỉnh sửa</div>
+                <div className={styles.name}>Ngày cập nhật</div>
             </div>
             <div className={styles.right}>
                 <TippyHeadLessOneWay

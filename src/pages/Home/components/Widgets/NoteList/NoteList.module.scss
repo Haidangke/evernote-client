@@ -58,6 +58,7 @@
     font-size: 1.4rem;
     color: var(--color-73);
     line-height: 1.4;
+    @include text-overflow(7);
 }
 .time {
     font-size: 1.2rem;

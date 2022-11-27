@@ -57,12 +57,12 @@
 
 .item {
     @include flex(center, unset);
-    height: 22px;
+    height: 24px;
     width: fit-content;
     margin: 4px 0 2px 24px;
     color: var(--color-text);
     font-size: 1.3rem;
-    padding: 0 12px;
+    padding: 0 10px;
     border-radius: 12px;
     cursor: pointer;
     transition: var(--transition-base);
@@ -76,7 +76,7 @@
     }
 
     &:hover > .other {
-        @include flex(center, center);
+        opacity: 1;
     }
 }
 
@@ -90,9 +90,10 @@
 }
 
 .other {
-    display: none;
-    padding-left: 2px;
-    padding-bottom: 4px;
-
-    transform: rotateZ(90deg);
+    opacity: 0;
+    @include flex(center, center);
+    & svg {
+        width: 16px;
+        height: 16px;
+    }
 }

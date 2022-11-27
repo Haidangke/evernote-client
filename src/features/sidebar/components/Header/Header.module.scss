@@ -13,8 +13,18 @@
 }
 
 .avatar {
-    width: 28px;
-    height: 28px;
+    // width: 28px;
+    // height: 28px;
+    & > span {
+        @include flex(center, center);
+        border-radius: 50px;
+        width: 28px;
+        height: 28px;
+        background-color: #01b3af;
+        color: var(--color-white);
+        font-size: 1.7rem;
+        text-transform: uppercase;
+    }
     & > img {
         width: 28px;
         height: 28px;

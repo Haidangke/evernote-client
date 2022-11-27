@@ -44,10 +44,9 @@ function SlateFooterTagItem({ tag, note }: SlateFooterTagItemProps) {
     const handleDeleteTag = () => {
         setIsModal(false);
         tagService
-            .delete(tag._id)
+            .remove(tag._id)
             .then((data) => {
                 dispatch(noteActions.setListNote(data.listNote));
-                dispatch(tagActions.setListTag(data.listTag));
                 toast((t) => (
                     <Toast toastId={t.id}>
                         <>
@@ -59,6 +58,17 @@ function SlateFooterTagItem({ tag, note }: SlateFooterTagItemProps) {
                 ));
             })
             .catch(() => {});
+    };
+
+    const handleFilterWithTag = () => {
+        dispatch(
+            noteActions.setFilter({
+                tags: [tag._id],
+                notebook: null,
+                createdAt: null,
+                updatedAt: null,
+            })
+        );
     };
 
     useOnClickOutside(itemRef, (event: any) => {
@@ -83,7 +93,9 @@ function SlateFooterTagItem({ tag, note }: SlateFooterTagItemProps) {
                 className='tippy__dropdown-wrapper'
                 dropdown={
                     <div className={classNames('tippy__dropdown', styles.dropdown)}>
-                        <div className='tippy__dropdown-item'>Lọc theo thẻ</div>
+                        <div onClick={handleFilterWithTag} className='tippy__dropdown-item'>
+                            Lọc theo thẻ
+                        </div>
                         <div onClick={handleRemoveTag} className='tippy__dropdown-item'>
                             Loại bỏ thẻ
                         </div>

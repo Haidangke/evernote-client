@@ -18,6 +18,7 @@
 
 .new {
     @include flex(center, unset);
+    margin-right: 8px;
     cursor: pointer;
     & > span {
         font-size: 1.4rem;

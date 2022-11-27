@@ -1,4 +1,4 @@
-@import 'styles/mixin';
+@import "styles/mixin";
 
 .wrapper {
     @include flex(flex-start, space-between);
@@ -21,10 +21,10 @@
 
 .icon {
     &-note {
-        margin: 4px 8px 0 -2px;
+        margin: 4px 8px 0 2px;
     }
     &-book {
-        margin-right: 4px;
+        margin: 0 4px 0 -2px;
     }
 }
 

@@ -24,10 +24,7 @@
     border-radius: 4px;
     @include flex(center, unset);
     transition: var(--transition-base);
-    cursor: pointer;
-    &:hover {
-        background-color: var(--color-f2);
-    }
+    cursor: default;
     & > span {
         font-size: 1.4rem;
         font-weight: 600;

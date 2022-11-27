@@ -16,7 +16,7 @@ const History = ({ editor }: any) => {
                 disable={undos.length === 0}
                 handle={() => HistoryEditor.undo(editor)}
                 content='Hoàn tác'
-                className={cx({ btn__disable: undos.length === 0 })}
+                className={cx({ 'btn--disable': undos.length === 0 })}
             >
                 <UndoTcon />
             </HandleButton>
@@ -26,7 +26,7 @@ const History = ({ editor }: any) => {
                 disable={redos.length === 0}
                 handle={() => HistoryEditor.redo(editor)}
                 content='Làm lại'
-                className={cx({ btn__disable: redos.length === 0 })}
+                className={cx({ 'btn--disable': redos.length === 0 })}
             >
                 <RedoIcon />
             </HandleButton>

@@ -8,7 +8,9 @@ interface InitialState {
     isLoggedIn: boolean;
     logging: boolean;
     registering: boolean;
-    message: string;
+    // message: string;
+    errorLogin: string;
+    errorRegister: string;
 
     isLoading: boolean;
     isSuccess: boolean;
@@ -19,7 +21,9 @@ const initialState: InitialState = {
     user: undefined,
     isLoggedIn: !!access_token,
     logging: false,
-    message: '',
+    // message: '',
+    errorLogin: '',
+    errorRegister: '',
     registering: false,
 
     isLoading: false,
@@ -31,12 +35,12 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setMessage(state, action: PayloadAction<string>) {
-            state.message = action.payload;
-        },
-        clearMessage(state) {
-            state.message = '';
-        },
+        // setMessage(state, action: PayloadAction<string>) {
+        //     state.message = action.payload;
+        // },
+        // clearMessage(state) {
+        //     state.message = '';
+        // },
 
         getUser(state) {
             state.isLoading = true;
@@ -63,14 +67,16 @@ const authSlice = createSlice({
             state.logging = true;
         },
         loginSuccess(state, action: PayloadAction<User>) {
+            state.errorLogin = '';
             state.logging = false;
             state.user = action.payload;
             state.isLoggedIn = true;
         },
-        loginFailed(state) {
+        loginFailed(state, action: PayloadAction<string>) {
             state.logging = false;
             state.user = undefined;
             state.isLoggedIn = false;
+            state.errorLogin = action.payload;
         },
 
         register(state, action: PayloadAction<RegisterParams>) {
@@ -78,9 +84,11 @@ const authSlice = createSlice({
         },
         registerSuccess(state) {
             state.registering = false;
+            state.errorRegister = '';
         },
-        registerFailed(state) {
+        registerFailed(state, action: PayloadAction<string>) {
             state.registering = false;
+            state.errorRegister = action.payload;
         },
     },
 });

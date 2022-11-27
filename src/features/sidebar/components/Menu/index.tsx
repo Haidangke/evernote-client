@@ -30,11 +30,11 @@ function Menu() {
                 navigate={{ path: routesConfig.notes, params: { an: true } }}
             />
 
-            <SidebarMenuItem
+            {/* <SidebarMenuItem
                 topic={{ title: 'Nhiệm vụ' }}
                 icon={{ main: MissionIcon }}
                 types={[]}
-            />
+            /> */}
             <div className={cx('line-space')}></div>
 
             <NotebookItemSidebar />

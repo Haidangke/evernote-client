@@ -38,6 +38,9 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
 
     const [isDelete, setIsDelete] = useState(false);
     const [isChangeName, setIsChangeName] = useState(false);
+    const [isMore, setIsMore] = useState(false);
+
+    const closeMore = () => setIsMore(false);
 
     const addNote = useAddNote(notebook._id);
 
@@ -46,13 +49,16 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
         handleSubmit,
         reset,
         formState: { isDirty },
+        watch,
     } = useForm<UpdateName>({
         defaultValues: { name: notebook.name },
         resolver: yupResolver(nameSchema),
     });
+    const watchNameField = watch('name');
 
     const handleChangeName = useCallback(
         (value: UpdateName) => {
+            closeMore();
             setIsChangeName(false);
             notebookService.update(notebook._id, value).then(() => {
                 const newNotebooks = [...notebooks];
@@ -73,6 +79,7 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
     );
 
     const handleSetDefault = useCallback(() => {
+        closeMore();
         notebookService.update(notebook._id, { isDefault: true }).then(() => {
             const newNotebooks = [...notebooks].map((notebook) => ({
                 ...notebook,
@@ -95,6 +102,7 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
     }, [dispatch, notebook._id, notebook.name, notebooks]);
 
     const handleDelete = useCallback(() => {
+        closeMore();
         setIsDelete(false);
         notebookService.delete(notebook._id).then(() => {
             const index = notebooks.map((notebook) => notebook.name).indexOf(notebook.name);
@@ -111,28 +119,29 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
     }, [dispatch, listNote, notebook._id, notebook.name, notebooks]);
 
     const handleShortcut = () => {
-        if (isShortcut) {
-        } else {
-            shortcutService
-                .create({
-                    type: { _id: notebook._id, name: 'notebook', value: 'b' },
-                    name: notebook.name,
-                })
-                .then((data) => {
-                    const newShortcuts = [...shortcuts, data];
-                    dispatch(shortcutActions.setShortcuts(newShortcuts));
+        closeMore();
+        if (isShortcut) return;
+        shortcutService
+            .create({
+                type: { _id: notebook._id, name: 'notebook', value: 'b' },
+                name: notebook.name,
+            })
+            .then((data) => {
+                const newShortcuts = [...shortcuts, data];
+                dispatch(shortcutActions.setShortcuts(newShortcuts));
 
-                    toast.dismiss();
-                    toast((t) => (
-                        <Toast toastId={t.id} content={`Đã thêm "${data.name}" vào lỗi tắt`} />
-                    ));
-                });
-        }
+                toast.dismiss();
+                toast((t) => (
+                    <Toast toastId={t.id} content={`Đã thêm "${data.name}" vào lỗi tắt`} />
+                ));
+            });
     };
 
     return (
         <>
             <TippyMore
+                isMore={isMore}
+                setIsMore={setIsMore}
                 dropdown={
                     <div className={styles.wrapper}>
                         <div className={styles.item} onClick={addNote}>
@@ -142,15 +151,16 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
                         <div className={styles.item} onClick={() => setIsChangeName(true)}>
                             Đổi tên sổ tay
                         </div>
-                        <button
-                            disabled={notebook.isDefault}
-                            onClick={() => setIsDelete(true)}
+                        <div
+                            onClick={() => {
+                                if (!notebook.isDefault) setIsDelete(true);
+                            }}
                             className={cx('item', {
                                 item__disable: notebook.isDefault,
                             })}
                         >
                             Xóa sổ tay
-                        </button>
+                        </div>
 
                         <div className={styles.lineThrough}></div>
 
@@ -163,7 +173,7 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
                                 Đặt là sổ tay mặc định
                             </div>
                         )}
-                        <div className={styles.item}>Thêm vào chồng sổ tay</div>
+                        {/* <div className={styles.item}>Thêm vào chồng sổ tay</div> */}
                     </div>
                 }
             />
@@ -174,7 +184,7 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
                 title='Xóa sổ tay?'
                 variant='danger'
                 action='Xóa'
-                description='Mọi ghi chú trong sổ tay sẽ được di chuyển vào Thùng rác. Thao tác này không thể hồi lại được.'
+                description='Mọi ghi chú trong sổ tay sẽ bị xóa vĩnh viễn. Thao tác này không thể hồi lại được.'
             />
 
             <ModalCreate
@@ -185,7 +195,7 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
                 variant='primary'
                 action='Tiếp tục'
                 isSmall={true}
-                disabled={!isDirty}
+                disabled={!isDirty || !watchNameField}
             >
                 <InputField
                     name='name'

@@ -2,8 +2,6 @@ import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
-import { useAppSelector } from 'app/hooks';
-
 import logo from 'assets/svg/logo.svg';
 import styles from './Auth.module.scss';
 
@@ -31,7 +29,6 @@ const authText = {
 };
 
 function Auth({ page, children }: AuthProps) {
-    const { message } = useAppSelector((state) => state.auth);
     return (
         <div className={cx('root', { [page]: true })}>
             <div className={cx('wrapper')}>
@@ -46,8 +43,6 @@ function Auth({ page, children }: AuthProps) {
 
                     <div className={cx('form-main')}>
                         {children}
-                        <div className={styles.error}>{message}</div>
-
                         <div className={cx('form-footer')}>
                             <div>{authText[page].answer}</div>
                             <Link to={page === 'login' ? '/register' : '/login'}>

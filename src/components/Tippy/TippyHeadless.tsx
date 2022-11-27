@@ -15,6 +15,9 @@ interface TippyHeadLessProps {
     disableClickOutside?: boolean;
     placement?: Placement;
     className?: string;
+
+    disableContent?: boolean;
+    disableAnimation?: boolean;
     [key: string]: any;
 }
 
@@ -24,6 +27,8 @@ function TippyHeadLess({
     setVisible,
     dropdown,
     disableClickOutside,
+    disableContent,
+    disableAnimation,
     placement,
     className,
 }: TippyHeadLessProps) {
@@ -72,7 +77,7 @@ function TippyHeadLess({
                         ref={ref}
                         className='tippy-box'
                         data-state={isAnimation ? 'visible' : 'hidden'}
-                        data-animation={'shift-away'}
+                        data-animation={!disableAnimation ? 'shift-away' : ''}
                         style={{
                             transitionDuration: isAnimation ? '400ms' : '0',
                             pointerEvents: 'all',
@@ -86,7 +91,10 @@ function TippyHeadLess({
             >
                 <div
                     style={{ height: '100%' }}
-                    onClick={() => !disableClickOutside && setVisible(!visible)}
+                    onClick={() => {
+                        if (disableContent) return;
+                        !disableClickOutside && setVisible(!visible);
+                    }}
                 >
                     {children}
                 </div>
@@ -102,6 +110,9 @@ export function TippyHeadLessOneWay({
     setVisible,
     placement,
     disableClickOutside,
+    disableContent,
+    disableAnimation,
+    className,
 }: TippyHeadLessProps) {
     const ref = useRef<HTMLDivElement>(null);
     const dropdownRef = useRef(null);
@@ -113,10 +124,12 @@ export function TippyHeadLessOneWay({
 
     return (
         <TippyHeadLess
+            disableAnimation={disableAnimation}
             placement={placement}
             disableClickOutside={true}
             visible={visible}
             setVisible={setVisible}
+            className={className}
             dropdown={
                 visible ? (
                     <div style={{ padding: '12px 0' }} ref={dropdownRef}>
@@ -130,7 +143,12 @@ export function TippyHeadLessOneWay({
             <div
                 ref={ref}
                 style={{ display: 'flex', alignItems: 'center', height: '100%' }}
-                onClick={() => setVisible(!visible)}
+                onClick={() => {
+                    if (disableContent) {
+                        return setVisible(true);
+                    }
+                    setVisible(!visible);
+                }}
             >
                 {children}
             </div>

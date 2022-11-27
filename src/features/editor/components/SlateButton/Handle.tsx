@@ -49,9 +49,7 @@ function Handle({ children, handle, className, content, disable, format, modal }
                 <button
                     disabled={disable !== undefined ? disable : false}
                     onClick={handle}
-                    className={cx('btn', {
-                        className,
-                    })}
+                    className={cx('btn', className)}
                 >
                     {children}
                 </button>

@@ -1,74 +1,72 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
 import classNames from 'classnames/bind';
-
-import Auth from '.';
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { InputField } from 'components/FormFields';
-import { LoginParams } from 'types';
-
-import { FcGoogle } from 'react-icons/fc';
+import { useState } from 'react';
 import { BsApple } from 'react-icons/bs';
+import { FcGoogle } from 'react-icons/fc';
+
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import Auth from '.';
+
 import authService from 'services/authService';
 
-import styles from './Auth.module.scss';
-import { authActions } from '../authSlice';
 import Loading from 'components/Loading';
-const defaultValues = { email: 'vatcmnvo@gmail.com', password: 'Haidangker12345' };
+import { validateEmail } from 'utils/StringUtils';
+import { authActions } from '../authSlice';
 
-const schema = yup
-    .object()
-    .shape({
-        email: yup
-            .string()
-            .required('Email là bắt buộc ')
-            .min(6, 'Email tối thiếu 6 kí tự')
-            .max(30, 'Email tối đa 30 kí tự')
-            .email('Định dạng của email không hợp lệ'),
-        password: yup
-            .string()
-            .required('Mật khẩu là bắt buộc là bắt buộc ')
-            .min(6, 'Mật khẩu là bắt buộc tối thiếu 6 kí tự')
-            .max(30, 'Mật khẩu là bắt buộc tối đa 30 kí tự'),
-    })
-    .required();
+import styles from './Auth.module.scss';
 
 const cx = classNames.bind(styles);
 function Login() {
     const [remember, setRemember] = useState(false);
     const [validEmail, setValidEmail] = useState(false);
-    const { message, logging } = useAppSelector((state) => state.auth);
+    const { logging, errorLogin } = useAppSelector((state) => state.auth);
     const dispatch = useAppDispatch();
-    const { control, handleSubmit, reset, getValues } = useForm<LoginParams>({
-        defaultValues,
-        resolver: yupResolver(schema),
-    });
 
-    const handleFormSubmit = async (formValue: LoginParams) => {
-        // dispatch(login({ formValue, remember }))
-        //     .unwrap()
-        //     .then(() => {
-        //         reset(defaultValues);
-        //         navigate('/');
-        //     })
-        //     .catch(() => {});
-        dispatch(authActions.login(formValue));
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [errEmail, setErrEmail] = useState('');
+
+    const [errPassword, setErrPassword] = useState('');
+
+    const handleFormSubmit = async () => {
+        if (!password) return setErrPassword('Bạn chưa nhập mật khẩu');
+        if (password.length < 6) return setErrPassword('Mật khẩu tối thiếu 6 kí tự');
+
+        dispatch(authActions.login({ email, password }));
     };
 
     const handleCheckEmail = () => {
-        const { email } = getValues();
+        if (!email) {
+            return setErrEmail('Bạn chưa nhập email');
+        }
+        if (!validateEmail(email)) {
+            return setErrEmail('Email không hợp lệ');
+        }
         authService
             .checkEmail({ email })
             .then((res) => {
                 setValidEmail(true);
             })
             .catch((error) => {
-                console.log(error.response.data.msg);
+                setErrEmail(error.response.data.msg);
                 setValidEmail(false);
             });
+    };
+
+    const handleChangeEmail = (e: any) => {
+        const value = e.target.value;
+        setValidEmail(false);
+        setEmail(value);
+        if (value && validateEmail(value)) {
+            setErrEmail('');
+        }
+    };
+
+    const handleChangePassword = (e: any) => {
+        const value = e.target.value;
+        setPassword(value);
+        if (value.length > 6) {
+            setErrPassword('');
+        }
     };
 
     return (
@@ -85,44 +83,48 @@ function Login() {
             </div>
 
             <div className={cx('or')}>hoặc</div>
-            <form onSubmit={handleSubmit(handleFormSubmit)}>
-                <InputField name='email' control={control} placeholder='Địa chỉ email' />
+            <>
+                <input
+                    value={email}
+                    onChange={handleChangeEmail}
+                    className={styles.input}
+                    name='email'
+                    placeholder='Địa chỉ email'
+                />
+                {errEmail && <div className={cx('input-error')}>{errEmail}</div>}
                 {validEmail && (
                     <div className={cx('input-hide')}>
-                        <InputField
+                        <input
+                            onChange={handleChangePassword}
+                            value={password}
                             type='password'
+                            className={styles.input}
                             name='password'
-                            control={control}
-                            placeholder='Password'
+                            placeholder='Mật khẩu'
                         />
+                        {errorLogin ? (
+                            <div className={cx('input-error')}>{errorLogin}</div>
+                        ) : (
+                            errPassword && <div className={cx('input-error')}>{errPassword}</div>
+                        )}
                     </div>
                 )}
                 <button
                     disabled={logging}
                     type={validEmail ? 'submit' : 'button'}
-                    onClick={!validEmail ? handleCheckEmail : () => {}}
+                    // onClick={!validEmail ? handleCheckEmail : () => {}}
+                    onClick={!validEmail ? handleCheckEmail : handleFormSubmit}
                     className={cx('submit', { disable: logging })}
                 >
                     {logging ? (
-                        <Loading height='22px' width="22px" />
+                        <Loading height='22px' width='22px' />
                     ) : validEmail ? (
                         'Đăng nhập'
                     ) : (
                         'Tiếp tục'
                     )}
                 </button>
-            </form>
-
-            <div className={cx('actions')}>
-                <div className={cx('remember')}>
-                    <input
-                        onChange={() => setRemember(!remember)}
-                        type='checkbox'
-                        defaultChecked={remember}
-                    />
-                    <span>Ghi nhớ tôi trong 30 ngày</span>
-                </div>
-            </div>
+            </>
         </Auth>
     );
 }

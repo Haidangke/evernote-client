@@ -112,7 +112,7 @@ function NoteTable() {
         <NoteTableWrapper>
             <div className={styles.wrapper}>
                 <header className={styles.header}>
-                    <NoteTitle notebook={notebook?.name} />
+                    <NoteTitle notebook={notebook} />
                     <div className={styles.concern}>
                         <div className={styles.total}>{listNoteFilter.length} ghi chú</div>
                         <div className={styles.actions}>

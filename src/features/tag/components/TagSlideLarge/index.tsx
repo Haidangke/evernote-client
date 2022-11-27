@@ -7,6 +7,7 @@ import { useAppSelector } from 'app/hooks';
 import { SortIcon, TagIcon } from 'components/Icons';
 import SearchInput from 'components/SearchInput';
 import { TippyButton } from 'components/Tippy';
+import TagMore from '../TagMore';
 
 import styles from './TagSlideLarge.module.scss';
 const cx = classNames.bind(styles);
@@ -43,9 +44,6 @@ function TagSlideLarge() {
                 <div className={cx('topbar')}>
                     <span>Thẻ</span>
                     <div className={cx('button')}>
-                        <TippyButton placement='bottom' content='Tạo thẻ mới'>
-                            <TagIcon className={cx('icon')} />
-                        </TippyButton>
                         <TippyButton placement='bottom' content='Cách sắp xếp'>
                             <SortIcon className={cx('icon')} />
                         </TippyButton>
@@ -69,9 +67,10 @@ function TagSlideLarge() {
                                 .map((tag) => (
                                     <div key={tag._id} className={cx('item')}>
                                         <span className={cx('name')}>{tag.name}</span>
-                                        <span className={cx('quantity')}>({tag.quantity})</span>
+                                        {/* <span className={cx('quantity')}>({tag.quantity})</span> */}
                                         <span className={cx('other')}>
-                                            <IoIosMore width={16} height={16} />
+                                            {/* <IoIosMore width={16} height={16} /> */}
+                                            <TagMore tag={tag} />
                                         </span>
                                     </div>
                                 ))}

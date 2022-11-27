@@ -26,9 +26,6 @@ function Element({ children, className, title, menu }: ElementProps) {
         <div className={cx('wrapper', { [`${className}`]: className })}>
             <div className={styles.header}>
                 <div className={styles.title}>{title}</div>
-                {/* <span>
-                        <AddNoteIcon />
-                    </span> */}
                 <TippyHeadLess
                     visible={isOther}
                     setVisible={setIsOther}

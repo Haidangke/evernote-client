@@ -23,25 +23,23 @@ const schema = yup
             .email('Định dạng của email không hợp lệ'),
         username: yup
             .string()
-            .required('Email là bắt buộc ')
-            .min(3, 'Email tối thiếu 3 kí tự')
-            .max(30, 'Email tối đa 30 kí tự'),
+            .required('Tên người dùng là bắt buộc ')
+            .min(3, 'Tên người dùng tối thiếu 3 kí tự')
+            .max(30, 'Tên người dùng tối đa 30 kí tự'),
         password: yup
             .string()
-            .required('Mật khẩu là bắt buộc là bắt buộc ')
+            .required('Mật khẩu là bắt buộc')
             .min(6, 'Mật khẩu là bắt buộc tối thiếu 6 kí tự')
             .max(30, 'Mật khẩu là bắt buộc tối đa 30 kí tự'),
         passwordConfirm: yup
             .string()
-            .required('Mật khẩu là bắt buộc là bắt buộc ')
-            .min(6, 'Mật khẩu là bắt buộc tối thiếu 6 kí tự')
-            .max(30, 'Mật khẩu là bắt buộc tối đa 30 kí tự')
+            .required('Vui lòng nhập lại mật khẩu')
             .oneOf([yup.ref('password'), null], 'Mật khẩu nhập lại không khớp'),
     })
     .required();
 
 function Register() {
-    const { registering } = useAppSelector((state) => state.auth);
+    const { registering, errorRegister } = useAppSelector((state) => state.auth);
     const dispatch = useAppDispatch();
     const { control, handleSubmit, reset } = useForm<RegisterParams>({
         defaultValues,
@@ -73,7 +71,7 @@ function Register() {
                     {registering ? <Loading height='22px' width='22px' /> : ' Đăng kí'}
                 </button>
             </form>
-
+            {errorRegister && <div className={styles.error}>{errorRegister}</div>}
             <div className={styles.policy}>
                 Bằng việc tạo một tài khoản, bạn đồng ý với Điều khoản dịch vụ và Chính sách về
                 Quyền riêng tư.
