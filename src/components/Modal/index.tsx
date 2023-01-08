@@ -12,9 +12,10 @@ export interface ModalProps {
     isOpen: boolean;
     setIsOpen?: (isOpen: boolean) => void;
     isSmall?: boolean;
+    width?: string;
 }
 const cx = classNames.bind(styles);
-function Modal({ children, isOpen, setIsOpen, isSmall }: ModalProps) {
+function Modal({ children, isOpen, setIsOpen, isSmall, width }: ModalProps) {
     const modalRef = useRef(null);
     const wrapperRef = useRef(null);
 
@@ -23,6 +24,7 @@ function Modal({ children, isOpen, setIsOpen, isSmall }: ModalProps) {
     useOnClickOutside(modalRef, () => {
         if (setIsOpen !== undefined) setIsOpen(false);
     });
+
     return (
         <>
             <CSSTransition
@@ -43,6 +45,7 @@ function Modal({ children, isOpen, setIsOpen, isSmall }: ModalProps) {
             >
                 <div ref={wrapperRef} className={styles.wrapper}>
                     <div
+                        style={{ width: width || 'unset' }}
                         className={cx('content', {
                             isSmall,
                         })}

@@ -8,7 +8,7 @@ const notebookService = {
     create(params: { name: string; creator: string }) {
         return axiosClientSecret.post('/notebook', params);
     },
-    update(id: string, params: NotebookUpdate) {
+    update(id: string, params: NotebookUpdate): Promise<Notebook> {
         return axiosClientSecret.put(`/notebook/${id}`, params);
     },
     delete(id: string) {

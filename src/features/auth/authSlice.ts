@@ -8,7 +8,6 @@ interface InitialState {
     isLoggedIn: boolean;
     logging: boolean;
     registering: boolean;
-    // message: string;
     errorLogin: string;
     errorRegister: string;
 
@@ -21,7 +20,6 @@ const initialState: InitialState = {
     user: undefined,
     isLoggedIn: !!access_token,
     logging: false,
-    // message: '',
     errorLogin: '',
     errorRegister: '',
     registering: false,
@@ -35,12 +33,6 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        // setMessage(state, action: PayloadAction<string>) {
-        //     state.message = action.payload;
-        // },
-        // clearMessage(state) {
-        //     state.message = '';
-        // },
 
         getUser(state) {
             state.isLoading = true;

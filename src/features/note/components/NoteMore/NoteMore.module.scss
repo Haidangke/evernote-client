@@ -1,3 +1,5 @@
+@import "styles/mixin";
+
 .wrapper {
     padding: 10px 0;
 }
@@ -45,4 +47,63 @@
 
 .popper {
     margin-top: 8px;
+}
+
+//move
+.move {
+    height: calc(100vh - 208px);
+    min-height: 200px;
+    overflow-y: auto;
+    margin: 0 15px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    .searchInput {
+        margin: 10px;
+        height: 38px;
+    }
+
+    .moveList {
+        margin-left: 10px;
+    }
+
+    .moveItem {
+        @include flex(center, unset);
+        height: 40px;
+        padding: 0 15px 0 10px;
+        cursor: pointer;
+    }
+
+    .moveItem:hover {
+        background-color: var(--color-f2);
+    }
+
+    .moveItem__active,
+    .moveItem__active:hover {
+        background-color: var(--color-master-light-blue);
+    }
+
+    .moveInfo {
+        height: 100%;
+        @include flex(center, unset);
+        flex: 6;
+    }
+
+    .moveName {
+        margin-left: 4px;
+        font-size: 1.4rem;
+    }
+
+    .checkIcon {
+        min-width: 24px;
+        color: var(--color-light-blue);
+    }
+
+    .notebookIcon {
+        color: var(--color-6a);
+    }
+
+    .moveCurrent {
+        flex: 4;
+        font-size: 1.4rem;
+        color: var(--color-b3);
+    }
 }

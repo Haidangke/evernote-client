@@ -43,6 +43,22 @@ const notebookSlice = createSlice({
         setNotebooks(state, action: PayloadAction<Notebook[]>) {
             state.notebooks = action.payload;
         },
+        updateNotebook(state, action: PayloadAction<Notebook>) {
+            const notebook = action.payload;
+            const index = state.notebooks.map((notebook) => notebook._id).indexOf(notebook._id);
+            let newNotebooks = [...state.notebooks];
+
+            if (notebook.isDefault) {
+                newNotebooks = [...state.notebooks].map((notebook) => ({
+                    ...notebook,
+                    isDefault: false,
+                }));
+            }
+
+            newNotebooks[index] = notebook;
+
+            state.notebooks = newNotebooks;
+        },
     },
 });
 

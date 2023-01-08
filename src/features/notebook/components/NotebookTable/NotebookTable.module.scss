@@ -1,4 +1,4 @@
-@import 'styles/mixin';
+@import "styles/mixin";
 
 .wrapper {
 }
@@ -49,6 +49,14 @@
     &__sub {
         padding-left: 58px;
     }
+
+    &__creator {
+        min-width: 70px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
     & > span {
         color: var(--color-b3);
         font-size: 1.4rem;

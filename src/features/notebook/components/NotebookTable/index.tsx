@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 
 import { useAppSelector } from 'app/hooks';
 import { SortConfig } from 'config/actions';
-import NotebookTableItem from './NotebookTableItem';
+import NotebookTableItem from './NotebookItem';
 
 import styles from './NotebookTable.module.scss';
 const cx = classNames.bind(styles);
@@ -23,7 +23,7 @@ function Table({ sort, search }: TableProps) {
                         Tiêu đề
                         <AiOutlineArrowUp />
                     </div>
-                    <div className={cx('column')}>Người tạo</div>
+                    <div className={cx('column', 'column__creator')}>Người tạo</div>
                     <div className={cx('column')}>Đã cập nhật</div>
                     <div className={cx('column')}>Được chia sẽ với</div>
                     <div className={cx('column')}>Hành động</div>

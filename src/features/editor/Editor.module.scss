@@ -56,18 +56,12 @@
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
-
-    & html {
-        font-size: unset;
-        font-family: unset;
-    }
 }
 
 .editable-main {
     position: relative;
     margin-top: 12px;
     padding: 0 40px;
-
     & ul,
     li,
     ol {

@@ -1,9 +1,9 @@
-import { HomePage } from 'pages';
 import { routesConfig } from 'config/routes';
 import DefaultLayout from 'components/DefaultLayout';
 import Notebook from 'features/notebook';
 import LoginPage from 'features/auth/pages/Login';
 import RegisterPage from 'features/auth/pages/Register';
+import HomePage from 'features/home';
 
 interface Route {
     path: string;

@@ -13,13 +13,20 @@ const cx = classNames.bind(styles);
 
 interface NoteItemProps {
     note: Note<Tag>;
+    handleDragStart: any;
 }
 
-function NoteItem({ note }: NoteItemProps) {
+function NoteItem({ note, handleDragStart }: NoteItemProps) {
     const navigate = useNavigateParams();
+
     return (
-        <div key={note._id} className={styles.row}>
-            <div className={cx('column', 'column__sub')}>
+        <div className={styles.row}>
+            <div
+                draggable
+                onDragStart={handleDragStart}
+                // onDragStart={(e) => handleDragStart(e, note)}
+                className={cx('column', 'column__sub')}
+            >
                 <div className={styles.info} onClick={() => navigate('/note', { n: note._id })}>
                     <NoteSolidIcon />
                     <div className={styles.name}>{note.title || 'Chưa có tiêu đề'}</div>

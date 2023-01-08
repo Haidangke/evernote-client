@@ -8,7 +8,7 @@ import {
     NotebookSubIcon,
 } from 'components/Icons';
 import MenuItem from 'features/sidebar/components/Menu/MenuItem';
-import NotebookAdd from '../NotebookAdd';
+import NotebookAdd from 'features/notebook/components/NotebookAdd';
 
 function NotebookItemSidebar() {
     const [isModal, setIsModal] = useState(false);

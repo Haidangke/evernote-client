@@ -1,15 +1,16 @@
 import classNames from 'classnames/bind';
-import { useMemo, useState } from 'react';
+import {  useMemo, useState } from 'react';
 import { BsDash } from 'react-icons/bs';
 import { IoMdArrowDropright } from 'react-icons/io';
 
-import { useAppSelector } from 'app/hooks';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { NotebookDfIcon, NotebookIcon } from 'components/Icons';
 import TimeUp from 'components/TimeUp';
 import useNavigateParams from 'hooks/useNavigateParams';
-import { Notebook } from 'types';
+import { Note, Notebook, Tag } from 'types';
 import NotebookMore from '../NotebookMore';
 import NoteItem from './NoteItem';
+import { noteActions } from 'features/note/noteSlice';
 
 import styles from './NotebookTable.module.scss';
 const cx = classNames.bind(styles);
@@ -19,6 +20,10 @@ interface NotebookTableItemProps {
 }
 
 function NotebookTableItem({ notebook }: NotebookTableItemProps) {
+    console.log('re-render');
+    const dispatch = useAppDispatch();
+    const [isOpen, setIsOpen] = useState(false);
+
     const { listNote } = useAppSelector((state) => state.note);
     const navigate = useNavigateParams();
     const notesOfNotebook = useMemo(
@@ -29,10 +34,31 @@ function NotebookTableItem({ notebook }: NotebookTableItemProps) {
         [listNote, notebook._id]
     );
 
-    const [isOpen, setIsOpen] = useState(false);
+    const handleDrop = (e: any) => {
+        e.preventDefault();
+        const noteDrag = JSON.parse(e.dataTransfer.getData('note'));
+        const notebookDrag = JSON.parse(e.dataTransfer.getData('notebook'));
+
+        if (notebookDrag !== notebook._id) {
+            dispatch(noteActions.updateNote({ ...noteDrag, notebook: notebook._id }));
+        }
+    };
+
+    const handleDragStart = (e: any, note: Note<Tag>) => {
+        e.dataTransfer.setData('note', JSON.stringify(note));
+        e.dataTransfer.setData('notebook', JSON.stringify(note.notebook));
+    };
+
+    const handleDragEnter = (e: any) => {};
+
     return (
         <>
-            <div className={styles.row}>
+            <div
+                onDragEnter={handleDragEnter}
+                onDrop={handleDrop}
+                onDragOver={(e) => e.preventDefault()}
+                className={styles.row}
+            >
                 <div className={styles.column}>
                     <IoMdArrowDropright
                         onClick={() => setIsOpen(!isOpen)}
@@ -53,7 +79,7 @@ function NotebookTableItem({ notebook }: NotebookTableItemProps) {
                         <span className={styles.amount}>({notesOfNotebook.length})</span>
                     </div>
                 </div>
-                <div className={styles.column}>{notebook.creator}</div>
+                <div className={cx('column', 'column__creator')}>{notebook.creator}</div>
                 <TimeUp updatedAt={notebook.updatedAt} className={styles.column} />
                 <div className={styles.column}>
                     <BsDash />
@@ -62,7 +88,15 @@ function NotebookTableItem({ notebook }: NotebookTableItemProps) {
                     <NotebookMore notebook={notebook} />
                 </div>
             </div>
-            {isOpen && notesOfNotebook.map((note) => <NoteItem note={note} key={note._id} />)}
+
+            {isOpen &&
+                notesOfNotebook.map((note) => (
+                    <NoteItem
+                        key={note._id}
+                        note={note}
+                        handleDragStart={(e: any) => handleDragStart(e, note)}
+                    />
+                ))}
         </>
     );
 }

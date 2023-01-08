@@ -2,6 +2,10 @@
     margin-top: 16px;
 }
 
+.wrapper {
+    padding: 0 25px;
+}
+
 .label {
     display: inline-block;
     color: var(--color-4d);
@@ -35,7 +39,5 @@
     color: var(--color-red);
     margin-top: 4px;
     text-align: left;
-    &__height {
-        min-height: 20px;
-    }
+    min-height: 40px;
 }

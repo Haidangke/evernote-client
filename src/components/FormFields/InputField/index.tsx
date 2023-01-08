@@ -51,7 +51,7 @@ function InputField({
                 type={type}
                 placeholder={placeholder}
             />
-            <p className={cx('error', { error__height: handleValid })}>
+            <p className={cx('error')}>
                 {handleValid && handleValid(value) ? errorProp : error?.message}
             </p>
         </div>

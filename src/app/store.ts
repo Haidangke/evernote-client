@@ -7,7 +7,7 @@ import authReducer from 'features/auth/authSlice';
 import notebookReducer from 'features/notebook/notebookSlice';
 import sidebarReducer from 'features/sidebar/sidebarSlice';
 import tagReducer from 'features/tag/tagSlice';
-import shortcutReducer from 'features/shortcut/shortcutSlice';
+// import shortcutReducer from 'features/shortcut/shortcutSlice';
 
 import rootSaga from './rootSaga';
 
@@ -19,9 +19,10 @@ const rootReducer = combineReducers({
     tag: tagReducer,
     notebook: notebookReducer,
     editor: editorReducer,
-    shortcut: shortcutReducer,
+    // shortcut: shortcutReducer,
     sidebar: sidebarReducer
 });
+
 export const store = configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),

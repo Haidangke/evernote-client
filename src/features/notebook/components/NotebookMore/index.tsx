@@ -8,10 +8,8 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { Notebook } from 'types';
 import useAddNote from 'hooks/useAddNote';
 import notebookService from 'services/notebookService';
-import shortcutService from 'services/shortcutService';
 import { notebookActions } from 'features/notebook/notebookSlice';
 import { noteActions } from 'features/note/noteSlice';
-import { shortcutActions } from 'features/shortcut/shortcutSlice';
 
 import InputField, { nameSchema } from 'components/FormFields/InputField';
 import ModalCreate from 'components/Modal/ModalCreate';
@@ -33,8 +31,6 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
     const dispatch = useAppDispatch();
     const notebooks = useAppSelector((state) => state.notebook.notebooks);
     const listNote = useAppSelector((state) => state.note.listNote);
-    const shortcuts = useAppSelector((state) => state.shortcut.shortcuts);
-    const isShortcut = shortcuts.find((shortcut) => shortcut.type._id === notebook._id);
 
     const [isDelete, setIsDelete] = useState(false);
     const [isChangeName, setIsChangeName] = useState(false);
@@ -60,14 +56,8 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
         (value: UpdateName) => {
             closeMore();
             setIsChangeName(false);
-            notebookService.update(notebook._id, value).then(() => {
-                const newNotebooks = [...notebooks];
-                const index = newNotebooks.map((notebook) => notebook._id).indexOf(notebook._id);
-                const updatedAt = new Date().toISOString();
-                const notebookUpdate = { ...newNotebooks[index], name: value.name, updatedAt };
-                newNotebooks[index] = notebookUpdate;
-
-                dispatch(notebookActions.setNotebooks(newNotebooks));
+            notebookService.update(notebook._id, value).then((data) => {
+                dispatch(notebookActions.updateNotebook(data));
                 reset({ name: value.name });
 
                 toast.dismiss();
@@ -75,21 +65,13 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
                 toast((t) => <Toast toastId={t.id} content='Đã đổi tên sổ tay' />);
             });
         },
-        [dispatch, notebook._id, notebooks, reset]
+        [dispatch, notebook._id, reset]
     );
 
     const handleSetDefault = useCallback(() => {
         closeMore();
-        notebookService.update(notebook._id, { isDefault: true }).then(() => {
-            const newNotebooks = [...notebooks].map((notebook) => ({
-                ...notebook,
-                isDefault: false,
-            }));
-            const index = newNotebooks.map((notebook) => notebook._id).indexOf(notebook._id);
-
-            const notebookUpdate = { ...newNotebooks[index], isDefault: true };
-            newNotebooks[index] = notebookUpdate;
-            dispatch(notebookActions.setNotebooks(newNotebooks));
+        notebookService.update(notebook._id, { isDefault: true }).then((data) => {
+            dispatch(notebookActions.updateNotebook(data));
 
             toast.dismiss();
             toast((t) => (
@@ -99,7 +81,7 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
                 />
             ));
         });
-    }, [dispatch, notebook._id, notebook.name, notebooks]);
+    }, [dispatch, notebook._id, notebook.name]);
 
     const handleDelete = useCallback(() => {
         closeMore();
@@ -120,21 +102,15 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
 
     const handleShortcut = () => {
         closeMore();
-        if (isShortcut) return;
-        shortcutService
-            .create({
-                type: { _id: notebook._id, name: 'notebook', value: 'b' },
-                name: notebook.name,
-            })
-            .then((data) => {
-                const newShortcuts = [...shortcuts, data];
-                dispatch(shortcutActions.setShortcuts(newShortcuts));
+        if (notebook.isShortcut) return;
+        notebookService.update(notebook._id, { isShortcut: true }).then((data) => {
+            dispatch(notebookActions.updateNotebook(data));
 
-                toast.dismiss();
-                toast((t) => (
-                    <Toast toastId={t.id} content={`Đã thêm "${data.name}" vào lỗi tắt`} />
-                ));
-            });
+            toast.dismiss();
+            toast((t) => (
+                <Toast toastId={t.id} content={`Đã thêm "${notebook.name}" vào lỗi tắt`} />
+            ));
+        });
     };
 
     return (
@@ -165,7 +141,7 @@ function NotebookMore({ notebook }: NotebookMoreProps) {
                         <div className={styles.lineThrough}></div>
 
                         <div className={styles.item} onClick={handleShortcut}>
-                            {isShortcut ? 'Xóa khỏi ' : 'Thêm vào '}
+                            {notebook.isShortcut ? 'Xóa khỏi ' : 'Thêm vào '}
                             Lối tắt
                         </div>
                         {!notebook.isDefault && (

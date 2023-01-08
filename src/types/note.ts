@@ -11,6 +11,7 @@ export interface Note<T> {
     isTrash: boolean;
     createdAt: string;
     updatedAt: string;
+    isShortcut: boolean;
 }
 
 export interface UpdateNoteParams {
@@ -19,5 +20,7 @@ export interface UpdateNoteParams {
     tags?: string[];
     notebook?: string;
     isTrash?: boolean;
-    contain?: string;
+    contain?: string[];
+    createdAt?: string;
+    isShortcut?: boolean;
 }

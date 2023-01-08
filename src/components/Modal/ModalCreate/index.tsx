@@ -28,9 +28,10 @@ function ModalCreate({
     action = 'Tạo',
     isSmall,
     disabled,
+    width,
 }: ModalCreateProps) {
     return (
-        <Modal isSmall={isSmall} isOpen={isOpen} setIsOpen={setIsOpen}>
+        <Modal isSmall={isSmall} isOpen={isOpen} setIsOpen={setIsOpen} width={width}>
             <div className={cx('header')}>
                 <h2 className={cx('title')}>
                     <span>{title}</span>
@@ -40,8 +41,8 @@ function ModalCreate({
                 </h2>
                 {description && <p className={cx('description')}>{description}</p>}
             </div>
+            {children}
             <div className={cx('form')}>
-                {children}
                 <div className={cx('button')}>
                     <Button
                         onClick={() => setIsOpen && setIsOpen(false)}

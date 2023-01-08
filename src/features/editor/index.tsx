@@ -144,6 +144,7 @@ function Editor() {
                                 })}
                             >
                                 <Editable
+                                    className='xxxxxaaaa'
                                     autoFocus
                                     placeholder='Bắt đầu viết những suy nghĩ, hoặc công việc vào đây'
                                     decorate={decorate}

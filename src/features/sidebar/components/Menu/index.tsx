@@ -4,12 +4,12 @@ import { DeleteIcon, HomeIcon, MissionIcon, NoteIcon } from 'components/Icons';
 import { routesConfig } from 'config/routes';
 
 import { useAppSelector } from 'app/hooks';
-import ShortcutItemSidebar from 'features/shortcut/components/ShortcutItemSidebar';
-import TagItemSidebar from 'features/tag/components/TagItemSidebar';
 import SidebarMenuItem from './MenuItem';
-import NotebookItemSidebar from 'features/notebook/components/NotebookItemSidebar';
+import ShortcutItemSidebar from './ShortcutItemSidebar';
+import NotebookItemSidebar from './NotebookItemSidebar';
 
 import styles from './Menu.module.scss';
+import TagItemSidebar from './TagItemSidebar';
 const cx = classNames.bind(styles);
 
 function Menu() {

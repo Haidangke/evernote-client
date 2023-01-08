@@ -6,7 +6,6 @@ import classNames from 'classnames/bind';
 import { editorActions } from 'features/editor/editorSlice';
 import { useAppDispatch } from 'app/hooks';
 
-import { ElementType } from 'features/editor/slates';
 import { BlockButton, MarkButton } from '../SlateButton';
 import OverflowToolbar from '../OverflowToolbar';
 import Align from './Align';
@@ -18,7 +17,6 @@ import History from './History';
 import Link from './Link';
 import TextIndent from './TextIndent';
 import Info from '../SlateInfo';
-import Todo from './Todo';
 
 import {
     BoldIcon,
@@ -55,10 +53,6 @@ function Toolbar({ onHeader }: ToolbarProps) {
             <Info />
 
             <div className={cx('toolbar', { 'toolbar-on-header': onHeader })}>
-                <Todo />
-
-                <div className={cx('line')}></div>
-
                 <History editor={editor} />
 
                 <div className={cx('line')}></div>

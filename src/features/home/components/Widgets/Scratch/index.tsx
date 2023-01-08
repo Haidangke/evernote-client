@@ -11,7 +11,7 @@ function Scratch() {
             <DebounceInput
                 debounceTimeout={700}
                 element='textarea'
-                placeholder='Tiêu đề'
+                placeholder='Ghi chép nhanh'
                 className={styles.input}
                 value={scratch}
                 onChange={(e) => {

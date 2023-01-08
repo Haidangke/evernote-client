@@ -12,8 +12,9 @@ const noteService = {
         });
     },
 
-    create(notebookId?: string): Promise<Note<Tag>> {
-        return axiosClientSecret.post('/note', { notebookId });
+    create(notebookId?: string, params?: UpdateNoteParams): Promise<Note<Tag>> {
+        console.log({ notebookId, ...{ params } });
+        return axiosClientSecret.post('/note', { notebookId, ...params });
     },
 
     update(id: string, params: UpdateNoteParams): Promise<Note<Tag>> {

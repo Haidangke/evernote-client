@@ -89,14 +89,14 @@
 
 .share-btn {
     @include flex(center, center);
-    height: 30px;
+    height: 32px;
     font-size: 1.4rem;
     background-color: var(--primary-color);
     border-radius: 4px;
     font-weight: 600;
     color: var(--color-white);
     padding: 0px 16px;
-    margin: 0px 8px 0 16px;
+    margin: 0px 8px 0 12px;
     cursor: pointer;
     transition: background-color ease-in 0.1s;
     &:hover {

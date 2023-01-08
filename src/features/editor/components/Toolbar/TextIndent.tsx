@@ -8,7 +8,11 @@ const TextIndent = ({ editor }: any) => {
             <HandleButton
                 format='indent'
                 content='Indent'
-                handle={() => textIndent(editor, 'indent')}
+                handle={() => {
+                    // textIndent(editor, 'indent');
+                    console.log('keu');
+                    new KeyboardEvent('keydown', { keyCode: 9 });
+                }}
             >
                 <IndentIcon />
             </HandleButton>
