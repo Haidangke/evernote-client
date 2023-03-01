@@ -18,6 +18,7 @@ function Header() {
     const { user } = useAppSelector((state) => state.auth);
     const [visible, setVisible] = useState(false);
     const { isSmall } = useAppSelector((state) => state.sidebar);
+
     return (
         <div className={cx('wrapper', { small: isSmall })}>
             <div className={cx('left')}>

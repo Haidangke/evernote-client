@@ -2,7 +2,7 @@ import { Notebook, NotebookUpdate } from 'types';
 import axiosClientSecret from 'services/axiosClientSecret';
 
 const notebookService = {
-    getAll(): Promise<Notebook> {
+    getAll(): Promise<Notebook[]> {
         return axiosClientSecret.get('/notebook');
     },
     create(params: { name: string; creator: string }) {

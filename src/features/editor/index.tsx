@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import pipe from 'lodash/fp/pipe';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { createEditor } from 'slate';
 import { withHistory } from 'slate-history';
@@ -51,11 +51,14 @@ function Editor() {
     const noteId = searchParams.get('n') || '';
     const note = useMemo(() => listNote.find((note) => note._id === noteId), [listNote, noteId]);
 
+    // useEffect(() => { console.log({ note2 }) }, [note2])
+
     //state
     const search = useAppSelector((state) => state.editor.search);
     const [onHeader, setOnHeader] = useState(false);
 
     const decorate = useDecorate(search);
+
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const editor = useMemo(() => createEditorWithPlugins(createEditor()), [noteId]);
@@ -84,7 +87,6 @@ function Editor() {
             );
         });
     };
-
     useOnClickOutside(editorRef, () => dispatch(editorActions.setIsToolbar(false)));
 
     return (
@@ -94,7 +96,7 @@ function Editor() {
                 <SlateTopbar />
             </div>
 
-            {note?.content ? (
+            {note ? (
                 <div ref={editorRef} className={styles.editor}>
                     <Slate
                         editor={editor}
@@ -130,7 +132,7 @@ function Editor() {
                                 className={cx('slate-header', {
                                     'input--disable': page === 'recycle',
                                 })}
-                                value={note?.title}
+                                value={note.title}
                                 onChange={(e) => {
                                     if (page === 'recycle') return;
                                     const title = e.target.value;
@@ -144,7 +146,6 @@ function Editor() {
                                 })}
                             >
                                 <Editable
-                                    className='xxxxxaaaa'
                                     autoFocus
                                     placeholder='Bắt đầu viết những suy nghĩ, hoặc công việc vào đây'
                                     decorate={decorate}

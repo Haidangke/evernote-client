@@ -10,7 +10,15 @@ import Loading from 'components/Loading';
 import { authActions } from '../authSlice';
 
 import styles from './Auth.module.scss';
-const defaultValues = { username: '', password: '', email: '', passwordConfirm: '' };
+import classNames from 'classnames/bind';
+const defaultValues = {
+    username: '',
+    password: '',
+    email: '',
+    passwordConfirm: '',
+};
+
+const cx = classNames.bind(styles);
 
 const schema = yup
     .object()
@@ -53,15 +61,31 @@ function Register() {
     return (
         <Auth page='register'>
             <form onSubmit={handleSubmit(handleFormSubmit)}>
-                <InputField name='email' control={control} placeholder='Email' />
-                <InputField name='username' control={control} placeholder='Tên người dùng' />
                 <InputField
+                    wrapperClass={cx('register-wrapper')}
+                    errorClass={cx('register-error')}
+                    name='email'
+                    control={control}
+                    placeholder='Email'
+                />
+                <InputField
+                    wrapperClass={cx('register-wrapper')}
+                    errorClass={cx('register-error')}
+                    name='username'
+                    control={control}
+                    placeholder='Tên người dùng'
+                />
+                <InputField
+                    wrapperClass={cx('register-wrapper')}
+                    errorClass={cx('register-error')}
                     type='password'
                     name='password'
                     control={control}
                     placeholder='Mật khẩu'
                 />
                 <InputField
+                    wrapperClass={cx('register-wrapper')}
+                    errorClass={cx('register-error')}
                     type='password'
                     name='passwordConfirm'
                     control={control}

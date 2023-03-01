@@ -16,7 +16,6 @@ import styles from './Auth.module.scss';
 
 const cx = classNames.bind(styles);
 function Login() {
-    const [remember, setRemember] = useState(false);
     const [validEmail, setValidEmail] = useState(false);
     const { logging, errorLogin } = useAppSelector((state) => state.auth);
     const dispatch = useAppDispatch();
@@ -112,7 +111,6 @@ function Login() {
                 <button
                     disabled={logging}
                     type={validEmail ? 'submit' : 'button'}
-                    // onClick={!validEmail ? handleCheckEmail : () => {}}
                     onClick={!validEmail ? handleCheckEmail : handleFormSubmit}
                     className={cx('submit', { disable: logging })}
                 >

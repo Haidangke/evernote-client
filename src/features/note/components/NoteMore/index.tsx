@@ -137,17 +137,16 @@ function NoteMore({ page, noteId }: NoteMoreProps) {
                     toast((t) => (
                         <Toast
                             toastId={t.id}
-                            content={`Đã chuyển "${
-                                curNote.title || 'Không có tiêu đề'
-                            }" vào sổ tay" ${selectMove?.name}"`}
+                            content={`Đã chuyển "${curNote.title || 'Không có tiêu đề'
+                                }" vào sổ tay" ${selectMove?.name}"`}
                         />
                     ));
                 });
         }
 
-        if (action === 'copy') {
+        if (action === 'copy' && selectMove?._id) {
             noteService
-                .create(selectMove?._id, {
+                .create(selectMove._id, {
                     contain: curNote.contain,
                     content: curNote.content,
                     createdAt: curNote.createdAt,

@@ -12,13 +12,16 @@ const noteService = {
         });
     },
 
-    create(notebookId?: string, params?: UpdateNoteParams): Promise<Note<Tag>> {
-        console.log({ notebookId, ...{ params } });
+    create(notebookId: string, params?: UpdateNoteParams): Promise<Note<Tag>> {
         return axiosClientSecret.post('/note', { notebookId, ...params });
     },
 
     update(id: string, params: UpdateNoteParams): Promise<Note<Tag>> {
         return axiosClientSecret.put(`/note/${id}`, params);
+    },
+
+    update2(note: Note<string>): Promise<Note<Tag>> {
+        return axiosClientSecret.put(`/note/${note._id}`, { ...note });
     },
 
     delete(id: string) {

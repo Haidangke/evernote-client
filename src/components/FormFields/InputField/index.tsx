@@ -14,6 +14,10 @@ interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
     variant?: 'outline';
     type?: string;
     errorProp?: string;
+
+    wrapperClass?: string;
+    inputClass?: string;
+    errorClass?: string;
 }
 
 const cx = classNames.bind(styles);
@@ -27,14 +31,16 @@ function InputField({
     variant = 'outline',
     type = 'text',
     errorProp,
+    wrapperClass = '',
+    inputClass = '',
+    errorClass = '',
 }: InputFieldProps) {
     const {
         field: { value, onChange, onBlur, ref },
         fieldState: { error },
     } = useController({ name, control });
-
     return (
-        <div className={cx('wrapper')}>
+        <div className={cx(wrapperClass || 'wrapper')}>
             {label && (
                 <label htmlFor={`input-${name}`} className={cx('label')}>
                     {label}
@@ -43,7 +49,7 @@ function InputField({
             <input
                 autoComplete='on'
                 id={`input-${name}`}
-                className={cx('input', { [variant]: true })}
+                className={cx(inputClass || 'input', { [variant]: true })}
                 ref={ref}
                 value={value}
                 onChange={onChange}
@@ -51,7 +57,7 @@ function InputField({
                 type={type}
                 placeholder={placeholder}
             />
-            <p className={cx('error')}>
+            <p className={cx(errorClass || 'error')}>
                 {handleValid && handleValid(value) ? errorProp : error?.message}
             </p>
         </div>

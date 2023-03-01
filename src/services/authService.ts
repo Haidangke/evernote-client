@@ -1,6 +1,6 @@
 import { Response } from 'types';
 import { LoginParams, RegisterParams, User } from 'types/auth';
-import axiosClient from 'services/axiosClient';
+import axiosClient from './axiosClient';
 import history from 'routes/history';
 
 const authService = {
@@ -15,7 +15,7 @@ const authService = {
         history.navigate('/login');
         return axiosClient.post('/auth/logout');
     },
-    register(params: RegisterParams): Promise<Response<any>> {
+    register(params: RegisterParams) {
         return axiosClient.post('/auth/register', params);
     },
     refresh(): Promise<Response<string>> {
