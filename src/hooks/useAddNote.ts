@@ -2,6 +2,7 @@ import { noteActions } from 'features/note/noteSlice';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import noteService from 'services/noteService';
 import useNavigateParams from './useNavigateParams';
+import { EditorState, convertToRaw } from 'draft-js';
 
 function useAddNote(notebookId?: string) {
     const dispatch = useAppDispatch();
@@ -13,9 +14,12 @@ function useAddNote(notebookId?: string) {
         const notebookDf = notebooks.find((notebook) => notebook.isDefault);
         const notebook = notebookId || notebookDf?._id;
 
+        const empty = EditorState.createEmpty();
+        const content = JSON.stringify(convertToRaw(empty.getCurrentContent()));
+
         if (notebook) {
             noteService
-                .create(notebook)
+                .create(notebook, { content })
 
                 .then((res) => {
                     if (!res) return;

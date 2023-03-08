@@ -1,0 +1,87 @@
+@import "styles/mixin";
+.btn {
+    position: relative;
+    height: 28px;
+
+    line-height: 28px;
+    border-radius: 3px;
+    padding: 0 2px;
+    margin: 0 2px;
+    border: 1px solid var(--color-white);
+    & svg {
+        fill: var(--color-26);
+    }
+    &:hover {
+        background-color: var(--color-f2);
+    }
+    &:active {
+        border: 1px solid var(--color-light-blue);
+    }
+}
+
+.btn--disable {
+    cursor: unset;
+    & svg {
+        fill: var(--color-26);
+        opacity: 0.2;
+    }
+    &:hover {
+        background-color: unset;
+    }
+    &:active {
+        border: 1px solid var(--color-white);
+    }
+}
+
+.btn-active {
+    background-color: var(--color-light-blue);
+
+    &:hover {
+        background-color: var(--color-light-blue);
+        opacity: 0.8;
+    }
+    & > svg {
+        fill: var(--color-white);
+    }
+}
+
+.btn-hide {
+    display: none;
+}
+
+//dropdown
+.dropdown-wrapper {
+    min-width: fit-content;
+}
+.dropdown-btn {
+    padding: 0;
+    margin: 0;
+    & > span {
+        @include flex(center, unset);
+        text-align: left;
+        padding: 0 4px;
+        color: var(--color-4d);
+        font-weight: 600;
+        font-size: 1.3rem;
+        font-family: "SegoeUI";
+    }
+    & > svg {
+        margin: 0 4px;
+    }
+}
+
+//Handle Button
+.tippy-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid var(--color-a6);
+    border-bottom: 1px solid var(--color-a6);
+    font-size: 1.2rem;
+    padding: 3px 6px;
+    color: var(--color-black);
+    background-color: var(--color-white);
+    z-index: 9999;
+}

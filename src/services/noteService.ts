@@ -2,10 +2,6 @@ import { ListParams, Note, UpdateNoteParams, Tag } from 'types';
 import axiosClientSecret from 'services/axiosClientSecret';
 
 const noteService = {
-    get(id: string): Promise<Note<Tag[]>> {
-        return axiosClientSecret.get(`/note/${id}`);
-    },
-
     getAll(params?: ListParams): Promise<Note<Tag>[]> {
         return axiosClientSecret.get('/note', {
             params,

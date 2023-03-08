@@ -69,6 +69,29 @@ export const headingConfig = [
     },
 ];
 
+export const headingConfig2 = [
+    {
+        name: 'Tiêu đề lớn',
+        value: 'header-one',
+        size: '30px',
+    },
+    {
+        name: 'Tiêu đề trung bình',
+        value: 'header-two',
+        size: '24px',
+    },
+    {
+        name: 'Tiêu đề nhỏ',
+        value: 'header-three',
+        size: '18px',
+    },
+    {
+        name: 'Văn bản thường',
+        value: 'paragraph',
+        size: '16px',
+    },
+];
+
 export const ovfToolbarConfig = [
     {
         format: 'color',

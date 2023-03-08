@@ -58,18 +58,16 @@ function Actions() {
     );
 
     const listNoteSearch = useMemo(
-        () =>
-            listNote
-                .filter((note) => !note.isTrash)
-                .map((note) => ({ ...note, content: JSON.parse(note.content) }))
-                .map((note) => ({
-                    ...note,
-                    content: note?.content
-                        .map((item: any) => item?.children?.map((x: any) => x.text).join(''))
-                        .join(' '),
-                }))
+        () => listNote.filter((note) => !note.isTrash),
+        // .map((note) => ({ ...note, content: JSON.parse(note.content) }))
+        // .map((note) => ({
+        //     ...note,
+        //     content: note?.content
+        //         .map((item: any) => item?.children?.map((x: any) => x.text).join(''))
+        //         .join(' '),
+        // })),
 
-                .filter((note) => note.content.trim().includes(search)),
+        // .filter((note) => note.content.trim().includes(search))
         [listNote, search]
     );
 

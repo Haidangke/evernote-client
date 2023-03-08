@@ -21,24 +21,14 @@ import SlateFooter from './components/SlateFooter';
 import SlateTopbar from './components/SlateTopbar';
 import Toolbar from './components/Toolbar';
 import Loading from 'components/Loading';
-import UploadLoading from './components/UploadLoading';
 
-import { withChecklists, withKeyCommands, withLinks, withIndent, withLists } from './plugins';
+import { withLists } from './plugins';
 import { SlateElement, SlateLeaf } from './slates';
 
 import styles from './Editor.module.scss';
 const cx = classNames.bind(styles);
 
-const createEditorWithPlugins = pipe(
-    withListsReact,
-    withLists,
-    withReact,
-    withHistory
-    // withChecklists,
-    // withLinks,
-    // withKeyCommands
-    // withIndent
-);
+const createEditorWithPlugins = pipe(withListsReact, withLists, withReact, withHistory);
 
 function Editor() {
     const page = useLocationPage();
@@ -51,14 +41,11 @@ function Editor() {
     const noteId = searchParams.get('n') || '';
     const note = useMemo(() => listNote.find((note) => note._id === noteId), [listNote, noteId]);
 
-    // useEffect(() => { console.log({ note2 }) }, [note2])
-
     //state
     const search = useAppSelector((state) => state.editor.search);
     const [onHeader, setOnHeader] = useState(false);
 
     const decorate = useDecorate(search);
-
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const editor = useMemo(() => createEditorWithPlugins(createEditor()), [noteId]);
@@ -76,27 +63,25 @@ function Editor() {
     const handleChangeDisable = () => {
         if (!(page === 'recycle')) return;
         toast.remove();
-        toast((t) => {
-            return (
-                <Toast type='error' toastId={t.id}>
-                    <span className={styles.toast}>
-                        <WarningIcon />
-                        Bạn không thể cập nhật một ghi chú trong thùng rác
-                    </span>
-                </Toast>
-            );
-        });
+        toast((t) => (
+            <Toast type='error' toastId={t.id}>
+                <span className={styles.toast}>
+                    <WarningIcon />
+                    Bạn không thể cập nhật một ghi chú trong thùng rác
+                </span>
+            </Toast>
+        ));
     };
+
     useOnClickOutside(editorRef, () => dispatch(editorActions.setIsToolbar(false)));
 
     return (
         <div className={styles.wrapper}>
-            <UploadLoading />
             <div className={styles.topbar}>
                 <SlateTopbar />
             </div>
 
-            {note ? (
+            {note && typeof JSON.parse(note.content) === 'object' ? (
                 <div ref={editorRef} className={styles.editor}>
                     <Slate
                         editor={editor}

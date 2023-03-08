@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
-
 import { useAppSelector } from 'app/hooks';
 
 import styles from './SlateFooter.module.scss';
