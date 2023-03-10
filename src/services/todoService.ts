@@ -1,4 +1,4 @@
-import axiosClientSecret from 'services/axiosClientSecret';
+import { axiosClientSecret } from 'services/axiosInstance';
 
 const todoService = {
     create(params: { noteId: string }) {

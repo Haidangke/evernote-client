@@ -1,5 +1,5 @@
 import { Notebook, NotebookUpdate } from 'types';
-import axiosClientSecret from 'services/axiosClientSecret';
+import { axiosClientSecret } from 'services/axiosInstance';
 
 const notebookService = {
     getAll(): Promise<Notebook[]> {

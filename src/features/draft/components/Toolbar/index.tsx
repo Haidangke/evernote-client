@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 
 import { editorActions } from 'features/editor/editorSlice';
 import { useAppDispatch } from 'app/hooks';
-import { HandleButton, InlineButton } from '../Button';
+import { BlockButton, HandleButton, InlineButton } from '../Button';
 import {
     BoldIcon,
     BulletedListIcon,
@@ -23,6 +23,11 @@ import styles from './Toolbar.module.scss';
 import { EditorState, RichUtils } from 'draft-js';
 import Heading from './Heading';
 import FontFamily from './FontFamily';
+import FontSize from './FontSize';
+import ColorPicker from './ColorPicker';
+import Align from './Align';
+import LinkEditor from './LinkEditor';
+import Indent from './Indent';
 const cx = classNames.bind(styles);
 
 export interface DraftToolbarProps {
@@ -41,88 +46,104 @@ function DraftToolbar({ onHeader, onChange, editorState }: DraftToolbarProps) {
         dispatch(editorActions.setWidth(width));
     }, [width, dispatch]);
     return (
-        <div ref={ref}>
+        <div className={styles.wrapper} ref={ref}>
             {/* <Info /> */}
 
             <div className={cx('toolbar', { 'toolbar-on-header': onHeader })}>
                 <HandleButton
                     // disable={undos.length === 0}
                     handle={() => onChange(EditorState.undo(editorState))}
-                    content='Hoàn tác'
+                    tippy='Hoàn tác'
                     // className={cx({ 'btn--disable': undos.length === 0 })}
                 >
                     <UndoTcon />
                 </HandleButton>
-
                 {/* redo */}
                 <HandleButton
                     // disable={redos.length === 0}
                     handle={() => onChange(EditorState.redo(editorState))}
-                    content='Làm lại'
+                    tippy='Làm lại'
                     // className={cx({ 'btn--disable': redos.length === 0 })}
                 >
                     <RedoIcon />
                 </HandleButton>
-
                 <div className={cx('line')}></div>
-
                 <Heading onChange={onChange} editorState={editorState} />
-
                 <div className={cx('line')}></div>
-
-                <FontFamily onChange={onChange} editorState={editorState} />
-
+                <FontFamily />
                 <div className={cx('line')}></div>
-
-                {/* <FontSize /> */}
-
+                <FontSize />
                 <div className={cx('line')}></div>
-
-                {/* <ColorPicker editor={editor} /> */}
-
+                <ColorPicker />
                 <InlineButton
                     onClick={() => {
-                        onChange(RichUtils.toggleCode(editorState));
+                        onChange(RichUtils.toggleInlineStyle(editorState, 'BOLD'));
                     }}
-                    content='Đậm'
+                    tippy='Đậm'
                     format='bold'
                 >
                     <BoldIcon />
                 </InlineButton>
-
-                {/* <MarkButton content='Nghiêng' format='italic'>
+                <InlineButton
+                    onClick={() => {
+                        onChange(RichUtils.toggleInlineStyle(editorState, 'ITALIC'));
+                    }}
+                    tippy='Nghiêng'
+                    format='italic'
+                    active={editorState.getCurrentInlineStyle().has('ITALIC')}
+                >
                     <ItalicIcon />
-                </MarkButton> */}
-
-                {/* <MarkButton content='Gạch dưới' format='underline'>
+                </InlineButton>
+                <InlineButton
+                    onClick={() => {
+                        onChange(RichUtils.toggleInlineStyle(editorState, 'UNDERLINE'));
+                    }}
+                    tippy='Gạch dưới'
+                    format='underline'
+                    active={editorState.getCurrentInlineStyle().has('UNDERLINE')}
+                >
                     <UnderlineIcon />
-                </MarkButton> */}
-
+                </InlineButton>
                 <div className={cx('line')}></div>
-
-                {/* <BlockButton content='Danh sách dấu đầu dòng' format='bulleted-list'>
+                <BlockButton
+                    tippy='Danh sách dấu đầu dòng'
+                    format='bulleted-list'
+                    onClick={() => {
+                        onChange(RichUtils.toggleBlockType(editorState, 'unordered-list-item'));
+                    }}
+                    active={RichUtils.getCurrentBlockType(editorState) === 'unordered-list-item'}
+                >
                     <BulletedListIcon />
-                </BlockButton> */}
-                {/* <BlockButton content='Danh sách đánh số' format='numbered-list'>
+                </BlockButton>
+                <BlockButton
+                    tippy='Danh sách đánh số'
+                    format='numbered-list'
+                    onClick={() => {
+                        onChange(RichUtils.toggleBlockType(editorState, 'ordered-list-item'));
+                    }}
+                    active={RichUtils.getCurrentBlockType(editorState) === 'ordered-list-item'}
+                >
                     <NumberListIcon />
-                </BlockButton> */}
-                {/* 
-                <BlockButton content='Danh sách kiểm tra' format='check-list-item'>
+                </BlockButton>
+
+                <BlockButton
+                    tippy='Danh sách kiểm tra'
+                    format='check-list-item'
+                    onClick={() => {
+                        onChange(RichUtils.toggleBlockType(editorState, 'check-list-item'));
+                    }}
+                    active={RichUtils.getCurrentBlockType(editorState) === 'check-list-item'}
+                >
                     <TestListIcon />
-                </BlockButton> */}
-
+                </BlockButton>
                 <div className={cx('line')}></div>
 
-                {/* <Link editor={editor} /> */}
+                <LinkEditor editorState={editorState} onChange={onChange} />
 
                 <div className={cx('line')}></div>
-
-                {/* <Align editor={editor} /> */}
-
-                {/* <TextIndent editor={editor} /> */}
-
+                <Align onChange={onChange} editorState={editorState} />
+                <Indent  onChange={onChange} editorState={editorState}/>
                 <div className={cx('line')}></div>
-
                 {/* <MarkButton content='Gạch ngang' format='through'>
                     <LineThrougnIcon />
                 </MarkButton>

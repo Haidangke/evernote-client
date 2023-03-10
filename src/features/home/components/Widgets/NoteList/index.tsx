@@ -44,10 +44,6 @@ function NoteList() {
                     <NoteListLoading />
                 ) : listNoteFilter.length ? (
                     listNoteFilter.map((note) => {
-                        const content = note?.content
-                            .map((item: any) => item?.children?.map((x: any) => x.text).join(''))
-                            .join(' ');
-
                         return (
                             <div
                                 onClick={() => navigate('/note', { n: note._id })}
@@ -59,7 +55,7 @@ function NoteList() {
                                         {note.title || 'Chưa có tiêu đề'}
                                     </div>
                                     <div className={styles.content}>
-                                        {content || 'Chưa có nội dung'}
+                                        {/* {content || 'Chưa có nội dung'} */}
                                     </div>
                                 </div>
                                 <TimeUp className={styles.time} updatedAt={note.updatedAt} />

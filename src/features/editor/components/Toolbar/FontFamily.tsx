@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import { useMemo } from 'react';
 import { useSlate } from 'slate-react';
 
-import { fontFamilyConfig } from 'config/toolbar';
+import { fontFamilies } from 'config/toolbar';
 import { DropdownButton } from '../SlateButton';
 import { getMarks, toggleMark } from '../../utils/mark';
 
@@ -14,19 +14,19 @@ function FontFamily() {
     const marks = getMarks(editor);
 
     const fontFamilyCur = useMemo(
-        () => marks.find((mark) => fontFamilyConfig.map((font) => font.value).includes(mark)),
+        () => marks.find((mark) => fontFamilies.map((font) => font.value).includes(mark)),
         [marks]
     );
 
     const fontFamily =
-        fontFamilyConfig.find((font) => font.value === fontFamilyCur)?.name || 'Sans Serif';
+        fontFamilies.find((font) => font.value === fontFamilyCur)?.name || 'Sans Serif';
     return (
         <DropdownButton
             minWidth='68px'
             value={fontFamily}
             dropdown={() => (
                 <div className={cx('dropdown-wrapper')}>
-                    {fontFamilyConfig.map((item) => (
+                    {fontFamilies.map((item) => (
                         <button
                             className={cx('dropdown-fontFamily', {
                                 'dropdown-wrapper__active': fontFamily === item.name,

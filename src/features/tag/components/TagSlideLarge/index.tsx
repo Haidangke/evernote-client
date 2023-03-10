@@ -5,7 +5,7 @@ import { IoIosMore } from 'react-icons/io';
 
 import { useAppSelector } from 'app/hooks';
 import { SortIcon, TagIcon } from 'components/Icons';
-import SearchInput from 'components/SearchInput';
+import SearchInput from 'components/Input/SearchInput';
 import { TippyButton } from 'components/Tippy';
 import TagMore from '../TagMore';
 

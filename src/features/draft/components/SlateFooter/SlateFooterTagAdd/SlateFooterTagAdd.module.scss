@@ -1,0 +1,102 @@
+@import "styles/mixin";
+
+.dropdown {
+    min-width: 260px;
+}
+
+.dropdown-wrapper {
+    min-height: unset;
+}
+
+.dropdown-header {
+    @include flex(center, space-between);
+    background-color: var(--color-f2);
+    padding: 0px 20px;
+    color: var(--color-text);
+}
+
+.dropdown-list {
+    border-top: 1px solid var(--color-f2);
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.space {
+}
+
+.dropdown-name {
+    @include flex(center, unset);
+    cursor: pointer;
+
+    & > svg {
+        margin-right: 4px;
+        transform: scale(0.85);
+        color: var(--color-73);
+    }
+
+    & > span {
+        padding: 0 5px;
+        font-weight: 600;
+    }
+}
+
+.dropdown-name,
+.dropdown-tab {
+    font-size: 1.4rem;
+}
+
+//input
+.input-wrapper {
+    display: flex;
+    flex: 1;
+}
+.input {
+    height: 28px;
+    padding: 0;
+    &__focus,
+    &__blur {
+        border-radius: 13px;
+    }
+    &__focus {
+        background-color: var(--color-f2);
+        border: 1px solid transparent;
+    }
+
+    &__focus > input {
+        padding: 0 12px;
+    }
+
+    &__blur {
+        border: 1px dashed var(--color-a6);
+    }
+    &__hide > input {
+        display: none;
+    }
+
+    &__blur > input {
+        padding: 0 12px;
+        color: var(--color-a6) !important;
+    }
+
+    & > input {
+        min-width: 0;
+        height: 28px;
+        color: var(--color-26);
+        font-size: 1.3rem;
+        background-color: transparent;
+        &::placeholder {
+            color: var(--color-26);
+            opacity: 0.9;
+        }
+    }
+}
+
+//tag add
+.btn {
+    order: -1;
+}
+.icon {
+    display: flex;
+    margin-right: 8px;
+    color: var(--color-a6);
+}

@@ -91,7 +91,7 @@ const initialState: InitialState = {
             isOverflow: false,
             format: 'through',
         },
-    ],
+    ]
 };
 
 const editorSlice = createSlice({

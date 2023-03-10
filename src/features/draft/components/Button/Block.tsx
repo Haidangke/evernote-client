@@ -7,16 +7,16 @@ import { useAppDispatch } from 'app/hooks';
 import { editorActions } from 'features/editor/editorSlice';
 import useCheckOverflow from 'features/editor/hooks/useCheckOverflow';
 
-import { ovfToolbarConfig } from 'config/toolbar';
+import { limitBtns } from 'config/toolbar';
 
 import styles from './Button.module.scss';
 const cx = classNames.bind(styles);
 
-function Block({ format, children, content, className, onClick }: ButtonProps) {
+function Block({ format, children, className, onClick, tippy, active }: ButtonProps) {
     const dispatch = useAppDispatch();
     const [isOverflow, setIsOverflow] = useState<boolean>(false);
 
-    const limit = ovfToolbarConfig.find((item) => item.format === format)?.limit || 0;
+    const limit = limitBtns.find((item) => item.format === format)?.limit || 0;
     const check = useCheckOverflow(limit);
 
     useEffect(() => {
@@ -33,14 +33,14 @@ function Block({ format, children, content, className, onClick }: ButtonProps) {
                 placement={'bottom'}
                 render={(attrs) => (
                     <div className={cx('tippy-content')} {...attrs}>
-                        {content}
+                        {tippy}
                     </div>
                 )}
             >
                 <button
                     value={format}
                     className={`${cx('btn', {
-                        'btn-active': true,
+                        'btn-active': active,
                     })}  ${className || ''}`}
                     onClick={onClick}
                 >

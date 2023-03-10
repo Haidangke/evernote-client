@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { useSlate } from 'slate-react';
 
 import { CheckIcon } from 'components/Icons';
-import { fontSizeConfig } from 'config/toolbar';
+import { fontSizes } from 'config/toolbar';
 import { getMarks, isMarkActive, toggleMark } from '../../utils/mark';
 import { DropdownButton } from '../SlateButton';
 
@@ -14,7 +14,7 @@ function FontSize() {
     const editor = useSlate();
     const marks = getMarks(editor);
 
-    const fontSizeCur = useMemo(() => marks.find((mark) => fontSizeConfig.includes(mark)), [marks]);
+    const fontSizeCur = useMemo(() => marks.find((mark) => fontSizes.includes(mark)), [marks]);
 
     const fontSizeDefault = fontSizeCur || '16';
     return (
@@ -23,7 +23,7 @@ function FontSize() {
             value={fontSizeDefault.replace('px', '')}
             dropdown={() => (
                 <div className={cx('dropdown-wrapper')}>
-                    {fontSizeConfig.map((item) => (
+                    {fontSizes.map((item) => (
                         <button
                             key={item}
                             className={cx('dropdown-align')}

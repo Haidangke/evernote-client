@@ -1,7 +1,7 @@
+import { convertItemStyleMap } from './../utils/ArrayUtils';
 import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from 'components/Icons';
-import { ElementType } from 'features/editor/slates';
 
-export const fontSizeConfig = [
+const fontSizes = [
     '8px',
     '9px',
     '10px',
@@ -18,13 +18,13 @@ export const fontSizeConfig = [
     '96px',
 ];
 
-export const alignConfig = [
+const aligns = [
     { value: 'left', icon: AlignLeftIcon },
     { value: 'center', icon: AlignCenterIcon },
     { value: 'right', icon: AlignRightIcon },
 ];
 
-export const colorConfig = [
+const colors = [
     'rgb(51, 51, 51)',
     'rgb(90, 90, 90)',
     'rgb(140, 140, 140)',
@@ -41,7 +41,7 @@ export const colorConfig = [
     'rgb(24, 168, 65)',
 ];
 
-export const fontFamilyConfig = [
+const fontFamilies = [
     { value: '"Source Sans Pro", sans-serif', name: 'Sans Serif' },
     { value: '"Source Serif Pro", serif', name: 'Serif' },
     { value: '"Zilla Slab", serif', name: 'Slab Serif' },
@@ -50,26 +50,7 @@ export const fontFamilyConfig = [
     { value: '"Kalam", cursive', name: 'Viết tay' },
 ];
 
-export const headingConfig = [
-    {
-        name: 'Tiêu đề lớn',
-        value: '30px',
-    },
-    {
-        name: 'Tiêu đề trung bình',
-        value: '24px',
-    },
-    {
-        name: 'Tiêu đề nhỏ',
-        value: '18px',
-    },
-    {
-        name: 'Văn bản thường',
-        value: '16px',
-    },
-];
-
-export const headingConfig2 = [
+const headings = [
     {
         name: 'Tiêu đề lớn',
         value: 'header-one',
@@ -92,7 +73,7 @@ export const headingConfig2 = [
     },
 ];
 
-export const ovfToolbarConfig = [
+const limitBtns = [
     {
         format: 'color',
         limit: 460,
@@ -153,3 +134,5 @@ export const ovfToolbarConfig = [
         limit: 885,
     },
 ];
+
+export { fontSizes, aligns, fontFamilies, colors, headings, limitBtns };

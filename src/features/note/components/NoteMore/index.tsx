@@ -8,7 +8,7 @@ import { Note, Tag } from 'types';
 import Toast from 'components/Toast';
 import TippyMore from 'components/Tippy/TippyMore';
 import ModalCreate from 'components/Modal/ModalCreate';
-import SearchInput from 'components/SearchInput';
+import SearchInput from 'components/Input/SearchInput';
 import { CheckIcon, NotebookIcon, NotebookDfIcon } from 'components/Icons';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { search } from 'utils/ArrayUtils';
@@ -137,8 +137,9 @@ function NoteMore({ page, noteId }: NoteMoreProps) {
                     toast((t) => (
                         <Toast
                             toastId={t.id}
-                            content={`Đã chuyển "${curNote.title || 'Không có tiêu đề'
-                                }" vào sổ tay" ${selectMove?.name}"`}
+                            content={`Đã chuyển "${
+                                curNote.title || 'Không có tiêu đề'
+                            }" vào sổ tay" ${selectMove?.name}"`}
                         />
                     ));
                 });

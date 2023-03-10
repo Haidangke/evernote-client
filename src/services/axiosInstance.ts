@@ -58,4 +58,23 @@ axiosClientSecret.interceptors.response.use(
     }
 );
 
-export default axiosClientSecret;
+const axiosClient = axios.create({
+    baseURL: BASE_URL_API,
+    headers: {
+        Accepted: 'appication/json',
+        'Content-Type': 'application/json',
+    },
+});
+
+axiosClient.defaults.withCredentials = true;
+
+axiosClient.interceptors.response.use(
+    function (response) {
+        return response.data;
+    },
+    function (error) {
+        return Promise.reject(error);
+    }
+);
+
+export { axiosClientSecret, axiosClient };

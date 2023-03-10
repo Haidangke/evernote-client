@@ -1,7 +1,7 @@
 import { RichUtils } from 'draft-js';
 import classNames from 'classnames/bind';
 
-import { headingConfig2 } from 'config/toolbar';
+import { headings } from 'config/toolbar';
 import { DropdownButton } from '../Button';
 import { DraftToolbarProps } from '.';
 
@@ -10,9 +10,8 @@ const cx = classNames.bind(styles);
 
 function Heading({ onChange, editorState }: DraftToolbarProps) {
     const currentBlockStyle = RichUtils.getCurrentBlockType(editorState);
-    console.log(currentBlockStyle);
     const heading =
-        headingConfig2.find((item) => item.value === currentBlockStyle)?.name || 'Văn bản thường';
+        headings.find((item) => item.value === currentBlockStyle)?.name || 'Văn bản thường';
 
     return (
         <DropdownButton
@@ -20,13 +19,13 @@ function Heading({ onChange, editorState }: DraftToolbarProps) {
             minWidth='120px'
             dropdown={() => (
                 <div className={cx('dropdown-wrapper')}>
-                    {headingConfig2.map((item) => (
+                    {headings.map((item) => (
                         <button
+                            key={item.value}
                             className={cx('dropdown-heading', {
                                 'dropdown-wrapper__active': currentBlockStyle === item.value,
                             })}
                             style={{ fontSize: item.size }}
-                            key={item.value}
                             onClick={() => {
                                 onChange(RichUtils.toggleBlockType(editorState, item.value));
                             }}

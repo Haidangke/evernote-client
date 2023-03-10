@@ -1,4 +1,4 @@
-import { fontFamilyConfig, fontSizeConfig, colorConfig } from 'config/toolbar';
+import { fontFamilies, fontSizes, colors } from 'config/toolbar';
 import { Editor } from 'slate';
 
 const isMarkActive = (editor: any, format: any) => {
@@ -14,22 +14,22 @@ const getMarks = (editor: any) => {
 const toggleMark = (editor: any, format: any) => {
     const marks: any = Editor.marks(editor);
 
-    const isFontSize = fontSizeConfig.includes(format);
-    const isColor = colorConfig.includes(format);
-    const isFontFamily = fontFamilyConfig.map((item) => item.value).includes(format);
+    const isFontSize = fontSizes.includes(format);
+    const isColor = colors.includes(format);
+    const isFontFamily = fontFamilies.map((item) => item.value).includes(format);
 
     const isActive = isMarkActive(editor, format);
     if (isActive) {
         Editor.removeMark(editor, format);
     } else {
         for (const mark in marks) {
-            if (fontSizeConfig.includes(mark) && isFontSize) {
+            if (fontSizes.includes(mark) && isFontSize) {
                 Editor.removeMark(editor, mark);
             }
-            if (fontFamilyConfig.map((item) => item.value).includes(mark) && isFontFamily) {
+            if (fontFamilies.map((item) => item.value).includes(mark) && isFontFamily) {
                 Editor.removeMark(editor, mark);
             }
-            if (colorConfig.includes(mark) && isColor) {
+            if (colors.includes(mark) && isColor) {
                 Editor.removeMark(editor, mark);
             }
         }

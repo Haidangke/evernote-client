@@ -6,7 +6,7 @@ import { useAppDispatch } from 'app/hooks';
 import useCheckOverflow from '../../hooks/useCheckOverflow';
 import { editorActions } from 'features/editor/editorSlice';
 
-import { ovfToolbarConfig } from 'config/toolbar';
+import { limitBtns } from 'config/toolbar';
 import styles from './Button.module.scss';
 
 interface HandleProps {
@@ -25,7 +25,7 @@ function Handle({ children, handle, className, content, disable, format, modal }
     const dispatch = useAppDispatch();
     const [isOverflow, setIsOverflow] = useState<boolean>(false);
 
-    const limit = ovfToolbarConfig.find((item) => item.format === format)?.limit || 0;
+    const limit = limitBtns.find((item) => item.format === format)?.limit || 0;
     const check = useCheckOverflow(limit);
     useEffect(() => {
         if (check !== undefined && format) {

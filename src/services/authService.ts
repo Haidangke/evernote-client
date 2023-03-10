@@ -1,6 +1,6 @@
 import { Response } from 'types';
 import { LoginParams, RegisterParams, User } from 'types/auth';
-import axiosClient from './axiosClient';
+import { axiosClient } from './axiosInstance';
 import history from 'routes/history';
 
 const authService = {

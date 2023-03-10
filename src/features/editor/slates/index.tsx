@@ -1,4 +1,4 @@
-import { fontFamilyConfig, fontSizeConfig, colorConfig } from 'config/toolbar';
+import { fontFamilies, fontSizes, colors } from 'config/toolbar';
 import CheckListItemElement from '../slates/CheckList';
 
 export enum ElementType {
@@ -78,14 +78,14 @@ const SlateLeaf = ({ attributes, children, leaf }: any) => {
         color: 'rgb(0, 0, 0)',
     };
     for (const key in leaf) {
-        if (fontSizeConfig.includes(key)) {
+        if (fontSizes.includes(key)) {
             style.fontSize = key;
         }
-        if (fontFamilyConfig.map((item) => item.value).includes(key)) {
+        if (fontFamilies.map((item) => item.value).includes(key)) {
             style.fontFamily = key;
         }
 
-        if (colorConfig.includes(key)) {
+        if (colors.includes(key)) {
             style.color = key;
         }
     }

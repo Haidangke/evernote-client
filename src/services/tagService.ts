@@ -1,5 +1,5 @@
 import { Note, Tag } from 'types';
-import axiosClientSecret from 'services/axiosClientSecret';
+import { axiosClientSecret } from 'services/axiosInstance';
 
 const tagService = {
     getAll(): Promise<Tag[]> {

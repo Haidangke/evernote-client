@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { SortConfig } from 'config/actions';
-import SearchInput from 'components/SearchInput';
+import SearchInput from 'components/Input/SearchInput';
 import NotebookHeader from './components/NotebookHeader';
 import NotebookTable from './components/NotebookTable';
 

@@ -14,24 +14,11 @@
     height: 100vh;
 }
 
-.toolbar {
-    position: relative;
-    flex-basis: var(--toolbar-height);
-}
-
-.topbar {
-    flex-basis: var(--topbar-height);
-}
-
-.footer {
-    flex-basis: var(--footer-height);
-}
-
 .editor {
     display: flex;
     flex-direction: column;
-    flex-basis: calc(100vh - (var(--topbar-height) + var(--footer-height)));
-    height: calc(100vh - (var(--topbar-height) + var(--footer-height)));
+    flex-basis: calc(100vh - 85px);
+    height: calc(100vh - 85px);
     padding-bottom: 10px;
 }
 
@@ -62,11 +49,6 @@
     position: relative;
     margin-top: 12px;
     padding: 0 40px;
-    & ul,
-    li,
-    ol {
-        padding: revert;
-    }
 }
 
 .placeholder {

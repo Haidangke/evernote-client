@@ -1,5 +1,5 @@
 import { ListParams, Note, UpdateNoteParams, Tag } from 'types';
-import axiosClientSecret from 'services/axiosClientSecret';
+import { axiosClientSecret } from 'services/axiosInstance';
 
 const noteService = {
     getAll(params?: ListParams): Promise<Note<Tag>[]> {

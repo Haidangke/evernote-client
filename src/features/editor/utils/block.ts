@@ -1,5 +1,5 @@
 import { Editor, Transforms, Element as SlateElement } from 'slate';
-import { fontFamilyConfig, colorConfig } from 'config/toolbar';
+import { fontFamilies, colors } from 'config/toolbar';
 
 export const LIST_TYPES = ['numbered-list', 'bulleted-list'];
 export const TEXT_ALIGN_TYPES = ['left', 'center', 'right', 'justify'];
@@ -22,9 +22,9 @@ const toggleBlock = (editor: any, format: any) => {
     const isList = LIST_TYPES.includes(format);
     const isTextAlign = TEXT_ALIGN_TYPES.includes(format);
 
-    const isColor = colorConfig.includes(format);
+    const isColor = colors.includes(format);
 
-    const isFontFamily = fontFamilyConfig.map((item) => item.value).includes(format);
+    const isFontFamily = fontFamilies.map((item) => item.value).includes(format);
 
     let type = 'type';
     if (isTextAlign) type = 'align';

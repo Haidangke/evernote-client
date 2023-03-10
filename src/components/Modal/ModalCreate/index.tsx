@@ -7,9 +7,9 @@ import Modal, { ModalProps } from '..';
 import styles from './ModalCreate.module.scss';
 
 interface ModalCreateProps extends ModalProps {
-    title: string;
-    description?: string;
     onSubmit: () => void;
+    title?: string;
+    description?: string;
     variant?: Variant;
     action?: string;
     disabled?: boolean;
@@ -33,12 +33,14 @@ function ModalCreate({
     return (
         <Modal isSmall={isSmall} isOpen={isOpen} setIsOpen={setIsOpen} width={width}>
             <div className={cx('header')}>
-                <h2 className={cx('title')}>
-                    <span>{title}</span>
-                    <span onClick={() => setIsOpen && setIsOpen(false)}>
-                        <CloseIcon className={cx('icon')} />
-                    </span>
-                </h2>
+                {title && (
+                    <h2 className={cx('title')}>
+                        <span>{title}</span>
+                        <span onClick={() => setIsOpen && setIsOpen(false)}>
+                            <CloseIcon className={cx('icon')} />
+                        </span>
+                    </h2>
+                )}
                 {description && <p className={cx('description')}>{description}</p>}
             </div>
             {children}

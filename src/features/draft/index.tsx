@@ -1,33 +1,39 @@
 import classNames from 'classnames/bind';
+import { convertFromRaw, convertToRaw, EditorState } from 'draft-js';
+import { Editor, EditorProvider } from 'draft-js-rte';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import toast from 'react-hot-toast';
 import { useSearchParams } from 'react-router-dom';
-import { Editor, EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { editorActions } from 'features/editor/editorSlice';
 import { noteActions } from 'features/note/noteSlice';
-
-import { WarningIcon } from 'components/Icons';
-import Loading from 'components/Loading';
-import Toast from 'components/Toast';
 import useLocationPage from 'hooks/useLocationPage';
 import useOnClickOutside from 'hooks/useOnclickOutside';
-import Toolbar from './components/Toolbar';
 
+import Loading from 'components/Loading';
+import { toastError } from 'components/Toast/toast';
+import SlateFooter from './components/SlateFooter';
+import Toolbar from './components/Toolbar';
+import Topbar from './components/Topbar';
+import {
+    blockRenderMap,
+    customStyleMaps,
+    getBlockRendererFn,
+    keyBindingFn,
+    myBlockStyleFn,
+} from './config/draft.config';
+
+import 'draft-js-rte/lib/Draft.css';
+import 'draft-js/dist/Draft.css';
 import styles from './Draft.module.scss';
 import './Draft.scss';
 const cx = classNames.bind(styles);
 
-const styleMap = {
-    SANSSERIF: {
-        fontFamily: '"Source Sans Pro", sans-serif',
-    },
-};
-
 function Draft() {
     const dispatch = useAppDispatch();
     const page = useLocationPage();
+    const isRecycle = page === 'recycle';
+
     const editorRef = useRef(null);
     const [onHeader, setOnHeader] = useState(false);
     const { listNote, isFetching } = useAppSelector((state) => state.note);
@@ -46,98 +52,86 @@ function Draft() {
 
     const onChange = useCallback(
         (newEditorState: EditorState) => {
-            if (!note) return;
-            const content = JSON.stringify(convertToRaw(newEditorState.getCurrentContent()));
-            if (newEditorState !== noteContent) {
-                setEditorState(newEditorState);
-                dispatch(noteActions.update({ id: note._id, params: { content } }));
-                dispatch(noteActions.updateNote({ ...note, content }));
-            }
+            if (!noteContent || !note) return;
+            const _raw = convertToRaw(newEditorState.getCurrentContent());
+            const content = JSON.stringify(_raw);
+
+            setEditorState(newEditorState);
+            dispatch(noteActions.update({ id: note._id, params: { content } }));
+            dispatch(noteActions.updateNote({ ...note, content }));
         },
         [dispatch, noteContent, note]
     );
 
-    //state
+    const blockRendererFn = getBlockRendererFn(editorState as EditorState, onChange);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-
-    const setIsToolbar = useCallback(
-        (isToolbar: boolean) => {
-            dispatch(editorActions.setIsToolbar(isToolbar));
-        },
-        [dispatch]
-    );
-
-    const handleChangeDisable = () => {
-        if (!(page === 'recycle')) return;
-        toast.remove();
-        toast((t) => (
-            <Toast type='error' toastId={t.id}>
-                <span className={styles.toast}>
-                    <WarningIcon />
-                    Bạn không thể cập nhật một ghi chú trong thùng rác
-                </span>
-            </Toast>
-        ));
+    const changeDisable = () => {
+        if (isRecycle) {
+            toastError('Bạn không thể cập nhật một ghi chú trong thùng rác');
+        }
     };
 
     useEffect(() => {
         setEditorState(noteContent);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [noteId]);
-
     useOnClickOutside(editorRef, () => dispatch(editorActions.setIsToolbar(false)));
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.topbar}>{/* <SlateTopbar /> */}</div>
-
+            <Topbar />
             {editorState && note ? (
                 <div ref={editorRef} className={styles.editor}>
-                    <div className={styles.toolbar}>
+                    <EditorProvider
+                        key={note._id}
+                        editorState={editorState}
+                        onChange={onChange}
+                        customStyleMaps={customStyleMaps}
+                    >
                         <Toolbar onChange={onChange} editorState={editorState} />
-                    </div>
 
-                    <div onDoubleClick={handleChangeDisable} className={cx('editable')}>
-                        <input
-                            onFocus={() => {
-                                setOnHeader(true);
-                                setIsToolbar(true);
-                            }}
-                            onBlur={() => setOnHeader(false)}
-                            type='text'
-                            placeholder='Tiêu đề'
-                            className={cx('slate-header', {
-                                'input--disable': page === 'recycle',
-                            })}
-                            value={note.title}
-                            onChange={(e) => {
-                                if (page === 'recycle') return;
-                                const title = e.target.value;
-                                dispatch(noteActions.updateNote({ ...note, title }));
-                                dispatch(noteActions.update({ id: noteId, params: { title } }));
-                            }}
-                        />
-                        <div
-                            className={cx('editable-main', {
-                                'input--disable': page === 'recycle',
-                            })}
-                        >
-                            <Editor
-                                key={note._id}
-                                placeholder='Bắt đầu soạn thảo ghi chú của riêng bạn'
-                                editorState={editorState}
-                                onChange={onChange}
-                                customStyleMap={styleMap}
+                        <div onDoubleClick={changeDisable} className={cx('editable')}>
+                            <input
+                                onFocus={() => {
+                                    setOnHeader(true);
+                                    dispatch(editorActions.setIsToolbar(true));
+                                }}
+                                onBlur={() => setOnHeader(false)}
+                                type='text'
+                                placeholder='Tiêu đề'
+                                className={cx('slate-header', {
+                                    'input--disable': page === 'recycle',
+                                })}
+                                value={note.title}
+                                onChange={(e) => {
+                                    if (page === 'recycle') return;
+                                    const title = e.target.value;
+                                    dispatch(noteActions.updateNote({ ...note, title }));
+                                    dispatch(noteActions.update({ id: noteId, params: { title } }));
+                                }}
                             />
+                            <div
+                                className={cx('editable-main', {
+                                    'input--disable': page === 'recycle',
+                                })}
+                            >
+                                <Editor
+                                    blockStyleFn={myBlockStyleFn}
+                                    blockRendererFn={blockRendererFn}
+                                    blockRenderMap={blockRenderMap}
+                                    keyBindingFn={(e) => keyBindingFn(e, editorState, onChange)}
+                                    placeholder='Bắt đầu soạn thảo ghi chú của riêng bạn'
+                                />
+                            </div>
                         </div>
-                    </div>
+                    </EditorProvider>
                 </div>
             ) : (
                 <div className={cx('loading')}>
                     {isFetching && <Loading width='42px' height='42px' />}
                 </div>
             )}
-            {note && <div className={styles.footer}>{/* <SlateFooter /> */}</div>}
+            {note && <SlateFooter />}
         </div>
     );
 }

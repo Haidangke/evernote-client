@@ -9,7 +9,7 @@ import { editorActions } from 'features/editor/editorSlice';
 
 import { isBlockActive, toggleBlock } from '../../utils/block';
 import useCheckOverflow from '../../hooks/useCheckOverflow';
-import { ovfToolbarConfig } from 'config/toolbar';
+import { limitBtns } from 'config/toolbar';
 
 import styles from './Button.module.scss';
 const cx = classNames.bind(styles);
@@ -19,7 +19,7 @@ function Block({ format, children, content, className }: ButtonProps) {
     const editor = useSlate();
     const [isOverflow, setIsOverflow] = useState<boolean>(false);
 
-    const limit = ovfToolbarConfig.find((item) => item.format === format)?.limit || 0;
+    const limit = limitBtns.find((item) => item.format === format)?.limit || 0;
     const check = useCheckOverflow(limit);
 
     useEffect(() => {
