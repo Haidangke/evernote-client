@@ -4,13 +4,13 @@ import { BsApple } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import Auth from '.';
-
 import authService from 'services/authService';
-
-import Loading from 'components/Loading';
+import { getFCMToken } from 'firebase-config';
 import { validateEmail } from 'utils/StringUtils';
 import { authActions } from '../authSlice';
+import Auth from '.';
+
+import Loading from 'components/Loading';
 
 import styles from './Auth.module.scss';
 
@@ -29,8 +29,9 @@ function Login() {
     const handleFormSubmit = async () => {
         if (!password) return setErrPassword('Bạn chưa nhập mật khẩu');
         if (password.length < 6) return setErrPassword('Mật khẩu tối thiếu 6 kí tự');
+        const deviceToken = await getFCMToken();
 
-        dispatch(authActions.login({ email, password }));
+        dispatch(authActions.login({ email, password, deviceToken }));
     };
 
     const handleCheckEmail = () => {

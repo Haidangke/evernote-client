@@ -1,6 +1,7 @@
 export interface LoginParams {
     email: string;
     password: string;
+    deviceToken: string;
 }
 
 export interface RegisterParams {

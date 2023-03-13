@@ -12,6 +12,7 @@ export interface Note<T> {
     createdAt: string;
     updatedAt: string;
     isShortcut: boolean;
+    reminder: any;
 }
 
 export interface UpdateNoteParams {
@@ -23,4 +24,5 @@ export interface UpdateNoteParams {
     contain?: string[];
     createdAt?: string;
     isShortcut?: boolean;
+    reminder?: any;
 }

@@ -12,7 +12,7 @@ import useOnClickOutside from 'hooks/useOnclickOutside';
 
 import Loading from 'components/Loading';
 import { toastError } from 'components/Toast/toast';
-import SlateFooter from './components/SlateFooter';
+import EditorFooter from './components/Footer';
 import Toolbar from './components/Toolbar';
 import Topbar from './components/Topbar';
 import {
@@ -57,8 +57,16 @@ function Draft() {
             const content = JSON.stringify(_raw);
 
             setEditorState(newEditorState);
-            dispatch(noteActions.update({ id: note._id, params: { content } }));
             dispatch(noteActions.updateNote({ ...note, content }));
+
+            if (
+                !newEditorState
+                    .getCurrentContent()
+                    .getBlockMap()
+                    .equals(noteContent.getCurrentContent().getBlockMap())
+            ) {
+                dispatch(noteActions.update({ id: note._id, params: { content } }));
+            }
         },
         [dispatch, noteContent, note]
     );
@@ -131,7 +139,7 @@ function Draft() {
                     {isFetching && <Loading width='42px' height='42px' />}
                 </div>
             )}
-            {note && <SlateFooter />}
+            {note && <EditorFooter />}
         </div>
     );
 }

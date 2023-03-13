@@ -91,7 +91,7 @@ const getBlockRendererFn = (editorState: EditorState, onChange: any) => (block: 
 
 const blockRenderMap = Map({
     [CHECK_LIST_ITEM]: {
-        element: 'li',
+        element: 'div',
     },
 }).merge(DefaultDraftBlockRenderMap);
 

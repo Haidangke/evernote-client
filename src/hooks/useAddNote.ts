@@ -19,13 +19,13 @@ function useAddNote(notebookId?: string) {
         const empty = EditorState.createEmpty(decorator);
         const content = JSON.stringify(convertToRaw(empty.getCurrentContent()));
 
+        const reminder = new Date(2023, 2, 13, 4, 14, 0);
+        console.log(reminder);
         if (notebook) {
             noteService
-                .create(notebook, { content })
-
+                .create(notebook, { content, reminder: reminder.getTime() })
                 .then((res) => {
                     if (!res) return;
-
                     dispatch(noteActions.setListNote([res, ...listNote]));
                     navigate('/note', { n: res._id, an: true });
                 })

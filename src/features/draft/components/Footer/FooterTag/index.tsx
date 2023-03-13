@@ -2,12 +2,12 @@ import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { useAppSelector } from 'app/hooks';
-import SlateFooterAddTag from '../SlateFooterTagAdd';
-import SlateFooterTagList from '../SlateFooterTagList';
+import FooterAddTag from '../FooterAdd';
+import FooterTagList from '../FooterList';
 
-import styles from './SlateFooterTag.module.scss';
+import styles from './FooterTag.module.scss';
 
-function SlateFooterTag() {
+function FooterTag() {
     const [searchParams] = useSearchParams();
     const noteId = searchParams.get('n');
 
@@ -19,12 +19,12 @@ function SlateFooterTag() {
         <div className={styles.wrapper}>
             {note && (
                 <>
-                    <SlateFooterTagList note={note} />
-                    <SlateFooterAddTag note={note} />
+                    <FooterTagList note={note} />
+                    <FooterAddTag note={note} />
                 </>
             )}
         </div>
     );
 }
 
-export default SlateFooterTag;
+export default FooterTag;

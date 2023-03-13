@@ -11,6 +11,7 @@ import Sidebar from 'features/sidebar';
 
 import styles from './App.module.scss';
 import './App.scss';
+import usePushMessage from 'hooks/usePushMessage';
 
 function PrivateRoutes() {
     useSearchKey();
@@ -39,6 +40,7 @@ function PrivateRoutes() {
 
 function App() {
     useFetchData();
+    usePushMessage();
     return (
         <Routes>
             {publicRoute.map((route) => {
