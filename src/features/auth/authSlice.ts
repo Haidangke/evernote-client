@@ -33,7 +33,6 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-
         getUser(state) {
             state.isLoading = true;
             state.isSuccess = false;
@@ -69,6 +68,11 @@ const authSlice = createSlice({
             state.user = undefined;
             state.isLoggedIn = false;
             state.errorLogin = action.payload;
+        },
+        logout(state) {
+            state.errorLogin = '';
+            state.logging = false;
+            state.user = undefined;
         },
 
         register(state, action: PayloadAction<RegisterParams>) {

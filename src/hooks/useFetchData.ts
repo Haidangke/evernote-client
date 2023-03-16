@@ -7,20 +7,18 @@ import { tagActions } from 'features/tag/tagSlice';
 import { authActions } from 'features/auth/authSlice';
 
 function useFetchData() {
-    const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
     const user = useAppSelector((state) => state.auth.user);
     const dispatch = useAppDispatch();
-
     useEffect(() => {
-        if (!isLoggedIn) return;
         dispatch(authActions.getUser());
-    }, [dispatch, isLoggedIn]);
+    }, [dispatch]);
 
     useEffect(() => {
-        if (!user) return;
-        dispatch(noteActions.fetch());
-        dispatch(tagActions.fetch());
-        dispatch(notebookActions.fetch());
+        if (user) {
+            dispatch(noteActions.fetch());
+            dispatch(tagActions.fetch());
+            dispatch(notebookActions.fetch());
+        }
     }, [dispatch, user]);
 }
 

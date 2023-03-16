@@ -18,6 +18,7 @@ import { noteActions } from 'features/note/noteSlice';
 // import shortcutService from 'services/shortcutService';
 
 import styles from './NoteMore.module.scss';
+import { getFCMToken } from 'firebase-config';
 const cx = classNames.bind(styles);
 
 interface NoteMoreProps {
@@ -161,6 +162,21 @@ function NoteMore({ page, noteId }: NoteMoreProps) {
         }
     };
 
+    const handleReminder = async () => {
+        const token = await getFCMToken();
+        const date = new Date(2023, 2, 16, 10, 53, 0);
+        if (noteIdParams) {
+            noteService
+                .update(noteIdParams, { reminder: date, token })
+                .then((data) => {
+                    console.log({ noteUpdate: data });
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    };
+
     return (
         <>
             <TippyMore
@@ -170,6 +186,9 @@ function NoteMore({ page, noteId }: NoteMoreProps) {
                 dropdown={
                     page !== 'recycle' ? (
                         <div className={styles.wrapper}>
+                            <div onClick={handleReminder} className={styles.item}>
+                                Nhac nho
+                            </div>
                             <div onClick={handleMoveNote} className={styles.item}>
                                 Di chuyển...
                             </div>

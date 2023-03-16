@@ -7,19 +7,14 @@ interface RequireAuthProps {
 }
 
 function PrivateRoute({ children }: RequireAuthProps) {
-    const { isLoggedIn, user } = useAppSelector((state) => state.auth);
+    const { isLoggedIn, user, logging } = useAppSelector((state) => state.auth);
     const note = useAppSelector((state) => state.note);
     const tag = useAppSelector((state) => state.tag);
     const notebook = useAppSelector((state) => state.notebook);
 
     let location = useLocation();
 
-    if (
-        (isLoggedIn && !user) ||
-        !note.isFetchSuccess ||
-        !notebook.isFetchSuccess ||
-        !tag.isFetchSuccess
-    ) {
+    if (logging || !note || !tag || !notebook) {
         return <h1>Loading</h1>;
     }
 

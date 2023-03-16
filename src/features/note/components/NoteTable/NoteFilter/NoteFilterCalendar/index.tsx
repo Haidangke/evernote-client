@@ -1,14 +1,11 @@
 import { Dispatch, SetStateAction } from 'react';
-import Calendar from 'react-calendar';
+import Calendar from 'components/Calendar';
 import classNames from 'classnames/bind';
-import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
-import 'react-calendar/dist/Calendar.css';
 
 import { noteActions } from 'features/note/noteSlice';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { calendarConfig } from 'config/date';
 
-import './NoteFilterCalendar.scss';
 import styles from './NoteFilterCalendar.module.scss';
 const cx = classNames.bind(styles);
 
@@ -86,7 +83,7 @@ function NoteFilterCalendar({ setVisible, status }: NoteFilterCalendarProps) {
         setVisible(false);
     };
 
-    const handleOnChangeCalendar = (dates: Date[], event: any) => {
+    const handleChangeCalendar = (dates: Date[]) => {
         const convertDate = dates.map((item) => item.toLocaleDateString());
         const [dateStart, dateEnd] = convertDate;
 
@@ -150,15 +147,7 @@ function NoteFilterCalendar({ setVisible, status }: NoteFilterCalendarProps) {
                 ))}
             </div>
             <Calendar
-                tileClassName={styles.tile}
-                className={styles.calendar}
-                prev2Label={null}
-                next2Label={null}
-                nextLabel={<BsArrowRight size={18} />}
-                prevLabel={<BsArrowLeft size={18} />}
-                //state
-                selectRange={true}
-                onChange={handleOnChangeCalendar}
+                onChange={handleChangeCalendar}
                 value={dateFilterTime}
                 maxDate={new Date()}
             />

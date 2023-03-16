@@ -8,6 +8,7 @@ import { TippyButton } from 'components/Tippy';
 import { useAppSelector } from 'app/hooks';
 import useLocationPage from 'hooks/useLocationPage';
 import { FullSizeIcon, NoteMainIcon, NoteToIcon } from 'components/Icons';
+import TopbarReminder from './TopbarReminder';
 
 import styles from './Topbar.module.scss';
 const cx = classNames.bind(styles);
@@ -25,6 +26,10 @@ function SlateTopbar() {
         return notebooks.find((notebook) => notebook._id === notebookId);
     }, [noteId, listNote, notebooks]);
 
+    const note = useMemo(() => {
+        return listNote.find((note) => note._id === noteId);
+    }, [listNote, noteId]);
+
     const handleExpandEditor = () => {
         const expand = JSON.parse(searchParams.get('fs') || 'false');
 
@@ -35,6 +40,7 @@ function SlateTopbar() {
         }
         setSearchParams(searchParams);
     };
+
     if (!notebook) return <></>;
 
     return (
@@ -46,6 +52,9 @@ function SlateTopbar() {
                     </TippyButton>
                 </div>
                 <div className={cx('line')}></div>
+
+                <TopbarReminder note={note}/>
+
                 <div className={cx('note')}>
                     <TippyButton
                         className={cx('note-btn')}
@@ -67,7 +76,7 @@ function SlateTopbar() {
                     </TippyButton>
 
                     <TippyButton
-                        className={cx('note-btn__move')}
+                        className={cx('icon-move')}
                         content='Di chuyển ghi chú'
                         placement='bottom'
                     >

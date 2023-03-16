@@ -53,7 +53,6 @@ axiosClientSecret.interceptors.response.use(
         return response.data.data;
     },
     function (error) {
-        console.log(error);
         return Promise.reject(error);
     }
 );

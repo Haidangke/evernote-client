@@ -1,5 +1,4 @@
 import firebase from 'firebase/app';
-
 import 'firebase/messaging';
 
 const firebaseConfig = {
@@ -23,3 +22,5 @@ export const getFCMToken = async () => {
     });
     return token;
 };
+
+export default firebase;

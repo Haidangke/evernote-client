@@ -1,16 +1,22 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
+import history from 'routes/history';
 import authService from 'services/authService';
 import userService from 'services/userService';
 import { LoginParams, RegisterParams, Response, User } from 'types';
-import history from 'routes/history';
 import { authActions } from './authSlice';
 
 function* authSaga() {
-    yield takeLatest(authActions.login.type, login);
-    yield takeLatest(authActions.getUser.type, getUser);
-    yield takeLatest(authActions.register.type, register);
+    const isLogginIn = Boolean(localStorage.getItem('access_token'));
+
+    if (!isLogginIn) {
+        yield takeLatest(authActions.login.type, login);
+        yield takeLatest(authActions.register.type, register);
+    } else {
+        yield takeLatest(authActions.getUser.type, getUser);
+        yield takeLatest(authActions.logout.type, logout);
+    }
 }
 
 function* login(action: PayloadAction<LoginParams>) {
@@ -49,6 +55,10 @@ function* register(action: PayloadAction<RegisterParams>) {
 
         yield put(authActions.registerFailed(message));
     }
+}
+
+function* logout() {
+    yield call(authService.logout);
 }
 
 function* getUser() {
