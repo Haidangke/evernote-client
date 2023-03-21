@@ -2,6 +2,7 @@ import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/t
 import createSagaMiddleware from 'redux-saga';
 
 import editorReducer from 'features/editor/editorSlice';
+import draftReducer from 'features/draft/draftSlice';
 import noteReducer from 'features/note/noteSlice';
 import authReducer from 'features/auth/authSlice';
 import notebookReducer from 'features/notebook/notebookSlice';
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
     notebook: notebookReducer,
     editor: editorReducer,
     // shortcut: shortcutReducer,
-    sidebar: sidebarReducer
+    sidebar: sidebarReducer,
+    draft: draftReducer
 });
 
 export const store = configureStore({

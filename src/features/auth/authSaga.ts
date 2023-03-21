@@ -8,15 +8,10 @@ import { LoginParams, RegisterParams, Response, User } from 'types';
 import { authActions } from './authSlice';
 
 function* authSaga() {
-    const isLogginIn = Boolean(localStorage.getItem('access_token'));
-
-    if (!isLogginIn) {
-        yield takeLatest(authActions.login.type, login);
-        yield takeLatest(authActions.register.type, register);
-    } else {
-        yield takeLatest(authActions.getUser.type, getUser);
-        yield takeLatest(authActions.logout.type, logout);
-    }
+    yield takeLatest(authActions.login.type, login);
+    yield takeLatest(authActions.register.type, register);
+    yield takeLatest(authActions.getUser.type, getUser);
+    yield takeLatest(authActions.logout.type, logout);
 }
 
 function* login(action: PayloadAction<LoginParams>) {
@@ -27,7 +22,7 @@ function* login(action: PayloadAction<LoginParams>) {
         const { data } = response;
         if (data) {
             localStorage.setItem('access_token', JSON.stringify(data));
-            yield put(authActions.loginSuccess(data));
+            yield put(authActions.loginSuccess());
             history.navigate('/');
         }
     } catch (error: any) {

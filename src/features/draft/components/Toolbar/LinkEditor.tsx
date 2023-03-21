@@ -78,6 +78,7 @@ function LinkEditor({ editorState, onChange }: DraftToolbarProps) {
         <>
             <HandleButton
                 tippy='Liên kết'
+                format='LINK'
                 handle={(e) => {
                     promptForLink(e);
                 }}

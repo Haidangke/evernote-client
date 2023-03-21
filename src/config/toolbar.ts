@@ -1,4 +1,3 @@
-import { convertItemStyleMap } from './../utils/ArrayUtils';
 import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from 'components/Icons';
 
 const fontSizes = [
@@ -135,4 +134,19 @@ const limitBtns = [
     },
 ];
 
-export { fontSizes, aligns, fontFamilies, colors, headings, limitBtns };
+const limits: { [key: string]: number } = {
+    COLOR: 430,
+    BOLD: 460,
+    ITALIC: 490,
+    UNDERLINE: 520,
+    'unordered-list-item': 560,
+    'ordered-list-item': 590,
+    'check-list-item': 620,
+    LINK: 660,
+    ALIGN: 710,
+    INDENT: 750,
+    OUTDENT: 780,
+    STRIKETHROUGH: 810,
+};
+
+export { fontSizes, aligns, fontFamilies, colors, headings, limitBtns, limits };

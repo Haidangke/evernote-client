@@ -22,8 +22,7 @@ function Align({ editorState, onChange }: AlignProps) {
     return (
         <DropdownButton
             value={<AlignIcon />}
-            formats={['left', 'center', 'right']}
-            format='align'
+            format='ALIGN'
             dropdown={() => (
                 <div className={cx('dropdown-wrapper')}>
                     {aligns.map((item) => {

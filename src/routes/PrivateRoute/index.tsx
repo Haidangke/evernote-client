@@ -14,7 +14,7 @@ function PrivateRoute({ children }: RequireAuthProps) {
 
     let location = useLocation();
 
-    if (logging || !note || !tag || !notebook) {
+    if (logging || !note || !tag || !notebook || !user) {
         return <h1>Loading</h1>;
     }
 

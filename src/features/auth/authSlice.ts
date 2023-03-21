@@ -43,8 +43,6 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = true;
             state.isFailed = false;
-
-            state.isLoggedIn = true;
         },
         getUserFailed(state) {
             state.user = undefined;
@@ -52,15 +50,13 @@ const authSlice = createSlice({
             state.isSuccess = false;
             state.isFailed = true;
 
-            state.isLoggedIn = false;
         },
         login(state, action: PayloadAction<LoginParams>) {
             state.logging = true;
         },
-        loginSuccess(state, action: PayloadAction<User>) {
+        loginSuccess(state) {
             state.errorLogin = '';
             state.logging = false;
-            state.user = action.payload;
             state.isLoggedIn = true;
         },
         loginFailed(state, action: PayloadAction<string>) {

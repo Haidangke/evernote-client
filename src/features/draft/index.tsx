@@ -15,6 +15,7 @@ import { toastError } from 'components/Toast/toast';
 import EditorFooter from './components/Footer';
 import Toolbar from './components/Toolbar';
 import Topbar from './components/Topbar';
+import { Note, Tag } from 'types';
 import {
     blockRenderMap,
     customStyleMaps,
@@ -29,35 +30,42 @@ import styles from './Draft.module.scss';
 import './Draft.scss';
 const cx = classNames.bind(styles);
 
-function Draft() {
+function DraftWrapper() {
+    const { listNote } = useAppSelector((state) => state.note);
+
+    const [searchParams] = useSearchParams();
+    const noteId = searchParams.get('n') || '';
+    const note = useMemo(() => listNote.find((note) => note._id === noteId), [listNote, noteId]);
+
+    return note ? (
+        <Draft note={note} />
+    ) : (
+        <div className={cx('loading')}>{<Loading width='42px' height='42px' />}</div>
+    );
+}
+
+function Draft({ note }: { note: Note<Tag> }) {
+    const noteId = note._id;
     const dispatch = useAppDispatch();
     const page = useLocationPage();
     const isRecycle = page === 'recycle';
 
     const editorRef = useRef(null);
     const [onHeader, setOnHeader] = useState(false);
-    const { listNote, isFetching } = useAppSelector((state) => state.note);
-
-    const [searchParams] = useSearchParams();
-    const noteId = searchParams.get('n') || '';
-    const note = useMemo(() => listNote.find((note) => note._id === noteId), [listNote, noteId]);
 
     const noteContent = useMemo(() => {
-        if (!note) return null;
         const rawContentFromStore = convertFromRaw(JSON.parse(note.content));
         return EditorState.createWithContent(rawContentFromStore);
     }, [note]);
 
-    const [editorState, setEditorState] = useState(noteContent);
+    const [editorState, setEditorState] = useState<EditorState>(() =>
+        EditorState.createWithContent(convertFromRaw(JSON.parse(note.content)))
+    );
 
     const onChange = useCallback(
         (newEditorState: EditorState) => {
-            if (!noteContent || !note) return;
-            const _raw = convertToRaw(newEditorState.getCurrentContent());
-            const content = JSON.stringify(_raw);
-
+            const content = JSON.stringify(convertToRaw(newEditorState.getCurrentContent()));
             setEditorState(newEditorState);
-            dispatch(noteActions.updateNote({ ...note, content }));
 
             if (
                 !newEditorState
@@ -65,13 +73,14 @@ function Draft() {
                     .getBlockMap()
                     .equals(noteContent.getCurrentContent().getBlockMap())
             ) {
+                dispatch(noteActions.updateNote({ ...note, content }));
                 dispatch(noteActions.update({ id: note._id, params: { content } }));
             }
         },
-        [dispatch, noteContent, note]
+        [dispatch, note, noteContent]
     );
 
-    const blockRendererFn = getBlockRendererFn(editorState as EditorState, onChange);
+    const blockRendererFn = getBlockRendererFn(editorState, onChange);
 
     const changeDisable = () => {
         if (isRecycle) {
@@ -88,60 +97,56 @@ function Draft() {
     return (
         <div className={styles.wrapper}>
             <Topbar />
-            {editorState && note ? (
-                <div ref={editorRef} className={styles.editor}>
-                    <EditorProvider
-                        key={note._id}
-                        editorState={editorState}
-                        onChange={onChange}
-                        customStyleMaps={customStyleMaps}
-                    >
-                        <Toolbar onChange={onChange} editorState={editorState} />
 
-                        <div onDoubleClick={changeDisable} className={cx('editable')}>
-                            <input
-                                onFocus={() => {
-                                    setOnHeader(true);
-                                    dispatch(editorActions.setIsToolbar(true));
-                                }}
-                                onBlur={() => setOnHeader(false)}
-                                type='text'
-                                placeholder='Tiêu đề'
-                                className={cx('slate-header', {
-                                    'input--disable': page === 'recycle',
-                                })}
-                                value={note.title}
-                                onChange={(e) => {
-                                    if (page === 'recycle') return;
-                                    const title = e.target.value;
-                                    dispatch(noteActions.updateNote({ ...note, title }));
-                                    dispatch(noteActions.update({ id: noteId, params: { title } }));
-                                }}
+            <div ref={editorRef} className={styles.editor}>
+                <EditorProvider
+                    key={note._id}
+                    editorState={editorState}
+                    onChange={onChange}
+                    customStyleMaps={customStyleMaps}
+                >
+                    <Toolbar onChange={onChange} editorState={editorState} />
+
+                    <div onDoubleClick={changeDisable} className={cx('editable')}>
+                        <input
+                            onFocus={() => {
+                                setOnHeader(true);
+                                dispatch(editorActions.setIsToolbar(true));
+                            }}
+                            onBlur={() => setOnHeader(false)}
+                            type='text'
+                            placeholder='Tiêu đề'
+                            className={cx('slate-header', {
+                                'input--disable': page === 'recycle',
+                            })}
+                            value={note.title}
+                            onChange={(e) => {
+                                if (page === 'recycle') return;
+                                const title = e.target.value;
+                                dispatch(noteActions.updateNote({ ...note, title }));
+                                dispatch(noteActions.update({ id: noteId, params: { title } }));
+                            }}
+                        />
+                        <div
+                            className={cx('editable-main', {
+                                'input--disable': page === 'recycle',
+                            })}
+                        >
+                            <Editor
+                                blockStyleFn={myBlockStyleFn}
+                                blockRendererFn={blockRendererFn}
+                                blockRenderMap={blockRenderMap}
+                                keyBindingFn={(e) => keyBindingFn(e, editorState, onChange)}
+                                placeholder='Bắt đầu soạn thảo ghi chú của riêng bạn'
                             />
-                            <div
-                                className={cx('editable-main', {
-                                    'input--disable': page === 'recycle',
-                                })}
-                            >
-                                <Editor
-                                    blockStyleFn={myBlockStyleFn}
-                                    blockRendererFn={blockRendererFn}
-                                    blockRenderMap={blockRenderMap}
-                                    keyBindingFn={(e) => keyBindingFn(e, editorState, onChange)}
-                                    placeholder='Bắt đầu soạn thảo ghi chú của riêng bạn'
-                                />
-                            </div>
                         </div>
-                    </EditorProvider>
-                </div>
-            ) : (
-                <div className={cx('loading')}>
-                    {isFetching && <Loading width='42px' height='42px' />}
-                </div>
-            )}
-            {note && <EditorFooter />}
+                    </div>
+                </EditorProvider>
+            </div>
+
+            <EditorFooter />
         </div>
     );
 }
 
-export default Draft;
+export default DraftWrapper;

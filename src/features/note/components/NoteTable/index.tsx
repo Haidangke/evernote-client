@@ -99,13 +99,15 @@ function NoteTable() {
     ]);
 
     useEffect(() => {
-        if (listNoteFilter.some((note) => note._id === noteId)) return;
-        if (listNoteFilter.length > 0) {
-            searchParams.set('n', listNoteFilter[0]?._id);
-        } else {
-            searchParams.delete('n');
+        if (listNoteFilter.length === 0) return;
+        if (!listNoteFilter.some((note) => note._id === noteId)) {
+            if (listNoteFilter.length > 0 && !noteId) {
+                searchParams.set('n', listNoteFilter[0]?._id);
+            } else {
+                searchParams.delete('n');
+            }
+            setSearchParams(searchParams);
         }
-        setSearchParams(searchParams);
     }, [listNoteFilter, noteId, searchParams, setSearchParams]);
 
     return (

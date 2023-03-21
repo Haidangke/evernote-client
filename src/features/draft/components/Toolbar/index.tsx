@@ -1,10 +1,9 @@
 import { memo, useEffect } from 'react';
-import { useResizeDetector } from 'react-resize-detector';
 import classNames from 'classnames/bind';
+import { useResizeDetector } from 'react-resize-detector';
 
-import { editorActions } from 'features/editor/editorSlice';
 import { useAppDispatch } from 'app/hooks';
-import { BlockButton, HandleButton, InlineButton } from '../Button';
+import { draftActions } from 'features/draft/draftSlice';
 import {
     BoldIcon,
     BulletedListIcon,
@@ -12,22 +11,23 @@ import {
     LineThrougnIcon,
     NumberListIcon,
     RedoIcon,
-    SubScriptIcon,
     TestListIcon,
     UnderlineIcon,
     UndoTcon,
-    UpperIndexIcon,
 } from 'components/Icons';
+import { HandleButton, InlineButton } from '../Button';
 
-import styles from './Toolbar.module.scss';
 import { EditorState, RichUtils } from 'draft-js';
-import Heading from './Heading';
+import Align from './Align';
+import ColorPicker from './ColorPicker';
 import FontFamily from './FontFamily';
 import FontSize from './FontSize';
-import ColorPicker from './ColorPicker';
-import Align from './Align';
-import LinkEditor from './LinkEditor';
+import Heading from './Heading';
 import Indent from './Indent';
+import LinkEditor from './LinkEditor';
+
+import styles from './Toolbar.module.scss';
+import DropdownToolbar from '../DropdownToolbar';
 const cx = classNames.bind(styles);
 
 export interface DraftToolbarProps {
@@ -43,7 +43,7 @@ function DraftToolbar({ onHeader, onChange, editorState }: DraftToolbarProps) {
 
     useEffect(() => {
         if (!width) return;
-        dispatch(editorActions.setWidth(width));
+        dispatch(draftActions.setWidth(width));
     }, [width, dispatch]);
     return (
         <div className={styles.wrapper} ref={ref}>
@@ -80,7 +80,7 @@ function DraftToolbar({ onHeader, onChange, editorState }: DraftToolbarProps) {
                         onChange(RichUtils.toggleInlineStyle(editorState, 'BOLD'));
                     }}
                     tippy='Đậm'
-                    format='bold'
+                    format='BOLD'
                 >
                     <BoldIcon />
                 </InlineButton>
@@ -89,7 +89,7 @@ function DraftToolbar({ onHeader, onChange, editorState }: DraftToolbarProps) {
                         onChange(RichUtils.toggleInlineStyle(editorState, 'ITALIC'));
                     }}
                     tippy='Nghiêng'
-                    format='italic'
+                    format='ITALIC'
                     active={editorState.getCurrentInlineStyle().has('ITALIC')}
                 >
                     <ItalicIcon />
@@ -99,34 +99,34 @@ function DraftToolbar({ onHeader, onChange, editorState }: DraftToolbarProps) {
                         onChange(RichUtils.toggleInlineStyle(editorState, 'UNDERLINE'));
                     }}
                     tippy='Gạch dưới'
-                    format='underline'
+                    format='UNDERLINE'
                     active={editorState.getCurrentInlineStyle().has('UNDERLINE')}
                 >
                     <UnderlineIcon />
                 </InlineButton>
                 <div className={cx('line')}></div>
-                <BlockButton
+                <InlineButton
                     tippy='Danh sách dấu đầu dòng'
-                    format='bulleted-list'
+                    format='unordered-list-item'
                     onClick={() => {
                         onChange(RichUtils.toggleBlockType(editorState, 'unordered-list-item'));
                     }}
                     active={RichUtils.getCurrentBlockType(editorState) === 'unordered-list-item'}
                 >
                     <BulletedListIcon />
-                </BlockButton>
-                <BlockButton
+                </InlineButton>
+                <InlineButton
                     tippy='Danh sách đánh số'
-                    format='numbered-list'
+                    format='ordered-list-item'
                     onClick={() => {
                         onChange(RichUtils.toggleBlockType(editorState, 'ordered-list-item'));
                     }}
                     active={RichUtils.getCurrentBlockType(editorState) === 'ordered-list-item'}
                 >
                     <NumberListIcon />
-                </BlockButton>
+                </InlineButton>
 
-                <BlockButton
+                <InlineButton
                     tippy='Danh sách kiểm tra'
                     format='check-list-item'
                     onClick={() => {
@@ -135,27 +135,37 @@ function DraftToolbar({ onHeader, onChange, editorState }: DraftToolbarProps) {
                     active={RichUtils.getCurrentBlockType(editorState) === 'check-list-item'}
                 >
                     <TestListIcon />
-                </BlockButton>
+                </InlineButton>
                 <div className={cx('line')}></div>
 
                 <LinkEditor editorState={editorState} onChange={onChange} />
 
                 <div className={cx('line')}></div>
                 <Align onChange={onChange} editorState={editorState} />
-                <Indent  onChange={onChange} editorState={editorState}/>
+                <Indent onChange={onChange} editorState={editorState} />
                 <div className={cx('line')}></div>
+
+                <InlineButton
+                    onClick={() => {
+                        onChange(RichUtils.toggleInlineStyle(editorState, 'STRIKETHROUGH'));
+                    }}
+                    tippy='Gạch ngang'
+                    format='STRIKETHROUGH'
+                >
+                    <LineThrougnIcon />
+                </InlineButton>
+                <DropdownToolbar />
                 {/* <MarkButton content='Gạch ngang' format='through'>
                     <LineThrougnIcon />
                 </MarkButton>
+                
                 <MarkButton content='Chỉ số trên' format='sup'>
                     <UpperIndexIcon />
                 </MarkButton>
 
                 <MarkButton content='Chỉ số dưới' format='sub'>
                     <SubScriptIcon />
-                </MarkButton>
-
-                <OverflowToolbar /> */}
+                </MarkButton> */}
             </div>
         </div>
     );

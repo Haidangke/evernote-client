@@ -1,56 +1,37 @@
-import { useEffect, useState } from 'react';
-import classNames from 'classnames/bind';
 import TippyHeadLess from '@tippyjs/react/headless';
+import classNames from 'classnames/bind';
 
-import useCheckOverflow from 'features/editor/hooks/useCheckOverflow';
-import { editorActions } from 'features/editor/editorSlice';
-import { useAppDispatch } from 'app/hooks';
-import { ButtonProps } from '.';
-import { limitBtns } from 'config/toolbar';
+import { ButtonProps, WrapperButton } from '.';
 
 import styles from './Button.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Inline({ format, children, tippy, className, onClick, active }: ButtonProps) {
-    const dispatch = useAppDispatch();
-
-    const [isOverflow, setIsOverflow] = useState<boolean>(false);
-
-    const limit = limitBtns.find((item) => item.format === format)?.limit || 0;
-    const check = useCheckOverflow(limit);
-
-    useEffect(() => {
-        if (check !== undefined) {
-            setIsOverflow(!check);
-            dispatch(editorActions.setOverflow({ format, value: !check }));
-        }
-    }, [dispatch, format, check]);
-
-    return !isOverflow ? (
-        <div>
-            <TippyHeadLess
-                delay={[500, 0]}
-                placement={'bottom'}
-                render={(attrs) => (
-                    <div className={cx('tippy-content')} {...attrs}>
-                        {tippy}
-                    </div>
-                )}
-            >
-                <button
-                    value={format}
-                    className={`${cx('btn', {
-                        'btn-active': active,
-                    })}  ${className || ''}`}
-                    onClick={onClick}
+function Inline({ format, children, tippy, onClick, active }: ButtonProps) {
+    return (
+        <WrapperButton format={format}>
+            <div>
+                <TippyHeadLess
+                    delay={[500, 0]}
+                    placement={'bottom'}
+                    render={(attrs) => (
+                        <div className={cx('tippy-content')} {...attrs}>
+                            {tippy}
+                        </div>
+                    )}
                 >
-                    {children}
-                </button>
-            </TippyHeadLess>
-        </div>
-    ) : (
-        <></>
+                    <button
+                        value={format}
+                        className={cx('btn', {
+                            'btn-active': active,
+                        })}
+                        onClick={onClick}
+                    >
+                        {children}
+                    </button>
+                </TippyHeadLess>
+            </div>
+        </WrapperButton>
     );
 }
 

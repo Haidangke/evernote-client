@@ -1,31 +1,19 @@
 import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
-import { BiCheck } from 'react-icons/bi';
 import { useInline } from 'draft-js-rte';
+import { BiCheck } from 'react-icons/bi';
 
 import { ColorPickerIcon } from 'components/Icons';
 import { colors } from 'config/toolbar';
-import useCheckOverflow from 'features/editor/hooks/useCheckOverflow';
 import { DropdownButton } from '../Button';
-import { limitBtns } from 'config/toolbar';
 
 import colorPicker from 'assets/images/cl_pick.png';
 import styles from './Toolbar.module.scss';
 const cx = classNames.bind(styles);
 
 function ColorPicker() {
-    const [isOverflow, setIsOverflow] = useState<boolean>(false);
-
-    const limit = limitBtns.find((item) => item.format === 'color')?.limit || 0;
-    const check = useCheckOverflow(limit);
-
-    useEffect(() => {
-        if (check !== undefined) {
-            setIsOverflow(!check);
-        }
-    }, [check]);
-    return !isOverflow ? (
+    return (
         <DropdownButton
+            format='COLOR'
             value={
                 <div className={cx('color-picker')}>
                     <img src={colorPicker} alt='color picker' />
@@ -40,8 +28,6 @@ function ColorPicker() {
                 </div>
             )}
         />
-    ) : (
-        <></>
     );
 }
 

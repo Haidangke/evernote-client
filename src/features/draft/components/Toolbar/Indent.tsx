@@ -34,7 +34,7 @@ function Indent({ onChange, editorState }: DraftToolbarProps) {
     return (
         <>
             <HandleButton
-                format='indent'
+                format='INDENT'
                 tippy='Indent'
                 disable={getDepth(editorState) === 4}
                 handle={(event) => {
@@ -46,7 +46,7 @@ function Indent({ onChange, editorState }: DraftToolbarProps) {
             </HandleButton>
             <HandleButton
                 disable={getDepth(editorState) === 0}
-                format='outdent'
+                format='OUTDENT'
                 tippy='Outdent'
                 handle={handleOutdent}
             >
