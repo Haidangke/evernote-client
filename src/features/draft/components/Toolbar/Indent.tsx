@@ -1,10 +1,10 @@
 import { ContentBlock, ContentState, EditorState, RichUtils } from 'draft-js';
 
 import { IndentIcon, OutdentIcon } from 'components/Icons';
-import { DraftToolbarProps } from '.';
+import { DraftToolProps } from '.';
 import { HandleButton } from '../Button';
 
-function Indent({ onChange, editorState }: DraftToolbarProps) {
+function Indent({ onChange, editorState }: DraftToolProps) {
     const getDepth = (state: any) => {
         const contentState = state.getCurrentContent();
         const selectionState = state.getSelection();

@@ -10,6 +10,8 @@ import noteService from 'services/noteService';
 import { getFCMToken } from 'firebase-config';
 import { useAppDispatch } from 'app/hooks';
 import { noteActions } from 'features/note/noteSlice';
+import { toastError, toastInfo } from 'components/Toast/toast';
+import useLocationPage from 'hooks/useLocationPage';
 const cx = classNames.bind(styles);
 
 interface TopbarReminderProps {
@@ -17,6 +19,7 @@ interface TopbarReminderProps {
 }
 
 function TopbarReminder({ note }: TopbarReminderProps) {
+    const page = useLocationPage();
     const dispatch = useAppDispatch();
     const reminder = note?.reminder;
     const noteId = note?._id;
@@ -29,13 +32,6 @@ function TopbarReminder({ note }: TopbarReminderProps) {
     const [minutes, setMinutes] = useState(date.getMinutes().toString().padStart(2, '0'));
 
     const [reminderValue, setReminderValue] = useState('');
-
-    const handleChangeCalendar = (date: Date) => {
-        setCalendar(date);
-        if (calendar.toString() === date.toString()) {
-            setVisible(false);
-        }
-    };
 
     const handleChangeHours = (e: any) => {
         const value = e.target.value.trim();
@@ -60,21 +56,28 @@ function TopbarReminder({ note }: TopbarReminderProps) {
         const month = calendar.getMonth();
         const year = calendar.getFullYear();
         const date = new Date(year, month, day, Number(hours), Number(minutes), 0);
+        setVisible(false);
         try {
             if (noteId) {
                 const token = await getFCMToken();
                 const data = await noteService.update(noteId, { reminder: date, token });
                 dispatch(noteActions.updateNote(data));
-                console.log(data);
+                toastInfo(
+                    `Đã đặt thông báo cho "${
+                        data.title || 'Chưa có tiêu đề'
+                    }" vào lúc ${reminderValue}`
+                );
             }
-        } catch (error) {}
+        } catch (error) {
+            toastError('Gặp lỗi khi đặt thông báo cho ghi chú');
+        }
     };
 
     useEffect(() => {
         if (reminder) {
             const date = new Date(reminder);
-            const minutes = date.getMinutes();
-            const hours = date.getHours();
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            const hours = date.getHours().toString().padStart(2, '0');
             const nth = date.getDay();
             const day = date.getDate();
             const month = date.getMonth();
@@ -85,13 +88,16 @@ function TopbarReminder({ note }: TopbarReminderProps) {
 
     return (
         <TippyHeadLess
+            placement='bottom'
             visible={visible}
             setVisible={setVisible}
+            className={cx('reminder-wrapper')}
+            disableContent={page === 'recycle'}
             dropdown={
                 <div className={cx('reminder')}>
                     <Calendar
                         value={calendar}
-                        onChange={handleChangeCalendar}
+                        onChange={setCalendar}
                         maxDate={undefined}
                         selectRange={false}
                     />
@@ -114,6 +120,8 @@ function TopbarReminder({ note }: TopbarReminderProps) {
             <div
                 className={cx('note-btn', 'reminder-header', {
                     'reminder-header--active': reminderValue,
+                    'note-btn--disable': page === 'recycle',
+                    'reminder-header--disable': page === 'recycle',
                 })}
             >
                 <BiAlarm width={'18px'} height={'18px'} />

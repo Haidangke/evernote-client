@@ -193,7 +193,46 @@ export const WarningIcon = ({ className }: IconProps) => (
             fillRule='evenodd'
             clipRule='evenodd'
             d='M12 20a8 8 0 110-16 8 8 0 010 16zm0-2.909a.728.728 0 110-1.455.728.728 0 010 1.455zm-.727-7.273c0 1.205.326 4.364.728 4.364.401 0 .727-3.159.727-4.364V7.636a.728.728 0 00-1.455 0v2.182z'
-            fill='#000'
+            fill='#fff'
         ></path>
+    </svg>
+);
+
+export const RecycleIcon = ({ className }: IconProps) => (
+    <svg
+        width={18}
+        height={20}
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+        className={className}
+    >
+        <path
+            d='M14.158 17.115l.592-10.614H3.25l.616 10.619a2 2 0 001.997 1.884h6.298a2 2 0 001.997-1.889z'
+            fill='currentColor'
+        />
+        <path
+            fillRule='evenodd'
+            clipRule='evenodd'
+            d='M8 .504a2.75 2.75 0 00-2.75 2.75V3.5H1.5a.75.75 0 000 1.5h15a.75.75 0 000-1.5h-3.75v-.246A2.75 2.75 0 0010 .504H8zM11.25 3.5v-.246c0-.69-.56-1.25-1.25-1.25H8c-.69 0-1.25.56-1.25 1.25V3.5h4.5z'
+            fill='currentColor'
+        />
+    </svg>
+);
+
+export const RecycleFillIcon = ({ className }: IconProps) => (
+    <svg
+        width={14}
+        height={14}
+        viewBox='0 0 14 14'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+        className={className}
+    >
+        <path
+            fillRule='evenodd'
+            clipRule='evenodd'
+            d='m2.945 5 8.112.004-.337 6.315C10.662 12.264 9.908 13 8.846 13H5.223c-1.06 0-1.863-.738-1.923-1.681L2.945 5ZM4 6l.288 5.263c.028.43.453.737.935.737h3.623c.483 0 .854-.309.88-.739L10 6H4ZM6.273 1c-1.105 0-2 .883-2 1.868V3H1.545c-.3 0-.545.245-.545.514 0 .268.244.486.545.486h10.91c.3 0 .545-.218.545-.486 0-.269-.244-.514-.546-.514H9.727v-.132c0-.985-.895-1.868-2-1.868H6.273Zm2.363 2v-.132C8.636 2.42 8.23 2 7.727 2H6.273c-.502 0-.91.42-.91.868V3h3.273Z'
+            fill='currentColor'
+        />
     </svg>
 );

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 
 import {
@@ -19,6 +19,8 @@ import DropdownToolbarItem from './DropdownToolbarItem';
 import { DropdownButton } from '../Button';
 
 import styles from './DropdownToolbar.module.scss';
+import { useAppSelector } from 'app/hooks';
+import { limits } from 'config/toolbar';
 const cx = classNames.bind(styles);
 
 const tools = [
@@ -76,8 +78,15 @@ const tools = [
 
 function DropdownToolbar() {
     const [dropdown, setDropdown] = useState(false);
-
-    return (
+    const { width } = useAppSelector((state) => state.draft);
+    useEffect(() => {
+        const newDropdown = [];
+        for (const limit in limits) {
+            newDropdown.push({ limit: limits[limit] });
+        }
+        setDropdown(newDropdown.some((x) => x.limit + 60 > width));
+    }, [width]);
+    return dropdown ? (
         <DropdownButton
             value='Khác'
             dropdown={() => (
@@ -90,7 +99,6 @@ function DropdownToolbar() {
                                     format={item.format}
                                     icon={item.icon}
                                     name={item.name}
-                                    setDropdown={setDropdown}
                                 />
                             ) : (
                                 <div key={index} className={cx('line-through')}>
@@ -102,7 +110,7 @@ function DropdownToolbar() {
                 </div>
             )}
         />
-    );
+    ) : null;
 }
 
 export default DropdownToolbar;

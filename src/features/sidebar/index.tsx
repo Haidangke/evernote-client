@@ -13,6 +13,7 @@ import Menu from './components/Menu';
 import SlideLarge from './components/SlideLarge';
 
 import styles from './Sidebar.module.scss';
+import Search from './components/Search';
 
 const cx = classnames.bind(styles);
 
@@ -79,7 +80,10 @@ function Sidebar() {
             >
                 <div className={cx('main')}>
                     <Header />
-                    <Actions />
+                    <div className={cx('action')}>
+                        <Search />
+                        <Actions />
+                    </div>
                     <Menu />
                 </div>
                 <SlideLarge />

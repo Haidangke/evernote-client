@@ -22,6 +22,4 @@ function findLinkEntities(contentBlock: ContentBlock, callback: any, contentStat
     }, callback);
 }
 
-
-
 export { updateDataOfBlock, findLinkEntities };

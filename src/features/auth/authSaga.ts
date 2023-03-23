@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, fork, put, takeLatest } from 'redux-saga/effects';
 
 import history from 'routes/history';
 import authService from 'services/authService';
@@ -8,6 +8,10 @@ import { LoginParams, RegisterParams, Response, User } from 'types';
 import { authActions } from './authSlice';
 
 function* authSaga() {
+    yield fork(watchUserAuthentication);
+}
+
+function* watchUserAuthentication() {
     yield takeLatest(authActions.login.type, login);
     yield takeLatest(authActions.register.type, register);
     yield takeLatest(authActions.getUser.type, getUser);

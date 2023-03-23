@@ -3,12 +3,12 @@ import classNames from 'classnames/bind';
 
 import { headings } from 'config/toolbar';
 import { DropdownButton } from '../Button';
-import { DraftToolbarProps } from '.';
+import { DraftToolProps } from '.';
 
 import styles from './Toolbar.module.scss';
 const cx = classNames.bind(styles);
 
-function Heading({ onChange, editorState }: DraftToolbarProps) {
+function Heading({ onChange, editorState }: DraftToolProps) {
     const currentBlockStyle = RichUtils.getCurrentBlockType(editorState);
     const heading =
         headings.find((item) => item.value === currentBlockStyle)?.name || 'Văn bản thường';

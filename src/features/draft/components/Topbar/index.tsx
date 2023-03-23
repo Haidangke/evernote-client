@@ -1,13 +1,12 @@
 import { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import classNames from 'classnames/bind';
-import { MdDelete } from 'react-icons/md';
 
 import NoteMore from 'features/note/components/NoteMore';
 import { TippyButton } from 'components/Tippy';
 import { useAppSelector } from 'app/hooks';
 import useLocationPage from 'hooks/useLocationPage';
-import { FullSizeIcon, NoteMainIcon, NoteToIcon } from 'components/Icons';
+import { FullSizeIcon, NoteMainIcon, NoteToIcon, RecycleFillIcon } from 'components/Icons';
 import TopbarReminder from './TopbarReminder';
 
 import styles from './Topbar.module.scss';
@@ -53,35 +52,35 @@ function SlateTopbar() {
                 </div>
                 <div className={cx('line')}></div>
 
-                <TopbarReminder note={note}/>
+                <TopbarReminder note={note} />
 
                 <div className={cx('note')}>
-                    <TippyButton
-                        className={cx('note-btn')}
-                        content='Di chuyển ghi chú'
-                        placement='bottom'
-                        height='100%'
-                    >
-                        {page === 'recycle' ? (
-                            <>
-                                <MdDelete size={16} />
-                                <span>Thùng rác</span>
-                            </>
-                        ) : (
-                            <>
-                                <NoteMainIcon />
-                                <span>{notebook?.name}</span>
-                            </>
-                        )}
-                    </TippyButton>
+                    {page === 'recycle' ? (
+                        <div className={cx('note-btn')}>
+                            <RecycleFillIcon />
+                            <span>Thùng rác</span>
+                        </div>
+                    ) : (
+                        <TippyButton
+                            className={cx('note-btn')}
+                            content='Di chuyển ghi chú'
+                            placement='bottom'
+                            height='100%'
+                        >
+                            <NoteMainIcon />
+                            <span>{notebook?.name}</span>
+                        </TippyButton>
+                    )}
 
-                    <TippyButton
-                        className={cx('icon-move')}
-                        content='Di chuyển ghi chú'
-                        placement='bottom'
-                    >
-                        <NoteToIcon />
-                    </TippyButton>
+                    {page !== 'recycle' && (
+                        <TippyButton
+                            className={cx('icon-move')}
+                            content='Di chuyển ghi chú'
+                            placement='bottom'
+                        >
+                            <NoteToIcon />
+                        </TippyButton>
+                    )}
                 </div>
             </div>
             <div className={cx('right')}>

@@ -9,14 +9,13 @@ import { useAppSelector } from 'app/hooks';
 import styles from './Info.module.scss';
 const cx = classNames.bind(styles);
 
-function SlateInfo() {
+function Info() {
     const page = useLocationPage();
     const [date, setDate] = useState({
         day: '',
         month: '',
         year: '',
     });
-    const isToolbar = useAppSelector((state) => state.editor.isToolbar);
     const { listNote } = useAppSelector((state) => state.note);
 
     const [searchParams] = useSearchParams();
@@ -33,7 +32,7 @@ function SlateInfo() {
     }, [note?.updatedAt]);
 
     return (
-        <div className={cx('wrapper', { hide: isToolbar && page !== 'recycle' })}>
+        <div className={cx('wrapper')}>
             {note?.isTrash && (
                 <div className={cx('is-trash')}>
                     <MdDelete size={18} color='#fff' />
@@ -47,4 +46,4 @@ function SlateInfo() {
     );
 }
 
-export default SlateInfo;
+export default Info;

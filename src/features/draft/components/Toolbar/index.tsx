@@ -25,18 +25,25 @@ import FontSize from './FontSize';
 import Heading from './Heading';
 import Indent from './Indent';
 import LinkEditor from './LinkEditor';
+import Info from '../Info';
+import DropdownToolbar from '../DropdownToolbar';
 
 import styles from './Toolbar.module.scss';
-import DropdownToolbar from '../DropdownToolbar';
 const cx = classNames.bind(styles);
 
-export interface DraftToolbarProps {
-    onHeader?: boolean;
+export interface DraftToolProps {
     onChange: any;
     editorState: EditorState;
 }
 
-function DraftToolbar({ onHeader, onChange, editorState }: DraftToolbarProps) {
+export interface DraftToolbarProps {
+    onHeader: boolean;
+    isToolbar: boolean;
+    onChange: any;
+    editorState: EditorState;
+}
+
+function DraftToolbar({ onHeader, isToolbar, onChange, editorState }: DraftToolbarProps) {
     const dispatch = useAppDispatch();
 
     const { width, height, ref } = useResizeDetector();
@@ -47,9 +54,10 @@ function DraftToolbar({ onHeader, onChange, editorState }: DraftToolbarProps) {
     }, [width, dispatch]);
     return (
         <div className={styles.wrapper} ref={ref}>
-            {/* <Info /> */}
-
-            <div className={cx('toolbar', { 'toolbar-on-header': onHeader })}>
+            <div className={cx('info', { 'info--hide': isToolbar })}>
+                <Info />
+            </div>
+            <div className={cx('toolbar', { 'toolbar--blur': onHeader })}>
                 <HandleButton
                     // disable={undos.length === 0}
                     handle={() => onChange(EditorState.undo(editorState))}

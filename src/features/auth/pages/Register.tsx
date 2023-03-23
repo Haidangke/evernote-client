@@ -49,7 +49,7 @@ const schema = yup
 function Register() {
     const { registering, errorRegister } = useAppSelector((state) => state.auth);
     const dispatch = useAppDispatch();
-    const { control, handleSubmit, reset } = useForm<RegisterParams>({
+    const { control, handleSubmit } = useForm<RegisterParams>({
         defaultValues,
         resolver: yupResolver(schema),
     });

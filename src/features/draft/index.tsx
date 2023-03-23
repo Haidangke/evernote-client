@@ -5,10 +5,10 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { editorActions } from 'features/editor/editorSlice';
 import { noteActions } from 'features/note/noteSlice';
 import useLocationPage from 'hooks/useLocationPage';
 import useOnClickOutside from 'hooks/useOnclickOutside';
+import { draftActions } from './draftSlice';
 
 import Loading from 'components/Loading';
 import { toastError } from 'components/Toast/toast';
@@ -31,27 +31,28 @@ import './Draft.scss';
 const cx = classNames.bind(styles);
 
 function DraftWrapper() {
-    const { listNote } = useAppSelector((state) => state.note);
+    const { listNote, isFetching } = useAppSelector((state) => state.note);
 
     const [searchParams] = useSearchParams();
     const noteId = searchParams.get('n') || '';
     const note = useMemo(() => listNote.find((note) => note._id === noteId), [listNote, noteId]);
 
-    return note ? (
-        <Draft note={note} />
-    ) : (
-        <div className={cx('loading')}>{<Loading width='42px' height='42px' />}</div>
-    );
+    if (isFetching) {
+        return <div className={cx('loading')}>{<Loading width='42px' height='42px' />}</div>;
+    } else {
+        return note ? <Draft note={note} /> : null;
+    }
 }
 
 function Draft({ note }: { note: Note<Tag> }) {
     const noteId = note._id;
     const dispatch = useAppDispatch();
     const page = useLocationPage();
-    const isRecycle = page === 'recycle';
 
     const editorRef = useRef(null);
     const [onHeader, setOnHeader] = useState(false);
+    const [isToolbar, setIsToolbar] = useState(false);
+    // const isToolbar = useAppSelector((state) => state.draft.isToolbar);
 
     const noteContent = useMemo(() => {
         const rawContentFromStore = convertFromRaw(JSON.parse(note.content));
@@ -83,7 +84,7 @@ function Draft({ note }: { note: Note<Tag> }) {
     const blockRendererFn = getBlockRendererFn(editorState, onChange);
 
     const changeDisable = () => {
-        if (isRecycle) {
+        if (page === 'recycle') {
             toastError('Bạn không thể cập nhật một ghi chú trong thùng rác');
         }
     };
@@ -92,7 +93,7 @@ function Draft({ note }: { note: Note<Tag> }) {
         setEditorState(noteContent);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [noteId]);
-    useOnClickOutside(editorRef, () => dispatch(editorActions.setIsToolbar(false)));
+    useOnClickOutside(editorRef, () => setIsToolbar(false));
 
     return (
         <div className={styles.wrapper}>
@@ -105,13 +106,18 @@ function Draft({ note }: { note: Note<Tag> }) {
                     onChange={onChange}
                     customStyleMaps={customStyleMaps}
                 >
-                    <Toolbar onChange={onChange} editorState={editorState} />
+                    <Toolbar
+                        onHeader={onHeader}
+                        isToolbar={isToolbar}
+                        onChange={onChange}
+                        editorState={editorState}
+                    />
 
                     <div onDoubleClick={changeDisable} className={cx('editable')}>
                         <input
                             onFocus={() => {
                                 setOnHeader(true);
-                                dispatch(editorActions.setIsToolbar(true));
+                                setIsToolbar(true);
                             }}
                             onBlur={() => setOnHeader(false)}
                             type='text'
@@ -133,6 +139,7 @@ function Draft({ note }: { note: Note<Tag> }) {
                             })}
                         >
                             <Editor
+                                onFocus={() => setIsToolbar(true)}
                                 blockStyleFn={myBlockStyleFn}
                                 blockRendererFn={blockRendererFn}
                                 blockRenderMap={blockRenderMap}

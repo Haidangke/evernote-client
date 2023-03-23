@@ -4,7 +4,6 @@ import { toast } from 'react-hot-toast';
 import classNames from 'classnames/bind';
 
 import noteService from 'services/noteService';
-import { Note, Tag } from 'types';
 import Toast from 'components/Toast';
 import TippyMore from 'components/Tippy/TippyMore';
 import ModalCreate from 'components/Modal/ModalCreate';
@@ -18,7 +17,7 @@ import { noteActions } from 'features/note/noteSlice';
 // import shortcutService from 'services/shortcutService';
 
 import styles from './NoteMore.module.scss';
-import { getFCMToken } from 'firebase-config';
+import { toastChildren, toastError, toastInfo } from 'components/Toast/toast';
 const cx = classNames.bind(styles);
 
 interface NoteMoreProps {
@@ -48,52 +47,39 @@ function NoteMore({ page, noteId }: NoteMoreProps) {
     const [selectMove, setSelectMove] = useState(curNotebook);
     const [action, setAction] = useState<'move' | 'copy' | null>(null);
 
-    const handleMoveTrash = (isTrash: boolean) => {
+    const handleMoveTrash = async (isTrash: boolean) => {
         setIsMore(false);
         if (!noteIdParams || !curNotebook) return;
-        noteService.update(noteIdParams, { isTrash }).then((note: Note<Tag>) => {
+        try {
+            const note = await noteService.update(noteIdParams, { isTrash });
             dispatch(noteActions.updateNote(note));
-            toast.remove();
-            toast((t) => (
-                <Toast toastId={t.id}>
-                    <>
-                        <span>Đã {isTrash ? 'di chuyển' : 'khôi phục'} "</span>
-                        <span className={styles.value}> {note?.title || 'Chưa có tiêu đề'} </span>
-                        <span>" {isTrash ? 'vào' : 'về'} </span>{' '}
-                        <span className={styles.address}>
-                            {isTrash ? 'Thùng rác' : curNotebook.name}
-                        </span>
-                    </>
-                </Toast>
-            ));
-        });
+            toastChildren(
+                <>
+                    <span>Đã {isTrash ? 'di chuyển' : 'khôi phục'} "</span>
+                    <span className={styles.value}> {note?.title || 'Chưa có tiêu đề'} </span>
+                    <span>" {isTrash ? 'vào' : 'về'} </span>{' '}
+                    <span className={styles.address}>
+                        {isTrash ? 'Thùng rác' : curNotebook.name}
+                    </span>
+                </>
+            );
+        } catch (error) {
+            toastError('Lỗi khi di chuyển ghi chú vào thùng rác');
+        }
     };
 
-    const handleAddShortcut = () => {
+    const handleAddShortcut = async () => {
         setIsMore(false);
         if (!curNote) return;
-        if (curNote.isShortcut) {
-            noteService.update(curNote._id, { isShortcut: false }).then((data) => {
-                // const newShortcuts = [...shortcuts].filter(
-                //     (shortcut) => shortcut._id !== isShortcut._id
-                // );
-                dispatch(noteActions.updateNote(data));
-                toast.remove();
-                toast((t) => (
-                    <Toast toastId={t.id} content={`Đã xóa "${curNote.title}" khỏi lối tắt`} />
-                ));
-            });
-        } else {
-            noteService.update(curNote._id, { isShortcut: true }).then((data) => {
-                // const newShortcuts = [...shortcuts, data];
-                // dispatch(shortcutActions.setShortcuts(newShortcuts));
-                dispatch(noteActions.updateNote(data));
-
-                toast.remove();
-                toast((t) => (
-                    <Toast toastId={t.id} content={`Đã thêm "${curNote.title}" vào lỗi tắt`} />
-                ));
-            });
+        const isShortcut = curNote.isShortcut;
+        try {
+            const note = await noteService.update(curNote._id, { isShortcut: !isShortcut });
+            dispatch(noteActions.updateNote(note));
+            toastInfo(`Đã ${isShortcut ? 'xóa' : 'thêm'} "${curNote.title}" khỏi lối tắt`);
+        } catch (error) {
+            toastError(
+                `Gặp lỗi khi ${isShortcut ? 'xóa' : 'thêm'} "${curNote.title}" khỏi lỗi tắt`
+            );
         }
     };
 
@@ -132,17 +118,12 @@ function NoteMore({ page, noteId }: NoteMoreProps) {
                     notebook: selectMove?._id,
                 })
                 .then((data) => {
-                    toast.remove();
                     dispatch(noteActions.updateNote(data));
-
-                    toast((t) => (
-                        <Toast
-                            toastId={t.id}
-                            content={`Đã chuyển "${
-                                curNote.title || 'Không có tiêu đề'
-                            }" vào sổ tay" ${selectMove?.name}"`}
-                        />
-                    ));
+                    toastInfo(
+                        `Đã chuyển "${curNote.title || 'Không có tiêu đề'}" vào sổ tay" ${
+                            selectMove?.name
+                        }"`
+                    );
                 });
         }
 
@@ -162,21 +143,6 @@ function NoteMore({ page, noteId }: NoteMoreProps) {
         }
     };
 
-    const handleReminder = async () => {
-        const token = await getFCMToken();
-        const date = new Date(2023, 2, 16, 10, 53, 0);
-        if (noteIdParams) {
-            noteService
-                .update(noteIdParams, { reminder: date, token })
-                .then((data) => {
-                    console.log({ noteUpdate: data });
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        }
-    };
-
     return (
         <>
             <TippyMore
@@ -186,9 +152,6 @@ function NoteMore({ page, noteId }: NoteMoreProps) {
                 dropdown={
                     page !== 'recycle' ? (
                         <div className={styles.wrapper}>
-                            <div onClick={handleReminder} className={styles.item}>
-                                Nhac nho
-                            </div>
                             <div onClick={handleMoveNote} className={styles.item}>
                                 Di chuyển...
                             </div>

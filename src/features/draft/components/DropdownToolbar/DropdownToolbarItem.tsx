@@ -7,13 +7,13 @@ interface DropdownToolbarItemProps {
     icon: any;
     name: string;
     format: string;
-    setDropdown: (dropdown: boolean) => void;
 }
 
-function DropdownToolbarItem({ icon, format, name, setDropdown }: DropdownToolbarItemProps) {
+function DropdownToolbarItem({ icon, format, name }: DropdownToolbarItemProps) {
     const { width } = useAppSelector((state) => state.draft);
     const Icon = icon;
     const check = limits[format] + 60 < width;
+
     if (check) return null;
     return (
         <div className={styles.item}>

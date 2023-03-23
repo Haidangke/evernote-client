@@ -1,3 +1,6 @@
+import { convertFromRaw, EditorState } from 'draft-js';
+
+import { RootState } from 'app/store';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Note, Tag, UpdateNoteParams } from 'types';
 
@@ -100,6 +103,24 @@ const noteSlice = createSlice({
 });
 
 export const noteActions = noteSlice.actions;
+
+export const selectListNotePlainText = (state: RootState) => {
+    const listNote = state.note.listNote;
+    return listNote
+        .filter((note) => !note.isTrash)
+        .map((note) => {
+            const rawContentFromStore = convertFromRaw(JSON.parse(note.content));
+            const content = EditorState.createWithContent(rawContentFromStore);
+            const contentPlainText = content.getCurrentContent().getPlainText();
+            return { ...note, content: contentPlainText };
+        });
+};
+
+export const selectListNote = (state: RootState) =>
+    state.note.listNote.filter((note) => !note.isTrash);
+
+export const selectListNoteDeleted = (state: RootState) =>
+    state.note.listNote.filter((note) => note.isTrash);
 
 const noteReducer = noteSlice.reducer;
 export default noteReducer;

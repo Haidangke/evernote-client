@@ -57,7 +57,6 @@ function TippyHeadLess({
                 offset={[0, 0]}
                 placement={placement}
                 onMount={() => setIsAnimation(true)}
-                // onHidden={() => setVisible(false)}
                 onHide={(instance: any) => {
                     setIsAnimation(false);
                     const unmountInstance = () => {

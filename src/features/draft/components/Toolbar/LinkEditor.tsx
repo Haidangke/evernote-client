@@ -1,14 +1,14 @@
 import { LinkIcon } from 'components/Icons';
 import { HandleButton } from '../Button';
 
-import { DraftToolbarProps } from '.';
+import { DraftToolProps } from '.';
 import { useState } from 'react';
 import { EditorState, RichUtils } from 'draft-js';
 import ModalCreate from 'components/Modal/ModalCreate';
 import TextInput from 'components/Input/TextInput';
 import styles from './Toolbar.module.scss';
 
-function LinkEditor({ editorState, onChange }: DraftToolbarProps) {
+function LinkEditor({ editorState, onChange }: DraftToolProps) {
     const [showURLInput, setShowURLInput] = useState(false);
     const [urlValue, setUrlValue] = useState('');
 

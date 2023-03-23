@@ -22,11 +22,12 @@ function Login() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    
     const [errEmail, setErrEmail] = useState('');
-
     const [errPassword, setErrPassword] = useState('');
 
-    const handleFormSubmit = async () => {
+    const handleFormSubmit = async (e: any) => {
+        e.preventDefault();
         if (!password) return setErrPassword('Bạn chưa nhập mật khẩu');
         if (password.length < 6) return setErrPassword('Mật khẩu tối thiếu 6 kí tự');
         const deviceToken = await getFCMToken();
@@ -83,7 +84,7 @@ function Login() {
             </div>
 
             <div className={cx('or')}>hoặc</div>
-            <>
+            <form onSubmit={handleFormSubmit}>
                 <input
                     value={email}
                     onChange={handleChangeEmail}
@@ -100,6 +101,7 @@ function Login() {
                             type='password'
                             className={styles.input}
                             name='password'
+                            autoComplete='on'
                             placeholder='Mật khẩu'
                         />
                         {errorLogin ? (
@@ -112,7 +114,7 @@ function Login() {
                 <button
                     disabled={logging}
                     type={validEmail ? 'submit' : 'button'}
-                    onClick={!validEmail ? handleCheckEmail : handleFormSubmit}
+                    onClick={handleCheckEmail}
                     className={cx('submit', { disable: logging })}
                 >
                     {logging ? (
@@ -123,7 +125,7 @@ function Login() {
                         'Tiếp tục'
                     )}
                 </button>
-            </>
+            </form>
         </Auth>
     );
 }

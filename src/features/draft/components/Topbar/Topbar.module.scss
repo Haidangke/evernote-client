@@ -41,6 +41,7 @@
 }
 
 .note-btn {
+    @include flex(center, unset);
     border-radius: 3px;
     padding: 0 7px;
     height: 100%;
@@ -60,6 +61,12 @@
 
     &:hover {
         background-color: var(--color-f2);
+    }
+    &--disable {
+        cursor: default;
+    }
+    &--disable:hover {
+        background-color: unset;
     }
 }
 
@@ -116,6 +123,10 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+.reminder-wrapper {
+    margin-top: 10px;
+}
+
 .reminder {
     padding: 10px 16px 30px;
 }
@@ -135,6 +146,10 @@ input::-webkit-inner-spin-button {
     }
     &--active {
         border: 1px solid var(--color-d9);
+    }
+
+    &--disable {
+        opacity: 0.5;
     }
 }
 

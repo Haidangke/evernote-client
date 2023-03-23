@@ -1,8 +1,12 @@
 import classNames from 'classnames/bind';
-import { MdDelete } from 'react-icons/md';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { NotebookDfTitleIcon, NotebookTitleIcon, NoteTitleIcon } from 'components/Icons';
+import {
+    NotebookDfTitleIcon,
+    NotebookTitleIcon,
+    NoteTitleIcon,
+    RecycleIcon,
+} from 'components/Icons';
 import { noteActions } from 'features/note/noteSlice';
 import useLocationPage from 'hooks/useLocationPage';
 import noteService from 'services/noteService';
@@ -33,7 +37,7 @@ function Title({ notebook }: TitleProps) {
             <div className={cx('title', { 'title-recycle': page === 'recycle' })}>
                 {page === 'recycle' && (
                     <div className={cx('title-recycle__name')}>
-                        <MdDelete size={22} className={cx('icon-note')} />
+                        <RecycleIcon className={cx('icon-note')} />
                         Thùng rác
                     </div>
                 )}
