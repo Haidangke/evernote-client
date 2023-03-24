@@ -1,18 +1,18 @@
 import classNames from 'classnames/bind';
 
-import SlateFooterStatus from './SlateFooterStatus';
-import SlateFooterTag from './FooterTag';
+import FooterStatus from './FooterStatus';
+import FooterTag from './FooterTag';
 
-import styles from './SlateFooter.module.scss';
+import styles from './Footer.module.scss';
 const cx = classNames.bind(styles);
 
-function SlateFooter() {
+function Footer() {
     return (
         <div className={cx('wrapper')}>
-            <SlateFooterTag />
-            <SlateFooterStatus />
+            <FooterTag />
+            <FooterStatus />
         </div>
     );
 }
 
-export default SlateFooter;
+export default Footer;

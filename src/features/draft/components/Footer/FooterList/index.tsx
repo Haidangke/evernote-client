@@ -13,14 +13,14 @@ import tagService from 'services/tagService';
 import { Note, Tag } from 'types';
 import useOnClickOutside from 'hooks/useOnclickOutside';
 
-import styles from './SlateFooterTagList.module.scss';
+import styles from './FooterTagList.module.scss';
 const cx = classNames.bind(styles);
 
-interface SlateFooterTagListProps {
+interface FooterTagListProps {
     note: Note<Tag>;
 }
 
-function SlateFooterTagList({ note }: SlateFooterTagListProps) {
+function FooterTagList({ note }: FooterTagListProps) {
     const dispatch = useAppDispatch();
     const [isFocus, setIsFocus] = useState(false);
     const [isModal, setIsModal] = useState(false);
@@ -41,7 +41,6 @@ function SlateFooterTagList({ note }: SlateFooterTagListProps) {
 
     const handleDeleteTag = async (tag: Tag) => {
         setIsModal(false);
-        console.log({ tag });
         try {
             const data = await tagService.remove(tag._id);
 
@@ -144,4 +143,4 @@ function SlateFooterTagList({ note }: SlateFooterTagListProps) {
     );
 }
 
-export default SlateFooterTagList;
+export default FooterTagList;

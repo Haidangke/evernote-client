@@ -1,7 +1,6 @@
 import { Response } from 'types';
 import { LoginParams, RegisterParams, User } from 'types/auth';
 import { axiosClient } from './axiosInstance';
-import history from 'routes/history';
 
 const authService = {
     checkEmail(params: { email: string }): Promise<Response<boolean>> {
@@ -11,8 +10,6 @@ const authService = {
         return axiosClient.post('/auth/login', params);
     },
     logout() {
-        localStorage.removeItem('access_token');
-        history.navigate('/login');
         return axiosClient.post('/auth/logout');
     },
     register(params: RegisterParams) {

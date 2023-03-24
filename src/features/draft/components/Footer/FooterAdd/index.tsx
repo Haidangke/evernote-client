@@ -13,14 +13,14 @@ import tagService from 'services/tagService';
 import { Note, Tag } from 'types';
 import { charMatchString } from 'utils/StringUtils';
 
-import styles from './SlateFooterTagAdd.module.scss';
+import styles from './FooterTagAdd.module.scss';
 const cx = classNamesBind.bind(styles);
 
-interface SlateFooterAddTagProps {
+interface FooterAddTagProps {
     note: Note<Tag>;
 }
 
-function SlateFooterAddTag({ note }: SlateFooterAddTagProps) {
+function FooterAddTag({ note }: FooterAddTagProps) {
     const dispatch = useAppDispatch();
     const [visible, setVisible] = useState<boolean>(false);
     const [inputTag, setInputTag] = useState('');
@@ -160,4 +160,4 @@ function SlateFooterAddTag({ note }: SlateFooterAddTagProps) {
         </>
     );
 }
-export default SlateFooterAddTag;
+export default FooterAddTag;

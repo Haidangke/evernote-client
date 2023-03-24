@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { useAppSelector } from 'app/hooks';
 
-import styles from './SlateFooter.module.scss';
+import styles from './Footer.module.scss';
 const cx = classNames.bind(styles);
 
-function SlateFooterStatus() {
+function FooterStatus() {
     const { isUpdating, isUpdateSuccess, isUpdateFailed } = useAppSelector((state) => state.note);
     const [status, setStatus] = useState('Đã lưu mọi thay đổi');
 
@@ -31,4 +31,4 @@ function SlateFooterStatus() {
         </div>
     );
 }
-export default SlateFooterStatus;
+export default FooterStatus;

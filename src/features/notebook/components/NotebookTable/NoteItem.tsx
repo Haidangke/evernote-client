@@ -35,9 +35,7 @@ function NoteItem({ note, handleDragStart }: NoteItemProps) {
             <div className={styles.column}></div>
             <TimeUp updatedAt={note.updatedAt} className={styles.column} />
             <div className={styles.column}>Chỉ bạn</div>
-            <div className={styles.column}>
-                <NoteMore noteId={note._id} />
-            </div>
+            <div className={styles.column}>{note && <NoteMore note={note} />}</div>
         </div>
     );
 }

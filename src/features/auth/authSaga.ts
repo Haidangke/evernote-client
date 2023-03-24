@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { call, fork, put, takeLatest } from 'redux-saga/effects';
+import { call, fork, put, takeLatest, take } from 'redux-saga/effects';
 
 import history from 'routes/history';
 import authService from 'services/authService';
@@ -7,22 +7,30 @@ import userService from 'services/userService';
 import { LoginParams, RegisterParams, Response, User } from 'types';
 import { authActions } from './authSlice';
 
-function* authSaga() {
-    yield fork(watchUserAuthentication);
+function* loginWatcher() {
+    while (true) {
+        const isLoggedIn = localStorage.getItem('access_token');
+        if (!isLoggedIn) {
+            const action: PayloadAction<LoginParams> = yield take(authActions.login.type);
+            yield fork(loginFlow, action.payload);
+        }
+
+        yield take(authActions.logout.type);
+        yield call(logoutFlow);
+    }
 }
 
-function* watchUserAuthentication() {
-    yield takeLatest(authActions.login.type, login);
-    yield takeLatest(authActions.register.type, register);
-    yield takeLatest(authActions.getUser.type, getUser);
-    yield takeLatest(authActions.logout.type, logout);
+function* registerWatcher() {
+    yield takeLatest(authActions.register.type, registerFlow);
 }
 
-function* login(action: PayloadAction<LoginParams>) {
-    const params = action.payload;
+function* getUserWatcher() {
+    yield takeLatest(authActions.getUser.type, getUserFlow);
+}
 
+function* loginFlow(loginPayload: LoginParams) {
     try {
-        const response: Response<User> = yield call(authService.login, params);
+        const response: Response<string> = yield call(authService.login, loginPayload);
         const { data } = response;
         if (data) {
             localStorage.setItem('access_token', JSON.stringify(data));
@@ -38,7 +46,7 @@ function* login(action: PayloadAction<LoginParams>) {
     }
 }
 
-function* register(action: PayloadAction<RegisterParams>) {
+function* registerFlow(action: PayloadAction<RegisterParams>) {
     const params = action.payload;
 
     try {
@@ -56,18 +64,20 @@ function* register(action: PayloadAction<RegisterParams>) {
     }
 }
 
-function* logout() {
-    yield call(authService.logout);
+function* logoutFlow() {
+    localStorage.removeItem('access_token');
+    history.navigate('/login');
+    yield put(authActions.logout());
 }
 
-function* getUser() {
+function* getUserFlow() {
     try {
         const user: User = yield call(userService.getInfoUser);
         yield put(authActions.getUserSuccess(user));
     } catch (error) {
         yield put(authActions.getUserFailed());
-        yield call(authService.logout);
+        yield call(logoutFlow);
     }
 }
 
-export default authSaga;
+export { loginWatcher, registerWatcher, getUserWatcher };

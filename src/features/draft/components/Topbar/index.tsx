@@ -12,7 +12,7 @@ import TopbarReminder from './TopbarReminder';
 import styles from './Topbar.module.scss';
 const cx = classNames.bind(styles);
 
-function SlateTopbar() {
+function Topbar() {
     const page = useLocationPage();
     const [searchParams, setSearchParams] = useSearchParams();
     const noteId = searchParams.get('n');
@@ -90,12 +90,10 @@ function SlateTopbar() {
                         <div className={cx('share-btn')}>Chia sẻ</div>
                     </>
                 )}
-                <div className={cx('other-btn')}>
-                    <NoteMore page={page} />
-                </div>
+                <div className={cx('other-btn')}>{note && <NoteMore note={note} />}</div>
             </div>
         </div>
     );
 }
 
-export default SlateTopbar;
+export default Topbar;

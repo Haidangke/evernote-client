@@ -49,7 +49,6 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = false;
             state.isFailed = true;
-
         },
         login(state, action: PayloadAction<LoginParams>) {
             state.logging = true;
@@ -69,6 +68,7 @@ const authSlice = createSlice({
             state.errorLogin = '';
             state.logging = false;
             state.user = undefined;
+            state.isLoggedIn = false;
         },
 
         register(state, action: PayloadAction<RegisterParams>) {

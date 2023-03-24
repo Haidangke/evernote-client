@@ -49,45 +49,49 @@
     margin-top: 8px;
 }
 
-//move
-.move {
-    height: calc(100vh - 208px);
+.modal {
     min-height: 200px;
     overflow-y: auto;
     margin: 0 15px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+
     .searchInput {
         margin: 10px;
-        height: 38px;
+        height: 40px;
     }
+}
 
-    .moveList {
+//move
+.modal--notebook {
+    height: calc(100vh - 208px);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+    .notebookList {
         margin-left: 10px;
     }
 
-    .moveItem {
+    .notebookItem {
         @include flex(center, unset);
         height: 40px;
         padding: 0 15px 0 10px;
         cursor: pointer;
     }
 
-    .moveItem:hover {
+    .notebookItem:hover {
         background-color: var(--color-f2);
     }
 
-    .moveItem__active,
-    .moveItem__active:hover {
+    .notebookItem__active,
+    .notebookItem__active:hover {
         background-color: var(--color-master-light-blue);
     }
 
-    .moveInfo {
+    .notebookInfo {
         height: 100%;
         @include flex(center, unset);
         flex: 6;
     }
 
-    .moveName {
+    .notebookName {
         margin-left: 4px;
         font-size: 1.4rem;
     }
@@ -101,7 +105,7 @@
         color: var(--color-6a);
     }
 
-    .moveCurrent {
+    .notebookCurrent {
         flex: 4;
         font-size: 1.4rem;
         color: var(--color-b3);
